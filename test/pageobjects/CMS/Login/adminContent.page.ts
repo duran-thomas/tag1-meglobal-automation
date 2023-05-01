@@ -37,8 +37,11 @@ class AdminContentPage extends Page {
      * e.g. to create a QA landing page if needed
      */
     public async createQALandingPage () {
-        await this.inputTitle.setValue('QA Landing Page');
-        await this.btnSubmit.click();
+        (await this.btnAddContent).click();
+        (await this.linkLandingPage).click();
+        (await this.inputTitle).setValue('QA Landing Page');
+        (await this.btnSubmit).scrollIntoView();
+        (await this.btnSubmit).click();
     }
 
     /**

@@ -98,6 +98,10 @@ class QuotesBlockPage extends Page {
         return $('.mf-quotes__text');
     }
 
+    public get configBlock () {
+        return $('.ui-draggable-handle');
+    }
+
     /**
      * Helper methods to create Quotes Component
      */

@@ -39,11 +39,13 @@ describe('Quotes Component Tests', () => {
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();
         await QALayoutPagePage.navigateToBlockList();
+        (await QALayoutPagePage.btnQuote).scrollIntoView();
         (await QALayoutPagePage.btnQuote).click();
+        (await QuotesBlockPage.configBlock).waitForDisplayed();
         await QuotesBlockPage.completeWithBorderNoAudio(quoteBlockData.title, quoteBlockData.quote, quoteBlockData.author, quoteBlockData.authorTitle);
 
-        expect(await QuotesBlockPage.borderElement).toBeDisplayed();
         expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quote);
+        expect(await QuotesBlockPage.borderElement).toBeDisplayed();     
     });
   
     it('Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
