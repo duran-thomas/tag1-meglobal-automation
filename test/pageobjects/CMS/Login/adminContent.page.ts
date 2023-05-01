@@ -9,18 +9,18 @@ class AdminContentPage extends Page {
      */
 
     public get btnAddContent () {
-        return $('[href="/node/add"]');
+        return $('a.button');
     }
 
     public get linkLandingPage () {
-        return $('[href="/node/add/landing_page"]');
+        return $('.admin-item__link[href="/node/add/landing_page"]');
     }
 
     public get inputTitle () {
         return $('#edit-title-0-value');
     }
 
-    public get btnSubmit () {
+    public get btnSave () {
         return $('#edit-submit');
     }
 
@@ -40,8 +40,9 @@ class AdminContentPage extends Page {
         (await this.btnAddContent).click();
         (await this.linkLandingPage).click();
         (await this.inputTitle).setValue('QA Landing Page');
-        (await this.btnSubmit).scrollIntoView();
-        (await this.btnSubmit).click();
+        (await this.btnSave).scrollIntoView();
+        await browser.pause(3500);
+        (await this.btnSave).click();
     }
 
     /**

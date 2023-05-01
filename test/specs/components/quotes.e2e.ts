@@ -10,7 +10,8 @@ import QALayoutPagePage from '../../pageobjects/CMS/Components/QALayoutPage.page
 describe('Quotes Component Tests', () => {
     before(async () => {
         // //Login
-        browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
+        await browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
+        await browser.maximizeWindow();
         // await LoginPage.waitForPageToLoad();
         // await LoginPage.open();
         // await LoginPage.login(users.validAdmin.username, users.validAdmin.password);
@@ -37,7 +38,7 @@ describe('Quotes Component Tests', () => {
   
     it.only('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
         (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
+        await QALayoutPagePage.createNewSection();//script failing somewhere in this execution
         await QALayoutPagePage.navigateToBlockList();
         (await QALayoutPagePage.btnQuote).scrollIntoView();
         (await QALayoutPagePage.btnQuote).click();
