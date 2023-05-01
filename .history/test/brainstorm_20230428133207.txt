@@ -1,0 +1,30 @@
+allure serve allure-results && allure open
+
+
+
+
+username: "test-content-administrator",
+password: "meda2022"
+
+public async login (username: string, password: string) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.btnSubmit.click();
+    }
+
+
+
+      //expect(await LoginPage.headerText).toBeDisplayed(); this is giving a false positive for some reason
+
+
+/*
+describe('', () => {
+    it('Should Login to the Drupal CMS with valid Content Administrator credentials', async () => {
+        await LoginPage.open();
+
+        await LoginPage.login(LoginData[0].username, LoginData[0].password);
+        
+        // TODO: Add successful login assertions
+    });
+});
+*/
