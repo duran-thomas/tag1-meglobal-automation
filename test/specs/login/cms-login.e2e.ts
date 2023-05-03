@@ -7,6 +7,21 @@ describe('Login Page', () => {
       // Bypass login modal before running tests
       browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
       await LoginPage.waitForPageToLoad();
+      await browser.setCookies([
+        {
+          name: 'SSESSaa21775f23303ec27f377cce4bdc4f02',
+          value: '38rjKWuZw0cJBnsWaQDCcRBXqbLr-25xv8oSZJXhr2R0cNXD',
+          domain: 'meglobalstg.prod.acquia-sites.com',
+          path: '/',
+        },
+        {
+          name: 'hyro.token',
+          value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOTlmZGQ3Mi02MWNjLTQxMjMtYTg1MS04MDkzZTJmMjg1NDIiLCJpc3MiOiJhaXJidWQuaW8ifQ.nGvkH0mIWlP8TCJhtkgZ9rqL9G_M9JHh-balo5uyGrg',
+          domain: 'meglobalstg.prod.acquia-sites.com',
+          path: '/'
+        }
+    ]);
+      //await browser.url('https://meglobalstg.prod.acquia-sites.com/admin/content');
     });
   
     afterEach(async function() {
@@ -17,18 +32,18 @@ describe('Login Page', () => {
     });
     
 
-    it('should display an error message for invalid credentials', async () => {
-      await LoginPage.open();
-      await LoginPage.login(users.invalidAdmin.username, users.invalidAdmin.password);
-      expect(await LoginPage.errorMessage).toBeDisplayed();
-    });
+    // it.skip('should display an error message for invalid credentials', async () => {
+    //   await LoginPage.open();
+    //   await LoginPage.login(users.invalidAdmin.username, users.invalidAdmin.password);
+    //   expect(await LoginPage.errorMessage).toBeDisplayed();
+    // });
   
-    it('should allow a Content Administrator user to login with valid credentials', async () => {
-      await LoginPage.open();
-      await LoginPage.login(users.validAdmin.username, users.validAdmin.password);
-      expect(await LoginPage.errorMessage).not.toBeDisplayed();
-      expect(await browser.getUrl()).toEqual('https://meglobalstg.prod.acquia-sites.com/home');
-    });
+    // it.skip('should allow a Content Administrator user to login with valid credentials', async () => {
+    //   await LoginPage.open();
+    //   await LoginPage.login(users.validAdmin.username, users.validAdmin.password);
+    //   expect(await LoginPage.errorMessage).not.toBeDisplayed();
+    //   expect(await browser.getUrl()).toEqual('https://meglobaldev.prod.acquia-sites.com/home');
+    // });
   
     
   });

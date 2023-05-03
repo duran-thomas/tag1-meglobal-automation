@@ -162,6 +162,10 @@ class LandingQAPage extends Page {
         return $('#ui-id-2');
     }
 
+    public get iframeDiv () {
+        return $('.lbim-dialog');
+    }
+
     /**
      * Methods to create a new section on a page, navigate to block list types
      */
@@ -171,9 +175,11 @@ class LandingQAPage extends Page {
         (await this.linkAddSection).click();
         (await this.sectionTypeOneColumn).click();
         (await this.sectionModal).waitForDisplayed();
+        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
-        const iframe = await $('iframe.lbim-dialog-iframe');
-        await browser.switchToFrame(iframe); //failing 
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
         (await this.modalBtnAddSection).scrollIntoView();
         (await this.modalBtnAddSection).click();
     }

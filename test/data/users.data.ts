@@ -10,7 +10,7 @@ export interface User {
       password: 'meda2022'
     },
     validAdmin: {
-      username: 'test-content-administrator',
+      username: 'admin',
       password: 'meda2022',
     },
     invalidAdmin: {

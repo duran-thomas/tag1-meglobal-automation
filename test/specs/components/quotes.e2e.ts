@@ -12,56 +12,97 @@ describe('Quotes Component Tests', () => {
         // //Login
         await browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
         await browser.maximizeWindow();
-        // await LoginPage.waitForPageToLoad();
-        // await LoginPage.open();
-        // await LoginPage.login(users.validAdmin.username, users.validAdmin.password);
-        // expect(await browser.getUrl()).toEqual('https://meglobalstg.prod.acquia-sites.com/home');
 
         // Set the cookie for the logged in user
-        const cookie = { name: 'SSESSaa21775f23303ec27f377cce4bdc4f02', value: '1GfUfNZ-1isaVQ5gLh2DpqtL3wgL%2CxYaZ0yRJtYibqf4JX-K' };
-        await browser.setCookies([cookie]);
+        await browser.setCookies([
+            {
+              name: 'SSESSaa21775f23303ec27f377cce4bdc4f02',
+              value: '38rjKWuZw0cJBnsWaQDCcRBXqbLr-25xv8oSZJXhr2R0cNXD',
+              domain: 'meglobalstg.prod.acquia-sites.com',
+              path: '/',
+            },
+            {
+              name: 'hyro.token',
+              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOTlmZGQ3Mi02MWNjLTQxMjMtYTg1MS04MDkzZTJmMjg1NDIiLCJpc3MiOiJhaXJidWQuaW8ifQ.nGvkH0mIWlP8TCJhtkgZ9rqL9G_M9JHh-balo5uyGrg',
+              domain: 'meglobalstg.prod.acquia-sites.com',
+              path: '/'
+            }
+        ]);
 
-        //navigate to admin content page
-        await AdminContentPage.open();
-
-        // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();
-        expect(await LandingPage.tabLayout).toBeDisplayed();
     });
 
-    afterEach(async function() {
+    beforeEach(async function() {
+        //navigate to admin content page
+        await AdminContentPage.open();
+        // Navigate to QA Landing page to execute tests
+        await AdminContentPage.getQALandingPage();  //TODO: This function may need some checking out. When its run with all tests at once. I don't think it behaves as expected.
+        expect(await LandingPage.tabLayout).toBeDisplayed();
+    })
+
+    afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
+
+    /**
+     * TODO: Possibly add some cleanup code here?
+     */
+    // after(async function () {
+
+    // })
   
-    it.only('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
+    it('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
         (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();//script failing somewhere in this execution
+        await QALayoutPagePage.createNewSection();
         await QALayoutPagePage.navigateToBlockList();
         (await QALayoutPagePage.btnQuote).scrollIntoView();
         (await QALayoutPagePage.btnQuote).click();
         (await QuotesBlockPage.configBlock).waitForDisplayed();
-        await QuotesBlockPage.completeWithBorderNoAudio(quoteBlockData.title, quoteBlockData.quote, quoteBlockData.author, quoteBlockData.authorTitle);
-
-        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quote);
+        await QuotesBlockPage.completeWithBorderNoAudio(quoteBlockData.title, quoteBlockData.quoteWithBorderNoAudio, quoteBlockData.author, quoteBlockData.authorTitle);
+        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithBorderNoAudio);
         expect(await QuotesBlockPage.borderElement).toBeDisplayed();     
     });
   
     it('Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
-      
+        (await QALayoutPagePage.tabLayout).click();
+        await QALayoutPagePage.createNewSection();
+        await QALayoutPagePage.navigateToBlockList();
+        (await QALayoutPagePage.btnQuote).scrollIntoView();
+        (await QALayoutPagePage.btnQuote).click();
+        (await QuotesBlockPage.configBlock).waitForDisplayed();
+        await QuotesBlockPage.completeWithoutBorder(quoteBlockData.title, quoteBlockData.quoteWithoutBorder, quoteBlockData.author, quoteBlockData.authorTitle);
+        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithoutBorder);
     });
 
     it('Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
-      
+        (await QALayoutPagePage.tabLayout).click();
+        await QALayoutPagePage.createNewSection();
+        await QALayoutPagePage.navigateToBlockList();
+        (await QALayoutPagePage.btnQuote).scrollIntoView();
+        (await QALayoutPagePage.btnQuote).click();
+        (await QuotesBlockPage.configBlock).waitForDisplayed();
+        const audioRemoteFilePath = await browser.uploadFile('/Users/doneilscottland/Desktop/Work/tag1-dap-automation/scriptFiles/sampleAudio.mp3');
+        await QuotesBlockPage.completeWithAudioAndTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioAndTrascript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath, quoteBlockData.transcript);
+        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithAudioAndTrascript);  
+        expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
     it('Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
-      
+        (await QALayoutPagePage.tabLayout).click();
+        await QALayoutPagePage.createNewSection();
+        await QALayoutPagePage.navigateToBlockList();
+        (await QALayoutPagePage.btnQuote).scrollIntoView();
+        (await QALayoutPagePage.btnQuote).click();
+        (await QuotesBlockPage.configBlock).waitForDisplayed();
+        const audioRemoteFilePath = await browser.uploadFile('/Users/doneilscottland/Desktop/Work/tag1-dap-automation/scriptFiles/sampleAudio.mp3');
+        await QuotesBlockPage.completeWithAudioNoTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioNoTrascript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath);
+        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithAudioNoTrascript);  
+        expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it.skip('Verify that all design fields are present with the correct available options.', async () => {
       
     });
 
