@@ -1,8 +1,8 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
-import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page'
-import QuotesBlockPage from '../../pageobjects/CMS/Components/quotes.page'
-import LandingPage from '../../pageobjects/CMS/Components/QALayoutPage.page'
-import {users} from '../../data/users.data'
+import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
+import QuotesBlockPage from '../../pageobjects/CMS/Components/quotes.page';
+import LandingPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import {users} from '../../data/users.data';
 import { quoteBlockData } from '../../data/quote.data';
 import QALayoutPagePage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 
@@ -10,21 +10,21 @@ import QALayoutPagePage from '../../pageobjects/CMS/Components/QALayoutPage.page
 describe('Quotes Component Tests', () => {
     before(async () => {
         // //Login
-        await browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
+        await browser.url(`https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`);
         await browser.maximizeWindow();
 
         // Set the cookie for the logged in user
         await browser.setCookies([
             {
-              name: 'SSESSaa21775f23303ec27f377cce4bdc4f02',
-              value: '38rjKWuZw0cJBnsWaQDCcRBXqbLr-25xv8oSZJXhr2R0cNXD',
-              domain: 'meglobalstg.prod.acquia-sites.com',
+              name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
+              value: 'LXmAuXucXgcyLudUgKqslFZimRDD6j64xFY-svh5ZnH%2Ck7DX',
+              domain: 'meglobalode7.prod.acquia-sites.com',
               path: '/',
             },
             {
               name: 'hyro.token',
-              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOTlmZGQ3Mi02MWNjLTQxMjMtYTg1MS04MDkzZTJmMjg1NDIiLCJpc3MiOiJhaXJidWQuaW8ifQ.nGvkH0mIWlP8TCJhtkgZ9rqL9G_M9JHh-balo5uyGrg',
-              domain: 'meglobalstg.prod.acquia-sites.com',
+              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzMWJhNDhiNi1kMDQyLTQ2ZmItYThjZS04N2NhZmEzNWE5YTQiLCJpc3MiOiJhaXJidWQuaW8ifQ.7u9l8If-42_tesTWDpLJ0mu6SAMu6RPCptnZfTN-EW4',
+              domain: 'meglobalode7.prod.acquia-sites.com',
               path: '/'
             }
         ]);
@@ -42,7 +42,7 @@ describe('Quotes Component Tests', () => {
     afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/${testName}.png`;
+        const screenshotPath = `./screenshots/Quotes/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
@@ -53,7 +53,7 @@ describe('Quotes Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
+    it.only('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();
         await QALayoutPagePage.navigateToBlockList();
@@ -102,8 +102,20 @@ describe('Quotes Component Tests', () => {
         expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
-    it.skip('Verify that all design fields are present with the correct available options.', async () => {
-      
+    it('Verify that all design fields are present with the correct available options.', async () => {
+        (await QALayoutPagePage.tabLayout).click();
+        await QALayoutPagePage.createNewSection();
+        await QALayoutPagePage.navigateToBlockList();
+        (await QALayoutPagePage.btnQuote).scrollIntoView();
+        (await QALayoutPagePage.btnQuote).click();
+        (await QuotesBlockPage.configBlock).waitForDisplayed();
+        (await QuotesBlockPage.dropdownStyling).scrollIntoView();
+        (await QuotesBlockPage.dropdownStyling).click();
+        await QuotesBlockPage.navToStyling();
+        //assert its displayed as well as it's default not ticked
+        const checkbox = await QuotesBlockPage.checkboxShowBorder;
+        expect(await checkbox).toBeDisplayed();
+        expect(await checkbox.isSelected()).toBe(false); 
     });
 
     

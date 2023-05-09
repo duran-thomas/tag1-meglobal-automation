@@ -227,6 +227,16 @@ class QuotesBlockPage extends Page {
         await browser.pause(3000);         
     }
 
+    public async navToStyling() {
+        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        (await this.dropdownStyling).scrollIntoView();
+        (await this.dropdownStyling).click();
+    }
+
 }
 
 export default new QuotesBlockPage();

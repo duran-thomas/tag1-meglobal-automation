@@ -5,7 +5,7 @@ import {users} from '../../data/users.data'
 describe('Login Page', () => {
     before(async () => {
       // Bypass login modal before running tests
-      browser.url(`https://meda2022:meda2022@meglobalstg.prod.acquia-sites.com/`);
+      browser.url(`https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`);
       await LoginPage.waitForPageToLoad();
       await browser.setCookies([
         {
@@ -27,7 +27,7 @@ describe('Login Page', () => {
     afterEach(async function() {
       // Take a screenshot after each test/assertion
       const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-      const screenshotPath = `./screenshots/${testName}.png`;
+      const screenshotPath = `./screenshots/Login/${testName}.png`;
       await browser.saveScreenshot(screenshotPath);
     });
     

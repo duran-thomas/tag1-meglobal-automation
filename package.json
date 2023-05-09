@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "allure": "allure serve allure-results && allure open",
     "login": "npx wdio run wdio.conf.ts --spec ./test/specs/login/*",
-    "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/*"
+    "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quotes.e2e.ts",
+    "carousel": "npx wdio run wdio.conf.ts --spec ./test/specs/components/carousel.e2e.ts",
+    "facts": "npx wdio run wdio.conf.ts --spec ./test/specs/components/facts.e2e.ts"
   },
   "author": "QW Team",
   "license": "ISC",

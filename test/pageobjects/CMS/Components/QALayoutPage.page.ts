@@ -13,6 +13,10 @@ class LandingQAPage extends Page {
         return $('[href$="/layout"]');
     }
 
+    public get tabView () {
+        return $('=View')
+    }
+
     public get linkAddSection () {
         return $('div[class="layout-builder__add-section"]');
     }
@@ -182,11 +186,21 @@ class LandingQAPage extends Page {
         await browser.switchToFrame(iframe);
         (await this.modalBtnAddSection).scrollIntoView();
         (await this.modalBtnAddSection).click();
+        await browser.pause(2000);
     }
 
     public async navigateToBlockList () {
+        (await this.linkAddBlock).waitForDisplayed();
+        (await this.linkAddBlock).scrollIntoView();
         (await this.linkAddBlock).click();
+        (await this.btnCreateCustomBlock).waitForDisplayed();
         (await this.btnCreateCustomBlock).click();
+    }
+
+    public async goToPageView () {
+        (await this.tabView).waitForEnabled();
+        (await this.tabView).click();
+
     }
 
 }
