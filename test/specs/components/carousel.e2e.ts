@@ -53,7 +53,7 @@ describe('Carousel Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Carousel Component', async () => {
+    it.only('Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();
@@ -152,7 +152,7 @@ describe('Carousel Component Tests', () => {
     });
 
 
-    it.only('Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it('Verify that the available paragraph types in the Carousel form are correct.', async () => {
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();
         await QALayoutPagePage.navigateToBlockList();
