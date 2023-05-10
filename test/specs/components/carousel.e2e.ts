@@ -53,7 +53,7 @@ describe('Carousel Component Tests', () => {
 
     // })
   
-    it.only('Verify that a site Content Administrator can create a Carousel Component', async () => {
+    it('Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();
@@ -116,7 +116,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.controlElement).not.toExist();   
     });
 
-    it('Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
+    it.only('Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPagePage.tabLayout).click();
         await QALayoutPagePage.createNewSection();

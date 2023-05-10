@@ -135,7 +135,7 @@ class FactsBlockPage extends Page {
     }
 
     /**
-     * Helper methods to create Quotes Component
+     * Helper methods to create Facts Component
      */
 
     public async createFactsWithHorizontalLayout(mainTitle: string, title1: string, description1: string, title2: string, description2: string, title3: string, description3: string) {

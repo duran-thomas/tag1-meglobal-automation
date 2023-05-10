@@ -415,6 +415,7 @@ class CarouselBlockPage extends Page {
         (await this.inputInfo1).scrollIntoView();
         await browser.pause(2000);
         (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
+        await browser.switchToFrame(await this.entityIframe);
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath1);
         await browser.pause(6000); //explicit waits seem to be necessary here
@@ -436,6 +437,7 @@ class CarouselBlockPage extends Page {
         (await this.inputInfo2).scrollIntoView();
         await browser.pause(2000);
         (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
+        await browser.switchToFrame(await this.entityIframe);
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath2);
         await browser.pause(6000); //explicit waits seem to be necessary here

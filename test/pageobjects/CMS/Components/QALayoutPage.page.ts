@@ -170,6 +170,22 @@ class LandingQAPage extends Page {
         return $('.lbim-dialog');
     }
 
+    public get btnRemoveSection () {
+        return $('a[href^="/layout_builder/remove/section"]');
+    }
+
+    public get configBlock () {
+        return $('.ui-draggable-handle');
+    }
+
+    public get btnRemove () {
+        return $('#edit-submit');
+    }
+
+    public get btnSaveLayout () {
+        return $('button[id="edit-submit"]');
+    }
+
     /**
      * Methods to create a new section on a page, navigate to block list types
      */
@@ -200,6 +216,24 @@ class LandingQAPage extends Page {
     public async goToPageView () {
         (await this.tabView).waitForEnabled();
         (await this.tabView).click();
+
+    }
+
+    public async cleanUpJob () {
+        (await this.tabLayout).waitForEnabled();
+        (await this.tabLayout).click();
+        while (await this.btnRemoveSection.isDisplayed()) {
+            (await this.btnRemoveSection).click();
+            await browser.pause(6500); //find a better wait criteria
+            const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+            await iframe.waitForDisplayed();
+            await browser.switchToFrame(iframe);
+            await browser.pause(3000);
+            (await this.btnRemove).click();
+          }
+
+          (await this.btnSaveLayout).waitForClickable();
+          (await this.btnSaveLayout).click();
 
     }
 
