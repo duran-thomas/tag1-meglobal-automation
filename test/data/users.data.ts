@@ -17,5 +17,6 @@ export interface User {
       username: 'invalid_username',
       password: 'invalid_password',
     },
+    bypassUrl: `https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`
   };
   

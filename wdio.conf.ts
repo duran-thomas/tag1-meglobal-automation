@@ -57,6 +57,7 @@ export const config: Options.Testrunner = {
         quotes: ['./test/specs/components/quotes.e2e.ts'],
         caorusel: ['/test/specs/components/carousel.e2e.ts'],
         facts: ['/test/specs/components/facts.e2e.ts'],
+        myChart: ['/test/specs/components/myChart.e2e.ts'],
 
     },  
     // Patterns to exclude.

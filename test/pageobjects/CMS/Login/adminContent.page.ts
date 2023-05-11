@@ -32,6 +32,14 @@ class AdminContentPage extends Page {
         return $('table');
     }
 
+    public get qaPage () {
+        return $('=QA Landing Page');
+    }
+
+    public get btnLayout () {
+        return $('=Layout');
+    }
+
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to create a QA landing page if needed

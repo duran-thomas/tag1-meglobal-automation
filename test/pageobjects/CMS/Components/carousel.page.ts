@@ -239,7 +239,7 @@ class CarouselBlockPage extends Page {
 
 
     /**
-     * Helper methods to create Quotes Component
+     * Helper methods to create Carousel Component
      */
 
     public async createCarousel(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {

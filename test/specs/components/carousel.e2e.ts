@@ -4,31 +4,25 @@ import CarouselBlockPage from '../../pageobjects/CMS/Components/carousel.page';
 import LandingPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import {users} from '../../data/users.data';
 import { carouselBlockData } from '../../data/carousel.data';
-import QALayoutPagePage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import { cookieData } from '../../data/cookie.data';
 
 
 describe('Carousel Component Tests', () => {
     before(async () => {
         // //Login
-        await browser.url(`https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`);
+        await browser.url(await users.bypassUrl);
         await browser.maximizeWindow();
 
-        // Set the cookie for the logged in user
+        // Set the cookie for a logged in user
         await browser.setCookies([
             {
-              name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-              value: 'LXmAuXucXgcyLudUgKqslFZimRDD6j64xFY-svh5ZnH%2Ck7DX',
-              domain: 'meglobalode7.prod.acquia-sites.com',
-              path: '/',
-            },
-            {
-              name: 'hyro.token',
-              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzMWJhNDhiNi1kMDQyLTQ2ZmItYThjZS04N2NhZmEzNWE5YTQiLCJpc3MiOiJhaXJidWQuaW8ifQ.7u9l8If-42_tesTWDpLJ0mu6SAMu6RPCptnZfTN-EW4',
-              domain: 'meglobalode7.prod.acquia-sites.com',
-              path: '/'
+              name: cookieData.name,
+              value: cookieData.value,
+              domain: cookieData.domain,
+              path: cookieData.path,
             }
         ]);
-
     });
 
     beforeEach(async function() {
@@ -55,11 +49,11 @@ describe('Carousel Component Tests', () => {
   
     it('Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnCarousel).scrollIntoView();
-        (await QALayoutPagePage.btnCarousel).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
@@ -67,7 +61,7 @@ describe('Carousel Component Tests', () => {
 
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         expect(await $(`div[data-analytics-item-title="${headline}"]`)).toExist; 
@@ -76,11 +70,11 @@ describe('Carousel Component Tests', () => {
 
     it('Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnCarousel).scrollIntoView();
-        (await QALayoutPagePage.btnCarousel).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
@@ -88,7 +82,7 @@ describe('Carousel Component Tests', () => {
 
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         expect(await $(`div[data-analytics-item-title="${headline}"]`)).toExist; 
@@ -97,11 +91,11 @@ describe('Carousel Component Tests', () => {
 
     it('Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnCarousel).scrollIntoView();
-        (await QALayoutPagePage.btnCarousel).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
@@ -109,7 +103,7 @@ describe('Carousel Component Tests', () => {
 
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         expect(await $(`div[data-analytics-item-title="${headline}"]`)).toExist; 
@@ -118,11 +112,11 @@ describe('Carousel Component Tests', () => {
 
     it.only('Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnCarousel).scrollIntoView();
-        (await QALayoutPagePage.btnCarousel).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
@@ -133,7 +127,7 @@ describe('Carousel Component Tests', () => {
 
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         
         expect(await $(`div[data-analytics-item-title="${headline}"]`)).toExist; 
         expect(await CarouselBlockPage.controlElement).not.toExist(); 
@@ -153,11 +147,11 @@ describe('Carousel Component Tests', () => {
 
 
     it('Verify that the available paragraph types in the Carousel form are correct.', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnCarousel).scrollIntoView();
-        (await QALayoutPagePage.btnCarousel).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         await CarouselBlockPage.navToStyling()

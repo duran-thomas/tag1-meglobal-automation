@@ -195,7 +195,7 @@ class LandingQAPage extends Page {
         (await this.linkAddSection).click();
         (await this.sectionTypeOneColumn).click();
         (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -224,7 +224,7 @@ class LandingQAPage extends Page {
         (await this.tabLayout).click();
         while (await this.btnRemoveSection.isDisplayed()) {
             (await this.btnRemoveSection).click();
-            await browser.pause(6500); //find a better wait criteria
+            await browser.pause(4000); //find a better wait criteria
             const iframe = await $('iframe[name="lbim-dialog-iframe"]');
             await iframe.waitForDisplayed();
             await browser.switchToFrame(iframe);
@@ -235,6 +235,11 @@ class LandingQAPage extends Page {
           (await this.btnSaveLayout).waitForClickable();
           (await this.btnSaveLayout).click();
 
+    }
+
+    public async goToQALayout() {
+        (await this.tabLayout).scrollIntoView();
+        (await this.tabLayout).click();
     }
 
 }

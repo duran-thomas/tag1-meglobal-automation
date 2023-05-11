@@ -9,7 +9,8 @@
     "login": "npx wdio run wdio.conf.ts --spec ./test/specs/login/*",
     "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quotes.e2e.ts",
     "carousel": "npx wdio run wdio.conf.ts --spec ./test/specs/components/carousel.e2e.ts",
-    "facts": "npx wdio run wdio.conf.ts --spec ./test/specs/components/facts.e2e.ts"
+    "facts": "npx wdio run wdio.conf.ts --spec ./test/specs/components/facts.e2e.ts",
+    "myChart": "npx wdio run wdio.conf.ts --spec ./test/specs/components/myChart.e2e.ts"
   },
   "author": "QW Team",
   "license": "ISC",

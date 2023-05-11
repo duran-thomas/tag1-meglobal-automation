@@ -4,31 +4,25 @@ import FactsBlockPage from '../../pageobjects/CMS/Components/facts.page';
 import LandingPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import {users} from '../../data/users.data';
 import { factsBlockData } from '../../data/facts.data';
-import QALayoutPagePage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import { cookieData } from '../../data/cookie.data';
 
 
 describe('Facts Component Tests', () => {
     before(async () => {
         // //Login
-        await browser.url(`https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`);
+        await browser.url(await users.bypassUrl);
         await browser.maximizeWindow();
 
-        // Set the cookie for the logged in user
+        // Set the cookie for a logged in user
         await browser.setCookies([
             {
-              name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-              value: 'LXmAuXucXgcyLudUgKqslFZimRDD6j64xFY-svh5ZnH%2Ck7DX',
-              domain: 'meglobalode7.prod.acquia-sites.com',
-              path: '/',
-            },
-            {
-              name: 'hyro.token',
-              value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzMWJhNDhiNi1kMDQyLTQ2ZmItYThjZS04N2NhZmEzNWE5YTQiLCJpc3MiOiJhaXJidWQuaW8ifQ.7u9l8If-42_tesTWDpLJ0mu6SAMu6RPCptnZfTN-EW4',
-              domain: 'meglobalode7.prod.acquia-sites.com',
-              path: '/'
+              name: cookieData.name,
+              value: cookieData.value,
+              domain: cookieData.domain,
+              path: cookieData.path,
             }
         ]);
-
     });
 
     beforeEach(async function() {
@@ -54,82 +48,82 @@ describe('Facts Component Tests', () => {
     // })
   
     it('Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.createFactsWithHorizontalLayout(factsBlockData.mainTitle, factsBlockData.title1, factsBlockData.description1, factsBlockData.title2, factsBlockData.description2, factsBlockData.title3, factsBlockData.description3);
 
         expect(await FactsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         expect(await FactsBlockPage.horizontalElement).toExist();   
         await (await FactsBlockPage.horizontalElement).scrollIntoView();
         
     });
 
     it('Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.createFactsWithVerticalLayout(factsBlockData.mainTitle, factsBlockData.title1, factsBlockData.description1, factsBlockData.title2, factsBlockData.description2, factsBlockData.title3, factsBlockData.description3);
 
         expect(await FactsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         expect(await FactsBlockPage.factsElement).toExist(); 
         await (await FactsBlockPage.factsElement).scrollIntoView();
         await browser.pause(4000);
     });
 
     it.only('Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.createFactsWithGridLayout(factsBlockData.mainTitle, factsBlockData.title1, factsBlockData.description1, factsBlockData.title2, factsBlockData.description2, factsBlockData.title3, factsBlockData.description3);
 
         expect(await FactsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         expect(await FactsBlockPage.factsElement).toExist(); 
         await (await FactsBlockPage.factsElement).scrollIntoView();
         await browser.pause(4000);
     });
 
     it('Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.createFactsWithSliderLayout(factsBlockData.mainTitle, factsBlockData.title1, factsBlockData.description1, factsBlockData.title2, factsBlockData.description2, factsBlockData.title3, factsBlockData.description3, factsBlockData.title4, factsBlockData.description4, factsBlockData.title5, factsBlockData.description5);
 
         expect(await FactsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         expect(await FactsBlockPage.btnCarousel).toExist(); 
         await (await FactsBlockPage.factsElement).scrollIntoView();
     });
 
     it('Verify that all design fields are present with the correct available options.', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.navToStyling()
@@ -165,17 +159,17 @@ describe('Facts Component Tests', () => {
     });
 
     it('Verify that the Facts Component displays the correct title', async () => {
-        (await QALayoutPagePage.tabLayout).click();
-        await QALayoutPagePage.createNewSection();
-        await QALayoutPagePage.navigateToBlockList();
-        (await QALayoutPagePage.btnFacts).scrollIntoView();
-        (await QALayoutPagePage.btnFacts).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFacts).scrollIntoView();
+        (await QALayoutPage.btnFacts).click();
         (await FactsBlockPage.configBlock).waitForDisplayed();
 
         await FactsBlockPage.createAFact(factsBlockData.mainTitle, factsBlockData.title1, factsBlockData.description1)
         expect(await FactsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPagePage.goToPageView();
+        await QALayoutPage.goToPageView();
         expect(((await FactsBlockPage.titleElement).getText)).toHaveText(factsBlockData.title1);
         await (await FactsBlockPage.factsElement).scrollIntoView();
     });
