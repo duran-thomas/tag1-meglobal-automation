@@ -60,7 +60,7 @@ class AdminContentPage extends Page {
      */
     public async getQALandingPage() {
         const tableElement = await this.tableElement;
-        const tableRows = await tableElement.$$('tr');
+        const tableRows = await tableElement.$$('tbody tr');
       
         for (const row of tableRows) {
           const rowText = await row.getText();
@@ -70,6 +70,7 @@ class AdminContentPage extends Page {
             await linkElement.click();
             return true;
           }
+          break;
         }
       
         await this.createQALandingPage();

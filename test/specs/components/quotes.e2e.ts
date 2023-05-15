@@ -1,7 +1,6 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import QuotesBlockPage from '../../pageobjects/CMS/Components/quotes.page';
-import LandingPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import {users} from '../../data/users.data';
 import { quoteBlockData } from '../../data/quote.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
@@ -30,7 +29,7 @@ describe('Quotes Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  //TODO: This function may need some checking out. When its run with all tests at once. I don't think it behaves as expected.
-        expect(await LandingPage.tabLayout).toBeDisplayed();
+        expect(await QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?

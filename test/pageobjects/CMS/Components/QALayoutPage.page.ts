@@ -186,6 +186,10 @@ class LandingQAPage extends Page {
         return $('button[id="edit-submit"]');
     }
 
+    public get btnCloseChatPopUp () {
+        return $('.close-0-2-17');
+    }
+
     /**
      * Methods to create a new section on a page, navigate to block list types
      */
@@ -211,6 +215,7 @@ class LandingQAPage extends Page {
         (await this.linkAddBlock).click();
         (await this.btnCreateCustomBlock).waitForDisplayed();
         (await this.btnCreateCustomBlock).click();
+        (await this.btnCloseChatPopUp).click();
     }
 
     public async goToPageView () {
@@ -220,21 +225,23 @@ class LandingQAPage extends Page {
     }
 
     public async cleanUpJob () {
-        (await this.tabLayout).waitForEnabled();
+        await browser.pause(2000);
+        (await this.tabLayout).waitForDisplayed();
         (await this.tabLayout).click();
-        while (await this.btnRemoveSection.isDisplayed()) {
-            (await this.btnRemoveSection).click();
-            await browser.pause(4000); //find a better wait criteria
-            const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-            await iframe.waitForDisplayed();
-            await browser.switchToFrame(iframe);
-            await browser.pause(3000);
-            (await this.btnRemove).click();
-          }
+        do {
+            if (await this.btnRemoveSection.isDisplayed()) {
+              (await this.btnRemoveSection).click();
+              await browser.pause(4000); // find a better wait criteria
+              const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+              await iframe.waitForDisplayed();
+              await browser.switchToFrame(iframe);
+              await browser.pause(3000);
+              (await this.btnRemove).click();
+            }
+          } while (await this.btnRemoveSection.isDisplayed());
 
           (await this.btnSaveLayout).waitForClickable();
           (await this.btnSaveLayout).click();
-
     }
 
     public async goToQALayout() {
