@@ -54,7 +54,13 @@ export const config: Options.Testrunner = {
     ],
     suites: {
         login: [ './test/specs/login/*.ts'],
-        quotes: ['./test/specs/components/quotes.e2e.ts']
+        quotes: ['./test/specs/components/quotes.e2e.ts'],
+        caorusel: ['/test/specs/components/carousel.e2e.ts'],
+        facts: ['/test/specs/components/facts.e2e.ts'],
+        myChart: ['/test/specs/components/myChart.e2e.ts'],
+        hero: ['/test/specs/components/hero.e2e.ts'],
+        visualList: ['/test/specs/components/visualList.e2e.ts']
+
     },  
     // Patterns to exclude.
     exclude: [
@@ -103,7 +109,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    logLevel: 'debug',
     //
     // Set specific log levels per logger
     // loggers:
@@ -130,7 +136,7 @@ export const config: Options.Testrunner = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 30000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -165,7 +171,9 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
+    reporters: ['spec', ['allure', { outputDir: 'allure-results',
+                                    disableWebdriverStepsReporting: true,
+                                    disableWebdriverScreenshotsReporting: false, }]],
 
 
     
@@ -174,7 +182,7 @@ export const config: Options.Testrunner = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 80000
     },
     //
     // =====

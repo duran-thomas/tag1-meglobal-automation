@@ -14,7 +14,7 @@ export default class Page {
          * username: meda2022
          * password: meda2022
          */
-        return browser.url(`https://meglobalstg.prod.acquia-sites.com/${path}`)
+        return browser.url(`https://meglobalode7.prod.acquia-sites.com/${path}`)
         //following a decision made ode environments will have incremental numeric value that updates after each release
     }
 }

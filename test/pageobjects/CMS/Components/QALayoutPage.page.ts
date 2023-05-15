@@ -13,6 +13,10 @@ class LandingQAPage extends Page {
         return $('[href$="/layout"]');
     }
 
+    public get tabView () {
+        return $('=View')
+    }
+
     public get linkAddSection () {
         return $('div[class="layout-builder__add-section"]');
     }
@@ -162,6 +166,30 @@ class LandingQAPage extends Page {
         return $('#ui-id-2');
     }
 
+    public get iframeDiv () {
+        return $('.lbim-dialog');
+    }
+
+    public get btnRemoveSection () {
+        return $('a[href^="/layout_builder/remove/section"]');
+    }
+
+    public get configBlock () {
+        return $('.ui-draggable-handle');
+    }
+
+    public get btnRemove () {
+        return $('#edit-submit');
+    }
+
+    public get btnSaveLayout () {
+        return $('button[id="edit-submit"]');
+    }
+
+    public get btnCloseChatPopUp () {
+        return $('.close-0-2-17');
+    }
+
     /**
      * Methods to create a new section on a page, navigate to block list types
      */
@@ -171,16 +199,54 @@ class LandingQAPage extends Page {
         (await this.linkAddSection).click();
         (await this.sectionTypeOneColumn).click();
         (await this.sectionModal).waitForDisplayed();
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
-        const iframe = await $('iframe.lbim-dialog-iframe');
-        await browser.switchToFrame(iframe); //failing 
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
         (await this.modalBtnAddSection).scrollIntoView();
         (await this.modalBtnAddSection).click();
+        await browser.pause(2000);
     }
 
     public async navigateToBlockList () {
+        (await this.linkAddBlock).waitForDisplayed();
+        (await this.linkAddBlock).scrollIntoView();
         (await this.linkAddBlock).click();
+        (await this.btnCreateCustomBlock).waitForDisplayed();
         (await this.btnCreateCustomBlock).click();
+        (await this.btnCloseChatPopUp).click();
+    }
+
+    public async goToPageView () {
+        (await this.tabView).waitForEnabled();
+        (await this.tabView).click();
+
+    }
+
+    public async cleanUpJob () {
+        await browser.pause(2000);
+        (await this.tabLayout).waitForDisplayed();
+        (await this.tabLayout).click();
+        do {
+            if (await this.btnRemoveSection.isDisplayed()) {
+              (await this.btnRemoveSection).click();
+              await browser.pause(4000); // find a better wait criteria
+              const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+              await iframe.waitForDisplayed();
+              await browser.switchToFrame(iframe);
+              await browser.pause(3000);
+              (await this.btnRemove).click();
+            }
+          } while (await this.btnRemoveSection.isDisplayed());
+
+          (await this.btnSaveLayout).waitForClickable();
+          (await this.btnSaveLayout).click();
+    }
+
+    public async goToQALayout() {
+        (await this.tabLayout).scrollIntoView();
+        (await this.tabLayout).click();
     }
 
 }

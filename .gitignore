@@ -133,4 +133,5 @@ dist
 
 #Individual files
 test/brainstorm.txt
-.history
+.history/
+screenshots/

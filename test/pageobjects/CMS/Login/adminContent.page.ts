@@ -32,6 +32,14 @@ class AdminContentPage extends Page {
         return $('table');
     }
 
+    public get qaPage () {
+        return $('=QA Landing Page');
+    }
+
+    public get btnLayout () {
+        return $('=Layout');
+    }
+
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to create a QA landing page if needed
@@ -52,7 +60,7 @@ class AdminContentPage extends Page {
      */
     public async getQALandingPage() {
         const tableElement = await this.tableElement;
-        const tableRows = await tableElement.$$('tr');
+        const tableRows = await tableElement.$$('tbody tr');
       
         for (const row of tableRows) {
           const rowText = await row.getText();
@@ -62,6 +70,7 @@ class AdminContentPage extends Page {
             await linkElement.click();
             return true;
           }
+          break;
         }
       
         await this.createQALandingPage();

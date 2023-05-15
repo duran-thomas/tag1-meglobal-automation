@@ -10,12 +10,13 @@ export interface User {
       password: 'meda2022'
     },
     validAdmin: {
-      username: 'test-content-administrator',
+      username: 'admin',
       password: 'meda2022',
     },
     invalidAdmin: {
       username: 'invalid_username',
       password: 'invalid_password',
     },
+    bypassUrl: `https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`
   };
   
