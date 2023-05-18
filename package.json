@@ -16,7 +16,8 @@
     "clinicalTrial": "npx wdio run wdio.conf.ts --spec ./test/specs/components/clinicalTrial.e2e.ts",
     "sectionHeader": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sectionHeader.e2e.ts",
     "dropdown": "npx wdio run wdio.conf.ts --spec ./test/specs/components/dropdown.e2e.ts",
-    "cardFeature": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardFeature.e2e.ts"
+    "cardFeature": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardFeature.e2e.ts",
+    "media": "npx wdio run wdio.conf.ts --spec ./test/specs/components/media.e2e.ts"
 
   },
   "author": "QW Team",
