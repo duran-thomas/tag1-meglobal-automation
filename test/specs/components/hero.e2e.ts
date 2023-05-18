@@ -1,7 +1,6 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import HeroBlockPage from '../../pageobjects/CMS/Components/hero.page';
-import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import {users} from '../../data/users.data';
 import { heroBlockData } from '../../data/hero.data';
 import { cookieData } from '../../data/cookie.data';
