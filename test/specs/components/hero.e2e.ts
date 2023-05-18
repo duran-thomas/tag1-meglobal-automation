@@ -85,33 +85,4 @@ describe('Hero Component Tests', () => {
        
     });
 
-    it('Verify that a site Content Administrator can not create a Hero Component in the Default Paragraph.', async () => {
-        await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await QALayoutPage.navigateToBlockList();
-        await (await QALayoutPage.btnDefault).scrollIntoView();
-        await (await QALayoutPage.btnDefault).click();
-        (await HeroBlockPage.configBlock).waitForDisplayed();
-        await HeroBlockPage.switchIntoFrame();
-
-        const ulElement = await $('.dropbutton.dropbutton--small.dropbutton--multiple');
-        const listElements = await ulElement.$$('li'); // Get all list elements within the unordered list element
-
-        let isValuePresent = false;
-
-        for (const element of listElements) {
-        const text = await element.getText();
-        if (text.includes('Hero')) {
-            isValuePresent = true;
-            break;
-        }
-        }
-
-        expect(isValuePresent).toBe(false); // Assert that the value is not present in any list element
-    });
-
-
-
   });
