@@ -121,7 +121,7 @@ describe('Media Component Tests', () => {
     });
 
    
-    it.only('Verify that all design fields are present with the correct available options for the Video Paragraph Type', async () => {
+    it('Verify that all design fields are present with the correct available options for the Video Paragraph Type', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
