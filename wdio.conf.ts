@@ -62,8 +62,8 @@ export const config: Options.Testrunner = {
         visualList: ['/test/specs/components/visualList.e2e.ts'],
         clinicalTrial: ['/test/specs/components/clinicalTrial.e2e.ts'],
         sectionHeader: ['/test/specs/components/sectionHeader.e2e.ts'],
-        dropdown: ['/test/specs/components/dropdown.e2e.ts']
-
+        dropdown: ['/test/specs/components/dropdown.e2e.ts'],
+        cardFeature: ['/test/specs/components/cardFeature.e2e.ts']
 
     },  
     // Patterns to exclude.
