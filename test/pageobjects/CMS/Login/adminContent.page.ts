@@ -49,8 +49,9 @@ class AdminContentPage extends Page {
         (await this.linkLandingPage).click();
         (await this.inputTitle).setValue('QA Landing Page');
         (await this.btnSave).scrollIntoView();
-        await browser.pause(3500);
+        await browser.pause(2000);
         (await this.btnSave).click();
+        await browser.pause(3000);
     }
 
     /**
