@@ -67,6 +67,8 @@ class AdminContentPage extends Page {
       
           if (rowText.includes('QA Landing Page')) {
             const linkElement = await row.$('li.edit');
+            await linkElement.scrollIntoView();
+            await linkElement.waitForClickable();
             await linkElement.click();
             return true;
           }
