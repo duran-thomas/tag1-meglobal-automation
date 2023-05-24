@@ -59,7 +59,14 @@ export const config: Options.Testrunner = {
         facts: ['/test/specs/components/facts.e2e.ts'],
         myChart: ['/test/specs/components/myChart.e2e.ts'],
         hero: ['/test/specs/components/hero.e2e.ts'],
-        visualList: ['/test/specs/components/visualList.e2e.ts']
+        visualList: ['/test/specs/components/visualList.e2e.ts'],
+        clinicalTrial: ['/test/specs/components/clinicalTrial.e2e.ts'],
+        sectionHeader: ['/test/specs/components/sectionHeader.e2e.ts'],
+        dropdown: ['/test/specs/components/dropdown.e2e.ts'],
+        cardFeature: ['/test/specs/components/cardFeature.e2e.ts'],
+        media: ['/test/specs/components/media.e2e.ts'],
+        map: ['/test/specs/components/map.e2e.ts']
+
 
     },  
     // Patterns to exclude.

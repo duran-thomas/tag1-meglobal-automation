@@ -226,7 +226,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get paginationElement () {
-        return $('mf-carousel__pagination');
+        return $('.mf-carousel__pagination');
     }
 
     public get controlElement () {

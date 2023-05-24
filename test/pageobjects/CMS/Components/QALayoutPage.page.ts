@@ -36,13 +36,13 @@ class LandingQAPage extends Page {
     }
 
     public get modalBtnAddSection () {
-        return $('#edit-actions-submit');
+        return $$('#edit-actions-submit')[0];
     }
     /** The other fields in the modal will be added as they become necessary */
 
     //base page with section added making add block become available
     public get linkAddBlock () {
-        return $('div[class="layout-builder__add-block"]');
+        return $$('div[class="layout-builder__add-block"]')[0];
     }
 
     //right window block menu
