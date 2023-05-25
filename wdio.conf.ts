@@ -66,7 +66,8 @@ export const config: Options.Testrunner = {
         cardFeature: ['/test/specs/components/cardFeature.e2e.ts'],
         media: ['/test/specs/components/media.e2e.ts'],
         map: ['/test/specs/components/map.e2e.ts'],
-        cardGeneral:['/test/specs/components/cardGeneral.e2e.ts']
+        cardGeneral:['/test/specs/components/cardGeneral.e2e.ts'],
+        cardServices: ['/test/specs/components/cardServices.e2e.ts']
 
 
     },  

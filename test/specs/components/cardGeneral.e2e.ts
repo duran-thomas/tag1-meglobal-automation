@@ -145,7 +145,7 @@ describe('Card General Component Tests', () => {
         expect(await CardGeneralBlockPage.dropdownDesktopAspectRatio).toHaveValue('dark');
         expect(await CardGeneralBlockPage.dropdownDesktopAspectRatio).toHaveValue('light');
 
-        expect(await CardGeneralBlockPage.dropdownTheme).toBeDisplayed();
+        expect(await CardGeneralBlockPage.dropdownAlignment).toBeDisplayed();
         expect(await CardGeneralBlockPage.dropdownDesktopAspectRatio).toHaveValue('_none');
         expect(await CardGeneralBlockPage.dropdownDesktopAspectRatio).toHaveValue('left');
         expect(await CardGeneralBlockPage.dropdownDesktopAspectRatio).toHaveValue('center');
