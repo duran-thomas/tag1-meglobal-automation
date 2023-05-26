@@ -1,4 +1,10 @@
 import type { Options } from '@wdio/types'
+import QualityWatcherReporter from "@qualitywatcher/wdio-reporter";
+import QualityWatcherService from "@qualitywatcher/wdio-service";
+
+import * as dotenvLoader from 'dotenv';
+
+dotenvLoader.config();
 
 export const config: Options.Testrunner = {
     //
@@ -53,7 +59,7 @@ export const config: Options.Testrunner = {
         './test/specs/**/*.ts'
     ],
     suites: {
-        login: [ './test/specs/login/*.ts'],
+        login: ['./test/specs/login/*.ts'],
         quotes: ['./test/specs/components/quotes.e2e.ts'],
         caorusel: ['/test/specs/components/carousel.e2e.ts'],
         facts: ['/test/specs/components/facts.e2e.ts'],
@@ -68,7 +74,7 @@ export const config: Options.Testrunner = {
         map: ['/test/specs/components/map.e2e.ts']
 
 
-    },  
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -96,7 +102,7 @@ export const config: Options.Testrunner = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    
+
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
@@ -156,8 +162,17 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['selenium-standalone'],
-    
+    services: ['selenium-standalone',
+        [QualityWatcherService, {
+            email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
+            apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
+            testRunName: "WDIO Test Run",
+            description: 'This test run was created by automation.',
+            projectId: 1,
+            includeAllCases: true,
+        }]
+    ],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -178,12 +193,18 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec', ['allure', { outputDir: 'allure-results',
-                                    disableWebdriverStepsReporting: true,
-                                    disableWebdriverScreenshotsReporting: false, }]],
 
 
-    
+    reporters: ['spec', ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+    }],
+        // @ts-ignore
+        QualityWatcherReporter],
+
+
+
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
