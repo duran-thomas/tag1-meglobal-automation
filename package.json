@@ -20,7 +20,8 @@
     "media": "npx wdio run wdio.conf.ts --spec ./test/specs/components/media.e2e.ts",
     "map": "npx wdio run wdio.conf.ts --spec ./test/specs/components/map.e2e.ts",
     "cardGeneral": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardGeneral.e2e.ts",
-    "cardServices": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardServices.e2e.ts"
+    "cardServices": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardServices.e2e.ts",
+    "accordion": "npx wdio run wdio.conf.ts --spec ./test/specs/components/accordion.e2e.ts"
 
   },
   "author": "QW Team",
