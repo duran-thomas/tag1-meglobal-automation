@@ -163,14 +163,14 @@ export const config: Options.Testrunner = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['selenium-standalone',
-        [QualityWatcherService, {
-            email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
-            apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-            testRunName: "WDIO Test Run",
-            description: 'This test run was created by automation.',
-            projectId: 1,
-            includeAllCases: true,
-        }]
+        // [QualityWatcherService, {
+        //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
+        //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
+        //     testRunName: "WDIO Test Run",
+        //     description: 'This test run was created by automation.',
+        //     projectId: 1,
+        //     includeAllCases: true,
+        // }]
     ],
 
     // Framework you want to run your specs with.

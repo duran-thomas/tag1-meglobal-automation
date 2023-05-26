@@ -46,7 +46,7 @@ describe('Card Feature Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Card Feature Component', async () => {
+    it('[S3C862] Verify that a site Content Administrator can create a Card Feature Component', async () => {
         const headline = cardFeatureBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -68,7 +68,7 @@ describe('Card Feature Component Tests', () => {
         expect(await CardFeatureBlockPage.cardFeatureImage).toBeDisplayed();   
     });
 
-    it('Verify that a site Content Administrator can create a Card Clinical Feature Component, using an internal url', async () => {
+    it('[S3C863] Verify that a site Content Administrator can create a Card Clinical Feature Component, using an internal url', async () => {
         const headline = cardFeatureBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -91,7 +91,7 @@ describe('Card Feature Component Tests', () => {
     });
 
 
-    it.only('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C864] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

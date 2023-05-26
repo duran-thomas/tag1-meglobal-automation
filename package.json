@@ -19,7 +19,6 @@
     "cardFeature": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardFeature.e2e.ts",
     "media": "npx wdio run wdio.conf.ts --spec ./test/specs/components/media.e2e.ts",
     "map": "npx wdio run wdio.conf.ts --spec ./test/specs/components/map.e2e.ts"
-
   },
   "author": "QW Team",
   "license": "ISC",

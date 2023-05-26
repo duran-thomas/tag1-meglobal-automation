@@ -55,7 +55,7 @@ describe('Hero Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
+    it('[S3C821] [S3C823] Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
         await (await AdminContentPage.btnAddContent).click();
         await (await AdminContentPage.linkLandingPage).click();
 
@@ -71,7 +71,7 @@ describe('Hero Component Tests', () => {
         expect(tagName).toBe('h1');
     });
 
-    it('Verify that a site Content Administrator can create a Hero Component with a Video Media Type', async () => {
+    it('[S3C822] Verify that a site Content Administrator can create a Hero Component with a Video Media Type', async () => {
         await (await AdminContentPage.btnAddContent).click();
         await (await AdminContentPage.linkLandingPage).click();
 
