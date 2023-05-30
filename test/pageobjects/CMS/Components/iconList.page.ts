@@ -154,6 +154,8 @@ class IconListBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         (await this.inputTitle).setValue(title);
+        (await this.dropdownIcon).selectByIndex(0);
+        await browser.pause(2000);
         (await this.inputText).scrollIntoView();
         (await this.inputText).setValue(text);
         (await this.dropdownItemIcon).selectByIndex(1);
