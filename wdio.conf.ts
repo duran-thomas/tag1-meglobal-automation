@@ -70,7 +70,8 @@ export const config: Options.Testrunner = {
         cardServices: ['/test/specs/components/cardServices.e2e.ts'],
         accordion: ['/test/specs/components/accordion.e2e.ts'],
         billboard: ['/test/specs/components/billboard.e2e.ts'],
-        inlineNavigation: ['/test/specs/components/inlineNavigation.e2e.ts']
+        inlineNavigation: ['/test/specs/components/inlineNavigation.e2e.ts'],
+        iconList: ['/test/specs/components/iconList.e2e.ts']
 
 
     },  

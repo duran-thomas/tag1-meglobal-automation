@@ -198,10 +198,10 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('bottom');
 
         await CarouselBlockPage.dropdownControlsIcon.scrollIntoView();
-        expect(await CarouselBlockPage.dropdownControlsPosition).toBeDisplayed();
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('_none');
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('chevron');
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('arrow');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toBeDisplayed();
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('_none');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('chevron');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('arrow');
 
         const animationCheckbox = await CarouselBlockPage.checkboxAnimationIntro;
         expect(await animationCheckbox).toBeDisplayed();

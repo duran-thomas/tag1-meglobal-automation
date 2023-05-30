@@ -23,7 +23,8 @@
     "cardServices": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardServices.e2e.ts",
     "accordion": "npx wdio run wdio.conf.ts --spec ./test/specs/components/accordion.e2e.ts",
     "billboard": "npx wdio run wdio.conf.ts --spec ./test/specs/components/billboard.e2e.ts",
-    "inlineNavigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/inlineNavigation.e2e.ts"
+    "inlineNavigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/inlineNavigation.e2e.ts",
+    "iconList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/iconList.e2e.ts"
 
   },
   "author": "QW Team",
