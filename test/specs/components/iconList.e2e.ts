@@ -46,7 +46,7 @@ describe('Icon List Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create an Icon List Component with a single Item', async () => {
+    it('[S3C899] Verify that a site Content Administrator can create an Icon List Component with a single Item', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -65,7 +65,7 @@ describe('Icon List Component Tests', () => {
         expect(await IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
     });
 
-    it('Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
+    it('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -84,7 +84,7 @@ describe('Icon List Component Tests', () => {
         expect(await IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
     });
 
-    it('Verify that the text field item on the Icon List Component is a mandatory field', async () => {
+    it('[S3C901] Verify that the text field item on the Icon List Component is a mandatory field', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -98,7 +98,7 @@ describe('Icon List Component Tests', () => {
         expect(await IconListBlockPage.inputText).toHaveAttribute('aria-required="true"');  
     });
    
-    it.only('Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it.only('[S3C902] Verify that the available paragraph types in the Carousel form are correct.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
