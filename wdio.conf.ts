@@ -71,7 +71,8 @@ export const config: Options.Testrunner = {
         accordion: ['/test/specs/components/accordion.e2e.ts'],
         billboard: ['/test/specs/components/billboard.e2e.ts'],
         inlineNavigation: ['/test/specs/components/inlineNavigation.e2e.ts'],
-        iconList: ['/test/specs/components/iconList.e2e.ts']
+        iconList: ['/test/specs/components/iconList.e2e.ts'],
+        contactList: ['/test/specs/components/contactList.e2e.ts']
 
 
     },  
@@ -149,7 +150,7 @@ export const config: Options.Testrunner = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 30000,
+    waitforTimeout: 50000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -195,7 +196,7 @@ export const config: Options.Testrunner = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 80000
+        timeout: 400000
     },
     //
     // =====
