@@ -18,7 +18,7 @@ class LandingQAPage extends Page {
     }
 
     public get linkAddSection () {
-        return $('div[class="layout-builder__add-section"]');
+        return $('.layout-builder__add-section:nth-child(1)');
     }
 
     //right window section menu
