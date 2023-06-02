@@ -55,21 +55,21 @@ describe('Visual List Component Tests', () => {
             (await QALayoutPage.btnVisualList).click();
             (await VisualListBlockPage.configBlock).waitForDisplayed();
             const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
-            if (record.itemTitle === 'QA Simple Visual List Item Title'){
+            if (record.itemTitle === '[S3C832] QA Simple Visual List Item Title'){
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
                 expect(await VisualListBlockPage.visualListElement).toExist();  
                 await QALayoutPage.goToPageView();
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
-            if (record.itemTitle === 'QA Simple Visual List Item Title Internal URL' ){
+            if (record.itemTitle === '[S3C833] QA Simple Visual List Item Title Internal URL' ){
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
                 expect(await VisualListBlockPage.visualListElement).toExist();  
                 await QALayoutPage.goToPageView();
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
-            if (record.itemTitle === 'QA Illustration Visual List Item Title'){
+            if (record.itemTitle === '[S3C834] QA Illustration Visual List Item Title'){
                 
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
@@ -77,7 +77,7 @@ describe('Visual List Component Tests', () => {
                 await QALayoutPage.goToPageView();
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
-            if (record.itemTitle === 'QA Illustration Visual List Item Title Internal URL'){
+            if (record.itemTitle === '[S3C835] QA Illustration Visual List Item Title Internal URL'){
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
                 expect(await VisualListBlockPage.visualListElement).toExist();  
@@ -128,7 +128,7 @@ describe('Visual List Component Tests', () => {
         })
     }
 
-    it('Verify that a site Content Administrator can create a Visual List Component with both an Illustration visual list item paragraph and a Simple visual list item', async () => {
+    it('[S3C836] Verify that a site Content Administrator can create a Visual List Component with both an Illustration visual list item paragraph and a Simple visual list item', async () => {
         await (QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -146,7 +146,7 @@ describe('Visual List Component Tests', () => {
 
 
     //#region TODO: Look at this again later. For now, manually execute these tests.
-    it.only('Verify that the Visual List Paragraph type has been added to the list of paragraph types that appear in the Freeform block', async () => {
+    it('[S3C842] Verify that the Visual List Paragraph type has been added to the list of paragraph types that appear in the Freeform block', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -156,7 +156,7 @@ describe('Visual List Component Tests', () => {
         await VisualListBlockPage.isVisualListInFreeformBlock();
     });
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C843] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
