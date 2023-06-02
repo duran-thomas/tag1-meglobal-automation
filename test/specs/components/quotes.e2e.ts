@@ -46,7 +46,7 @@ describe('Quotes Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
+    it('[S3C850] Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -62,7 +62,7 @@ describe('Quotes Component Tests', () => {
         browser.pause(3000); 
     });
   
-    it('Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
+    it('[S3C851] Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -75,7 +75,7 @@ describe('Quotes Component Tests', () => {
         expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithoutBorder);
     });
 
-    it('Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
+    it('[S3C852] Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -90,7 +90,7 @@ describe('Quotes Component Tests', () => {
         expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
-    it.only('Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
+    it('[S3C853] Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -105,7 +105,7 @@ describe('Quotes Component Tests', () => {
         expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C854] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

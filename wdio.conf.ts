@@ -53,6 +53,7 @@ export const config: Options.Testrunner = {
         './test/specs/**/*.ts'
     ],
     suites: {
+        all: ['./test/specs/components/*.ts'],
         login: [ './test/specs/login/*.ts'],
         quotes: ['./test/specs/components/quotes.e2e.ts'],
         caorusel: ['/test/specs/components/carousel.e2e.ts'],

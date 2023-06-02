@@ -46,7 +46,7 @@ describe('Dropdown Component Tests', () => {
 
     // })
 
-    it('Verify that a site Content Administrator can create a Dropdown Component with 1 menu item', async () => {
+    it('[S3C855] Verify that a site Content Administrator can create a Dropdown Component with 1 menu item', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -67,7 +67,7 @@ describe('Dropdown Component Tests', () => {
         expect(await DropdownBlockPage.duckDuckItem).toBeDisplayedInViewport(); 
     });
 
-    it.only('Verify that a site Content Administrator can create a Dropdown Component with more than 1 menu item', async () => {
+    it('[S3C856] Verify that a site Content Administrator can create a Dropdown Component with more than 1 menu item', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -91,7 +91,7 @@ describe('Dropdown Component Tests', () => {
     });
     
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C857] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

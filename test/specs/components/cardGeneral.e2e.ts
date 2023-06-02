@@ -47,7 +47,7 @@ describe('Card General Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a  Card - General Component.', async () => {
+    it('[S3C860] Verify that a site Content Administrator can create a  Card - General Component.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -67,7 +67,7 @@ describe('Card General Component Tests', () => {
         expect(await CardGeneralBlockPage.cardGeneralElement).toBeDisplayed();   
     });
 
-    it('Verify that the available paragraph types in the Card General form are correct.', async () => {
+    it('[S3C861] Verify that the available paragraph types in the Card General form are correct.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

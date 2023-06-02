@@ -46,7 +46,7 @@ describe('Facts Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
+    it('[S3C844] Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -64,7 +64,7 @@ describe('Facts Component Tests', () => {
         
     });
 
-    it('Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
+    it('[S3C845] Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -82,7 +82,7 @@ describe('Facts Component Tests', () => {
         await browser.pause(4000);
     });
 
-    it.only('Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
+    it('[S3C846] Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -100,7 +100,7 @@ describe('Facts Component Tests', () => {
         await browser.pause(4000);
     });
 
-    it('Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
+    it('[S3C847] Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -117,7 +117,7 @@ describe('Facts Component Tests', () => {
         await (await FactsBlockPage.factsElement).scrollIntoView();
     });
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C848] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -157,7 +157,7 @@ describe('Facts Component Tests', () => {
         
     });
 
-    it('Verify that the Facts Component displays the correct title', async () => {
+    it('[S3C849] Verify that the Facts Component displays the correct title', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

@@ -106,8 +106,8 @@ class LandingQAPage extends Page {
         return $('=Freeform');
     }
 
-    public get btnHHSembeddedContent () {
-        return $('=HHS embedded content');
+    public get btnHero () {
+        return $('=Hero');
     }
 
     public get btnIconList () {

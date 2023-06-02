@@ -193,8 +193,8 @@ class BillboardBlockPage extends Page {
         await browser.switchToFrame(await this.entityIframe);
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath);
-        await browser.pause(6000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
+        await browser.pause(10000); //explicit waits seem to be necessary here
+        (await this.inputAltText).scrollIntoView();
         (await this.inputAltText).setValue(altText);
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();

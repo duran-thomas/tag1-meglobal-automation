@@ -124,7 +124,7 @@ describe('Inline Navigation Component Tests', () => {
         expect(await AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
     });
 
-    it.only('[S3C898] Verify that a site Content Administrator can create an Inline Navigation Component in a Freeform block', async () => {
+    it('[S3C898] Verify that a site Content Administrator can create an Inline Navigation Component in a Freeform block', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

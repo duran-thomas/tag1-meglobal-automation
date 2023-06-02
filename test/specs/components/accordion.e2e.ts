@@ -24,7 +24,7 @@ describe('Accordion Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
@@ -46,7 +46,7 @@ describe('Accordion Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create an Accordion Component, Show|Hide included)', async () => {
+    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component, Show|Hide included)', async () => {
         const title = accordionBlockData.title;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -63,6 +63,11 @@ describe('Accordion Component Tests', () => {
         await (await AccordionBlockPage.accordionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         expect(await AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+
+    });
+
+    it('[S3C907] Verify that contents of the Accordion Component can be toggled (hide and show)', async () => {
+        const title = accordionBlockData.title;
 
         //Verify that the accordion content can be shown
         await (await AccordionBlockPage.accordionBtn).click();

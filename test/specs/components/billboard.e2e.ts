@@ -46,7 +46,7 @@ describe('Billboard Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Carousel Component', async () => {
+    it('[S3C887] Verify that a site Content Administrator can create a Billboard Component.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -54,7 +54,7 @@ describe('Billboard Component Tests', () => {
         (await QALayoutPage.btnBillBoard).click();
         (await BillboardBlockPage.configBlock).waitForDisplayed();
 
-        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
         await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText);
 
         expect(BillboardBlockPage.successMsg).toBeDisplayed();
@@ -66,7 +66,7 @@ describe('Billboard Component Tests', () => {
         expect(await BillboardBlockPage.billboardImage).toBeDisplayedInViewport();   
     });
 
-    it('Verify that a site Content Administrator can create a Billboard Component in a Carousel Block', async () => {
+    it('[S3C888] Verify that a site Content Administrator can create a Billboard Component in a Carousel Block', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -88,7 +88,7 @@ describe('Billboard Component Tests', () => {
     });
 
 
-    it.only('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C889] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

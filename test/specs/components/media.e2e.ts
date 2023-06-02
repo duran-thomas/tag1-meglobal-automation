@@ -46,7 +46,7 @@ describe('Media Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create an Image Paragraph Type', async () => {
+    it('[S3C867] Verify that a site Content Administrator can create an Image Paragraph Type', async () => {
         const alt = mediaBlockData.altText;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -67,7 +67,7 @@ describe('Media Component Tests', () => {
         expect((await MediaBlockPage.captionElement).getText).toHaveText(mediaBlockData.caption);   
     });
 
-    it('Verify that when the Cover field value is true for the Image paragraph type, the form is updated accordingly', async () => {
+    it('[S3C868] Verify that when the Cover field value is true for the Image paragraph type, the form is updated accordingly', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -83,7 +83,7 @@ describe('Media Component Tests', () => {
         expect(await MediaBlockPage.dropdownDesktopAspectRatio).not.toBeDisplayedInViewport;    
     });
 
-    it('Verify that when the Rounded field value is true for the Image paragraph type, the form is updated accordingly', async () => {
+    it('[S3C869] Verify that when the Rounded field value is true for the Image paragraph type, the form is updated accordingly', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -99,7 +99,7 @@ describe('Media Component Tests', () => {
         expect(await MediaBlockPage.dropdownDesktopAspectRatio).not.toBeDisplayedInViewport;    
     });
 
-    it('Verify that a site Content Administrator can create a Video Paragraph Type', async () => {
+    it('[S3C870] Verify that a site Content Administrator can create a Video Paragraph Type', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -121,7 +121,7 @@ describe('Media Component Tests', () => {
     });
 
    
-    it('Verify that all design fields are present with the correct available options for the Video Paragraph Type', async () => {
+    it('[S3C871] Verify that all design fields are present with the correct available options for the Video Paragraph Type', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

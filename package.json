@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "all": "npx wdio run wdio.conf.ts --spec ./test/specs/components/*",
     "allure": "allure serve allure-results && allure open",
     "login": "npx wdio run wdio.conf.ts --spec ./test/specs/login/*",
     "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quotes.e2e.ts",

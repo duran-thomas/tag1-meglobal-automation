@@ -65,7 +65,7 @@ describe('Icon List Component Tests', () => {
         expect(await IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
     });
 
-    it.only('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
+    it('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

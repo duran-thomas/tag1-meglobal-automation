@@ -306,7 +306,7 @@ describe('Contact List Component Tests', () => {
     });
    
 
-    it.only('[S3C886] Verify that all design fields are present with the correct available options and they are correctly applied', async () => {
+    it('[S3C886] Verify that all design fields are present with the correct available options and they are correctly applied', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

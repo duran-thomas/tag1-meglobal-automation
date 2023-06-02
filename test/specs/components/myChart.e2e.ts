@@ -52,7 +52,7 @@ describe('MyChart Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a MyChart Component', async () => {
+    it('[S3C858] Verify that a site Content Administrator can create a MyChart Component', async () => {
        
         const headline = myChartBlockData.headline;
         (await QALayoutPage.tabLayout).click();
@@ -76,7 +76,7 @@ describe('MyChart Component Tests', () => {
     });
 
 
-    it('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C859] Verify that all design fields are present with the correct available options.', async () => {
         
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();

@@ -46,7 +46,7 @@ describe('Carousel Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Carousel Component', async () => {
+    it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -67,7 +67,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.carouselImage).toBeDisplayed();   
     });
 
-    it('Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
+    it('[S3C825] Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -88,7 +88,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.paginationElement).not.toExist();   
     });
 
-    it('Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
+    it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -109,7 +109,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.controlElement).not.toExist();   
     });
 
-    it.only('Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
+    it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -145,7 +145,7 @@ describe('Carousel Component Tests', () => {
     });
 
 
-    it('Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

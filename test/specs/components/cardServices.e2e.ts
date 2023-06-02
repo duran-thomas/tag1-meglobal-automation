@@ -46,7 +46,7 @@ describe('Card Services Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Card Services Component with an external link', async () => {
+    it('[S3C903] Verify that a site Content Administrator can create a Card Services Component with an external link', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -66,7 +66,7 @@ describe('Card Services Component Tests', () => {
         expect((await CardServicesBlockPage.cardContent).getText).toHaveText(cardServicesBlockData.content);   
     });
 
-    it('Verify that a site Content Administrator can create a Card Services Component with an internal link', async () => {
+    it('[S3C904] Verify that a site Content Administrator can create a Card Services Component with an internal link', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -86,7 +86,7 @@ describe('Card Services Component Tests', () => {
         expect((await CardServicesBlockPage.internalLink).getText).toHaveText(cardServicesBlockData.resiText) 
     });
 
-    it.only('Verify that all design fields are present with the correct available options.', async () => {
+    it('[S3C905] Verify that all design fields are present with the correct available options.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

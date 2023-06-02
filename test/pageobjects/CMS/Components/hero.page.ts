@@ -13,31 +13,31 @@ class HeroBlockPage extends Page {
     }
 
     public get inputTitle () {
-        return $('#edit-title-0-value');
+        return $('#edit-settings-label');
     }
 
     public get inputHeadline () {
-        return $('#edit-field-hero-0-subform-field-headline-0-headline');
+        return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
     public get inputEyebrow () {
-        return $('#edit-field-hero-0-subform-field-eyebrow-0-value');
+        return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
     public get inputIntro () {
-        return $('#edit-field-hero-0-subform-field-intro-0-value');
+        return $('#edit-settings-block-form-field-content-0-subform-field-intro-0-value');
     }
 
     public get inputContent () {
-        return $('#edit-field-hero-0-subform-field-content-0-value');
+        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
     public get inputButtonText () {
-        return $('#edit-field-hero-0-subform-field-buttons-0-title');
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-title');
     }
 
     public get inputURL () {
-        return $('#edit-field-hero-0-subform-field-buttons-0-uri');
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
     public get dropdownMedia () {
@@ -60,8 +60,8 @@ class HeroBlockPage extends Page {
         return $('#edit-submit');
     }
     
-    public get btnSavePage () {
-        return $('#edit-submit');
+    public get btnAddBlock () {
+        return $('#edit-actions-submit');
     }
 
     public get successMsg () {
@@ -106,7 +106,11 @@ class HeroBlockPage extends Page {
      */
 
     public async createComponentWithImage(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await (await this.inputTitle).waitForClickable();
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
         (await this.inputTitle).setValue(title);
         (await this.inputHeadline).scrollIntoView();
         (await this.inputHeadline).setValue(headline);
@@ -129,14 +133,21 @@ class HeroBlockPage extends Page {
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         //await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnSavePage).scrollIntoView();
-        await (await this.btnSavePage).waitForEnabled();
-        (await this.btnSavePage).click();
+        (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).waitForEnabled();
+        (await this.btnAddBlock).click();
+        (await this.btnSaveLayout).waitForDisplayed();
+        (await this.btnSaveLayout).scrollIntoView();
+        (await this.btnSaveLayout).click();
         await browser.pause(2000);
     }
 
     public async createComponentWithVideo(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await (await this.inputTitle).waitForClickable();
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
         (await this.inputTitle).setValue(title);
         (await this.inputHeadline).scrollIntoView();
         (await this.inputHeadline).setValue(headline);
@@ -154,15 +165,18 @@ class HeroBlockPage extends Page {
         (await this.btnBrowse).waitForDisplayed();
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath);
-        await browser.pause(10000); //explicit waits seem to be necessary here
+        await browser.pause(10900); //explicit waits seem to be necessary here
         await (await this.btnSaveMedia).scrollIntoView();
         await (await this.btnSaveMedia).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         //await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnSavePage).scrollIntoView();
-        await (await this.btnSavePage).waitForEnabled();
-        (await this.btnSavePage).click();
+        (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).waitForEnabled();
+        (await this.btnAddBlock).click();
+        (await this.btnSaveLayout).waitForDisplayed();
+        (await this.btnSaveLayout).scrollIntoView();
+        (await this.btnSaveLayout).click();
         await browser.pause(2000);
     }
 

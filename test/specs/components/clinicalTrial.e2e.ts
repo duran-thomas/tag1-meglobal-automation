@@ -46,7 +46,7 @@ describe('Clinical Trial Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Card Clinical Trial Component.', async () => {
+    it('[S3C819] Verify that a site Content Administrator can create a Card Clinical Trial Component.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -65,7 +65,7 @@ describe('Clinical Trial Component Tests', () => {
         expect((await ClinicalTrialBlockPage.clinicalCardElement).getText).toHaveTextContaining(clinicalTrialBlockData.mainTitle);   
     });
 
-    it('Verify that a site Content Administrator can create a Card Clinical Trial Component, using an internal url', async () => {
+    it('[S3C820] Verify that a site Content Administrator can create a Card Clinical Trial Component, using an internal url', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
