@@ -1,0 +1,204 @@
+import Page from '../Login/page';
+
+/**
+ * sub page containing specific selectors and methods for a specific page
+ */
+class DropdownBlockPage extends Page {
+    /**
+     * define selectors using getter methods
+     */
+
+    public get btnSaveLayout () {
+        return $('#edit-submit');
+    }
+
+    public get inputTitle () {
+        return $('#edit-settings-label');
+    }
+
+    public get dropdownToggle () {
+        return $('.dropbutton__toggle');
+    }
+
+    public get linkAddDropdownList () {        
+        return $('.add-more-button-dropdown-list');
+    }    
+
+    public get inputTriggerText () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-trigger-text-0-value"]')
+    }
+
+    public get inputURL () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-uri"]');
+    }
+
+    public get inputLinkText () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-title"]');
+    }
+
+    public get dropdownTarget () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-target"]');
+    }
+
+
+    public get inputTriggerText1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-trigger-text-0-value"]')
+    }
+
+    public get inputURL1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-uri"]');
+    }
+
+    public get inputLinkText1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-title"]');
+    }
+
+    public get dropdownTarget1 () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-target"]');
+    }
+
+
+    public get dropdownStyling () {
+        return $('details[data-drupal-selector="edit-settings-block-form-field-content-widget-0-subform-group-styling"]');
+    }
+
+    public get dropdownSize () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-size"]');
+    }
+
+    public get inputMaxHeight () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-max-height-0-value"]');
+    }
+
+    public get dropdownMobileListPosition () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-mobile-list-position"]');
+    }
+
+    public get dropdownDesktopListPosition () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-desktop-list-position"]');
+    }
+
+    public get inputVerticalOffset () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-list-vertical-offset-0-value"]');
+    }
+
+    public get inputHorizontalOffset () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-list-horizontal-offset-0-value"]');
+    }
+
+    public get btnAddBlock () {
+        return $('#edit-actions-submit');
+    }
+
+    public get configBlock () {
+        return $('.ui-draggable-handle');
+    }
+
+    public get successMsg () {
+        return $('.mf-alert__container--success');
+    }
+
+    public get dropdownElement () {
+        return $('.mf-button--tertiary');
+    }
+
+    public get dropdownElements () {
+        return $$('.mf-button--tertiary');
+    }
+
+    public get duckDuckItem () {
+        return $('.mf-dropdown__link[href="https://www.google.com/"]');
+    }
+
+    public get dropdownElement1 () {
+        return $('button[data-analytics-click-text="Dropdown Trigger 1"]')
+    }
+
+    public get wikiItem () {
+        return $('.mf-dropdown__link[href="https://wikipedia.org/"]');
+    }
+
+
+    /**
+     * Helper methods to create Carousel Component
+     */
+
+    public async createDropdownItem(title: string, triggerText: string, url: string, linkText: string) {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        (await this.inputTitle).setValue(title);
+        await browser.pause(2000); //explicit waits seem to be necessary here
+        (await this.dropdownToggle).scrollIntoView();
+        (await this.dropdownToggle).click();
+        (await this.linkAddDropdownList).click();
+        (await this.inputTriggerText).setValue(triggerText);
+        (await this.inputURL).setValue(url);
+        (await this.inputLinkText).scrollIntoView();
+        (await this.inputLinkText).setValue(linkText);
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        (await this.dropdownTarget).selectByIndex(1);
+        (await this.btnAddBlock).scrollIntoView();
+        (await this.btnAddBlock).click();
+        (await this.btnSaveLayout).waitForDisplayed();
+        (await this.btnSaveLayout).scrollIntoView();
+        (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async createDropdownMultiItem(title: string, triggerText: string, url: string, linkText: string, triggerText1: string, url1: string, linkText1: string) {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        (await this.inputTitle).setValue(title);
+        await browser.pause(2000); //explicit waits seem to be necessary here
+        (await this.dropdownToggle).scrollIntoView();
+        (await this.dropdownToggle).click();
+        (await this.linkAddDropdownList).click();
+        (await this.inputTriggerText).setValue(triggerText);
+        (await this.inputURL).setValue(url);
+        (await this.inputLinkText).scrollIntoView();
+        (await this.inputLinkText).setValue(linkText);
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        (await this.dropdownTarget).selectByIndex(1);
+        //add second menu item
+        (await this.dropdownToggle).scrollIntoView();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        (await this.dropdownToggle).click();
+        (await this.linkAddDropdownList).click();
+        (await this.inputTriggerText1).setValue(triggerText1);
+        (await this.inputURL1).setValue(url1);
+        (await this.inputLinkText1).scrollIntoView();
+        (await this.inputLinkText1).setValue(linkText1);
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        (await this.dropdownTarget).selectByIndex(2);
+        (await this.btnAddBlock).scrollIntoView();
+        (await this.btnAddBlock).click();
+        (await this.btnSaveLayout).waitForDisplayed();
+        (await this.btnSaveLayout).scrollIntoView();
+        (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+    
+    public async navToStyling() {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await browser.pause(3000);
+        (await this.dropdownToggle).scrollIntoView();
+        (await this.dropdownToggle).click();
+        (await this.linkAddDropdownList).click();
+        await browser.pause(2000);
+        (await this.dropdownStyling).scrollIntoView();
+        (await this.dropdownStyling).click();
+        await browser.pause(3000);
+    }
+}
+
+export default new DropdownBlockPage();

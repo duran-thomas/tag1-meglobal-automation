@@ -12,16 +12,25 @@
     "facts": "npx wdio run wdio.conf.ts --spec ./test/specs/components/facts.e2e.ts",
     "myChart": "npx wdio run wdio.conf.ts --spec ./test/specs/components/myChart.e2e.ts",
     "hero": "npx wdio run wdio.conf.ts --spec ./test/specs/components/hero.e2e.ts",
-    "visualList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/visualList.e2e.ts"
+    "visualList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/visualList.e2e.ts",
+    "clinicalTrial": "npx wdio run wdio.conf.ts --spec ./test/specs/components/clinicalTrial.e2e.ts",
+    "sectionHeader": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sectionHeader.e2e.ts",
+    "dropdown": "npx wdio run wdio.conf.ts --spec ./test/specs/components/dropdown.e2e.ts",
+    "cardFeature": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardFeature.e2e.ts",
+    "media": "npx wdio run wdio.conf.ts --spec ./test/specs/components/media.e2e.ts",
+    "map": "npx wdio run wdio.conf.ts --spec ./test/specs/components/map.e2e.ts"
   },
   "author": "QW Team",
   "license": "ISC",
   "dependencies": {
     "@types/mocha": "^10.0.1",
+    "dotenv": "^16.0.3",
     "webdriverio": "^7.25.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@qualitywatcher/wdio-reporter": "^1.0.7",
+    "@qualitywatcher/wdio-service": "^1.0.14",
     "@wdio/allure-reporter": "^7.26.0",
     "@wdio/cli": "^7.25.2",
     "@wdio/local-runner": "^7.30.1",
