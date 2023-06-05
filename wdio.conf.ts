@@ -103,7 +103,7 @@ export const config: Options.Testrunner = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -174,10 +174,10 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "WDIO Test Run",
-        //     description: 'This test run was created by automation.',
+        //     testRunName: "Sprint 16 Automation Regression Run, Concise",
+        //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
-        //     includeAllCases: true,
+        //     includeAllCases: false,
         // }]
     ],
 

@@ -89,8 +89,7 @@ describe('Dropdown Component Tests', () => {
 
         const elem = await DropdownBlockPage.dropdownElements.length;
         
-        //set value to 3 to account for element created in test case above
-        expect(await elem).toEqual(3); 
+        expect(await elem).toEqual(2); 
 
         await (await DropdownBlockPage.dropdownElement1).click();
         expect(await DropdownBlockPage.wikiItem).toBeDisplayedInViewport(); 

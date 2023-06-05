@@ -39,6 +39,18 @@ describe('Accordion Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
 
+    //delete previously created sections
+    after(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
+
   
     it('[S3C906] Verify that a site Content Administrator can create an Accordion Component, Show|Hide included)', async () => {
         const title = accordionBlockData.title;

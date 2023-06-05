@@ -233,7 +233,7 @@ class LandingQAPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        await browser.pause(2500);
+        await browser.pause(1800);
         (await this.btnRemove).click();
         await browser.pause(2000);
         (await this.btnSaveLayout).waitForClickable();

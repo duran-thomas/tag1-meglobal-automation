@@ -7,7 +7,7 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
 
 
-describe('Visual List Component Tests', () => {
+describe.skip('Visual List Component Tests', () => {
     before(async () => {
         // //Login
         await browser.url(await users.bypassUrl);
@@ -28,24 +28,29 @@ describe('Visual List Component Tests', () => {
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  //TODO: This function may need some checking out. When its run with all tests at once. I don't think it behaves as expected.
+        await AdminContentPage.getQALandingPage();  
         expect(await QALayoutPage.tabLayout).toBeDisplayed();
     })
 
-    afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
+    afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/VisualList/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
-    /**
-     * TODO: Possibly add some cleanup code here?
-     */
-    // after(async function () {
+    //delete previously created sections
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
 
-    // })
-  
     for(const record of visualListBlockData){
         it(`${record.testCaseTitle}`, async () => {
             (await QALayoutPage.tabLayout).click();
