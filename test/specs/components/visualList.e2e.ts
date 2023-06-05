@@ -130,11 +130,6 @@ describe('Visual List Component Tests', () => {
 
     it('[S3C836] Verify that a site Content Administrator can create a Visual List Component with both an Illustration visual list item paragraph and a Simple visual list item', async () => {
         await (QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnVisualList).scrollIntoView();
-        (await QALayoutPage.btnVisualList).click();
-        (await VisualListBlockPage.configBlock).waitForDisplayed();
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await VisualListBlockPage.createIllustrationAndSimple(simplevisualListBlockData[0].mainTitle,simplevisualListBlockData[0].itemTitle,illustrationVisualListBlockData[0].itemTitle,simplevisualListBlockData[0].link, 
             simplevisualListBlockData[0].description, illustrationVisualListBlockData[0].description, imageFilePath,illustrationVisualListBlockData[0].altText)
@@ -143,7 +138,23 @@ describe('Visual List Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await VisualListBlockPage.visualListElement).scrollIntoView();   
     });
+       
+    // it.skip('[S3C832] Verify that a site Content Administrator can create a Visual List Component with a Simple visual list item paragraph', async () => {
+    //     (await QALayoutPage.tabLayout).click();
+    //     await QALayoutPage.createNewSection();
+    //     await QALayoutPage.navigateToBlockList();
+    //     (await QALayoutPage.btnVisualList).scrollIntoView();
+    //     (await QALayoutPage.btnVisualList).click();
+    //     (await VisualListBlockPage.configBlock).waitForDisplayed();
+    //     await VisualListBlockPage.createVisualListComponentSimple(visualListBlockData[0].mainTitle, visualListBlockData[0].itemTitle, visualListBlockData[0].link, visualListBlockData[0].description);
+        
+    //     await QALayoutPage.goToPageView();
+    //     await (await VisualListBlockPage.visualListElement).scrollIntoView();
 
+    //     expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(visualListBlockData[0].mainTitle);
+    //     expect(await VisualListBlockPage.visualListElement).toExist();  
+        
+    // });
 
     //#region TODO: Look at this again later. For now, manually execute these tests.
     it('[S3C842] Verify that the Visual List Paragraph type has been added to the list of paragraph types that appear in the Freeform block', async () => {
@@ -165,5 +176,5 @@ describe('Visual List Component Tests', () => {
         (await VisualListBlockPage.configBlock).waitForDisplayed();
     });
     //#endregion
-    
+
   });

@@ -17,7 +17,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get btnAddCardFeature () {
-        return $('div[data-drupal-selector="edit-settings-block-form-field-content-add-more"]');
+        return $('.add-more-button-card-feature');
     }
 
     //content area 1 start
@@ -97,7 +97,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get dropdownImage1 () {
-        return $('div[id^="edit-settings-block-form-field-content-1-subform-field-image-wrapper-"]');
+        return $('div[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-image-wrapper"]');
     }
 
     public get btnBrowse1 () {
@@ -105,7 +105,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get inputAltText1 () {
-        return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
+        return $('input[id="edit-inline-entity-form-field-media-image-0-alt"]');
     }
 
     public get btnSaveImage1 () {
@@ -144,7 +144,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get dropdownImage2 () {
-        return $('div[id^="edit-settings-block-form-field-content-2-subform-field-image-wrapper-"]');
+        return $('div[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-image-wrapper"]');
     }
 
     public get btnBrowse2 () {
@@ -152,7 +152,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get inputAltText2 () {
-        return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
+        return $('input[id="edit-inline-entity-form-field-media-image-0-alt"]');
     }
 
     public get btnSaveImage2 () {
@@ -250,6 +250,7 @@ class CarouselBlockPage extends Page {
         await browser.switchToFrame(iframe);
         (await this.inputTitle).setValue(title);
         (await this.btnAddCardFeature).click();
+        await browser.pause(2000);
         (await this.inputHeadline).waitForDisplayed();
         (await this.inputHeadline).setValue(headline);
         (await this.inputEyebrow).setValue(eyebrow);
@@ -271,7 +272,7 @@ class CarouselBlockPage extends Page {
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
         (await this.btnAddBlock).scrollIntoView();
         (await this.btnAddBlock).click();
@@ -377,7 +378,7 @@ class CarouselBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         (await this.inputTitle).setValue(title);
-
+        await browser.pause(3000);
         (await this.btnAddCardFeature).click();
         (await this.inputHeadline).waitForDisplayed();
         (await this.inputHeadline).setValue(headline);
@@ -400,10 +401,11 @@ class CarouselBlockPage extends Page {
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
 
         (await this.btnAddCardFeature).click();
+        await browser.pause(3000);
         (await this.inputHeadline1).waitForDisplayed();
         (await this.inputHeadline1).setValue(headline+' 1');
         (await this.inputEyebrow1).setValue(eyebrow+' 1');
@@ -412,10 +414,12 @@ class CarouselBlockPage extends Page {
         (await this.inputContent1).setValue(content+' 1');
         (await this.inputButtonText1).setValue(btnText+' 1');
         (await this.inputURL1).setValue(url);
-        (await this.inputInfo1).scrollIntoView();
         await browser.pause(2000);
+        (await this.dropdownImage1).scrollIntoView();
         (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
+        await browser.pause(2000);
         await browser.switchToFrame(await this.entityIframe);
+        await browser.pause(2000);
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath1);
         await browser.pause(6000); //explicit waits seem to be necessary here
@@ -424,8 +428,11 @@ class CarouselBlockPage extends Page {
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
 
         (await this.btnAddCardFeature).click();
+        await browser.pause(3000);
         (await this.inputHeadline2).waitForDisplayed();
         (await this.inputHeadline2).setValue(headline)+' 2';
         (await this.inputEyebrow2).setValue(eyebrow+' 2');
@@ -434,10 +441,12 @@ class CarouselBlockPage extends Page {
         (await this.inputContent2).setValue(content+' 2');
         (await this.inputButtonText2).setValue(btnText+' 2');
         (await this.inputURL2).setValue(url+' 2');
-        (await this.inputInfo2).scrollIntoView();
         await browser.pause(2000);
+        (await this.dropdownImage2).scrollIntoView();
         (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
+        await browser.pause(2000);
         await browser.switchToFrame(await this.entityIframe);
+        await browser.pause(2000);
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath2);
         await browser.pause(6000); //explicit waits seem to be necessary here
@@ -446,6 +455,9 @@ class CarouselBlockPage extends Page {
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+
 
         (await this.btnAddBlock).scrollIntoView();
         (await this.btnAddBlock).click();

@@ -157,8 +157,8 @@ class MediaBlockPage extends Page {
         (await this.inputAltText).setValue(altText);
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
-        await browser.pause(5000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.pause(10000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
         (await this.inputLink).scrollIntoView();
         (await this.inputLink).setValue(link);
@@ -197,13 +197,13 @@ class MediaBlockPage extends Page {
         (await this.tabNewVideo).click();
         (await this.btnBrowse).scrollIntoView();
         (await this.btnBrowse).setValue(remoteFilePath);
-        await browser.pause(9000); //explicit waits seem to be necessary here
+        await browser.pause(12000); //explicit waits seem to be necessary here
         (await this.inputDuration).setValue(duration);
         await browser.pause(2000);
         (await this.btnSaveMedia).scrollIntoView();
         (await this.btnSaveMedia).click();
         await browser.pause(3500); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await browser.pause(2000); //explicit waits seem to be necessary here
         (await this.dropdownPoster).scrollIntoView();
         (await this.dropdownPoster).click();
@@ -216,8 +216,8 @@ class MediaBlockPage extends Page {
         (await this.inputAltText).setValue(altText);
         (await this.btnSaveImage).scrollIntoView();
         (await this.btnSaveImage).click();
-        await browser.pause(5000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.pause(10000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
         await browser.pause(2000); //explicit waits seem to be necessary here
         (await this.btnAddBlock).scrollIntoView();
         (await this.btnAddBlock).click();

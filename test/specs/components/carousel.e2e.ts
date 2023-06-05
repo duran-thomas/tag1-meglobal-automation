@@ -28,25 +28,30 @@ describe('Carousel Component Tests', () => {
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  //TODO: This function may need some checking out. When its run with all tests at once. I don't think it behaves as expected.
+        await AdminContentPage.getQALandingPage();  
         expect(await QALayoutPage.tabLayout).toBeDisplayed();
     })
 
-    afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
+    afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/Carousel/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
-    /**
-     * TODO: Possibly add some cleanup code here?
-     */
-    // after(async function () {
-
-    // })
+    //delete previously created sections
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
   
-    it('Verify that a site Content Administrator can create a Carousel Component', async () => {
+    it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -67,7 +72,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.carouselImage).toBeDisplayed();   
     });
 
-    it('Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
+    it('[S3C825] Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -88,7 +93,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.paginationElement).not.toExist();   
     });
 
-    it('Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
+    it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -109,7 +114,7 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.controlElement).not.toExist();   
     });
 
-    it.only('Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
+    it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -145,7 +150,7 @@ describe('Carousel Component Tests', () => {
     });
 
 
-    it('Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -198,10 +203,10 @@ describe('Carousel Component Tests', () => {
         expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('bottom');
 
         await CarouselBlockPage.dropdownControlsIcon.scrollIntoView();
-        expect(await CarouselBlockPage.dropdownControlsPosition).toBeDisplayed();
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('_none');
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('chevron');
-        expect(await CarouselBlockPage.dropdownControlsPosition).toHaveValue('arrow');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toBeDisplayed();
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('_none');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('chevron');
+        expect(await CarouselBlockPage.dropdownControlsIcon).toHaveValue('arrow');
 
         const animationCheckbox = await CarouselBlockPage.checkboxAnimationIntro;
         expect(await animationCheckbox).toBeDisplayed();

@@ -106,8 +106,8 @@ class LandingQAPage extends Page {
         return $('=Freeform');
     }
 
-    public get btnHHSembeddedContent () {
-        return $('=HHS embedded content');
+    public get btnHero () {
+        return $('=Hero');
     }
 
     public get btnIconList () {
@@ -226,23 +226,21 @@ class LandingQAPage extends Page {
 
     public async cleanUpJob () {
         await browser.pause(2000);
-        (await this.tabLayout).waitForDisplayed();
-        (await this.tabLayout).click();
-        do {
-            if (await this.btnRemoveSection.isDisplayed()) {
-              (await this.btnRemoveSection).click();
-              await browser.pause(4000); // find a better wait criteria
-              const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-              await iframe.waitForDisplayed();
-              await browser.switchToFrame(iframe);
-              await browser.pause(3000);
-              (await this.btnRemove).click();
-            }
-          } while (await this.btnRemoveSection.isDisplayed());
-
-          (await this.btnSaveLayout).waitForClickable();
-          (await this.btnSaveLayout).click();
+        (await this.btnRemoveSection).scrollIntoView();
+        await this.btnRemoveSection.isDisplayedInViewport();
+        (await this.btnRemoveSection).click();
+        await browser.pause(4000); // find a better wait criteria
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await browser.pause(2500);
+        (await this.btnRemove).click();
+        await browser.pause(2000);
+        (await this.btnSaveLayout).waitForClickable();
+        (await this.btnSaveLayout).click();
+        await browser.pause(2000);
     }
+    
 
     public async goToQALayout() {
         (await this.tabLayout).scrollIntoView();

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "all": "npx wdio run wdio.conf.ts --spec ./test/specs/components/*",
     "allure": "allure serve allure-results && allure open",
     "login": "npx wdio run wdio.conf.ts --spec ./test/specs/login/*",
     "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quotes.e2e.ts",
@@ -18,7 +19,16 @@
     "dropdown": "npx wdio run wdio.conf.ts --spec ./test/specs/components/dropdown.e2e.ts",
     "cardFeature": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardFeature.e2e.ts",
     "media": "npx wdio run wdio.conf.ts --spec ./test/specs/components/media.e2e.ts",
-    "map": "npx wdio run wdio.conf.ts --spec ./test/specs/components/map.e2e.ts"
+    "map": "npx wdio run wdio.conf.ts --spec ./test/specs/components/map.e2e.ts",
+    "cardGeneral": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardGeneral.e2e.ts",
+    "cardServices": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardServices.e2e.ts",
+    "accordion": "npx wdio run wdio.conf.ts --spec ./test/specs/components/accordion.e2e.ts",
+    "billboard": "npx wdio run wdio.conf.ts --spec ./test/specs/components/billboard.e2e.ts",
+    "inlineNavigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/inlineNavigation.e2e.ts",
+    "iconList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/iconList.e2e.ts",
+    "contactList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contactList.e2e.ts"
+
+
   },
   "author": "QW Team",
   "license": "ISC",

@@ -1,5 +1,6 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
+import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import HeroBlockPage from '../../pageobjects/CMS/Components/hero.page';
 import {users} from '../../data/users.data';
 import { heroBlockData } from '../../data/hero.data';
@@ -33,55 +34,90 @@ describe('Hero Component Tests', () => {
     beforeEach(async function() {
         //navigate to admin content page
         await AdminContentPage.open();
+        // Navigate to QA Landing page to execute tests
+        await AdminContentPage.getQALandingPage();  
+        expect(await QALayoutPage.tabLayout).toBeDisplayed();
     })
 
-    afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
+    afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/Hero/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
-    after(async () => {
-        //delete hero pages from tests executed
-        await cleanJob();
-        
-    })
-
-    /**
-     * TODO: Possibly add some cleanup code here?
-     */
-    // after(async function () {
-
-    // })
+    //delete previously created sections
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
   
-    it('[S3C821] [S3C823] Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
-        await (await AdminContentPage.btnAddContent).click();
-        await (await AdminContentPage.linkLandingPage).click();
+    it('[S3C821] Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnHero).scrollIntoView();
+        (await QALayoutPage.btnHero).click();
+        (await HeroBlockPage.configBlock).waitForDisplayed();
+
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await HeroBlockPage.createComponentWithImage(heroBlockData.title, heroBlockData.headline, heroBlockData.eyebrow, heroBlockData.intro, heroBlockData.content, heroBlockData.btnText, heroBlockData.url,imageFilePath, heroBlockData.altText);
         
         await expect(HeroBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        
         await (await HeroBlockPage.headlineElement).scrollIntoView();
         expect(((await HeroBlockPage.titleBlockElement).getText)).toHaveTextContaining(heroBlockData.title);
 
-        //Verify that the Hero Headline is rendered as a `h1` HTML element.
-        const tagName = await HeroBlockPage.headlineElement.getTagName();
-        expect(tagName).toBe('h1');
     });
 
     it('[S3C822] Verify that a site Content Administrator can create a Hero Component with a Video Media Type', async () => {
-        await (await AdminContentPage.btnAddContent).click();
-        await (await AdminContentPage.linkLandingPage).click();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnHero).scrollIntoView();
+        (await QALayoutPage.btnHero).click();
+        (await HeroBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleVideo.mp4');
         await HeroBlockPage.createComponentWithVideo(heroBlockData.title, heroBlockData.headline, heroBlockData.eyebrow, heroBlockData.intro, heroBlockData.content, heroBlockData.btnText, heroBlockData.url,imageFilePath, heroBlockData.altText);
         
         await expect(HeroBlockPage.successMsg).toBeDisplayed();
+        await QALayoutPage.goToPageView();
+
         await (await HeroBlockPage.headlineElement).scrollIntoView();
         expect(((await HeroBlockPage.titleBlockElement).getText)).toHaveTextContaining(heroBlockData.title);
        
     });
+
+    it('[S3C823] Verify that the Hero Headline is rendered as a `h1` HTML element.', async () => {
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnHero).scrollIntoView();
+        (await QALayoutPage.btnHero).click();
+        (await HeroBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await HeroBlockPage.createComponentWithImage(heroBlockData.title, heroBlockData.headline, heroBlockData.eyebrow, heroBlockData.intro, heroBlockData.content, heroBlockData.btnText, heroBlockData.url,imageFilePath, heroBlockData.altText);
+        
+        await expect(HeroBlockPage.successMsg).toBeDisplayed();
+        await QALayoutPage.goToPageView();
+
+        await (await HeroBlockPage.headlineElement).scrollIntoView();
+
+        const tagName = await HeroBlockPage.headlineElement.getTagName();
+        expect(tagName).toBe('h1');
+    });
+
+
 
   });
