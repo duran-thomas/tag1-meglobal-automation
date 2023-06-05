@@ -33,24 +33,25 @@ describe('MyChart Component Tests', () => {
     });
 
 
-    afterEach(async function() { //TODO: This needs some checking out. The screenshots that it create seem to be taken a bit too early in the execution?
+    afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/MyChart/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
-
-        //clear out any existing blocks
-        await QALayoutPage.cleanUpJob();
-        //Return to layout view
-        await QALayoutPage.goToQALayout();
     });
 
-    /**
-     * TODO: Possibly add some cleanup code here?
-     */
-    // after(async function () {
-
-    // })
+    //delete previously created sections
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
+    
   
     it('[S3C858] Verify that a site Content Administrator can create a MyChart Component', async () => {
        
@@ -72,12 +73,10 @@ describe('MyChart Component Tests', () => {
         
         expect(await $(`div[data-analytics-item-title="${headline}"]`)).toExist; 
         expect(await MyChartBlockPage.myChartElement).toExist();   
-        browser.pause(2500);
     });
 
 
     it('[S3C859] Verify that all design fields are present with the correct available options.', async () => {
-        
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

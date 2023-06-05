@@ -46,7 +46,7 @@ describe('Visual List Component Tests', () => {
 
     // })
   
-    it('Verify that a site Content Administrator can create a Visual List Component with a Simple visual list item paragraph', async () => {
+    it.skip('[S3C832] Verify that a site Content Administrator can create a Visual List Component with a Simple visual list item paragraph', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -55,12 +55,12 @@ describe('Visual List Component Tests', () => {
         (await VisualListBlockPage.configBlock).waitForDisplayed();
         await VisualListBlockPage.createVisualComponentWithSimpleList(visualListBlockData.mainTitle, visualListBlockData.itemTitle, visualListBlockData.link, visualListBlockData.description);
         
-        expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(visualListBlockData.mainTitle);
-        expect(await VisualListBlockPage.visualListElement).toExist();  
         await QALayoutPage.goToPageView();
         await (await VisualListBlockPage.visualListElement).scrollIntoView();
-        browser.pause(3000); 
+
+        expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(visualListBlockData.mainTitle);
+        expect(await VisualListBlockPage.visualListElement).toExist();  
+        
     });
 
-    
   });

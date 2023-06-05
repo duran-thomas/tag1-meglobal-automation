@@ -163,7 +163,8 @@ class MyChartBlockPage extends Page {
         await browser.pause(4000);
         (await this.dropdownStyling).scrollIntoView();
         (await this.dropdownStyling).click();
-        (await this.dropdownContentPosition).scrollIntoView();
+        await browser.pause(3000);
+
     }
 }
 
