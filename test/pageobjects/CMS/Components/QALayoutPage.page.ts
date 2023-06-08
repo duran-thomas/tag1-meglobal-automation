@@ -190,6 +190,11 @@ class LandingQAPage extends Page {
         return $('.close-0-2-17');
     }
 
+    public get linkQuickActions () {
+        return $('=Quick Actions');
+    }
+
+
     /**
      * Methods to create a new section on a page, navigate to block list types
      */

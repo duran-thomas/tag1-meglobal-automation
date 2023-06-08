@@ -2,7 +2,7 @@
 
 export const cookieData = {
     name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-    value: 'l5n6pgvUvdwkDcfH-xIlSpCf0gkhULxoUBG4GAYcP7uPF3eY',
+    value: 'QdtzqljCoV6o1jX7djANe-V%2CB3A1QbnkWyXZBC-LDXzZ6PKW',
     domain: 'meglobalode7.prod.acquia-sites.com',
     path: '/',
     

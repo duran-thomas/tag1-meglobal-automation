@@ -82,7 +82,7 @@ describe('Dropdown Component Tests', () => {
 
         await DropdownBlockPage.createDropdownMultiItem(dropdownBlockData.title, dropdownBlockData.triggerText, dropdownBlockData.url, dropdownBlockData.linkText, dropdownBlockData.triggerText1, dropdownBlockData.url1, dropdownBlockData.linkText1);
 
-        expect(DropdownBlockPage.successMsg).toBeDisplayed();
+        await expect(DropdownBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await DropdownBlockPage.dropdownElement).scrollIntoView();

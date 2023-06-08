@@ -79,8 +79,8 @@ export const config: Options.Testrunner = {
         billboard: ['/test/specs/components/billboard.e2e.ts'],
         inlineNavigation: ['/test/specs/components/inlineNavigation.e2e.ts'],
         iconList: ['/test/specs/components/iconList.e2e.ts'],
-        contactList: ['/test/specs/components/contactList.e2e.ts']
-
+        contactList: ['/test/specs/components/contactList.e2e.ts'],
+        quickActions: ['/test/specs/components/quickActions.e2e.ts']
 
     },
     // Patterns to exclude.
