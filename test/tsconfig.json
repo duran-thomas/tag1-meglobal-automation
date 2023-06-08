@@ -6,8 +6,10 @@
             "webdriverio/async",
             "@wdio/mocha-framework",
             "expect-webdriverio",
-            "@wdio/selenium-standalone-service"
+            "@wdio/selenium-standalone-service",
+            "@types/jest",
         ],
-        "target": "es2019"
+        "target": "es2019",
+        "esModuleInterop": true,
     }
 }

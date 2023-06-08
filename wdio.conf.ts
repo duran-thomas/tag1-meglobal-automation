@@ -174,7 +174,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "Sprint 16 Automation Regression Run, Concise",
+        //     testRunName: "Testing Visual List case matching",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,
@@ -218,8 +218,8 @@ export const config: Options.Testrunner = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 400000
-    },
+        timeout: 400000,
+    }
     //
     // =====
     // Hooks

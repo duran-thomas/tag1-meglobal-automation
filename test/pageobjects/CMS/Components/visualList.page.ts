@@ -170,6 +170,10 @@ class VisualListBlockPage extends Page {
         return $('#edit-submit');
     }
 
+    public get freeformVisualList () {
+        return $('.add-more-button-visual-list');
+    }
+
     /**
      * Freeform Page Component
      */
@@ -185,7 +189,7 @@ class VisualListBlockPage extends Page {
      */
 
     public async createVisualListComponentSimple(mainTitle: string, itemTitle: string, link: string, description: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -224,7 +228,7 @@ class VisualListBlockPage extends Page {
      * @param altText 
      */
     public async createVisualListComponentIllustration(mainTitle: string, itemTitle: string, link: string, description: string, remoteFilePath: string, altText:string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -271,7 +275,7 @@ class VisualListBlockPage extends Page {
      * @param altText 
      */
     public async createVisualListComponentIcon(mainTitle: string, itemTitle: string, link: string, description: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -309,7 +313,7 @@ class VisualListBlockPage extends Page {
      * @param altText 
      */
      public async createVisualListComponentIllustrationCard(mainTitle: string, eyebrow: string, heading: string, url:string, linkText:string, description: string, remoteFilePath: string, altText:string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -361,7 +365,7 @@ class VisualListBlockPage extends Page {
      * @param altText 
      */
      public async createVisualListComponentImageCard(mainTitle: string, eyebrow: string, heading: string, url:string, linkText:string, description: string, remoteFilePath: string, altText:string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -415,7 +419,7 @@ class VisualListBlockPage extends Page {
      */
     public async createIllustrationAndSimple(mainTitle: string, simpleItemTitle: string, illustrationItemTitle, link: string, 
         simpleDescription: string, illustrationDescription: string,  remoteFilePath: string, altText:string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -464,8 +468,26 @@ class VisualListBlockPage extends Page {
     }
 
     public async isVisualListInFreeformBlock () {
-        const freeFormContentList = await this.freeFormContentList;
-        console.log(freeFormContentList);
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        (await this.dropdownToggle).scrollIntoView();
+        (await this.dropdownToggle).click();
+        await browser.pause(3000);
+
+    }
+
+    public async navToStyling() {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        (await this.dropdownStyling).scrollIntoView();
+        (await this.dropdownStyling).click();
+        await browser.pause(2000);         
     }
   
 }

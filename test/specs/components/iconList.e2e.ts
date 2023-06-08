@@ -29,7 +29,7 @@ describe('Icon List Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Icon List Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -66,8 +66,8 @@ describe('Icon List Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await IconListBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await IconListBlockPage.iconStyle).toHaveAttribute('data-analytics-click-text="bullet-square"'); 
-        expect(await IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
+        await expect(IconListBlockPage.iconStyle).toHaveAttribute('data-analytics-click-text="bullet-square"'); 
+        await expect(IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
     });
 
     it('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
@@ -85,9 +85,9 @@ describe('Icon List Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await IconListBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await IconListBlockPage.iconStyle).toHaveAttribute('data-analytics-click-text="bullet-square"'); 
-        expect(await IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
-        expect(await IconListBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
+        await expect(IconListBlockPage.iconStyle).toHaveAttribute('data-analytics-click-text="bullet-square"'); 
+        await expect(IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
+        await expect(IconListBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
     });
 
     it('[S3C901] Verify that the text field item on the Icon List Component is a mandatory field', async () => {
@@ -100,8 +100,8 @@ describe('Icon List Component Tests', () => {
 
         await IconListBlockPage.submitTest(iconListBlockData.title);
 
-        expect(await IconListBlockPage.inputText).toHaveAttribute('required="required"'); 
-        expect(await IconListBlockPage.inputText).toHaveAttribute('aria-required="true"');  
+        await expect(IconListBlockPage.inputText).toHaveAttribute('required="required"'); 
+        await expect(IconListBlockPage.inputText).toHaveAttribute('aria-required="true"');  
     });
    
     it('[S3C902] Verify that the available paragraph types in the Carousel form are correct.', async () => {
@@ -114,26 +114,26 @@ describe('Icon List Component Tests', () => {
 
         await IconListBlockPage.navToStyling()
         
-        expect(await IconListBlockPage.dropdownVariant).toBeDisplayed();
-        expect(await IconListBlockPage.dropdownVariant).toHaveValue('_none');
-        expect(await IconListBlockPage.dropdownVariant).toHaveValue('dark');
-        expect(await IconListBlockPage.dropdownVariant).toHaveValue('light');
+        await expect(IconListBlockPage.dropdownVariant).toBeDisplayed();
+        await expect(IconListBlockPage.dropdownVariant).toHaveValue('_none');
+        await expect(IconListBlockPage.dropdownVariant).toHaveValue('dark');
+        await expect(IconListBlockPage.dropdownVariant).toHaveValue('light');
 
-        expect(await IconListBlockPage.dropdownSite).toBeDisplayed();
-        expect(await IconListBlockPage.dropdownSite).toHaveValue('_none');
-        expect(await IconListBlockPage.dropdownSite).toHaveValue('montefiore');
-        expect(await IconListBlockPage.dropdownSite).toHaveValue('einstein');
+        await expect(IconListBlockPage.dropdownSite).toBeDisplayed();
+        await expect(IconListBlockPage.dropdownSite).toHaveValue('_none');
+        await expect(IconListBlockPage.dropdownSite).toHaveValue('montefiore');
+        await expect(IconListBlockPage.dropdownSite).toHaveValue('einstein');
 
-        expect(await IconListBlockPage.dropdownSize).toBeDisplayed();
-        expect(await IconListBlockPage.dropdownSize).toHaveValue('_none');
-        expect(await IconListBlockPage.dropdownSize).toHaveValue('small');
-        expect(await IconListBlockPage.dropdownSize).toHaveValue('base');
-        expect(await IconListBlockPage.dropdownSize).toHaveValue('large');
+        await expect(IconListBlockPage.dropdownSize).toBeDisplayed();
+        await expect(IconListBlockPage.dropdownSize).toHaveValue('_none');
+        await expect(IconListBlockPage.dropdownSize).toHaveValue('small');
+        await expect(IconListBlockPage.dropdownSize).toHaveValue('base');
+        await expect(IconListBlockPage.dropdownSize).toHaveValue('large');
 
-        expect(await IconListBlockPage.dropdownAlignment).toBeDisplayed();
-        expect(await IconListBlockPage.dropdownAlignment).toHaveValue('_none');
-        expect(await IconListBlockPage.dropdownAlignment).toHaveValue('left');
-        expect(await IconListBlockPage.dropdownAlignment).toHaveValue('center');
+        await expect(IconListBlockPage.dropdownAlignment).toBeDisplayed();
+        await expect(IconListBlockPage.dropdownAlignment).toHaveValue('_none');
+        await expect(IconListBlockPage.dropdownAlignment).toHaveValue('left');
+        await expect(IconListBlockPage.dropdownAlignment).toHaveValue('center');
     });
 
   });
