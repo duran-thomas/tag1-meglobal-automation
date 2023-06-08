@@ -234,7 +234,7 @@ class LandingQAPage extends Page {
         (await this.btnRemoveSection).scrollIntoView();
         await this.btnRemoveSection.isDisplayedInViewport();
         (await this.btnRemoveSection).click();
-        await browser.pause(4000); // find a better wait criteria
+        await browser.pause(2000); // find a better wait criteria
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
