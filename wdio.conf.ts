@@ -81,7 +81,9 @@ export const config: Options.Testrunner = {
         iconList: ['/test/specs/components/iconList.e2e.ts'],
         contactList: ['/test/specs/components/contactList.e2e.ts'],
         quickActions: ['/test/specs/components/quickActions.e2e.ts'],
-        tabs: ['/test/specs/components/tabs.e2e.ts']
+        tabs: ['/test/specs/components/tabs.e2e.ts'],
+        tooltip: ['/test/specs/components/tooltip.e2e.ts']
+
 
 
     },
