@@ -45,12 +45,12 @@ class AdminContentPage extends Page {
      * e.g. to create a QA landing page if needed
      */
     public async createQALandingPage () {
-        (await this.btnAddContent).click();
-        (await this.linkLandingPage).click();
-        (await this.inputTitle).setValue('QA Landing Page');
-        (await this.btnSave).scrollIntoView();
+        await (await this.btnAddContent).click();
+        await (await this.linkLandingPage).click();
+        await (await this.inputTitle).setValue('QA Landing Page');
+        await (await this.btnSave).scrollIntoView();
         await browser.pause(2000);
-        (await this.btnSave).click();
+        await (await this.btnSave).click();
         await browser.pause(3000);
     }
 
@@ -60,23 +60,18 @@ class AdminContentPage extends Page {
      * and create one if it's not there
      */
     public async getQALandingPage() {
-        const tableElement = await this.tableElement;
-        const tableRows = await tableElement.$$('tbody tr');
-      
-        for (const row of tableRows) {
-          const rowText = await row.getText();
-      
-          if (rowText.includes('QA Landing Page')) {
-            const linkElement = await row.$('li.edit');
-            await linkElement.scrollIntoView();
-            await linkElement.waitForClickable();
-            await linkElement.click();
-            return true;
-          }
-          break;
+        try {
+            const qaPage = await this.qaPage;
+            if (await qaPage.isExisting()) {
+              await qaPage.scrollIntoView({ behavior: 'auto', block: 'center' });
+              await qaPage.click();
+            } else {
+              await this.createQALandingPage();
+            }
+        } catch (error) {
+            // Try to show the error
+            console.error('Error occurred while performing getQALandingPage:', error);
         }
-      
-        await this.createQALandingPage();
       }
 
     /**

@@ -8,115 +8,115 @@ class CardGeneralBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
-    public get inputEyebrow () {
+    public get inputEyebrow() {
         return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
-    public get inputList () {
+    public get inputList() {
         return $('#edit-settings-block-form-field-content-0-subform-field-list-0-value');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-title');
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
-    public get dropdownImage () {
+    public get dropdownImage() {
         return $('#edit-field-media-entity');
     }
 
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
 
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt"]');
     }
 
-    public get btnSaveImage () {
+    public get btnSaveImage() {
         return $('#edit-submit');
     }
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-field-content-widget-0-subform-group-styling');
     }
 
-    public get dropdownSite () {
+    public get dropdownSite() {
         return $('#edit-settings-block-form-field-content-0-subform-field-site');
     }
 
-    public get checkboxFill () {
+    public get checkboxFill() {
         return $('#edit-settings-block-form-field-content-0-subform-field-fill-value');
     }
 
-    public get dropdownContentPosition () {
+    public get dropdownContentPosition() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-position');
     }
 
-    public get dropdownContentSize () {
+    public get dropdownContentSize() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-size');
     }
 
-    public get dropdownContentPadding () {
+    public get dropdownContentPadding() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-padding');
     }
 
-    public get dropdownContentBackground () {
+    public get dropdownContentBackground() {
         return $('#edit-settings-block-form-field-content-0-subform-field-background');
     }
 
-    public get dropdownMobileAspectRatio () {
+    public get dropdownMobileAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-mobile-aspect-ratio');
     }
 
-    public get dropdownDesktopAspectRatio () {
+    public get dropdownDesktopAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-desktop-aspect-ratio');
     }
 
-    public get dropdownTheme () {
+    public get dropdownTheme() {
         return $('#edit-settings-block-form-field-content-0-subform-field-theme');
     }
 
-    public get dropdownAlignment () {
+    public get dropdownAlignment() {
         return $('#edit-settings-block-form-field-content-0-subform-field-alignment');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('#entity_browser_iframe_image_and_video');
     }
 
-    public get cardGeneralElement () {
+    public get cardGeneralElement() {
         return $('.mf-card-general');
     }
 
-    public get cardEyebrow () {
+    public get cardEyebrow() {
         return $('.mf-text-body-4-serif');
     }
 
@@ -130,35 +130,35 @@ class CardGeneralBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputHeadline).scrollIntoView();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).scrollIntoView();
-        (await this.inputList).setValue(list);
-        (await this.inputButtonText).scrollIntoView();
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.dropdownImage).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).scrollIntoView();
+        await (await this.inputList).setValue(list);
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.dropdownImage).scrollIntoView();
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6500); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -169,8 +169,8 @@ class CardGeneralBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(3000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
         await browser.pause(3000);
     }
 }

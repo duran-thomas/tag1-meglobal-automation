@@ -8,232 +8,232 @@ class CarouselBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get btnAddCardFeature () {
+    public get btnAddCardFeature() {
         return $('.add-more-button-card-feature');
     }
 
     //content area 1 start
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-headline-0-headline-"]');
     }
 
-    public get inputEyebrow () {
+    public get inputEyebrow() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-eyebrow-"]');
     }
 
-    public get inputList () {
+    public get inputList() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-list"]');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-content-"]');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-buttons-0-title-"]');
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-buttons-0-uri-"]');
     }
 
-    public get inputInfo () {
+    public get inputInfo() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-info-label-0-"]');
     }
 
-    public get dropdownImage () {
+    public get dropdownImage() {
         return $('div[id^="edit-settings-block-form-field-content-0-subform-field-image-wrapper-"]');
     }
 
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
 
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
     }
 
-    public get btnSaveImage () {
+    public get btnSaveImage() {
         return $('#edit-submit');
     }
     //content area 1 end
 
 
     //content area 2 start
-    public get inputHeadline1 () {
-        return $('textarea[id^="edit-settings-block-form-field-content-1-subform-field-headline-0-headline-"]');
+    public get inputHeadline1() {
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-headline-0-headline"]');
     }
 
-    public get inputEyebrow1 () {
-        return $('textarea[id^="edit-settings-block-form-field-content-1-subform-field-eyebrow-"]');
+    public get inputEyebrow1() {
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-eyebrow-0-value"]');
     }
 
-    public get inputList1 () {
-        return $('input[id^="edit-settings-block-form-field-content-1-subform-field-list"]');
+    public get inputList1() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-list-0-value"]');
     }
 
-    public get inputContent1 () {
-        return $('textarea[id^="edit-settings-block-form-field-content-1-subform-field-content-"]');
+    public get inputContent1() {
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-content-0-value"]');
     }
 
-    public get inputButtonText1 () {
-        return $('input[id^="edit-settings-block-form-field-content-1-subform-field-buttons-0-title-"]');
+    public get inputButtonText1() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-buttons-0-title"]');
     }
 
-    public get inputURL1 () {
-        return $('input[id^="edit-settings-block-form-field-content-1-subform-field-buttons-0-uri-"]');
+    public get inputURL1() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-buttons-0-uri"]');
     }
 
-    public get inputInfo1 () {
-        return $('input[id^="edit-settings-block-form-field-content-1-subform-field-info-label-0-"]');
+    public get inputInfo1() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-info-label-0-value"]');
     }
 
-    public get dropdownImage1 () {
-        return $('div[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-image-wrapper"]');
+    public get dropdownImage1() {
+        return $$('details[id^="edit-field-image-"]')[1];
     }
 
-    public get btnBrowse1 () {
+    public get btnBrowse1() {
         return $("input[type='file']");
     }
 
-    public get inputAltText1 () {
+    public get inputAltText1() {
         return $('input[id="edit-inline-entity-form-field-media-image-0-alt"]');
     }
 
-    public get btnSaveImage1 () {
+    public get btnSaveImage1() {
         return $('#edit-submit');
     }
     //content area 2 end
 
 
     //content area 3 start
-    public get inputHeadline2 () {
+    public get inputHeadline2() {
         return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-headline-0-headline-"]');
     }
 
-    public get inputEyebrow2 () {
+    public get inputEyebrow2() {
         return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-eyebrow-"]');
     }
 
-    public get inputList2 () {
+    public get inputList2() {
         return $('input[id^="edit-settings-block-form-field-content-2-subform-field-list"]');
     }
 
-    public get inputContent2 () {
+    public get inputContent2() {
         return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-content-"]');
     }
 
-    public get inputButtonText2 () {
+    public get inputButtonText2() {
         return $('input[id^="edit-settings-block-form-field-content-2-subform-field-buttons-0-title-"]');
     }
 
-    public get inputURL2 () {
+    public get inputURL2() {
         return $('input[id^="edit-settings-block-form-field-content-2-subform-field-buttons-0-uri-"]');
     }
 
-    public get inputInfo2 () {
+    public get inputInfo2() {
         return $('input[id^="edit-settings-block-form-field-content-2-subform-field-info-label-0-"]');
     }
 
-    public get dropdownImage2 () {
-        return $('div[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-image-wrapper"]');
+    public get dropdownImage2() {
+        return $$('details[id^="edit-field-image-"]')[1];
     }
 
-    public get btnBrowse2 () {
+    public get btnBrowse2() {
         return $("input[type='file']");
     }
 
-    public get inputAltText2 () {
+    public get inputAltText2() {
         return $('input[id="edit-inline-entity-form-field-media-image-0-alt"]');
     }
 
-    public get btnSaveImage2 () {
+    public get btnSaveImage2() {
         return $('#edit-submit');
     }
     //content area 3 end
 
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-group-styling');
     }
 
-    public get dropdownLayout () {
+    public get dropdownLayout() {
         return $('#edit-settings-block-form-field-layout');
     }
 
-    public get checkboxInitialOffset () {
+    public get checkboxInitialOffset() {
         return $('#edit-settings-block-form-field-initial-offset-value');
     }
 
-    public get dropdownIncludePagination () {
+    public get dropdownIncludePagination() {
         return $('#edit-settings-block-form-field-include-pagination');
     }
 
-    public get dropdownPaginationType () {
+    public get dropdownPaginationType() {
         return $('#edit-settings-block-form-field-pagination-type');
     }
 
-    public get dropdownIncludeControls () {
+    public get dropdownIncludeControls() {
         return $('#edit-settings-block-form-field-include-controls');
     }
 
-    public get dropdownControlsPosition () {
+    public get dropdownControlsPosition() {
         return $('#edit-settings-block-form-field-controls-position');
     }
 
-    public get dropdownControlsIcon () {
+    public get dropdownControlsIcon() {
         return $('#edit-settings-block-form-field-controls-icons');
     }
 
-    public get checkboxAnimationIntro () {
+    public get checkboxAnimationIntro() {
         return $('#edit-settings-block-form-field-animation-intro-value');
     }
 
-    public get inputCarouselConfig () {
+    public get inputCarouselConfig() {
         return $('#edit-settings-block-form-field-carousel-config-0-value');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get carouselElement () {
+    public get carouselElement() {
         return $('.mf-carousel');
     }
 
-    public get carouselImage () {
+    public get carouselImage() {
         return $('img[alt="Carousel Alt Text"]');
     }
 
-    public get paginationElement () {
+    public get paginationElement() {
         return $('.mf-carousel__pagination');
     }
 
-    public get controlElement () {
-        return $('.mf-carousel__nav-button');
+    public get controlElement() {
+        return $$('.mf-carousel__nav-button');
     }
 
-    public get swiperElement () {
+    public get swiperElement() {
         return $('span[aria-label="Go to slide 3"]');
     }
 
@@ -248,37 +248,37 @@ class CarouselBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.btnAddCardFeature).click();
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
         await browser.pause(2000);
-        (await this.inputHeadline).waitForDisplayed();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).setValue(list);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.inputInfo).scrollIntoView();
+        await (await this.inputHeadline).waitForDisplayed();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView({ behavior: 'auto', block: 'center' });
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -289,41 +289,41 @@ class CarouselBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.btnAddCardFeature).click();
-        (await this.inputHeadline).waitForDisplayed();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).setValue(list);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.inputInfo).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
+        await (await this.inputHeadline).waitForDisplayed();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView({ behavior: 'auto', block: 'center' });
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(6000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToFrame(iframe);
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownStyling).scrollIntoView(); 
-        (await this.dropdownStyling).click(); 
+        await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownStyling).click();
         await browser.pause(5000);
-        (await this.dropdownIncludePagination).scrollIntoView();
-        (await this.dropdownIncludePagination).selectByIndex(2);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.dropdownIncludePagination).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownIncludePagination).selectByIndex(2);
+        await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -333,41 +333,41 @@ class CarouselBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.btnAddCardFeature).click();
-        (await this.inputHeadline).waitForDisplayed();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).setValue(list);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.inputInfo).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
+        await (await this.inputHeadline).waitForDisplayed();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView({ behavior: 'auto', block: 'center' });
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(6000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToFrame(iframe);
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownStyling).scrollIntoView(); 
-        (await this.dropdownStyling).click(); 
+        await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownStyling).click();
         await browser.pause(5000);
-        (await this.dropdownIncludeControls).scrollIntoView();
-        (await this.dropdownIncludeControls).selectByIndex(2);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.dropdownIncludeControls).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownIncludeControls).selectByIndex(2);
+        await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -463,7 +463,7 @@ class CarouselBlockPage extends Page {
         (await this.btnAddBlock).click();
         (await this.btnSaveLayout).waitForDisplayed();
         (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -474,9 +474,9 @@ class CarouselBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(3000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
-        (await this.dropdownLayout).scrollIntoView();
+        await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownStyling).click();
+        await (await this.dropdownLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
     }
 }
 

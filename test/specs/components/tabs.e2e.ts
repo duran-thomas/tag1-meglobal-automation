@@ -61,7 +61,7 @@ describe('Tabs Component Tests', () => {
 
         await TabsBlockPage.createTab(tabBlockData.title, tabBlockData.label, tabBlockData.name+' 1', tabBlockData.content+' 1');
 
-        expect(TabsBlockPage.successMsg).toBeDisplayed();
+        await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -80,7 +80,7 @@ describe('Tabs Component Tests', () => {
 
         await TabsBlockPage.createMultiTab(tabBlockData.title, tabBlockData.label, tabBlockData.name+' 1', tabBlockData.content+' 1', tabBlockData.label+' 2', tabBlockData.name+' 2', tabBlockData.content+' 2');
 
-        expect(TabsBlockPage.successMsg).toBeDisplayed();
+        await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });

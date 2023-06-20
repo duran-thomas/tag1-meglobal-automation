@@ -29,7 +29,7 @@ describe('Quotes Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Quotes Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -59,12 +59,11 @@ describe('Quotes Component Tests', () => {
         (await QALayoutPage.btnQuote).click();
         (await QuotesBlockPage.configBlock).waitForDisplayed();
         await QuotesBlockPage.completeWithBorderNoAudio(quoteBlockData.title, quoteBlockData.quoteWithBorderNoAudio, quoteBlockData.author, quoteBlockData.authorTitle);
-        
-        expect(await (await QuotesBlockPage.borderElement).getText).toHaveText(quoteBlockData.quoteWithBorderNoAudio);
-        expect(await QuotesBlockPage.borderElement).toBeDisplayed();  
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.borderElement).scrollIntoView();
-        browser.pause(3000); 
+        await (await QuotesBlockPage.borderElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(await $('.mf-quotes__text')).toHaveText(quoteBlockData.quoteWithBorderNoAudio);
+        await expect(QuotesBlockPage.borderElement).toBeDisplayed();  
     });
   
     it('[S3C851] Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
@@ -76,8 +75,8 @@ describe('Quotes Component Tests', () => {
         (await QuotesBlockPage.configBlock).waitForDisplayed();
         await QuotesBlockPage.completeWithoutBorder(quoteBlockData.title, quoteBlockData.quoteWithoutBorder, quoteBlockData.author, quoteBlockData.authorTitle);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView();
-        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithoutBorder);
+        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithoutBorder);
     });
 
     it('[S3C852] Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
@@ -90,9 +89,9 @@ describe('Quotes Component Tests', () => {
         const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
         await QuotesBlockPage.completeWithAudioAndTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioAndTrascript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath, quoteBlockData.transcript);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView();
-        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithAudioAndTrascript);  
-        expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
+        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithAudioAndTrascript);  
+        await expect(QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
     it('[S3C853] Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
@@ -105,9 +104,9 @@ describe('Quotes Component Tests', () => {
         const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
         await QuotesBlockPage.completeWithAudioNoTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioNoTrascript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView();
-        expect(await (await QuotesBlockPage.quoteElement).getText).toHaveText(quoteBlockData.quoteWithAudioNoTrascript);  
-        expect(await QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
+        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithAudioNoTrascript);  
+        await expect(QuotesBlockPage.quoteShowTranscriptElement).not.toBeDisplayed();
     });
 
     it('[S3C854] Verify that all design fields are present with the correct available options.', async () => {
@@ -122,8 +121,8 @@ describe('Quotes Component Tests', () => {
         await QuotesBlockPage.navToStyling();
         //assert its displayed as well as it's default not ticked
         const checkbox = await QuotesBlockPage.checkboxShowBorder;
-        expect(await checkbox).toBeDisplayed();
-        expect(await checkbox.isSelected()).toBe(false); 
+        await expect(checkbox).toBeDisplayed();
+        await expect(await checkbox.isSelected()).toBe(false); 
     });
 
     

@@ -35,7 +35,7 @@ describe('Inline Navigation Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -51,7 +51,7 @@ describe('Inline Navigation Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -67,13 +67,13 @@ describe('Inline Navigation Component Tests', () => {
 
         await InlineNavigationBlockPage.createExtInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'1');
 
-        expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
+        await expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await InlineNavigationBlockPage.inlineNavElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await $(`#${inlineNavigationBlockData.id}1`)).toExist; 
-        expect(await $(`#${inlineNavigationBlockData.id}1`)).toHaveElementClassContaining('scrollto'); 
+        await expect($(`#${inlineNavigationBlockData.id}1`)).toExist; 
+        await expect($(`#${inlineNavigationBlockData.id}1`)).toHaveElementClassContaining('scrollto'); 
     });
 
     it('[S3C896] Verify that a site Content Administrator can create an Inline Navigation Component with an internal link', async () => {
@@ -86,13 +86,13 @@ describe('Inline Navigation Component Tests', () => {
 
         await InlineNavigationBlockPage.createIntInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.intLinkTxt, inlineNavigationBlockData.intUrl, inlineNavigationBlockData.id+'2');
 
-        expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
+        await expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await InlineNavigationBlockPage.inlineNavElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await $(`#${inlineNavigationBlockData.id}2`)).toExist; 
-        expect(await $(`#${inlineNavigationBlockData.id}2`)).toHaveElementClassContaining('scrollto'); 
+        await expect($(`#${inlineNavigationBlockData.id}2`)).toExist; 
+        await expect($(`#${inlineNavigationBlockData.id}2`)).toHaveElementClassContaining('scrollto'); 
     });
 
     it('[S3C897] Verify that a site Content Administrator can create an Inline Navigation Component with a same page fragment', async () => {
@@ -119,14 +119,14 @@ describe('Inline Navigation Component Tests', () => {
         (await AccordionBlockPage.configBlock).waitForDisplayed();
         await AccordionBlockPage.createAccordionWithID(accordionBlockData.mainTitle, accordionBlockData.title, accordionBlockData.content, inlineNavigationBlockData.jumpID);
 
-        expect(AccordionBlockPage.successMsg).toBeDisplayed();
+        await expect(AccordionBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await InlineNavigationBlockPage.inlineLink).click();
         
-        expect(await $(`#${inlineNavigationBlockData.id}3`)).toExist; 
-        expect(await $(`#${inlineNavigationBlockData.id}3`)).toHaveElementClassContaining('scrollto'); 
-        expect(await AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+        await expect($(`#${inlineNavigationBlockData.id}3`)).toExist; 
+        await expect($(`#${inlineNavigationBlockData.id}3`)).toHaveElementClassContaining('scrollto'); 
+        await expect(AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
     });
 
     it('[S3C898] Verify that a site Content Administrator can create an Inline Navigation Component in a Freeform block', async () => {
@@ -139,13 +139,13 @@ describe('Inline Navigation Component Tests', () => {
 
         await InlineNavigationBlockPage.createFreeformInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'4');
 
-        expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
+        await expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await InlineNavigationBlockPage.inlineNavElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await $(`#${inlineNavigationBlockData.id}4`)).toExist; 
-        expect(await $(`#${inlineNavigationBlockData.id}4`)).toHaveElementClassContaining('scrollto'); 
+        await expect($(`#${inlineNavigationBlockData.id}4`)).toExist; 
+        await expect($(`#${inlineNavigationBlockData.id}4`)).toHaveElementClassContaining('scrollto'); 
     });
 
    

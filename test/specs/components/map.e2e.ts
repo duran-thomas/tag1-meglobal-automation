@@ -29,7 +29,7 @@ describe('Map Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Map Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -61,12 +61,12 @@ describe('Map Component Tests', () => {
 
         await MapBlockPage.createMap(mapBlockData.title, mapBlockData.highlightTitle, mapBlockData.mapConfig);
 
-        expect(MapBlockPage.successMsg).toBeDisplayed();
+        await expect(MapBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
 
         await (await MapBlockPage.mapElement).scrollIntoView();
-        expect(await MapBlockPage.mapElement).toBeDisplayed(); 
+        await expect(MapBlockPage.mapElement).toBeDisplayed(); 
 
         //dismiss google alert for clean screenshot
         (await $('.dismissButton')).click(); 
@@ -85,8 +85,8 @@ describe('Map Component Tests', () => {
 
         const hideLocationCheckbox = await MapBlockPage.checkboxHideLocationCards;
         await hideLocationCheckbox.scrollIntoView();
-        expect(await hideLocationCheckbox).toBeDisplayed();
-        expect(await hideLocationCheckbox.isSelected()).toBe(false);
+        await expect(hideLocationCheckbox).toBeDisplayed();
+        await expect(await hideLocationCheckbox.isSelected()).toBe(false);
     });
 
   });

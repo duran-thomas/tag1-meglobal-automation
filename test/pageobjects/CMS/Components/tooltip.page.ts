@@ -9,57 +9,57 @@ class TooltipBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('.ck-content');
     }
 
-    public get btnTooltipTrigger () {
+    public get btnTooltipTrigger() {
         return $('button[data-cke-tooltip-text="Tooltip"]');
     }
 
-    public get btnTooltipSave () {
+    public get btnTooltipSave() {
         return $('button[data-cke-tooltip-text="Save"]');
     }
 
     //Tooltip component has no unique identifiers, accessing based on index
-    public get inputAddText () {
+    public get inputAddText() {
         return $$('input[id^="ck-labeled-field-view"]')[1];
     }
 
-    public get inputAddTooltip () {
+    public get inputAddTooltip() {
         return $$('input[id^="ck-labeled-field-view"]')[2];
     }
 
-    public get inputPlacement () {
+    public get inputPlacement() {
         return $$('input[id^="ck-labeled-field-view"]')[3];
     }
 
-    public get inputTheme () {
+    public get inputTheme() {
         return $$('input[id^="ck-labeled-field-view"]')[4];
     }
 
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get tooltipElement () {
+    public get tooltipElement() {
         return $('.mf-tooltip');
     }
 
@@ -72,9 +72,9 @@ class TooltipBlockPage extends Page {
         await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
+        await iframe.waitForDisplayed({ timeout: 3000 });
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
+        await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).setValue(content);
         await (await this.inputContent).click();
@@ -102,9 +102,9 @@ class TooltipBlockPage extends Page {
         await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
+        await iframe.waitForDisplayed({ timeout: 3000 });
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
+        await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).click();
         await (await this.btnTooltipTrigger).click();
@@ -131,13 +131,13 @@ class TooltipBlockPage extends Page {
         await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
+        await iframe.waitForDisplayed({ timeout: 3000 });
         await browser.switchToFrame(iframe);
         await (await this.btnTooltipTrigger).click();
         await browser.pause(3000);
     }
 
- 
+
 }
 
 export default new TooltipBlockPage();

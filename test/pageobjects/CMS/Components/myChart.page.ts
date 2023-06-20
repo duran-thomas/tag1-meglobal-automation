@@ -8,105 +8,105 @@ class MyChartBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get contentArea () {
+    public get contentArea() {
         return $('.page-content');
     }
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
     //content area start
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
-    public get inputEyebrow () {
+    public get inputEyebrow() {
         return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
-    public get inputList () {
+    public get inputList() {
         return $('#edit-settings-block-form-field-content-0-subform-field-list-0-value');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-title');
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
-    public get inputInfo () {
+    public get inputInfo() {
         return $('#edit-settings-block-form-field-content-0-subform-field-info-label-0-value');
     }
 
-    public get dropdownImage () {
+    public get dropdownImage() {
         return $('#edit-field-image');
     }
 
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
 
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
     }
 
-    public get btnSaveImage () {
+    public get btnSaveImage() {
         return $('#edit-submit');
     }
     //content area end
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-field-content-widget-0-subform-group-styling');
     }
 
-    public get checkboxMinimal () {
+    public get checkboxMinimal() {
         return $('#edit-settings-block-form-field-content-0-subform-field-minimal-value');
     }
 
-    public get dropdownMobileAspectRatio () {
+    public get dropdownMobileAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-mobile-aspect-ratio');
     }
 
-    public get dropdownDesktopAspectRatio () {
+    public get dropdownDesktopAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-desktop-aspect-ratio');
     }
 
-    public get dropdownContentPosition () {
+    public get dropdownContentPosition() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-position');
     }
 
-    public get dropdownAlignment () {
+    public get dropdownAlignment() {
         return $('#edit-settings-block-form-field-content-0-subform-field-alignment');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get myChartElement () {
+    public get myChartElement() {
         return $('.block-inline-blockcard-mychart');
     }
 
@@ -121,36 +121,36 @@ class MyChartBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.contentArea).waitForDisplayed();
-        (await this.inputTitle).setValue(title);
-        (await this.inputHeadline).waitForDisplayed();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).setValue(list);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.inputInfo).scrollIntoView();
+        await (await this.contentArea).waitForDisplayed();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).waitForDisplayed();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView();
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -161,8 +161,8 @@ class MyChartBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(4000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
         await browser.pause(3000);
 
     }

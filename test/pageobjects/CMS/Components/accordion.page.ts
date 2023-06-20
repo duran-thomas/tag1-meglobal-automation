@@ -8,43 +8,43 @@ class AccordionBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputMainTitle () {
+    public get inputMainTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-block-form-field-content-0-subform-field-accordion-item-0-title');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('.ck-content');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
-        
-    public get accordionBtn () {
+
+    public get accordionBtn() {
         return $('#accordion-title');
     }
 
-    public get accordionElement () {
+    public get accordionElement() {
         return $('div[data-analytics-component-type="accordion"]');
     }
 
-    public get inputID () {
+    public get inputID() {
         return $('#edit-settings-block-form-field-id-0-value');
     }
 
@@ -59,16 +59,16 @@ class AccordionBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputMainTitle).setValue(mainTitle);
-        (await this.inputTitle).scrollIntoView();
-        (await this.inputTitle).setValue(title);
-        (await this.inputContent).setValue(content);
+        await (await this.inputMainTitle).setValue(mainTitle);
+        await (await this.inputTitle).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputContent).setValue(content);
         await browser.pause(1500);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -79,18 +79,18 @@ class AccordionBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputMainTitle).setValue(mainTitle);
-        (await this.inputTitle).scrollIntoView();
-        (await this.inputTitle).setValue(title);
-        (await this.inputContent).setValue(content);
+        await (await this.inputMainTitle).setValue(mainTitle);
+        await (await this.inputTitle).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputContent).setValue(content);
         await browser.pause(1500);
-        (await this.inputID).scrollIntoView();
-        (await this.inputID).setValue(jumpID);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(jumpID);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 

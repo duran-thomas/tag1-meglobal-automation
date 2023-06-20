@@ -54,17 +54,16 @@ describe('Quick Actions Component Tests', () => {
     });
 
    
-  
     it('[S3C924] Verify that a site Content Administrator can create a Quick Actions Component with an external link.', async () => {
         //create menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-        expect((await QuickActionsBlockPage.statusMsg).getText).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
+        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
         //add link to menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.extMenuLinkTitle, quickActionsBlockData.extLink);
-        expect((await QuickActionsBlockPage.statusMsg).getText).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
+        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
 
         //create node
         await QuickActionsBlockPage.openNodes();
@@ -91,12 +90,12 @@ describe('Quick Actions Component Tests', () => {
         //create menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-        expect((await QuickActionsBlockPage.statusMsg).getText).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
+        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
         //add link to menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.intMenuLinkTitle, quickActionsBlockData.intLink);
-        expect((await QuickActionsBlockPage.statusMsg).getText).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
+        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
 
         //create node
         await QuickActionsBlockPage.openNodes();

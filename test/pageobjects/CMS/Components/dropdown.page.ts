@@ -8,113 +8,113 @@ class DropdownBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get dropdownToggle () {
+    public get dropdownToggle() {
         return $('.dropbutton__toggle');
     }
 
-    public get linkAddDropdownList () {        
+    public get linkAddDropdownList() {
         return $('.add-more-button-dropdown-list');
-    }    
+    }
 
-    public get inputTriggerText () {
+    public get inputTriggerText() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-trigger-text-0-value"]')
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-uri"]');
     }
 
-    public get inputLinkText () {
+    public get inputLinkText() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-title"]');
     }
 
-    public get dropdownTarget () {
+    public get dropdownTarget() {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-target"]');
     }
 
 
-    public get inputTriggerText1 () {
+    public get inputTriggerText1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-trigger-text-0-value"]')
     }
 
-    public get inputURL1 () {
+    public get inputURL1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-uri"]');
     }
 
-    public get inputLinkText1 () {
+    public get inputLinkText1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-title"]');
     }
 
-    public get dropdownTarget1 () {
+    public get dropdownTarget1() {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-target"]');
     }
 
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('details[data-drupal-selector="edit-settings-block-form-field-content-widget-0-subform-group-styling"]');
     }
 
-    public get dropdownSize () {
+    public get dropdownSize() {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-size"]');
     }
 
-    public get inputMaxHeight () {
+    public get inputMaxHeight() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-max-height-0-value"]');
     }
 
-    public get dropdownMobileListPosition () {
+    public get dropdownMobileListPosition() {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-mobile-list-position"]');
     }
 
-    public get dropdownDesktopListPosition () {
+    public get dropdownDesktopListPosition() {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-desktop-list-position"]');
     }
 
-    public get inputVerticalOffset () {
+    public get inputVerticalOffset() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-list-vertical-offset-0-value"]');
     }
 
-    public get inputHorizontalOffset () {
+    public get inputHorizontalOffset() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-list-horizontal-offset-0-value"]');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get dropdownElement () {
+    public get dropdownElement() {
         return $('.mf-button--tertiary');
     }
 
-    public get dropdownElements () {
+    public get dropdownElements() {
         return $$('.mf-button--tertiary');
     }
 
-    public get duckDuckItem () {
-        return $('.mf-dropdown__link[href="https://www.google.com/"]');
+    public get duckDuckItem() {
+        return $('.mf-dropdown__link[href="https://duckduckgo.com/"]');
     }
 
-    public get dropdownElement1 () {
+    public get dropdownElement1() {
         return $('button[data-analytics-click-text="Dropdown Trigger 1"]')
     }
 
-    public get wikiItem () {
+    public get wikiItem() {
         return $('.mf-dropdown__link[href="https://wikipedia.org/"]');
     }
 
@@ -129,22 +129,22 @@ class DropdownBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
+        await (await this.inputTitle).setValue(title);
         await browser.pause(2000); //explicit waits seem to be necessary here
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.linkAddDropdownList).click();
-        (await this.inputTriggerText).setValue(triggerText);
-        (await this.inputURL).setValue(url);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.linkAddDropdownList).click();
+        await (await this.inputTriggerText).setValue(triggerText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownTarget).selectByIndex(1);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.dropdownTarget).selectByIndex(1);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -154,36 +154,36 @@ class DropdownBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
+        await (await this.inputTitle).setValue(title);
         await browser.pause(2000); //explicit waits seem to be necessary here
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.linkAddDropdownList).click();
-        (await this.inputTriggerText).setValue(triggerText);
-        (await this.inputURL).setValue(url);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.linkAddDropdownList).click();
+        await (await this.inputTriggerText).setValue(triggerText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownTarget).selectByIndex(1);
+        await (await this.dropdownTarget).selectByIndex(1);
         //add second menu item
-        (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).scrollIntoView();
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownToggle).click();
-        (await this.linkAddDropdownList).click();
-        (await this.inputTriggerText1).setValue(triggerText1);
-        (await this.inputURL1).setValue(url1);
-        (await this.inputLinkText1).scrollIntoView();
-        (await this.inputLinkText1).setValue(linkText1);
+        await (await this.dropdownToggle).click();
+        await (await this.linkAddDropdownList).click();
+        await (await this.inputTriggerText1).setValue(triggerText1);
+        await (await this.inputURL1).setValue(url1);
+        await (await this.inputLinkText1).scrollIntoView();
+        await (await this.inputLinkText1).setValue(linkText1);
         await browser.pause(3000); //explicit waits seem to be necessary here
-        (await this.dropdownTarget).selectByIndex(2);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.dropdownTarget).selectByIndex(2);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
-    
+
     public async navToStyling() {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
@@ -191,12 +191,12 @@ class DropdownBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(3000);
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.linkAddDropdownList).click();
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.linkAddDropdownList).click();
         await browser.pause(2000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
         await browser.pause(3000);
     }
 }

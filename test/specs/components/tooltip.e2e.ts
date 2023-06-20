@@ -145,7 +145,8 @@ describe('Tooltip Component Tests', () => {
 
         await TooltipBlockPage.navToTooltip();
 
-        await expect(TooltipBlockPage.inputAddTooltip).toHaveAttribute('aria-required="true"');
+        const elem = await TooltipBlockPage.inputAddTooltip;
+        await expect(await elem.getAttribute('aria-required')).toEqual('true');
     });
 
   });

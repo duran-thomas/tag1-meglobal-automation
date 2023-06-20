@@ -29,7 +29,7 @@ describe('Section Header Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Section Header Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -66,8 +66,8 @@ describe('Section Header Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await SectionHeaderBlockPage.sectionHeaderElement).scrollIntoView();
         
-        expect(await SectionHeaderBlockPage.sectionHeaderElement).toExist; 
-        expect((await SectionHeaderBlockPage.sectionHeaderElement).getText).toHaveTextContaining(sectionHeaderBlockData.headline);   
+        await expect(SectionHeaderBlockPage.sectionHeaderElement).toExist; 
+        expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline);   
     });
 
 
@@ -83,8 +83,8 @@ describe('Section Header Component Tests', () => {
 
         const minimalCheckbox = await SectionHeaderBlockPage.checkboxMinimal;
         await minimalCheckbox.scrollIntoView();
-        expect(await minimalCheckbox).toBeDisplayed();
-        expect(await minimalCheckbox.isSelected()).toBe(false);
+        await expect(minimalCheckbox).toBeDisplayed();
+        await expect(await minimalCheckbox.isSelected()).toBe(false);
     });
 
   });

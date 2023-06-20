@@ -29,7 +29,7 @@ describe('Accordion Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Accordion Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -63,12 +63,12 @@ describe('Accordion Component Tests', () => {
 
         await AccordionBlockPage.createAccordion(accordionBlockData.mainTitle, accordionBlockData.title, accordionBlockData.content);
 
-        expect(AccordionBlockPage.successMsg).toBeDisplayed();
+        await expect(AccordionBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await AccordionBlockPage.accordionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        expect(await AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+        await expect(AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
 
     });
 
@@ -77,11 +77,11 @@ describe('Accordion Component Tests', () => {
 
         //Verify that the accordion content can be shown
         await (await AccordionBlockPage.accordionBtn).click();
-        expect(await $(`div[aria-labelledby="${title}"]`)).toBeDisplayedInViewport(); 
+        await expect($('.mf-rich-text')).toBeDisplayedInViewport(); 
 
         //Verify that the accordion content can be hidden
         await (await AccordionBlockPage.accordionBtn).click();
-        expect(await $(`div[aria-labelledby="${title}"]`)).not.toBeDisplayedInViewport(); 
+        await expect($('.mf-rich-text')).not.toBeDisplayedInViewport(); 
 
         //Re-open accordion for screenshot
         await (await AccordionBlockPage.accordionBtn).click();

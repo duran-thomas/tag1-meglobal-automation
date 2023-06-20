@@ -8,76 +8,76 @@ class InlineNavigationBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputLabel () {
+    public get inputLabel() {
         return $('#edit-settings-block-form-field-content-0-subform-field-label-0-value');
     }
 
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-text-headline-0-value');
     }
 
-    public get inputLinkText () {
+    public get inputLinkText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-links-0-title');
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-links-0-uri');
     }
 
-    public get inputID () {
+    public get inputID() {
         return $('#edit-settings-block-form-field-id-0-value');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get inlineNavElement () {
+    public get inlineNavElement() {
         return $('.mf-inline-navigation');
     }
 
-    public get inlineLink () {
+    public get inlineLink() {
         return $('=Google');
     }
 
     //freeform selectors
-    public get dropdownToggle () {
+    public get dropdownToggle() {
         return $('.dropbutton__toggle');
     }
 
-    public get dropdownInlineLink () {
+    public get dropdownInlineLink() {
         return $('.add-more-button-inline-navigation');
     }
 
-    public get inputLabel1 () {
+    public get inputLabel1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-label-0-value"]');
     }
 
-    public get inputHeadline1 () {
+    public get inputHeadline1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-text-headline-0-value"]');
     }
 
-    public get inputLinkText1 () {
+    public get inputLinkText1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-links-0-title"]');
     }
 
-    public get inputURL1 () {
+    public get inputURL1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-links-0-uri"]');
     }
 
@@ -86,95 +86,95 @@ class InlineNavigationBlockPage extends Page {
      * Helper methods to create Inline Navigation Component
      */
 
-    public async createExtInlineNav(title: string, label: string, headline: string,  linkText: string, url: string, id: string) {
+    public async createExtInlineNav(title: string, label: string, headline: string, linkText: string, url: string, id: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputLabel).scrollIntoView();
-        (await this.inputLabel).setValue(label);
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
-        (await this.inputURL).setValue(url);
-        (await this.inputID).scrollIntoView();
-        (await this.inputID).setValue(id);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputLabel).scrollIntoView();
+        await (await this.inputLabel).setValue(label);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id);
         await browser.pause(2000);
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
-    public async createIntInlineNav(title: string, label: string, headline: string, intLinkText: string, intUrl:string, id: string) {
+    public async createIntInlineNav(title: string, label: string, headline: string, intLinkText: string, intUrl: string, id: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputLabel).scrollIntoView();
-        (await this.inputLabel).setValue(label);
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(intLinkText);
-        (await this.inputURL).setValue(intUrl);
-        (await this.inputID).scrollIntoView();
-        (await this.inputID).setValue(id);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputLabel).scrollIntoView();
+        await (await this.inputLabel).setValue(label);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(intLinkText);
+        await (await this.inputURL).setValue(intUrl);
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id);
         await browser.pause(2000);
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
-    public async createInlineNavFragment(title: string, label: string, headline: string,  linkText: string, jumpUrl: string, id: string) {
+    public async createInlineNavFragment(title: string, label: string, headline: string, linkText: string, jumpUrl: string, id: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputLabel).scrollIntoView();
-        (await this.inputLabel).setValue(label);
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
-        (await this.inputURL).setValue(jumpUrl);
-        (await this.inputID).scrollIntoView();
-        (await this.inputID).setValue(id);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputLabel).scrollIntoView();
+        await (await this.inputLabel).setValue(label);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputURL).setValue(jumpUrl);
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id);
         await browser.pause(2000);
-        (await this.btnAddBlock).click();
+        await (await this.btnAddBlock).click();
     }
 
-    public async createFreeformInlineNav(title: string, label: string, headline: string,  linkText: string, url: string, id: string) {
+    public async createFreeformInlineNav(title: string, label: string, headline: string, linkText: string, url: string, id: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.dropdownInlineLink).click();
+        await (await this.inputTitle).setValue(title);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.dropdownInlineLink).click();
         await browser.pause(1500);
-        (await this.inputLabel1).scrollIntoView();
-        (await this.inputLabel1).setValue(label);
-        (await this.inputHeadline1).setValue(headline);
-        (await this.inputLinkText1).scrollIntoView();
-        (await this.inputLinkText1).setValue(linkText);
-        (await this.inputURL1).setValue(url);
-        (await this.inputID).scrollIntoView();
-        (await this.inputID).setValue(id);
+        await (await this.inputLabel1).scrollIntoView();
+        await (await this.inputLabel1).setValue(label);
+        await (await this.inputHeadline1).setValue(headline);
+        await (await this.inputLinkText1).scrollIntoView();
+        await (await this.inputLinkText1).setValue(linkText);
+        await (await this.inputURL1).setValue(url);
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id);
         await browser.pause(2000);
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 

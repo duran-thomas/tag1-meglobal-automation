@@ -29,7 +29,7 @@ describe('Clinical Trial Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Clinical Trial Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -61,13 +61,13 @@ describe('Clinical Trial Component Tests', () => {
 
         await ClinicalTrialBlockPage.createCardClinicalTrial(clinicalTrialBlockData.mainTitle, clinicalTrialBlockData.title, clinicalTrialBlockData.tag1, clinicalTrialBlockData.tag2, clinicalTrialBlockData.tag3, clinicalTrialBlockData.link, clinicalTrialBlockData.strDate, clinicalTrialBlockData.condition1, clinicalTrialBlockData.condition2);
 
-        expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
+        await expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await ClinicalTrialBlockPage.clinicalCardElement).scrollIntoView();
         
-        expect(await ClinicalTrialBlockPage.clinicalCardElement).toExist; 
-        expect((await ClinicalTrialBlockPage.clinicalCardElement).getText).toHaveTextContaining(clinicalTrialBlockData.mainTitle);   
+        await expect(ClinicalTrialBlockPage.clinicalCardElement).toExist; 
+        await expect(await $('h2.mb-16')).toHaveTextContaining(clinicalTrialBlockData.title);   
     });
 
     it('[S3C820] Verify that a site Content Administrator can create a Card Clinical Trial Component, using an internal url', async () => {
@@ -80,13 +80,13 @@ describe('Clinical Trial Component Tests', () => {
 
         await ClinicalTrialBlockPage.createCardClinicalTrialInternalUrl(clinicalTrialBlockData.mainTitle, clinicalTrialBlockData.title, clinicalTrialBlockData.tag1, clinicalTrialBlockData.tag2, clinicalTrialBlockData.tag3, clinicalTrialBlockData.strDate, clinicalTrialBlockData.condition1, clinicalTrialBlockData.condition2);
 
-        expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
+        await expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await ClinicalTrialBlockPage.clinicalCardElement).scrollIntoView();
         
-        expect(await ClinicalTrialBlockPage.clinicalCardElement).toExist; 
-        expect((await ClinicalTrialBlockPage.clinicalCardElement).getText).toHaveTextContaining(clinicalTrialBlockData.mainTitle);   
+        await expect(ClinicalTrialBlockPage.clinicalCardElement).toExist; 
+        await expect(await $('h2.mb-16')).toHaveTextContaining(clinicalTrialBlockData.title);   
     });
   
   
