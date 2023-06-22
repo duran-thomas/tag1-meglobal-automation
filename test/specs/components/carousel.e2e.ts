@@ -40,16 +40,16 @@ describe('Carousel Component Tests', () => {
     });
 
     //delete previously created sections
-    // afterEach(async function() { 
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getQALandingPage();
-    //     (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.cleanUpJob();
-    //     await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
-    //     //return to starting point
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getQALandingPage();  
-    // });
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();
+        (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        await AdminContentPage.getQALandingPage();  
+    });
   
     it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
@@ -114,7 +114,7 @@ describe('Carousel Component Tests', () => {
         await expect(CarouselBlockPage.controlElement).not.toExist();   
     });
 
-    it.only('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
+    it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();

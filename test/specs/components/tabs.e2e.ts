@@ -59,15 +59,15 @@ describe('Tabs Component Tests', () => {
         (await QALayoutPage.btnTabs).click();
         (await TabsBlockPage.configBlock).waitForDisplayed();
 
-        await TabsBlockPage.createTab(tabBlockData.title, tabBlockData.label, tabBlockData.name+' 1', tabBlockData.content+' 1');
+        await TabsBlockPage.createTab(tabBlockData.title, tabBlockData.label, tabBlockData.name, tabBlockData.content);
 
         await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(TabsBlockPage.tabPanel).toBeDisplayedInViewport();
-        await expect(TabsBlockPage.tabPanel).toHaveTextContaining(tabBlockData.content+' 1'); 
+        await expect(await TabsBlockPage.tabPanel).toBeDisplayedInViewport();
+        await expect(await TabsBlockPage.tabPanel).toHaveTextContaining(tabBlockData.content); 
     });
 
     it('[S3C912] Verify that a site Content Administrator can create a Tabs Component with a multiple Tab Item', async () => {
@@ -78,7 +78,7 @@ describe('Tabs Component Tests', () => {
         (await QALayoutPage.btnTabs).click();
         (await TabsBlockPage.configBlock).waitForDisplayed();
 
-        await TabsBlockPage.createMultiTab(tabBlockData.title, tabBlockData.label, tabBlockData.name+' 1', tabBlockData.content+' 1', tabBlockData.label+' 2', tabBlockData.name+' 2', tabBlockData.content+' 2');
+        await TabsBlockPage.createMultiTab(tabBlockData.title, tabBlockData.label, tabBlockData.name, tabBlockData.content, tabBlockData.multi.name1, tabBlockData.multi.content1, tabBlockData.multi.name2, tabBlockData.multi.content2, tabBlockData.multi.name3, tabBlockData.multi.content3);
 
         await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
@@ -86,7 +86,10 @@ describe('Tabs Component Tests', () => {
         await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(TabsBlockPage.tabPanel).toBeDisplayedInViewport();
-        await expect(TabsBlockPage.tabPanel[1]).toHaveTextContaining(tabBlockData.content+' 2'); 
+        await expect(await $(`#${tabBlockData.name.toLowerCase()}`)).toBeExisting();
+        await expect(await $(`#${tabBlockData.multi.name1.toLowerCase()}`)).toBeExisting();
+        await expect(await $(`#${tabBlockData.multi.name2.toLowerCase().replace(/\s/g, '-')}`)).toBeExisting();
+        await expect(await $(`#${tabBlockData.multi.name3.toLowerCase()}`)).toBeExisting();
     });
 
    

@@ -290,25 +290,84 @@ class CardLocationBlockPage extends Page {
         return $('#edit-settings-block-form-field-content-add-more');
     }
 
-    // public get inputLocation1() {
-    //     return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-location-0-target-id"]');
-    // }
+    public get checkboxPublish () {
+        return $('#edit-status');
+    }
 
-    // public get dropdownContentPosition1 () {
-    //     return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-content-position"]');
-    // }
+    // carousel locators
+    
+    public get dropdownToggle() {
+        return $('.dropbutton__toggle');
+    }
 
-    // public get dropdownSize1 () {
-    //     return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-size"]');
-    // }
+    public get listCardLocation () {
+        return $('.add-more-button-card-location');
+    }
 
-    // public get checkboxShadow1 () {
-    //     return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-shadow-value"]');
-    // }
+    public get carouselInputLocation () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-location-0-target-id"]');
+    }
 
-    // public get checkboxBorder1 () {
-    //     return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-border-value"]');
-    // }
+    public get carouselDropdownContentPosition () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-content-position"]');
+    }
+
+    public get carouselDropdownSize () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-size"]');
+    }
+
+    public get carouselCheckboxShadow () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-shadow-value"]');
+    }
+
+    public get carouselCheckboxBorder () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-border-value"]');
+    }
+
+    //second location
+    public get carouselInputLocation1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-location-0-target-id"]');
+    }
+
+    public get carouselDropdownContentPosition1 () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-content-position"]');
+    }
+
+    public get carouselDropdownSize1 () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-size"]');
+    }
+
+    public get carouselCheckboxShadow1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-shadow-value"]');
+    }
+
+    public get carouselCheckboxBorder1 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-border-value"]');
+    }
+    
+    //third location
+    public get carouselInputLocation2 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-location-0-target-id"]');
+    }
+
+    public get carouselDropdownContentPosition2 () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-content-position"]');
+    }
+
+    public get carouselDropdownSize2 () {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-size"]');
+    }
+
+    public get carouselCheckboxShadow2 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-shadow-value"]');
+    }
+
+    public get carouselCheckboxBorder2 () {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-2-subform-field-border-value"]');
+    }
+
+
+    //end
 
     public get listResult () {
         return $('.ui-menu-item');
@@ -316,6 +375,14 @@ class CardLocationBlockPage extends Page {
 
     public get cardLocationElements () {
         return $$('.mf-card-location');
+    }
+
+    public get carouselElement () {
+        return $('.mf-carousel');
+    }
+
+    public get btnApplyToSelected () {
+        return $('#edit-submit--2');
     }
    
     /**
@@ -527,6 +594,7 @@ class CardLocationBlockPage extends Page {
         await (await this.entityLocationSpecialtiesBox4).click();
         await (await this.entityLocationTypeBox).click();
         await (await this.entityParentLocationBox).click();
+        await (await this.checkboxPublish).click();
         await (await this.btnClone).click();
         await browser.pause(1500);
     }
@@ -539,14 +607,6 @@ class CardLocationBlockPage extends Page {
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();
         await browser.pause(1500);
-    }
-
-    public async locationDelete() {
-        await (await this.tabDelete).waitForDisplayed({timeout:5000});
-        await (await this.tabDelete).click();
-        await (await this.btnSave).waitForDisplayed({timeout:4000});
-        await (await this.btnSave).click();
-        await browser.pause(1800);
     }
 
     public async createLocationComponentBlock1(title:string, location:string) {
@@ -581,9 +641,88 @@ class CardLocationBlockPage extends Page {
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await (await this.btnSaveLayout).waitForDisplayed({timeout:4000});
+        await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async createCarouselCardLocation() {
+        await browser.pause(3000); 
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed({timeout:3000});
+        await browser.switchToFrame(iframe);
+        await (await this.inputBlockTitle).setValue('TR3 Carousel block Title 1');
+
+        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownToggle).click();
+        await (await this.listCardLocation).click();
+        await (await this.carouselInputLocation).waitForDisplayed({timeout:5000});
+        await (await this.carouselInputLocation).setValue('P9901');
+        await (await this.listResult).click();
+        await (await this.carouselDropdownContentPosition).selectByVisibleText('below');
+        await (await this.carouselDropdownSize).selectByVisibleText('small');
+        await (await this.carouselCheckboxShadow).click();
+        await (await this.carouselCheckboxBorder).click();
+
+        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownToggle).click();
+        await (await this.listCardLocation).click();
+        await (await this.carouselInputLocation1).waitForDisplayed({timeout:5000});
+        await (await this.carouselInputLocation1).setValue('QA Test');
+        await (await this.listResult).click();
+        await (await this.carouselDropdownContentPosition1).selectByVisibleText('below');
+        await (await this.carouselDropdownSize1).selectByVisibleText('medium');
+        await (await this.carouselCheckboxBorder1).click();
+
+        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.dropdownToggle).click();
+        await (await this.listCardLocation).click();
+        await (await this.carouselInputLocation2).waitForDisplayed({timeout:5000});
+        await (await this.carouselInputLocation2).setValue('P9903');
+        await (await this.listResult).click();
+        await (await this.carouselDropdownContentPosition2).selectByVisibleText('below');
+        await (await this.carouselDropdownSize2).selectByVisibleText('large');
+
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed({timeout:4000});
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
+    }
+
+    public async selectRowsByTitle(title: string): Promise<void> {
+        const rows = await $$('tbody tr');
+        
+        for (const row of rows) {
+            const rowTitleElement = await row.$('.views-field-title');
+            const rowTitle = await rowTitleElement.getText();
+          
+          if (rowTitle === title) {
+                const checkbox = await row.$('input[type="checkbox"]');
+            
+            if (checkbox) {
+                await checkbox.scrollIntoView({ behavior: 'auto', block: 'center' });
+                await checkbox.click();
+            }
+          }
+        }
+    }
+
+    public async deleteAll() {
+        await (await this.selectRowsByTitle('QA Landing Page'));
+        await (await this.selectRowsByTitle('Greene Medical Arts Pavilion QA Test - VERT'));
+        await (await this.selectRowsByTitle('Montefiore Medical Group Greene Medical Arts Pavilion - Cloned'));
+        await (await this.selectRowsByTitle('Jack D. Weiler Hospital'));
+        await (await this.selectRowsByTitle('Greene Medical Arts Pavilion QA Test'));
+        await (await this.selectRowsByTitle('White Plains Hospital'));
+        await (await this.btnApplyToSelected).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.btnApplyToSelected).click();
+        await (await this.btnSave).waitForDisplayed({timeout:5000});
+        await (await this.btnSave).click();
+        await browser.pause(2000);
+
     }
 
 

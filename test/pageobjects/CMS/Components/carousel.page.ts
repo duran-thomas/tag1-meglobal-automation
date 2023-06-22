@@ -366,7 +366,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
         await (await this.btnSaveLayout).waitForDisplayed();
-        await (await this.btnSaveLayout).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }

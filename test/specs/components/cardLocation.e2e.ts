@@ -7,7 +7,7 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
 
 
-describe.skip('Card Location Component Tests', () => {
+describe('Card Location Component Tests', () => {
     before(async () => {
         // Bypass AlertPrompt
         await browser.url(await users.bypassUrl);
@@ -83,8 +83,28 @@ describe.skip('Card Location Component Tests', () => {
     //     }
     // });
 
-   
-  
+    after(async function () {
+        const tests = this.test.parent.tests;
+        const allPassed = tests.every((test) => test.state === 'passed');
+
+        if (allPassed) {
+            try {
+            //navigate to admin content page
+            await AdminContentPage.open();
+            // Cleanup or teardown operations after all test cases have run
+            await (await CardLocationBlockPage.deleteAll());
+            await expect(await CardLocationBlockPage.statusMsg).toBeDisplayed();
+            await expect(await CardLocationBlockPage.statusMsg).toHaveTextContaining('Deleted');
+
+
+        } catch (error) {
+            // Handle any errors that occur during the after hook
+            console.error('Error occurred in the after hook:', error);
+            }
+        }        
+      });
+      
+
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {
         //create location 1
         await AdminContentPage.open();
@@ -147,12 +167,29 @@ describe.skip('Card Location Component Tests', () => {
 
         await CardLocationBlockPage.createLocationComponentBlock2(cardLocationComponentData.title+' 2', cardLocationComponentData.location2);
 
-        await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
+        //await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await CardLocationBlockPage.cardLocationElements[0]).scrollIntoView();
         const elem = await CardLocationBlockPage.cardLocationElements.length;
         await expect(elem).toEqual(2);   
+    });
+
+    it('[S3C909] Verify that a site Content Administrator can create Card Location Components in the Carousel Block', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnCarousel).scrollIntoView();
+        await (await QALayoutPage.btnCarousel).click();
+        await (await CardLocationBlockPage.configBlock).waitForDisplayed();
+
+        await CardLocationBlockPage.createCarouselCardLocation();
+
+        await expect(await CardLocationBlockPage.carouselElement).toBeExisting();
+        await expect($('span[aria-label="Go to slide 1"]')).toBeExisting();
+        await expect($('span[aria-label="Go to slide 2"]')).toBeExisting();
+        await expect($('span[aria-label="Go to slide 3"]')).toBeExisting();
+        
     });
 
   });

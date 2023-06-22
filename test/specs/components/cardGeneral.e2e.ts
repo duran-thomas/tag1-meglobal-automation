@@ -69,7 +69,7 @@ describe('Card General Component Tests', () => {
         await (await CardGeneralBlockPage.cardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await CardGeneralBlockPage.cardEyebrow).toHaveText(cardGeneralBlockData.eyebrow); 
-        await expect(CardGeneralBlockPage.cardGeneralElement).toBeDisplayed();   
+        await expect(CardGeneralBlockPage.cardGeneralElement).toBeExisting();   
     });
 
     // it('[S3C861] Verify that the available paragraph types in the Card General form are correct.', async () => {

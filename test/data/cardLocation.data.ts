@@ -53,6 +53,4 @@ export const cardLocationComponentData = {
     title: 'TR3 Card-Location block Title',
     location1: 'P9901',
     location2: 'VERT'
-
-
 };
