@@ -170,7 +170,7 @@ describe('Card Location Component Tests', () => {
         //await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardLocationBlockPage.cardLocationElements[0]).scrollIntoView();
+        await (await CardLocationBlockPage.cardLocationElements[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
         const elem = await CardLocationBlockPage.cardLocationElements.length;
         await expect(elem).toEqual(2);   
     });
@@ -184,6 +184,10 @@ describe('Card Location Component Tests', () => {
         await (await CardLocationBlockPage.configBlock).waitForDisplayed();
 
         await CardLocationBlockPage.createCarouselCardLocation();
+
+        await QALayoutPage.goToPageView();
+        await (await CardLocationBlockPage.carouselElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+
 
         await expect(await CardLocationBlockPage.carouselElement).toBeExisting();
         await expect($('span[aria-label="Go to slide 1"]')).toBeExisting();
