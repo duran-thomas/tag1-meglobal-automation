@@ -13,6 +13,7 @@ export const cardServicesBlockData = {
     infolabel: 'QA Label',
     altText: 'QA Alt Text',
     resiText: 'Residency Programs',
+    resiLink: '/education/residency'
     
 };
 

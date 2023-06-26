@@ -26,7 +26,12 @@
     "billboard": "npx wdio run wdio.conf.ts --spec ./test/specs/components/billboard.e2e.ts",
     "inlineNavigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/inlineNavigation.e2e.ts",
     "iconList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/iconList.e2e.ts",
-    "contactList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contactList.e2e.ts"
+    "contactList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contactList.e2e.ts",
+    "quickActions": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quickActions.e2e.ts",
+    "tabs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/tabs.e2e.ts",
+    "tooltip": "npx wdio run wdio.conf.ts --spec ./test/specs/components/tooltip.e2e.ts",
+    "cardLocation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardLocation.e2e.ts"
+
   },
   "author": "QW Team",
   "license": "ISC",

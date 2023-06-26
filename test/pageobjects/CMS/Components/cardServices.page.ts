@@ -8,135 +8,135 @@ class CardServicesBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
-    public get inputEyebrow () {
+    public get inputEyebrow() {
         return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
-    public get inputList () {
+    public get inputList() {
         return $('#edit-settings-block-form-field-content-0-subform-field-list-0-value');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-title');
     }
 
-    public get inputButtonURL () {
+    public get inputButtonURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
-    public get inputLinkText () {
+    public get inputLinkText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-links-0-title');
     }
 
-    public get inputLinkURL () {
+    public get inputLinkURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-links-0-uri');
     }
 
-    public get inputInfo () {
+    public get inputInfo() {
         return $('#edit-settings-block-form-field-content-0-subform-field-info-label-0-value');
     }
 
-    public get dropdownImage () {
+    public get dropdownImage() {
         return $('#edit-field-image');
     }
 
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
 
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
     }
 
-    public get btnSaveImage () {
+    public get btnSaveImage() {
         return $('#edit-submit');
     }
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-field-content-widget-0-subform-group-styling');
     }
 
-    public get dropdownBackground () {
+    public get dropdownBackground() {
         return $('#edit-settings-block-form-field-content-0-subform-field-background');
     }
 
-    public get dropdownContentPosition () {
+    public get dropdownContentPosition() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-position');
     }
 
-    public get dropdownServicesDisplay () {
+    public get dropdownServicesDisplay() {
         return $('#edit-settings-block-form-field-content-0-subform-field-services-display');
     }
 
-    public get checkboxMinimal () {
+    public get checkboxMinimal() {
         return $('#edit-settings-block-form-field-content-0-subform-field-minimal-value');
     }
 
-    public get dropdownMobileAspectRatio () {
+    public get dropdownMobileAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-mobile-aspect-ratio');
     }
 
-    public get dropdownDesktopAspectRatio () {
+    public get dropdownDesktopAspectRatio() {
         return $('#edit-settings-block-form-field-content-0-subform-field-desktop-aspect-ratio');
     }
 
-    public get dropdownTheme () {
+    public get dropdownTheme() {
         return $('#edit-settings-block-form-field-content-0-subform-field-theme');
     }
 
-    public get dropdownAlignment () {
+    public get dropdownAlignment() {
         return $('#edit-settings-block-form-field-content-0-subform-field-alignment');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get cardServicesElement () {
+    public get cardServicesElement() {
         return $('.mf-card-services');
     }
 
-    public get cardContent () {
+    public get cardContent() {
         return $('p.mf-text-body-3-sans');
     }
 
-    public get internalUrl () {
+    public get internalUrl() {
         return $('=Residency Programs');
     }
 
-    public get internalLink () {
+    public get internalLink() {
         return $('a[data-analytics-click-text="Residency Programs"]');
     }
 
-    public get listElement () {
+    public get listElement() {
         return $('.mf-icon-list__item');
     }
 
@@ -151,99 +151,95 @@ class CardServicesBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputEyebrow).scrollIntoView();
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputList).setValue(list);
-        (await this.inputButtonText).scrollIntoView();
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputButtonURL).setValue(btnUrl);
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
-        (await this.inputLinkURL).setValue(linkUrl);
-        (await this.inputInfo).scrollIntoView();
-        (await this.inputInfo).setValue(info);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputEyebrow).scrollIntoView();
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputList).setValue(list);
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputButtonURL).setValue(btnUrl);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputLinkURL).setValue(linkUrl);
+        await (await this.inputInfo).scrollIntoView();
+        await (await this.inputInfo).setValue(info);
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4500); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForClickable();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForClickable();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
-    public async createCardServiceIntLink(title: string, eyebrow: string, headline: string, content: string, list: string, resiText: string, info: string, remoteFilePath: string, altText: string) {
+    public async createCardServiceIntLink(title: string, eyebrow: string, headline: string, content: string, list: string, resiText: string, resiLink:string, info: string, remoteFilePath: string, altText: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputEyebrow).scrollIntoView();
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputList).setValue(list);
-        (await this.inputButtonText).scrollIntoView();
-        (await this.inputButtonText).setValue(resiText);
-        (await this.inputButtonURL).setValue(resiText);
-        await browser.pause(800);
-        (await this.internalUrl).click();
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(resiText);
-        (await this.inputLinkURL).setValue(resiText);
-        await browser.pause(800);
-        (await this.internalUrl).click();
-        (await this.inputInfo).scrollIntoView();
-        (await this.inputInfo).setValue(info);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputEyebrow).scrollIntoView();
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputList).setValue(list);
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(resiText);
+        await (await this.inputButtonURL).setValue(resiLink);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(resiText);
+        await (await this.inputLinkURL).setValue(resiLink);
+        await (await this.inputInfo).scrollIntoView();
+        await (await this.inputInfo).setValue(info);
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(5200); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForClickable();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForClickable();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(3000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
         await browser.pause(3000);
     }
 }

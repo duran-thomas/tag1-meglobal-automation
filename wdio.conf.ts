@@ -79,7 +79,13 @@ export const config: Options.Testrunner = {
         billboard: ['/test/specs/components/billboard.e2e.ts'],
         inlineNavigation: ['/test/specs/components/inlineNavigation.e2e.ts'],
         iconList: ['/test/specs/components/iconList.e2e.ts'],
-        contactList: ['/test/specs/components/contactList.e2e.ts']
+        contactList: ['/test/specs/components/contactList.e2e.ts'],
+        quickActions: ['/test/specs/components/quickActions.e2e.ts'],
+        tabs: ['/test/specs/components/tabs.e2e.ts'],
+        tooltip: ['/test/specs/components/tooltip.e2e.ts'],
+        cardLocation: ['/test/specs/components/cardLocation.e2e.ts'],
+
+
 
 
     },
@@ -130,7 +136,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
     //
     // Set specific log levels per logger
     // loggers:
@@ -174,7 +180,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "Testing Visual List case matching",
+        //     testRunName: "Automated Regression - Sprint 18",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,

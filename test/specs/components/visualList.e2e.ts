@@ -29,7 +29,7 @@ describe('Visual List Component Tests', () => {
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getQALandingPage();  
-        expect(await QALayoutPage.tabLayout).toBeDisplayed();
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
     afterEach(async function() { 
@@ -45,7 +45,7 @@ describe('Visual List Component Tests', () => {
         await AdminContentPage.getQALandingPage();
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        expect(await QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getQALandingPage();  
@@ -63,14 +63,14 @@ describe('Visual List Component Tests', () => {
             if (record.itemTitle === 'QA Simple Visual List Item Title'){
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Simple Visual List Item Title');
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
             if (record.itemTitle === 'QA Simple Visual List Item Title Internal URL' ){
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Simple Visual List Item Title Internal URL');
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
@@ -78,28 +78,28 @@ describe('Visual List Component Tests', () => {
             
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
             if (record.itemTitle === 'QA Illustration Visual List Item Title Internal URL'){
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
             if (record.itemTitle === 'QA Icon Visual List Item Title'){
                 await VisualListBlockPage.createVisualListComponentIcon(record.mainTitle,record.itemTitle,record.link,record.description)
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
             if (record.itemTitle === 'QA Icon Visual List Item Title Internal URL'){
                 await VisualListBlockPage.createVisualListComponentIcon(record.mainTitle,record.itemTitle,record.link,record.description)
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
@@ -108,7 +108,7 @@ describe('Visual List Component Tests', () => {
                 record.eyebrow, record.heading, record.url, record.linkText, record.description, imageFilePath, record.altText)
 
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Card Visual List Item Heading');
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();
             }
@@ -117,7 +117,7 @@ describe('Visual List Component Tests', () => {
                 record.eyebrow, record.heading, record.url, record.linkText, record.description, imageFilePath, record.altText)
                 
                 await QALayoutPage.goToPageView();
-                expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Card Visual List Item Heading Internal UR');
                 await expect(VisualListBlockPage.visualListElement).toExist();  
                 await (await VisualListBlockPage.visualListElement).scrollIntoView();    
             }
@@ -126,7 +126,7 @@ describe('Visual List Component Tests', () => {
                     record.eyebrow, record.heading, record.url, record.linkText, record.description, imageFilePath, record.altText)
                     
                     await QALayoutPage.goToPageView();
-                    expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(record.mainTitle);
+                    await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
                     await expect(VisualListBlockPage.visualListElement).toExist();  
                     await (await VisualListBlockPage.visualListElement).scrollIntoView();   
             }
@@ -145,7 +145,7 @@ describe('Visual List Component Tests', () => {
             simplevisualListBlockData[0].description, illustrationVisualListBlockData[0].description, imageFilePath,illustrationVisualListBlockData[0].altText)
         
         await QALayoutPage.goToPageView();
-        expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(simplevisualListBlockData[0].mainTitle);
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Visual List Item Title');
         await expect( VisualListBlockPage.visualListElement).toExist();  
         await (await VisualListBlockPage.visualListElement).scrollIntoView();   
     });
@@ -161,7 +161,7 @@ describe('Visual List Component Tests', () => {
         
         await QALayoutPage.goToPageView();
         await (await VisualListBlockPage.visualListElement).scrollIntoView();
-        expect(await (await VisualListBlockPage.visualListElementTitle).getText).toHaveText(visualListBlockData[0].mainTitle);
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[0].itemTitle);
         await expect(VisualListBlockPage.visualListElement).toExist();  
         
     });

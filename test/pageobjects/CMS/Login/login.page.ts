@@ -35,6 +35,7 @@ class LoginPage extends Page {
     public async login (username: string, password: string) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
+        await (await this.btnSubmit).scrollIntoView();
         await this.btnSubmit.click();
     }
 

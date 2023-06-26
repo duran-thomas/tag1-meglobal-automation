@@ -8,71 +8,71 @@ class SectionHeaderBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
-    public get btnAddButtons () {
+    public get btnAddButtons() {
         return $('.add-more-button-buttons');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-actions-0-subform-field-buttons-0-title"]');
     }
 
-    public get inputButtonURL () {
+    public get inputButtonURL() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-actions-0-subform-field-buttons-0-uri"]');
     }
 
-    public get dropdownToggle () {
+    public get dropdownToggle() {
         return $('.dropbutton__toggle');
     }
 
-    public get btnAddLinks () {
+    public get btnAddLinks() {
         return $('.add-more-button-links');
     }
 
-    public get inputLinkText () {
+    public get inputLinkText() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-actions-1-subform-field-links-0-title"]');
     }
 
-    public get inputLinkURL () {
+    public get inputLinkURL() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-actions-1-subform-field-links-0-uri"]');
     }
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-field-content-widget-0-subform-group-styling');
     }
 
-    public get checkboxMinimal () {
+    public get checkboxMinimal() {
         return $("#edit-settings-block-form-field-content-0-subform-field-minimal-value");
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get sectionHeaderElement () {
+    public get sectionHeaderElement() {
         return $('.mf-section-header');
     }
 
@@ -87,31 +87,31 @@ class SectionHeaderBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputHeadline).scrollIntoView();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content)
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content)
         await browser.pause(3000); //explicit wait seems necessary here
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.btnAddButtons).click();
-        (await this.inputButtonText).scrollIntoView();
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputButtonURL).setValue(btnUrl);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.btnAddButtons).click();
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputButtonURL).setValue(btnUrl);
         await browser.pause(3000); //explicit wait seems necessary here
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
-        (await this.btnAddLinks).click();
-        (await this.inputLinkText).scrollIntoView();
-        (await this.inputLinkText).setValue(linkText);
-        (await this.inputLinkURL).setValue(linkUrl);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.btnAddLinks).click();
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputLinkURL).setValue(linkUrl);
         await browser.pause(3000); //explicit wait seems necessary here
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -122,9 +122,9 @@ class SectionHeaderBlockPage extends Page {
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await browser.pause(3000);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
-        (await this.checkboxMinimal).scrollIntoView()
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
+        await (await this.checkboxMinimal).scrollIntoView()
         await browser.pause(3000);
     }
 

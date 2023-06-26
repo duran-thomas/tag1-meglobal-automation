@@ -8,169 +8,169 @@ class VisualListBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get dropdownToggle () {
+    public get dropdownToggle() {
         return $('.dropbutton__toggle');
     }
 
-    public get inputItemTitle () {
+    public get inputItemTitle() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-title-"]');
     }
 
-    public get secondInputItemTitle () {
-        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-1-subform-field-title"]'); 
+    public get secondInputItemTitle() {
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-1-subform-field-title"]');
     }
 
-    public get inputItemLink () {
+    public get inputItemLink() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-uri"]');
     }
 
-    public get secondInputItemLink () {
+    public get secondInputItemLink() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-1-subform-field-link"]');
     }
 
-    public get simpleVisualList () {
+    public get simpleVisualList() {
         return $('input[id^="settings-block-form-field-content-0-subform-field-items-visual-list-item-simple-add-more"]');
     }
 
-    public get illustrationVisualList () {
+    public get illustrationVisualList() {
         return $('input[id^="settings-block-form-field-content-0-subform-field-items-visual-list-item-illustration-add-more"]');
     }
 
-    public get imageCardVisualList () {
+    public get imageCardVisualList() {
         return $('input[id^="settings-block-form-field-content-0-subform-field-items-visual-list-item-image-card-add-more"]');
     }
 
-    public get illustrationCardVisualList () {
+    public get illustrationCardVisualList() {
         return $('input[id^="settings-block-form-field-content-0-subform-field-items-visual-list-illustration-card-add-more"]');
     }
 
-    public get illustrationCardVisualListEyebrow () {
+    public get illustrationCardVisualListEyebrow() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-eyebrow"]');
     }
 
-    public get illustrationCardVisualListHeading () {
+    public get illustrationCardVisualListHeading() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-heading"]');
     }
 
-    public get illustrationCardVisualListDescription () {
+    public get illustrationCardVisualListDescription() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-description"]');
     }
 
-    public get illustrationCardVisualListURL () {
+    public get illustrationCardVisualListURL() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-uri"]');
     }
 
-    public get illustrationCardVisualListLinkText () {
+    public get illustrationCardVisualListLinkText() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-title"]');
     }
 
-    public get illustrationCardVisualListBackgroundDropdown () {
+    public get illustrationCardVisualListBackgroundDropdown() {
         return $('select[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-illustration-background"]');
     }
 
 
-    public get iconVisualList () {
+    public get iconVisualList() {
         return $('input[id^="settings-block-form-field-content-0-subform-field-items-visual-list-item-icon-add-more"]');
     }
 
-    public get iconVisualListDropdown () {
+    public get iconVisualListDropdown() {
         return $('select[name="settings[block_form][field_content][0][subform][field_items][0][subform][field_icon][0][name]"]')
     }
 
-    public get illustrationImageDropdown () {
+    public get illustrationImageDropdown() {
         return $('.field--type-entity-reference.field--name-field-image');
     }
 
-    public get inputItemDescription () {
+    public get inputItemDescription() {
         return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-description-0-value"]');
     }
 
-    public get dropdownAttributes () {
+    public get dropdownAttributes() {
         return $('details[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-options-attributes"]');
     }
 
-    public get dropdownTarget () {
-        return $('select[id^="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-options-attributes-target-"]');
+    public get dropdownTarget() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-0-subform-field-link-0-options-attributes-target"]');
     }
 
-    public get dropdownStyling () {
+    public get dropdownStyling() {
         return $('#edit-settings-block-form-field-content-widget-0-subform-group-styling');
     }
 
-    public get dropdownMediaBackground () {
+    public get dropdownMediaBackground() {
         return $('#edit-settings-block-form-field-content-0-subform-field-background');
     }
 
-    public get dropdownMediaSize () {
+    public get dropdownMediaSize() {
         return $('#edit-settings-block-form-field-content-0-subform-field-size');
     }
 
-    public get dropdownMediaSpacing () {
+    public get dropdownMediaSpacing() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-padding');
     }
 
-    public get dropdownMediaAlign () {
+    public get dropdownMediaAlign() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-position');
     }
 
-    public get checkboxRoundedMedia () {
+    public get checkboxRoundedMedia() {
         return $('#edit-settings-block-form-field-content-0-subform-field-rounded-value');
     }
 
-    public get dropdownTemplate () {
+    public get dropdownTemplate() {
         return $('#edit-settings-block-form-field-content-0-subform-field-template');
     }
 
-    public get checkboxDivider () {
+    public get checkboxDivider() {
         return $('#edit-settings-block-form-field-content-0-subform-field-divider-value');
     }
-    
-    public get dropdownDividerStyle () {
+
+    public get dropdownDividerStyle() {
         return $('#edit-settings-block-form-field-content-0-subform-field-divider-style');
     }
 
-    public get btnAddBlock () {
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get visualListElement () {
+    public get visualListElement() {
         return $('.mf-visual-list');
     }
 
-    public get visualListElementTitle () {
+    public get visualListElementTitle() {
         return $('h4.mf-text-body-3-sans');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
     }
-    public get btnSaveImage () {
+    public get btnSaveImage() {
         return $('#edit-submit');
     }
 
-    public get freeformVisualList () {
+    public get freeformVisualList() {
         return $('.add-more-button-visual-list');
     }
 
@@ -178,11 +178,11 @@ class VisualListBlockPage extends Page {
      * Freeform Page Component
      */
 
-    public get freeFormContentList () {
+    public get freeFormContentList() {
         return $$('li[class^="add-more-button"]');
     }
 
-   
+
 
     /**
      * Helper methods to create Visual List Component with Simple List
@@ -194,7 +194,7 @@ class VisualListBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
         await browser.pause(5000);
@@ -202,21 +202,21 @@ class VisualListBlockPage extends Page {
         await (await this.simpleVisualList).waitForClickable();
         await (await this.simpleVisualList).click();
         await browser.pause(5000);
-        (await this.inputItemTitle).setValue(itemTitle);
-        (await this.inputItemLink).setValue(link);
-        (await this.dropdownAttributes).scrollIntoView();
-        (await this.dropdownAttributes).click();
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
-        (await this.inputItemDescription).click();
-        (await this.inputItemDescription).setValue(description);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.inputItemTitle).setValue(itemTitle);
+        await (await this.inputItemLink).setValue(link);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
+        await (await this.inputItemDescription).click();
+        await (await this.inputItemDescription).setValue(description);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
-    
+
 
     /**
      * Helper methods to create Visual List Component with Illustration list
@@ -227,41 +227,41 @@ class VisualListBlockPage extends Page {
      * @param remoteFilePath 
      * @param altText 
      */
-    public async createVisualListComponentIllustration(mainTitle: string, itemTitle: string, link: string, description: string, remoteFilePath: string, altText:string) {
+    public async createVisualListComponentIllustration(mainTitle: string, itemTitle: string, link: string, description: string, remoteFilePath: string, altText: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.illustrationVisualList).waitForClickable();
         await (await this.illustrationVisualList).click();
-        (await this.inputItemTitle).setValue(itemTitle);
-        (await this.inputItemLink).setValue(link);
-        (await this.dropdownAttributes).scrollIntoView();
-        (await this.dropdownAttributes).click();
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
+        await (await this.inputItemTitle).setValue(itemTitle);
+        await (await this.inputItemLink).setValue(link);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
         await (await this.illustrationImageDropdown).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToFrame(iframe);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputItemDescription).click();
-        (await this.inputItemDescription).setValue(description);
+        await (await this.inputItemDescription).click();
+        await (await this.inputItemDescription).setValue(description);
 
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -280,7 +280,7 @@ class VisualListBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
         await browser.pause(5000);
@@ -288,18 +288,20 @@ class VisualListBlockPage extends Page {
         await (await this.iconVisualList).waitForClickable();
         await (await this.iconVisualList).click();
         await browser.pause(5000);
-        (await this.inputItemTitle).setValue(itemTitle);
-        (await this.inputItemLink).setValue(link);
-        (await this.inputItemDescription).click();
-        (await this.inputItemDescription).setValue(description);
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
-        (await this.iconVisualListDropdown).waitForDisplayed();
-        (await this.iconVisualListDropdown).selectByIndex(1);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.inputItemTitle).setValue(itemTitle);
+        await (await this.inputItemLink).setValue(link);
+        await (await this.inputItemDescription).click();
+        await (await this.inputItemDescription).setValue(description);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
+        await (await this.iconVisualListDropdown).waitForDisplayed();
+        await (await this.iconVisualListDropdown).selectByIndex(1);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -312,46 +314,46 @@ class VisualListBlockPage extends Page {
      * @param remoteFilePath 
      * @param altText 
      */
-     public async createVisualListComponentIllustrationCard(mainTitle: string, eyebrow: string, heading: string, url:string, linkText:string, description: string, remoteFilePath: string, altText:string) {
+    public async createVisualListComponentIllustrationCard(mainTitle: string, eyebrow: string, heading: string, url: string, linkText: string, description: string, remoteFilePath: string, altText: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
         await browser.pause(5000);
         await (await this.illustrationCardVisualList).waitForClickable();
         await (await this.illustrationCardVisualList).click();
         await browser.pause(5000);
-        (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
-        (await this.illustrationCardVisualListHeading).setValue(heading);
-        (await this.illustrationCardVisualListDescription).setValue(description);
-        (await this.illustrationCardVisualListURL).setValue(url);
-        (await this.illustrationCardVisualListLinkText).setValue(linkText);
-        (await this.dropdownAttributes).scrollIntoView();
-        (await this.dropdownAttributes).click();
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
+        await (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
+        await (await this.illustrationCardVisualListHeading).setValue(heading);
+        await (await this.illustrationCardVisualListDescription).setValue(description);
+        await (await this.illustrationCardVisualListURL).setValue(url);
+        await (await this.illustrationCardVisualListLinkText).setValue(linkText);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
         await (await this.illustrationImageDropdown).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await browser.pause(4000); //explicit waits seem to be necessary here
 
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -364,45 +366,45 @@ class VisualListBlockPage extends Page {
      * @param remoteFilePath 
      * @param altText 
      */
-     public async createVisualListComponentImageCard(mainTitle: string, eyebrow: string, heading: string, url:string, linkText:string, description: string, remoteFilePath: string, altText:string) {
+    public async createVisualListComponentImageCard(mainTitle: string, eyebrow: string, heading: string, url: string, linkText: string, description: string, remoteFilePath: string, altText: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
         await browser.pause(5000);
         await (await this.imageCardVisualList).waitForClickable();
         await (await this.imageCardVisualList).click();
         await browser.pause(5000);
-        (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
-        (await this.illustrationCardVisualListHeading).setValue(heading);
-        (await this.illustrationCardVisualListDescription).setValue(description);
-        (await this.illustrationCardVisualListURL).setValue(url);
-        (await this.illustrationCardVisualListLinkText).setValue(linkText);
-        (await this.dropdownAttributes).scrollIntoView();
-        (await this.dropdownAttributes).click();
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
+        await (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
+        await (await this.illustrationCardVisualListHeading).setValue(heading);
+        await (await this.illustrationCardVisualListDescription).setValue(description);
+        await (await this.illustrationCardVisualListURL).setValue(url);
+        await (await this.illustrationCardVisualListLinkText).setValue(linkText);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToFrame(iframe);
         await browser.pause(4000); //explicit waits seem to be necessary here
 
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
@@ -417,37 +419,37 @@ class VisualListBlockPage extends Page {
      * @param remoteFilePath 
      * @param altText 
      */
-    public async createIllustrationAndSimple(mainTitle: string, simpleItemTitle: string, illustrationItemTitle, link: string, 
-        simpleDescription: string, illustrationDescription: string,  remoteFilePath: string, altText:string) {
+    public async createIllustrationAndSimple(mainTitle: string, simpleItemTitle: string, illustrationItemTitle, link: string,
+        simpleDescription: string, illustrationDescription: string, remoteFilePath: string, altText: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(mainTitle);
+        await (await this.inputTitle).setValue(mainTitle);
         await (await this.illustrationVisualList).waitForClickable();
         await (await this.illustrationVisualList).click();
-        (await this.inputItemTitle).setValue(illustrationItemTitle);
-        (await this.inputItemLink).setValue(link);
-        (await this.dropdownAttributes).scrollIntoView();
-        (await this.dropdownAttributes).click();
-        (await this.dropdownTarget).waitForDisplayed();
-        (await this.dropdownTarget).selectByIndex(1);
+        await (await this.inputItemTitle).setValue(illustrationItemTitle);
+        await (await this.inputItemLink).setValue(link);
+        await (await this.dropdownAttributes).scrollIntoView();
+        await (await this.dropdownAttributes).click();
+        await (await this.dropdownTarget).waitForDisplayed();
+        await (await this.dropdownTarget).selectByIndex(1);
         await (await this.illustrationImageDropdown).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToFrame(iframe);
         await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.inputItemDescription).click();
-        (await this.inputItemDescription).setValue(illustrationDescription);
+        await (await this.inputItemDescription).click();
+        await (await this.inputItemDescription).setValue(illustrationDescription);
         await (await this.dropdownToggle).scrollIntoView();
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
@@ -457,24 +459,24 @@ class VisualListBlockPage extends Page {
         await (await this.simpleVisualList).click();
         await browser.pause(5000);
         await (await this.secondInputItemTitle).scrollIntoView();
-        (await this.secondInputItemTitle).setValue(simpleItemTitle);
+        await (await this.secondInputItemTitle).setValue(simpleItemTitle);
         await (await this.secondInputItemLink).scrollIntoView();
-        (await this.secondInputItemLink).setValue(link);
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.secondInputItemLink).setValue(link);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
 
-    public async isVisualListInFreeformBlock () {
+    public async isVisualListInFreeformBlock() {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
         await browser.pause(3000);
 
     }
@@ -485,11 +487,11 @@ class VisualListBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.dropdownStyling).scrollIntoView();
-        (await this.dropdownStyling).click();
-        await browser.pause(2000);         
+        await (await this.dropdownStyling).scrollIntoView();
+        await (await this.dropdownStyling).click();
+        await browser.pause(2000);
     }
-  
+
 }
 
 export default new VisualListBlockPage();

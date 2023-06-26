@@ -8,75 +8,75 @@ class HeroBlockPage extends Page {
      * define selectors using getter methods
      */
 
-    public get btnSaveLayout () {
+    public get btnSaveLayout() {
         return $('#edit-submit');
     }
 
-    public get inputTitle () {
+    public get inputTitle() {
         return $('#edit-settings-label');
     }
 
-    public get inputHeadline () {
+    public get inputHeadline() {
         return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
-    public get inputEyebrow () {
+    public get inputEyebrow() {
         return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
-    public get inputIntro () {
+    public get inputIntro() {
         return $('#edit-settings-block-form-field-content-0-subform-field-intro-0-value');
     }
 
-    public get inputContent () {
+    public get inputContent() {
         return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
-    public get inputButtonText () {
+    public get inputButtonText() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-title');
     }
 
-    public get inputURL () {
+    public get inputURL() {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
-    public get dropdownMedia () {
+    public get dropdownMedia() {
         return $('#edit-field-media-entity');
     }
 
-    public get linkUploadVideo () {
+    public get linkUploadVideo() {
         return $('=Upload new video');
     }
 
-    public get btnBrowse () {
+    public get btnBrowse() {
         return $("input[type='file']");
     }
 
-    public get inputAltText () {
+    public get inputAltText() {
         return $('input[id^="edit-inline-entity-form-field-media-image-0-alt-"]');
     }
 
-    public get btnSaveMedia () {
+    public get btnSaveMedia() {
         return $('#edit-submit');
     }
-    
-    public get btnAddBlock () {
+
+    public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
 
-    public get successMsg () {
+    public get successMsg() {
         return $('.mf-alert__container--success');
     }
 
-    public get entityIframe () {
+    public get entityIframe() {
         return $('iframe[name="entity_browser_iframe_image_and_video"]');
     }
 
-    public get titleBlockElement () { 
+    public get titleBlockElement() {
         return $('#block-meda-page-title');
     }
 
-    public get headlineElement () {
+    public get headlineElement() {
         return $('.mf-text-title-1-serif');
     }
 
@@ -92,11 +92,11 @@ class HeroBlockPage extends Page {
         return $('#edit-submit');
     }
 
-    public get configBlock () {
+    public get configBlock() {
         return $('.ui-draggable-handle');
     }
 
-    public get dropdownToggle () {
+    public get dropdownToggle() {
         return $('.dropbutton__toggle');
     }
 
@@ -111,21 +111,21 @@ class HeroBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputHeadline).scrollIntoView();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputIntro).setValue(intro);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.dropdownMedia).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputIntro).setValue(intro);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.dropdownMedia).scrollIntoView();
         await (await this.dropdownMedia).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(4000); //explicit waits seem to be necessary here
         await (await this.inputAltText).setValue(altText);
         await (await this.btnSaveMedia).scrollIntoView();
@@ -133,12 +133,12 @@ class HeroBlockPage extends Page {
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         //await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).waitForEnabled();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(2000);
     }
 
@@ -148,45 +148,45 @@ class HeroBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        (await this.inputHeadline).scrollIntoView();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputIntro).setValue(intro);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.dropdownMedia).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputIntro).setValue(intro);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.dropdownMedia).scrollIntoView();
         await (await this.dropdownMedia).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
         await (await this.linkUploadVideo).click();
-        (await this.btnBrowse).waitForDisplayed();
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).waitForDisplayed();
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(10900); //explicit waits seem to be necessary here
         await (await this.btnSaveMedia).scrollIntoView();
         await (await this.btnSaveMedia).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         //await browser.pause(4000); //explicit waits seem to be necessary here
-        (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).waitForEnabled();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
-        (await this.btnSaveLayout).click();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
         await browser.pause(2000);
     }
 
     public async deletePages() {
-            (await this.heroPageLink).click();
-            (await this.deletelink).waitForExist();
-            (await this.deletelink).click();
-            (await this.btnDelete).waitForExist();
-            (await this.btnDelete).click();
-            await browser.pause(3000);
+        await (await this.heroPageLink).click();
+        await (await this.deletelink).waitForExist();
+        await (await this.deletelink).click();
+        await (await this.btnDelete).waitForExist();
+        await (await this.btnDelete).click();
+        await browser.pause(3000);
     }
 
     public async switchIntoFrame() {
@@ -195,11 +195,11 @@ class HeroBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.dropdownToggle).scrollIntoView();
-        (await this.dropdownToggle).click();
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
     }
 
-   
+
 }
 
 export default new HeroBlockPage();
