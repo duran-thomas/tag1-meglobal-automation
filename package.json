@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "all": "npx wdio run wdio.conf.ts --spec ./test/specs/components/*",
+    "all": "npx wdio run wdio.conf.ts --spec ./test/specs/components/**",
     "allure": "allure serve allure-results && allure open",
     "login": "npx wdio run wdio.conf.ts --spec ./test/specs/login/*",
     "quotes": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quotes.e2e.ts",
@@ -30,7 +30,9 @@
     "quickActions": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quickActions.e2e.ts",
     "tabs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/tabs.e2e.ts",
     "tooltip": "npx wdio run wdio.conf.ts --spec ./test/specs/components/tooltip.e2e.ts",
-    "cardLocation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardLocation.e2e.ts"
+    "cardLocation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardLocation.e2e.ts",
+    "stepper": "npx wdio run wdio.conf.ts --spec ./test/specs/components/stepper.e2e.ts"
+
 
   },
   "author": "QW Team",
