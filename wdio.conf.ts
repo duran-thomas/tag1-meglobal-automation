@@ -59,7 +59,7 @@ export const config: Options.Testrunner = {
         './test/specs/**/*.ts'
     ],
     suites: {
-        all: ['./test/specs/components/*.ts'],
+        all: ['./test/specs/components/**.ts'],
         login: [ './test/specs/login/*.ts'],
         quotes: ['./test/specs/components/quotes.e2e.ts'],
         caorusel: ['/test/specs/components/carousel.e2e.ts'],
@@ -84,8 +84,7 @@ export const config: Options.Testrunner = {
         tabs: ['/test/specs/components/tabs.e2e.ts'],
         tooltip: ['/test/specs/components/tooltip.e2e.ts'],
         cardLocation: ['/test/specs/components/cardLocation.e2e.ts'],
-
-
+        stepper: ['/test/specs/components/stepper.e2e.ts'],
 
 
     },
@@ -123,6 +122,9 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
+        'goog:chromeOptions': {
+            args: ['headless', 'disable-gpu']
+        },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.

@@ -142,6 +142,10 @@ class LandingQAPage extends Page {
         return $('=Section Header');
     }
 
+    public get btnStepper() {
+        return $('=Stepper');
+    }
+
     public get btnTabs() {
         return $('=Tabs');
     }

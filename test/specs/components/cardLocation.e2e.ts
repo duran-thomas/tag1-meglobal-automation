@@ -39,50 +39,6 @@ describe('Card Location Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
 
-    // after(async function() {
-    //     if (this.currentTest.title === '[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component') {
-    //         await (await $(`=${cardLocationBlockData.location1.title}`)).scrollIntoView({ behavior: 'auto', block: 'center' });
-    //         await (await $(`=${cardLocationBlockData.location1.title}`)).click();
-    //         await CardLocationBlockPage.locationDelete();
-    //         await AdminContentPage.open();
-
-    //         await (await $(`=${cardLocationBlockData.location2.title}`)).scrollIntoView({ behavior: 'auto', block: 'center' });
-    //         await (await $(`=${cardLocationBlockData.location2.title}`)).click();
-    //         await CardLocationBlockPage.locationDelete();
-    //         await AdminContentPage.open();
-
-    //         await (await $(`=${cardLocationBlockData.location2.title} - VERT`)).scrollIntoView({ behavior: 'auto', block: 'center' });
-    //         await (await $(`=${cardLocationBlockData.location2.title} - VERT`)).click();
-    //         await CardLocationBlockPage.locationDelete();
-    //         await AdminContentPage.open();
-
-    //         await (await $(`=${cardLocationBlockData.location3.title}`)).scrollIntoView({ behavior: 'auto', block: 'center' });
-    //         await (await $(`=${cardLocationBlockData.location3.title}`)).click();
-    //         await CardLocationBlockPage.locationDelete();
-    //         await AdminContentPage.open();
-
-    //         await (await $('=Montefiore Medical Group Greene Medical Arts Pavilion - Cloned')).scrollIntoView({ behavior: 'auto', block: 'center' });
-    //         await (await $('=Montefiore Medical Group Greene Medical Arts Pavilion - Cloned')).click();
-    //         await CardLocationBlockPage.locationDelete();
-    //         await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
-    //     }
-    //   });
-    
-
-    //clean up job
-    // afterEach(async function() { 
-    //     // Get the current test result
-    //     const testResult = this.currentTest;
-
-    //     // Check if the test passed
-    //     if (testResult.state === 'passed') {
-    //         await CardLocationBlockPage.cleanUp();
-    //         await expect(CardLocationBlockPage.statusMsg).toBeDisplayedInViewport();
-    //         await expect(CardLocationBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
-
-    //     }
-    // });
-
     after(async function () {
         const tests = this.test.parent.tests;
         const allPassed = tests.every((test) => test.state === 'passed');
