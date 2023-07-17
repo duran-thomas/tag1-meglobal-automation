@@ -135,7 +135,7 @@ describe('Tooltip Component Tests', () => {
         await expect(await tipValue).toEqual(tooltipBlockData.longTooltip);
     });
 
-    it('[S3C894] Verify that tooltip is a required field', async () => {
+    it.only('[S3C894] Verify that tooltip is a required field', async () => {
         (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

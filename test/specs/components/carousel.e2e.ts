@@ -90,7 +90,7 @@ describe('Carousel Component Tests', () => {
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(CarouselBlockPage.paginationElement).not.toExist();   
+        await expect($('div[x-ref="swiperButtonPrev"]')).toHaveElementClassContaining('mf-button--disabled');  
     });
 
     it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
@@ -111,7 +111,7 @@ describe('Carousel Component Tests', () => {
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(CarouselBlockPage.controlElement).not.toExist();   
+        await expect(CarouselBlockPage.controlElement).not.toBeExisting();  
     });
 
     it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
