@@ -54,6 +54,25 @@ class AdminContentPage extends Page {
         await browser.pause(3000);
     }
 
+    public async createTestPage (componentTest) {
+        await (await this.btnAddContent).click();
+        await (await this.linkLandingPage).click();
+        await (await this.inputTitle).setValue(componentTest);
+        await (await this.btnSave).scrollIntoView();
+        await browser.pause(2000);
+        await (await this.btnSave).click();
+        await browser.pause(3000);
+    }
+
+    public async deleteTestPage (componentTest) {
+        await (await $(`=${componentTest}`)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await $(`=${componentTest}`)).click();
+        await (await $('=Delete')).click();
+        await (await this.btnSave).waitForDisplayed({timeout:8000});
+        await (await this.btnSave).click();
+        await browser.pause(2000);
+    }
+
     /**
      * a method to check if the text "QA Landing Page" is present in the table element,
      * to assume if page exists or not
@@ -71,6 +90,21 @@ class AdminContentPage extends Page {
         } catch (error) {
             // Try to show the error
             console.error('Error occurred while performing getQALandingPage:', error);
+        }
+      }
+
+    public async getTestPage(componentTest) {
+        try {
+            const testPage = await $(`=${componentTest}`);
+            if (await testPage.isExisting()) {
+              await testPage.scrollIntoView({ behavior: 'auto', block: 'center' });
+              await testPage.click();
+            } else {
+              await this.createTestPage(componentTest);
+            }
+        } catch (error) {
+            // Try to show the error
+            console.error('Error occurred while performing getTestPage:', error);
         }
       }
 

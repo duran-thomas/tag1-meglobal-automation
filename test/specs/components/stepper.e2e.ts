@@ -1,7 +1,7 @@
-import LoginPage from  '../../pageobjects/CMS/Login/login.page';
+import LoginPage from '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import StepperBlockPage from '../../pageobjects/CMS/Components/stepper.page';
-import {users} from '../../data/users.data';
+import { users } from '../../data/users.data';
 import { stepperBlockData } from '../../data/stepper.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
@@ -16,23 +16,24 @@ describe('Stepper Component Tests', () => {
         // Set the cookie for a logged in user
         await browser.setCookies([
             {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
+                name: cookieData.name,
+                value: cookieData.value,
+                domain: cookieData.domain,
+                path: cookieData.path,
             }
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function () {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
-    afterEach(async function() { 
+    afterEach(async function () {
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/Stepper/${testName}.png`;
@@ -40,19 +41,19 @@ describe('Stepper Component Tests', () => {
     });
 
     //delete previously created sections
-    afterEach(async function() { 
+    afterEach(async function () {
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);
     });
 
     it('[S3C926] Verify required fields in a stepper component', async () => {
-        (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
@@ -65,9 +66,9 @@ describe('Stepper Component Tests', () => {
         await expect(await elem.getAttribute('aria-required')).toEqual('true');
 
     });
-  
+
     it('[S3C927] Verify that a site Content Administrator can create a horizontal Stepper Component', async () => {
-        (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
@@ -86,7 +87,7 @@ describe('Stepper Component Tests', () => {
     });
 
     it('[S3C928] Verify that a site Content Administrator can create a vertical Stepper Component', async () => {
-        (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
@@ -104,8 +105,8 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
     });
 
-    it('[S3C929] Verify that when the stepper component is on the initial step, the "back" button is not displayed, and the "continue" button is displayed.', async () => {
-        (await QALayoutPage.tabLayout).click();
+    it('[S3C929] Verify that when the stepper component is on the initial step, the "back" button is not displayed, and the "Next Step" button is displayed.', async () => {
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
@@ -124,7 +125,7 @@ describe('Stepper Component Tests', () => {
     });
 
     it('[S3C930] Verify that when the stepper component is on the last step, "continue" button is not displayed and the "back" button is displayed', async () => {
-        (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
@@ -147,6 +148,6 @@ describe('Stepper Component Tests', () => {
 
 
 
-   
 
-  });
+
+});

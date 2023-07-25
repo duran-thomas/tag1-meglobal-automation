@@ -10,7 +10,7 @@ class LandingQAPage extends Page {
 
     //base page
     public get tabLayout() {
-        return $('[href$="/layout"]');
+        return $('=Layout');
     }
 
     public get tabView() {
@@ -191,7 +191,7 @@ class LandingQAPage extends Page {
     }
 
     public get btnCloseChatPopUp() {
-        return $('.close-0-2-17');
+        return $('button[aria-label="closeButton"]');
     }
 
     public get linkQuickActions() {

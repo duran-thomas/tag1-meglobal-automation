@@ -24,11 +24,12 @@ describe('Contact List Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -42,17 +43,25 @@ describe('Contact List Component Tests', () => {
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
     });
-  
+
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
+     
     it('[S3C874] Verify that a site Content Administrator can create a Contact List Component with an Email Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -73,7 +82,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C875] Verify that a site Content Administrator can create a Contact List Component with an Text Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -94,7 +103,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C876] Verify that a site Content Administrator can create a Contact List Component with an Text Contact List Item using an internal node as its link', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -115,7 +124,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C877]  Verify that a site Content Administrator can create a Contact List Component with a Phone Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -136,7 +145,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C878]  Verify that a site Content Administrator can create a Contact List Component with a Location Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -157,7 +166,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C879]  Verify that a site Content Administrator can create a Contact List Component with a Location Contact List Item using an internal node as its link', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -178,7 +187,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C880] Verify that a site Content Administrator can create a Contact List Component with a Chat Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -199,7 +208,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C881] Verify that a site Content Administrator can create a Contact List Component with a Chat Contact List Item using an internal node as its link', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -220,7 +229,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C882] Verify that a site Content Administrator can create a Contact List Component with an Button Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -241,7 +250,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C883] Verify that a site Content Administrator can create a Contact List Component with an Button Contact List Item using an internal node as its link', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -262,7 +271,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C884] Verify that a site Content Administrator can create a Contact List Component with a Person Contact List Item', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -283,7 +292,7 @@ describe('Contact List Component Tests', () => {
     });
 
     it('[S3C885] Verify that a site Content Administrator can create a Contact List Component with multiple Items', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnContactList).scrollIntoView();
@@ -311,7 +320,7 @@ describe('Contact List Component Tests', () => {
    
 
     // it('[S3C886] Verify that all design fields are present with the correct available options and they are correctly applied', async () => {
-    //     (await QALayoutPage.tabLayout).click();
+    //  await (await QALayoutPage.tabLayout).click();
     //     await QALayoutPage.createNewSection();
     //     await QALayoutPage.navigateToBlockList();
     //     (await QALayoutPage.btnContactList).scrollIntoView();

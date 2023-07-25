@@ -24,11 +24,12 @@ describe('Quick Actions Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -71,7 +72,7 @@ describe('Quick Actions Component Tests', () => {
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
         //create quick action component
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         (await QALayoutPage.linkAddBlock).click();
         (await QALayoutPage.linkQuickActions).click();
@@ -103,7 +104,7 @@ describe('Quick Actions Component Tests', () => {
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
         //create quick action component
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         (await QALayoutPage.linkAddBlock).click();
         (await QALayoutPage.linkQuickActions).click();

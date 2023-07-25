@@ -17,19 +17,19 @@ class HeroBlockPage extends Page {
     }
 
     public get inputHeadline() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
+        return $$('div[role="textbox"]')[0];
     }
 
     public get inputEyebrow() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
+        return $$('div[role="textbox"]')[1];
     }
 
     public get inputIntro() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-intro-0-value');
+        return $$('div[role="textbox"]')[2];
     }
 
     public get inputContent() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
+        return $$('div[role="textbox"]')[3];
     }
 
     public get inputButtonText() {

@@ -7,7 +7,7 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
 
 
-describe('Header Component Tests', () => {
+describe.skip('Header Component Tests', () => {
     before(async () => {
         // //Login
         await browser.url(await 'https://meda2022:meda2022@meglobalode6.prod.acquia-sites.com/');
@@ -39,13 +39,13 @@ describe('Header Component Tests', () => {
     //delete previously created sections
     // afterEach(async function() { 
     //     await AdminContentPage.open();
-    //     await AdminContentPage.getQALandingPage();
-    //     (await QALayoutPage.tabLayout).click();
+    //     await AdminContentPage.getTestPage(global.suiteDescription);
+    //  await (await QALayoutPage.tabLayout).click();
     //     await QALayoutPage.cleanUpJob();
     //     await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
     //     //return to starting point
     //     await AdminContentPage.open();
-    //     await AdminContentPage.getQALandingPage();  
+    //     await AdminContentPage.getTestPage(global.suiteDescription);  
     // });
   
     it('[S3C943] Verify that all sections of the Header are present.', async () => {

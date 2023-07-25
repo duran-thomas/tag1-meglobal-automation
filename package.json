@@ -32,7 +32,8 @@
     "tooltip": "npx wdio run wdio.conf.ts --spec ./test/specs/components/tooltip.e2e.ts",
     "cardLocation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/cardLocation.e2e.ts",
     "stepper": "npx wdio run wdio.conf.ts --spec ./test/specs/components/stepper.e2e.ts",
-    "header": "npx wdio run wdio.conf.ts --spec ./test/specs/components/header.e2e.ts"
+    "header": "npx wdio run wdio.conf.ts --spec ./test/specs/components/header.e2e.ts",
+    "freeform": "npx wdio run wdio.conf.ts --spec ./test/specs/components/freeform.e2e.ts"
 
 
   },
