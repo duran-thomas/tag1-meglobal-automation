@@ -306,7 +306,7 @@ class ContactListBlockPage extends Page {
     }
 
     public get contactContent() {
-        return $('p.mf-text-body-3-sans');
+        return $('div[class="mf-text-body-3-sans text-gray-600"] div[class="mf-rich-text"]');
     }
 
     public get contactHeading() {

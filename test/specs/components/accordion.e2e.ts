@@ -25,10 +25,11 @@ describe('Accordion Component Tests', () => {
     });
 
     before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -39,22 +40,17 @@ describe('Accordion Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
 
-    //delete previously created sections
-    after(async function() { 
+    //delete page
+    after(async function () {
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
-        //return to starting point
-        await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
   
     it('[S3C906] Verify that a site Content Administrator can create an Accordion Component, Show|Hide included)', async () => {
         const title = accordionBlockData.title;
-        (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnAccordion).scrollIntoView();

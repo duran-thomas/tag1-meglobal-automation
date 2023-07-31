@@ -24,11 +24,12 @@ describe('Map Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -42,17 +43,25 @@ describe('Map Component Tests', () => {
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
     });
-  
+
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
+     
     it('[S3C872] Verify that a site Content Administrator can create a Map Component', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnMap).scrollIntoView();
@@ -74,7 +83,7 @@ describe('Map Component Tests', () => {
 
 
     it('[S3C873] Verify that all design fields are present with the correct available options.', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnMap).scrollIntoView();

@@ -118,11 +118,11 @@ class StepperBlockPage extends Page {
     }
 
     public get btnBackStep() {
-        return $('button[data-analytics-click-text="Previous Step"]');
+        return $('button[data-analytics-click-text="Step 5: Transition of care"]');
     }
 
     public get btnNextStep() {
-        return $('button[data-analytics-click-text="Next Step"]');
+        return $('button[data-analytics-click-text="Step 1: Assess the situation"]');
     }
 
     public get btnLastStep() {

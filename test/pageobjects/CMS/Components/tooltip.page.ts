@@ -63,6 +63,12 @@ class TooltipBlockPage extends Page {
         return $('.mf-tooltip');
     }
 
+    public get dropdownTextFormat() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-rich-text-0-format--2');
+    }
+
+
+
 
     /**
      * Helper methods to create Tooltip Component
@@ -76,6 +82,7 @@ class TooltipBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
+        //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
         await (await this.inputContent).setValue(content);
         await (await this.inputContent).click();
 
@@ -106,6 +113,7 @@ class TooltipBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
+        //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
         await (await this.inputContent).click();
         await (await this.btnTooltipTrigger).click();
         await browser.pause(1000);
@@ -133,6 +141,9 @@ class TooltipBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed({ timeout: 3000 });
         await browser.switchToFrame(iframe);
+        //await (await this.dropdownTextFormat).scrollIntoView({ behavior: 'auto', block: 'center' });
+        //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
+        await (await this.btnTooltipTrigger).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnTooltipTrigger).click();
         await browser.pause(3000);
     }

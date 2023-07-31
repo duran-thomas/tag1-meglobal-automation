@@ -24,11 +24,12 @@ describe('Facts Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -42,17 +43,25 @@ describe('Facts Component Tests', () => {
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
     });
-  
+
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
+     
     it('[S3C844] Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -71,7 +80,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C845] Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -89,7 +98,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C846] Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -107,7 +116,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C847] Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -124,7 +133,7 @@ describe('Facts Component Tests', () => {
     });
 
     // it('[S3C848] Verify that all design fields are present with the correct available options.', async () => {
-    //     (await QALayoutPage.tabLayout).click();
+    //  await (await QALayoutPage.tabLayout).click();
     //     await QALayoutPage.createNewSection();
     //     await QALayoutPage.navigateToBlockList();
     //     (await QALayoutPage.btnFacts).scrollIntoView();
@@ -164,7 +173,7 @@ describe('Facts Component Tests', () => {
     // });
 
     it('[S3C849] Verify that the Facts Component displays the correct title', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();

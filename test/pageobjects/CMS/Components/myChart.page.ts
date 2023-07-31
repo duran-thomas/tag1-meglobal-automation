@@ -26,7 +26,7 @@ class MyChartBlockPage extends Page {
     }
 
     public get inputEyebrow() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
+        return $$('div[role=textbox')[0];
     }
 
     public get inputList() {
@@ -34,7 +34,7 @@ class MyChartBlockPage extends Page {
     }
 
     public get inputContent() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
+        return $$('div[role=textbox')[1];
     }
 
     public get inputButtonText() {

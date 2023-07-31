@@ -3,7 +3,7 @@ import Page from '../Login/page';
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class BillboardBlockPage extends Page {
+class BreadcrumbsBlockPage extends Page {
     /**
      * define selectors using getter methods
      */
@@ -17,19 +17,19 @@ class BillboardBlockPage extends Page {
     }
 
     public get inputHeadline() {
-        return $$('div[role="textbox"]')[0];
+        return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
     }
 
     public get inputEyebrow() {
-        return $$('div[role="textbox"]')[1];
+        return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
     }
 
     public get inputIntro() {
-        return $$('div[role="textbox"]')[2];
+        return $('#edit-settings-block-form-field-content-0-subform-field-intro-0-value');
     }
 
     public get inputContent() {
-        return $$('div[role="textbox"]')[3];
+        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
     public get inputButtonText() {
@@ -133,19 +133,19 @@ class BillboardBlockPage extends Page {
     }
 
     public get inputHeadline1() {
-        return $$('div[role="textbox"]')[0];
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-headline-0-headline"]');
     }
 
     public get inputEyebrow1() {
-        return $$('div[role="textbox"]')[1];
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value"]');
     }
 
     public get inputIntro1() {
-        return $$('div[role="textbox"]')[2];
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-intro-0-value"]');
     }
 
     public get inputContent1() {
-        return $$('div[role="textbox"]')[3];
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-content-0-value"]');
     }
 
     public get inputButtonText1() {
@@ -167,7 +167,7 @@ class BillboardBlockPage extends Page {
 
 
     /**
-     * Helper methods to create Billboard Component
+     * Helper methods to create Breadcrumbs Component
      */
 
     public async createBillboard(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
@@ -267,4 +267,4 @@ class BillboardBlockPage extends Page {
     }
 }
 
-export default new BillboardBlockPage();
+export default new BreadcrumbsBlockPage();

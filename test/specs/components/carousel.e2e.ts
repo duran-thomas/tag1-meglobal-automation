@@ -24,11 +24,12 @@ describe('Carousel Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -42,18 +43,26 @@ describe('Carousel Component Tests', () => {
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
     });
-  
+
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
+     
     it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -74,7 +83,7 @@ describe('Carousel Component Tests', () => {
 
     it('[S3C825] Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -90,12 +99,12 @@ describe('Carousel Component Tests', () => {
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(CarouselBlockPage.paginationElement).not.toExist();   
+        await expect($('div[x-ref="swiperButtonPrev"]')).toHaveElementClassContaining('mf-button--disabled');  
     });
 
     it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -111,12 +120,12 @@ describe('Carousel Component Tests', () => {
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(CarouselBlockPage.controlElement).not.toExist();   
+        await expect(CarouselBlockPage.controlElement).not.toBeExisting();  
     });
 
     it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -152,7 +161,7 @@ describe('Carousel Component Tests', () => {
 
 
     // it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
-    //     (await QALayoutPage.tabLayout).click();
+    //  await (await QALayoutPage.tabLayout).click();
     //     await QALayoutPage.createNewSection();
     //     await QALayoutPage.navigateToBlockList();
     //     (await QALayoutPage.btnCarousel).scrollIntoView();

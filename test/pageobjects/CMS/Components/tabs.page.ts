@@ -163,7 +163,7 @@ class TabsBlockPage extends Page {
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout:4000 });
-        await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
+        await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
         await browser.pause(2000);
     }

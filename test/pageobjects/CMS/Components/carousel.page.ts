@@ -22,11 +22,11 @@ class CarouselBlockPage extends Page {
 
     //content area 1 start
     public get inputHeadline() {
-        return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-headline-0-headline-"]');
+        return $$('div[role=textbox]')[0];
     }
 
     public get inputEyebrow() {
-        return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-eyebrow-"]');
+        return $$('div[role=textbox]')[1];
     }
 
     public get inputList() {
@@ -34,7 +34,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get inputContent() {
-        return $('textarea[id^="edit-settings-block-form-field-content-0-subform-field-content-"]');
+        return $$('div[role=textbox]')[2];
     }
 
     public get inputButtonText() {
@@ -69,11 +69,11 @@ class CarouselBlockPage extends Page {
 
     //content area 2 start
     public get inputHeadline1() {
-        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-headline-0-headline"]');
+        return $$('div[role=textbox]')[3];
     }
 
     public get inputEyebrow1() {
-        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-eyebrow-0-value"]');
+        return $$('div[role=textbox]')[4];
     }
 
     public get inputList1() {
@@ -81,7 +81,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get inputContent1() {
-        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-content-0-value"]');
+        return $$('div[role=textbox]')[5];
     }
 
     public get inputButtonText1() {
@@ -116,11 +116,11 @@ class CarouselBlockPage extends Page {
 
     //content area 3 start
     public get inputHeadline2() {
-        return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-headline-0-headline-"]');
+        return $$('div[role=textbox]')[6];
     }
 
     public get inputEyebrow2() {
-        return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-eyebrow-"]');
+        return $$('div[role=textbox]')[7];
     }
 
     public get inputList2() {
@@ -128,7 +128,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get inputContent2() {
-        return $('textarea[id^="edit-settings-block-form-field-content-2-subform-field-content-"]');
+        return $$('div[role=textbox]')[8];
     }
 
     public get inputButtonText2() {
@@ -243,15 +243,15 @@ class CarouselBlockPage extends Page {
      */
 
     public async createCarousel(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
-        await browser.pause(2000);
-        await (await this.inputHeadline).waitForDisplayed();
+        await browser.pause(8000);
+        await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
         await (await this.inputEyebrow).setValue(eyebrow);
         await (await this.inputList).setValue(list);
@@ -284,14 +284,15 @@ class CarouselBlockPage extends Page {
 
 
     public async createCarouselNoPagination(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
-        await (await this.inputHeadline).waitForDisplayed();
+        await browser.pause(8000);
+        await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
         await (await this.inputEyebrow).setValue(eyebrow);
         await (await this.inputList).setValue(list);
@@ -328,14 +329,15 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselNoControls(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
-        await (await this.inputHeadline).waitForDisplayed();
+        await browser.pause(8000);
+        await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
         await (await this.inputEyebrow).setValue(eyebrow);
         await (await this.inputList).setValue(list);
@@ -372,97 +374,97 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselMultiSlide(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, remoteFilePath1: string, remoteFilePath2: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        (await this.inputTitle).setValue(title);
-        await browser.pause(3000);
-        (await this.btnAddCardFeature).click();
-        (await this.inputHeadline).waitForDisplayed();
-        (await this.inputHeadline).setValue(headline);
-        (await this.inputEyebrow).setValue(eyebrow);
-        (await this.inputList).setValue(list);
-        (await this.inputContent).scrollIntoView();
-        (await this.inputContent).setValue(content);
-        (await this.inputButtonText).setValue(btnText);
-        (await this.inputURL).setValue(url);
-        (await this.inputInfo).scrollIntoView();
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(8000);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView();
         await browser.pause(2000);
-        (await this.dropdownImage).click();
+        await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(8000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText);
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
 
-        (await this.btnAddCardFeature).click();
-        await browser.pause(3000);
-        (await this.inputHeadline1).waitForDisplayed();
-        (await this.inputHeadline1).setValue(headline+' 1');
-        (await this.inputEyebrow1).setValue(eyebrow+' 1');
-        (await this.inputList1).setValue(list+' 1');
-        (await this.inputContent1).scrollIntoView();
-        (await this.inputContent1).setValue(content+' 1');
-        (await this.inputButtonText1).setValue(btnText+' 1');
-        (await this.inputURL1).setValue(url);
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(8000);
+        await (await this.inputHeadline1).scrollIntoView();
+        await (await this.inputHeadline1).setValue(headline + ' 1');
+        await (await this.inputEyebrow1).setValue(eyebrow + ' 1');
+        await (await this.inputList1).setValue(list + ' 1');
+        await (await this.inputContent1).scrollIntoView();
+        await (await this.inputContent1).setValue(content + ' 1');
+        await (await this.inputButtonText1).setValue(btnText + ' 1');
+        await (await this.inputURL1).setValue(url);
         await browser.pause(2000);
-        (await this.dropdownImage1).scrollIntoView();
-        (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
+        await (await this.dropdownImage1).scrollIntoView();
+        await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
         await browser.pause(2000);
         await browser.switchToFrame(await this.entityIframe);
         await browser.pause(2000);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath1);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath1);
         await browser.pause(6000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText+' 1');
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText + ' 1');
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
 
-        (await this.btnAddCardFeature).click();
-        await browser.pause(3000);
-        (await this.inputHeadline2).waitForDisplayed();
-        (await this.inputHeadline2).setValue(headline)+' 2';
-        (await this.inputEyebrow2).setValue(eyebrow+' 2');
-        (await this.inputList2).setValue(list+' 2');
-        (await this.inputContent2).scrollIntoView();
-        (await this.inputContent2).setValue(content+' 2');
-        (await this.inputButtonText2).setValue(btnText+' 2');
-        (await this.inputURL2).setValue(url+' 2');
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(8000);
+        await (await this.inputHeadline2).scrollIntoView();
+        await (await this.inputHeadline2).setValue(headline) + ' 2';
+        await (await this.inputEyebrow2).setValue(eyebrow + ' 2');
+        await (await this.inputList2).setValue(list + ' 2');
+        await (await this.inputContent2).scrollIntoView();
+        await (await this.inputContent2).setValue(content + ' 2');
+        await (await this.inputButtonText2).setValue(btnText + ' 2');
+        await (await this.inputURL2).setValue(url + ' 2');
         await browser.pause(2000);
-        (await this.dropdownImage2).scrollIntoView();
-        (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
+        await (await this.dropdownImage2).scrollIntoView();
+        await (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
         await browser.pause(2000);
         await browser.switchToFrame(await this.entityIframe);
         await browser.pause(2000);
-        (await this.btnBrowse).scrollIntoView();
-        (await this.btnBrowse).setValue(remoteFilePath2);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath2);
         await browser.pause(6000); //explicit waits seem to be necessary here
-        (await this.inputAltText).waitForEnabled();
-        (await this.inputAltText).setValue(altText+' 2');
-        (await this.btnSaveImage).scrollIntoView();
-        (await this.btnSaveImage).click();
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText + ' 2');
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
 
 
-        (await this.btnAddBlock).scrollIntoView();
-        (await this.btnAddBlock).click();
-        (await this.btnSaveLayout).waitForDisplayed();
-        (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }

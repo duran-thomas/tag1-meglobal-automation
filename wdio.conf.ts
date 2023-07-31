@@ -85,6 +85,9 @@ export const config: Options.Testrunner = {
         tooltip: ['/test/specs/components/tooltip.e2e.ts'],
         cardLocation: ['/test/specs/components/cardLocation.e2e.ts'],
         stepper: ['/test/specs/components/stepper.e2e.ts'],
+        header: ['/test/specs/components/header.e2e.ts'],
+        freeform: ['/test/specs/components/freeform.e2e.ts']
+
 
 
     },
@@ -108,7 +111,7 @@ export const config: Options.Testrunner = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    maxInstances: 4,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -122,9 +125,9 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        'goog:chromeOptions': {
-            args: ['headless', 'disable-gpu']
-        },
+        // 'goog:chromeOptions': {
+        //     args: ['headless', 'disable-gpu']
+        // },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
@@ -182,7 +185,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "Automated Regression - Sprint 18",
+        //     testRunName: "[Release 0.19.8] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,

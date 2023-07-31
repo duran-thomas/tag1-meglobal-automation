@@ -193,6 +193,10 @@ class CardLocationBlockPage extends Page {
         return $('=Edit');
     }
 
+    public get tabEditGreene () {
+        return $$('=Edit')[1];
+    }
+
     public get tabDelete () {
         return $('=Delete');
     }
@@ -449,6 +453,7 @@ class CardLocationBlockPage extends Page {
         await (await this.dropdownLocationType).selectByVisibleText('Hospital');
         await (await this.checkboxBreastCareCenter).scrollIntoView();
         await (await this.checkboxBreastCareCenter).click();
+        await (await this.checkboxCancerCenter).scrollIntoView();
         await (await this.checkboxCancerCenter).click();
         await (await this.checkboxOrthopedics).scrollIntoView();
         await (await this.checkboxOrthopedics).click();
@@ -600,9 +605,9 @@ class CardLocationBlockPage extends Page {
     }
 
     public async renameClone (title:string) {
-        await (await this.tabEdit).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await (await this.tabEdit).click();
-        await await (await this.inputTitle).clearValue();
+        await (await this.tabEditGreene).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await this.tabEditGreene).click();
+        await (await this.inputTitle).clearValue();
         await (await this.inputTitle).setValue(title+' - VERT');
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();

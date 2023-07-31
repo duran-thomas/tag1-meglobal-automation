@@ -16,20 +16,20 @@ class CardServicesBlockPage extends Page {
         return $('#edit-settings-label');
     }
 
-    public get inputHeadline() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
+    public get inputEyebrow() {
+        return $$('div[role="textbox"]')[0];
     }
 
-    public get inputEyebrow() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-eyebrow-0-value');
+    public get inputHeadline() {
+        return $$('div[role="textbox"]')[1];
+    }
+
+    public get inputContent() {
+        return $$('div[role="textbox"]')[2];
     }
 
     public get inputList() {
         return $('#edit-settings-block-form-field-content-0-subform-field-list-0-value');
-    }
-
-    public get inputContent() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
     }
 
     public get inputButtonText() {
@@ -125,7 +125,7 @@ class CardServicesBlockPage extends Page {
     }
 
     public get cardContent() {
-        return $('p.mf-text-body-3-sans');
+        return $('.mf-rich-text');
     }
 
     public get internalUrl() {

@@ -24,11 +24,12 @@ describe('Card Location Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     });
 
@@ -57,8 +58,15 @@ describe('Card Location Component Tests', () => {
             // Handle any errors that occur during the after hook
             console.error('Error occurred in the after hook:', error);
             }
-        }        
+        }      
       });
+      
+        //delete page
+        after(async function () {
+            await AdminContentPage.open();
+            await AdminContentPage.deleteTestPage(global.suiteDescription);
+            await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+        });
       
 
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {
@@ -107,6 +115,8 @@ describe('Card Location Component Tests', () => {
     });
 
     it('[S3C908] Verify that a site Content Administrator can create Card Location Components in a Card Location Block', async () => {
+        await AdminContentPage.open();
+        await AdminContentPage.getTestPage(global.suiteDescription); 
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -132,6 +142,8 @@ describe('Card Location Component Tests', () => {
     });
 
     it('[S3C909] Verify that a site Content Administrator can create Card Location Components in the Carousel Block', async () => {
+        await AdminContentPage.open();
+        await AdminContentPage.getTestPage(global.suiteDescription); 
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

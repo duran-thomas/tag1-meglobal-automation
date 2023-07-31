@@ -24,11 +24,12 @@ describe('Tooltip Component Tests', () => {
         ]);
     });
 
-    beforeEach(async function() {
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
         // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
 
@@ -42,16 +43,24 @@ describe('Tooltip Component Tests', () => {
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();
-        (await QALayoutPage.tabLayout).click();
+        await AdminContentPage.getTestPage(global.suiteDescription);
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         //return to starting point
         await AdminContentPage.open();
-        await AdminContentPage.getQALandingPage();  
+        await AdminContentPage.getTestPage(global.suiteDescription);  
     });
-  
+
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
+     
     it('[S3C890] Verify that a site Content Administrator can create a Tooltip Component by highlighting text on the website', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -72,7 +81,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C891] Verify that a site Content Administrator can create a Tooltip Component by adding new text on the website', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -93,7 +102,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C892] Verify that when a user hovers over a Tooltip the text is displayed correctly', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -114,7 +123,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C893] Verify no maximum length set on tooltip text', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -136,7 +145,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C894] Verify that tooltip is a required field', async () => {
-        (await QALayoutPage.tabLayout).click();
+     await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
