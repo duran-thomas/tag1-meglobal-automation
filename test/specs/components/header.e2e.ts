@@ -106,7 +106,7 @@ describe.skip('Header Component Tests', () => {
 
     });
 
-    it.only('[S3C631] Verify "Hamburger" menu links.', async () => {
+    it('[S3C631] Verify "Hamburger" menu links.', async () => {
         await HeaderBlockPage.goToMainMenu();
         await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
         

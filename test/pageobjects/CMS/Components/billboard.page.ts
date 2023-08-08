@@ -40,6 +40,14 @@ class BillboardBlockPage extends Page {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-uri');
     }
 
+    public get dropdownAdditionalButtonOptions() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options');
+    }
+
+    public get linkTargetSelectInput() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options-target');
+    }
+
     public get dropdownMedia() {
         return $('#edit-field-media-entity');
     }
@@ -170,7 +178,7 @@ class BillboardBlockPage extends Page {
      * Helper methods to create Billboard Component
      */
 
-    public async createBillboard(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
+    public async createBillboard(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, linkTarget: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
@@ -186,6 +194,10 @@ class BillboardBlockPage extends Page {
         await (await this.inputButtonText).scrollIntoView();
         await (await this.inputButtonText).setValue(btnText);
         await (await this.inputURL).setValue(url);
+        await (await this.dropdownAdditionalButtonOptions).scrollIntoView();
+        await browser.pause(2000);
+        await (await this.dropdownAdditionalButtonOptions).click();
+        await (await this.linkTargetSelectInput).selectByAttribute('value',linkTarget)
         await (await this.dropdownMedia).scrollIntoView();
         await browser.pause(2000);
         await (await this.dropdownMedia).click();
