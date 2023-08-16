@@ -5,6 +5,7 @@ import {users} from '../../data/users.data';
 import { billboardBlockData } from '../../data/billboard.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
+import * as fs from "fs";
 
 
 describe('Billboard Component Tests', () => {
@@ -69,7 +70,7 @@ describe('Billboard Component Tests', () => {
         (await BillboardBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
-        await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText);
+        await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText, '_self');
 
         await expect(BillboardBlockPage.successMsg).toBeDisplayed();
 
@@ -100,7 +101,78 @@ describe('Billboard Component Tests', () => {
         await expect(BillboardBlockPage.billboardHeadline).toHaveText(billboardBlockData.headline); 
         await expect(BillboardBlockPage.billboardImage).toBeDisplayedInViewport();   
     });
+    
+    
+    it.only('Verify that Analytics works as expected for a Billboard Component. [POC FOR DAP-2099]', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnBillBoard).scrollIntoView();
+        (await QALayoutPage.btnBillBoard).click();
+        (await BillboardBlockPage.configBlock).waitForDisplayed();
 
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
+        await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText, '_blank');
+
+        await expect(BillboardBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await BillboardBlockPage.billboardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(BillboardBlockPage.billboardHeadline).toHaveText(billboardBlockData.headline); 
+        await expect(BillboardBlockPage.billboardImage).toBeDisplayedInViewport();
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g127fd856972_0_330
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'billboard',
+            itemTitle: billboardBlockData.headline,
+            linkType: 'button',
+            clickText: billboardBlockData.btnText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${billboardBlockData.btnText}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/billboard.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/Billboard/Verify_that Analytics works as expected for a Billboard Component..png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
 
     // it('[S3C889] Verify that all design fields are present with the correct available options.', async () => {
     //  await (await QALayoutPage.tabLayout).click();

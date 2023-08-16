@@ -3,6 +3,7 @@ import QualityWatcherReporter from "@qualitywatcher/wdio-reporter";
 import QualityWatcherService from "@qualitywatcher/wdio-service";
 
 import * as dotenvLoader from 'dotenv';
+import * as fs from "fs";
 
 dotenvLoader.config();
 
@@ -117,6 +118,7 @@ export const config: Options.Testrunner = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+
     capabilities: [{
 
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
@@ -125,10 +127,11 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        // 'goog:chromeOptions': {
-        //     args: ['headless', 'disable-gpu']
-        // },
-        acceptInsecureCerts: true
+        'goog:chromeOptions': {
+            args: ['disable-gpu','--auto-open-devtools-for-tabs'],
+            extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
+        },
+        acceptInsecureCerts: true,
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -141,7 +144,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:

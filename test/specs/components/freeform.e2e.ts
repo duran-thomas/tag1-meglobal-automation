@@ -320,7 +320,7 @@ describe('Freeform Component Tests', () => {
         await expect(await $(`h4=${data.freeformBlockData.headline}`)).toBeExisting();
     });
 
-    it.only('[S3C1080] Verify that the Headline size defaults to h3 when creating a Freeform Component)', async () => {
+    it('[S3C1080] Verify that the Headline size defaults to h3 when creating a Freeform Component)', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

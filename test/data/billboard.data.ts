@@ -8,7 +8,7 @@ export const billboardBlockData = {
     content: 'Billboard Content',
     btnText: 'Section Header Button',
     url: 'https://google.com',
-    altText: 'Billboard Alt Text'
+    altText: 'Billboard Alt Text',
     
 };
 
