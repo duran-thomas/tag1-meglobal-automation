@@ -161,6 +161,7 @@ describe('Freeform Component Tests', () => {
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
         await expect(await $(`img[alt="${data.imageFreeformData.altText}"]`)).toBeDisplayed();
+        await browser.pause(3000);
     });
 
     it('[S3C1017] Verify that a site Content Administrator can create a Freeform Component with an Inline Navigation block)', async () => {
