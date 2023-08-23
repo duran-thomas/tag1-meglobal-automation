@@ -61,7 +61,7 @@ describe('Facts Component Tests', () => {
 
      
     it('[S3C844] Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -80,7 +80,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C845] Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -98,7 +98,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C846] Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
@@ -116,7 +116,7 @@ describe('Facts Component Tests', () => {
     });
 
     it('[S3C847] Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();

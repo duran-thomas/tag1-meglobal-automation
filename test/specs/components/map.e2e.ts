@@ -61,7 +61,7 @@ describe('Map Component Tests', () => {
 
      
     it('[S3C872] Verify that a site Content Administrator can create a Map Component', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnMap).scrollIntoView();
@@ -83,7 +83,7 @@ describe('Map Component Tests', () => {
 
 
     it('[S3C873] Verify that all design fields are present with the correct available options.', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnMap).scrollIntoView();

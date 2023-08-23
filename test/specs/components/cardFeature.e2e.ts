@@ -62,7 +62,7 @@ describe('Card Feature Component Tests', () => {
      
     it('[S3C862] Verify that a site Content Administrator can create a Card Feature Component', async () => {
         const headline = cardFeatureBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardFeature).scrollIntoView();
@@ -84,7 +84,7 @@ describe('Card Feature Component Tests', () => {
 
     it('[S3C863] Verify that a site Content Administrator can create a Card Clinical Feature Component, using an internal url', async () => {
         const headline = cardFeatureBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardFeature).scrollIntoView();

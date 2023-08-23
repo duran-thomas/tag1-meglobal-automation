@@ -218,6 +218,21 @@ class LandingQAPage extends Page {
         await browser.pause(2000);
     }
 
+    public async create2ColSection() {
+        await (await this.linkAddSection).scrollIntoView();
+        await (await this.linkAddSection).click();
+        await (await this.sectionTypeTwoColumn).click();
+        await (await this.sectionModal).waitForDisplayed();
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.modalBtnAddSection).scrollIntoView();
+        await (await this.modalBtnAddSection).click();
+        await browser.pause(2000);
+    }
+
     public async navigateToBlockList() {
         await (await this.linkAddBlock).waitForDisplayed();
         await (await this.linkAddBlock).scrollIntoView();

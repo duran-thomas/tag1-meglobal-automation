@@ -62,7 +62,7 @@ describe('Carousel Component Tests', () => {
      
     it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
         const headline = carouselBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -83,7 +83,7 @@ describe('Carousel Component Tests', () => {
 
     it('[S3C825] Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
         const headline = carouselBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -104,7 +104,7 @@ describe('Carousel Component Tests', () => {
 
     it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
         const headline = carouselBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
@@ -125,7 +125,7 @@ describe('Carousel Component Tests', () => {
 
     it('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
         const headline = carouselBlockData.headline;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();

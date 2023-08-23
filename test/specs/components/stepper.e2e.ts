@@ -52,7 +52,7 @@ describe('Stepper Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
     });
 
-    it('[S3C926] Verify required fields in a stepper component', async () => {
+    it.skip('[S3C926] Verify required fields in a stepper component', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

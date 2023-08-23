@@ -62,7 +62,7 @@ describe('Media Component Tests', () => {
      
     it('[S3C867] Verify that a site Content Administrator can create an Image Paragraph Type', async () => {
         const alt = mediaBlockData.altText;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnImage).scrollIntoView();
@@ -83,7 +83,7 @@ describe('Media Component Tests', () => {
     });
 
     it('[S3C868] Verify that when the Cover field value is true for the Image paragraph type, the form is updated accordingly', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnImage).scrollIntoView();

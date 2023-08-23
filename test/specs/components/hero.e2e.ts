@@ -51,7 +51,7 @@ describe('Hero Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
@@ -68,7 +68,7 @@ describe('Hero Component Tests', () => {
 
      
     it('[S3C821] Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnHero).scrollIntoView();
@@ -90,7 +90,7 @@ describe('Hero Component Tests', () => {
     });
 
     it('[S3C822] Verify that a site Content Administrator can create a Hero Component with a Video Media Type', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnHero).scrollIntoView();
@@ -110,7 +110,7 @@ describe('Hero Component Tests', () => {
     });
 
     it('[S3C823] Verify that the Hero Headline is rendered as a `h1` HTML element.', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnHero).scrollIntoView();
