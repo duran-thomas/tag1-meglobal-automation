@@ -8,7 +8,7 @@ export const carouselBlockData = {
     content: 'Carousel Content',
     btnText: 'Carousel Button',
     url: 'https://google.com',
-    altText: 'Carousel Alt Text'
-    
+    altText: 'Carousel Alt Text',
+    transcript: 'This is a sample generated transcript.'
 };
 

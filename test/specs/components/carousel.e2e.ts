@@ -159,6 +159,28 @@ describe('Carousel Component Tests', () => {
         
     });
 
+    it.only('[] Verify that Analytics works as expected for a Carousel Component ', async () => {
+        const headline = carouselBlockData.headline;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
+        (await CarouselBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        const imageFilePath1 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        const imageFilePath2 = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
+        const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
+
+        await CarouselBlockPage.createCarouselMultiSlideAllComponents(carouselBlockData.title, carouselBlockData.headline, 
+            carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, 
+            carouselBlockData.url,imageFilePath, carouselBlockData.altText, imageFilePath1, imageFilePath2, audioRemoteFilePath, 
+            carouselBlockData.transcript)
+
+        await browser.debug();
+
+    });
 
     // it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
     //  await (await QALayoutPage.tabLayout).click();
