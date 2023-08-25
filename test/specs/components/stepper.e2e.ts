@@ -5,6 +5,7 @@ import { users } from '../../data/users.data';
 import { stepperBlockData } from '../../data/stepper.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
+import * as fs from "fs";
 
 
 describe('Stepper Component Tests', () => {
@@ -145,6 +146,224 @@ describe('Stepper Component Tests', () => {
     });
 
 
+    it('[] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnStepper).scrollIntoView();
+        (await QALayoutPage.btnStepper).click();
+        (await StepperBlockPage.configBlock).waitForDisplayed();
+
+        await StepperBlockPage.createHorizontalStepper(stepperBlockData.adminTitle, stepperBlockData.steps.title1, stepperBlockData.steps.content1, stepperBlockData.steps.title2, stepperBlockData.steps.content2, stepperBlockData.steps.title3, stepperBlockData.steps.content3, stepperBlockData.steps.title4, stepperBlockData.steps.content4, stepperBlockData.steps.title5, stepperBlockData.steps.content5, stepperBlockData.backLabel, stepperBlockData.contLabel);
+
+        await expect(await StepperBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+
+        await expect(await $('.mf-stepper__list--horizontal')).toBeExisting();
+        await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
+
+        /**
+         * Create the expected analytics 
+         * objects based on the spec below: 
+         * 
+         *  */ 
+        const expectedAnalyticsDataForwardBtn = {
+            event: 'e_componentClick',
+            componentType:'stepper',
+            linkType: 'button',
+            clickText: stepperBlockData.steps.title1,
+            pageSlot: '1'
+        }
+
+        // Interact with the Forward button on the stepper to generate the analytics. (Clicking the button brings us to the next step)
+        await (await $(`button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
+
+         // Get the data layer for the window and get the data for the click event for the component
+        let dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        let actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
+
+        // Build the actual analytics data object for using the forward button
+        const parsedActualAnalyticsDataForwardBtn = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/horizontalStepper_forward.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+        
+        await expect(expectedAnalyticsDataForwardBtn).toEqual(parsedActualAnalyticsDataForwardBtn);
+
+        const expectedAnalyticsDataBackLink = {
+            event: 'e_componentClick',
+            componentType:'stepper',
+            linkType: 'link',
+            clickText: stepperBlockData.steps.title2,
+            pageSlot: '1'
+        }
+
+        // Interact with the Back Link on the stepper to generate the analytics. (Clicking the button brings us to the next step)
+        await (await $$(`button.mf-link.mf-link--site-montefiore.mf-link--primary.mf-link--small.mf-link--direction-backwards.mf-link--animation-default`)[0]).click();
+
+         // Get the data layer for the window and get the data for the click event for the component
+        dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "link")))[0];
+
+        // Build the actual analytics data object for using the back link
+        const parsedActualAnalyticsDataBackLink = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/horizontalStepper_back.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+        
+        await expect(expectedAnalyticsDataBackLink).toEqual(parsedActualAnalyticsDataBackLink);
+
+        const expectedAnalyticsDataStep = {
+            event: 'e_componentClick',
+            componentType:'stepper',
+            linkType: 'step',
+            clickText: stepperBlockData.steps.title1,
+            pageSlot: '1'
+        }
+
+        // Interact with the Back Link on the stepper to generate the analytics. (Clicking the button brings us to the next step)
+        await (await $$(`button[aria-expanded="false"].mf-stepper__button`)[0]).click();
+
+        // Get the data layer for the window and get the data for the click event for the component
+        dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
+
+        // Build the actual analytics data object for using the back link
+        const parsedActualAnalyticsDataStep = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/horizontalStepper_step.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+        
+        await expect(expectedAnalyticsDataStep).toEqual(parsedActualAnalyticsDataStep);
+
+    });
+
+    it.only('[] Verify that Analytics works as expected for a vertical Stepper Component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnStepper).scrollIntoView();
+        (await QALayoutPage.btnStepper).click();
+        (await StepperBlockPage.configBlock).waitForDisplayed();
+
+        await StepperBlockPage.createVerticalStepper(stepperBlockData.adminTitle, stepperBlockData.steps.title1, stepperBlockData.steps.content1, stepperBlockData.steps.title2, stepperBlockData.steps.content2, stepperBlockData.steps.title3, stepperBlockData.steps.content3, stepperBlockData.steps.title4, stepperBlockData.steps.content4, stepperBlockData.steps.title5, stepperBlockData.steps.content5, stepperBlockData.backLabel, stepperBlockData.contLabel);
+
+        await expect(await StepperBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+
+        await expect(await $('.mf-stepper__list--vertical')).toBeExisting();
+        await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
+
+        /**
+         * Create the expected analytics 
+         * objects based on the spec below: 
+         * 
+         *  */ 
+        const expectedAnalyticsDataForwardBtn = {
+            event: 'e_componentClick',
+            componentType:'stepper',
+            linkType: 'button',
+            clickText: stepperBlockData.steps.title1,
+            pageSlot: '1'
+        }
+
+        // Interact with the Forward button on the stepper to generate the analytics. (Clicking the button brings us to the next step)
+        await (await $(`button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
+
+         // Get the data layer for the window and get the data for the click event for the component
+        let dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        let actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
+
+        // Build the actual analytics data object for using the forward button
+        const parsedActualAnalyticsDataForwardBtn = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/verticalStepper_forward.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+        
+        await expect(expectedAnalyticsDataForwardBtn).toEqual(parsedActualAnalyticsDataForwardBtn);
+
+        const expectedAnalyticsDataStep = {
+            event: 'e_componentClick',
+            componentType:'stepper',
+            linkType: 'step',
+            clickText: stepperBlockData.steps.title2,
+            pageSlot: '1'
+        }
+
+        // Interact with the Back Link on the stepper to generate the analytics. (Clicking the button brings us to the next step)
+        await (await $$(`button[aria-expanded="false"].mf-stepper__button`)[0]).click();
+
+        // Get the data layer for the window and get the data for the click event for the component
+        dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
+
+        // Build the actual analytics data object for using the back link
+        const parsedActualAnalyticsDataStep = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/verticalStepper_step.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+        
+        await expect(expectedAnalyticsDataStep).toEqual(parsedActualAnalyticsDataStep);
+    });
 
 
 
