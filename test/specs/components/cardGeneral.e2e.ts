@@ -64,9 +64,9 @@ describe('Card General Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCardGeneral).scrollIntoView();
-        (await QALayoutPage.btnCardGeneral).click();
-        (await CardGeneralBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCardGeneral).scrollIntoView();
+        await (await QALayoutPage.btnCardGeneral).click();
+        await (await CardGeneralBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await CardGeneralBlockPage.createCardGeneral(cardGeneralBlockData.title, cardGeneralBlockData.headline, cardGeneralBlockData.eyebrow, cardGeneralBlockData.list, cardGeneralBlockData.btnText, cardGeneralBlockData.url,imageFilePath, cardGeneralBlockData.altText);

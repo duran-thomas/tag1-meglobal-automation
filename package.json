@@ -34,7 +34,9 @@
     "stepper": "npx wdio run wdio.conf.ts --spec ./test/specs/components/stepper.e2e.ts",
     "header": "npx wdio run wdio.conf.ts --spec ./test/specs/components/header.e2e.ts",
     "freeform": "npx wdio run wdio.conf.ts --spec ./test/specs/components/freeform.e2e.ts",
-    "testimonial": "npx wdio run wdio.conf.ts --spec ./test/specs/components/testimonial.e2e.ts"
+    "testimonial": "npx wdio run wdio.conf.ts --spec ./test/specs/components/testimonial.e2e.ts",
+    "teamLeader": "npx wdio run wdio.conf.ts --spec ./test/specs/components/teamLeader.e2e.ts"
+
   },
   "author": "QW Team",
   "license": "ISC",

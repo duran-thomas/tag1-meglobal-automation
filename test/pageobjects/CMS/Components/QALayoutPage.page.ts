@@ -154,6 +154,14 @@ class LandingQAPage extends Page {
         return $('=Testimonial');
     }
 
+    public get btnTeamLeadersCarousel(){
+        return $('=Team Leaders Carousel');
+    }
+
+    public get btnTeamMembersGrid(){
+        return $('=Team Members Grid');
+    }
+
     public get btnVideo() {
         return $('=Video');
     }

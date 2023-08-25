@@ -89,6 +89,7 @@ export const config: Options.Testrunner = {
         header: ['/test/specs/components/header.e2e.ts'],
         freeform: ['/test/specs/components/freeform.e2e.ts'],
         testimonial: ['/test/specs/components/testimonial.e2e.ts'],
+        teamLeadr: ['/test/specs/components/teamLeader.e2e.ts']
 
     },
     // Patterns to exclude.
