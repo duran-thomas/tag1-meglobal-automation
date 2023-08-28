@@ -146,7 +146,7 @@ describe('Stepper Component Tests', () => {
     });
 
 
-    it('[] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
+    it('[S3C1076] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -273,7 +273,7 @@ describe('Stepper Component Tests', () => {
 
     });
 
-    it.only('[] Verify that Analytics works as expected for a vertical Stepper Component', async () => {
+    it('[S3C1077] Verify that Analytics works as expected for a vertical Stepper Component', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
