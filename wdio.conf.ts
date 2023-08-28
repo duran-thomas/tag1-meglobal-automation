@@ -128,7 +128,8 @@ export const config: Options.Testrunner = {
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: ['disable-gpu'],
+            args: [
+                'disable-gpu'],
             extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,

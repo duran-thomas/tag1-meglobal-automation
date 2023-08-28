@@ -1,4 +1,3 @@
-import click from 'webdriverio/build/commands/element/click';
 import Page from '../Login/page';
 
 /**
