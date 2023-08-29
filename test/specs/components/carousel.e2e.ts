@@ -164,9 +164,9 @@ describe('Carousel Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCarousel).scrollIntoView();
-        (await QALayoutPage.btnCarousel).click();
-        (await CarouselBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCarousel).scrollIntoView();
+        await (await QALayoutPage.btnCarousel).click();
+        await (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         const imageFilePath1 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
