@@ -159,7 +159,7 @@ describe('Carousel Component Tests', () => {
         
     });
 
-    it.only('[] Verify that Analytics works as expected for a Carousel Component ', async () => {
+    it.only('[S3C1125] Verify that Analytics works as expected for a Carousel Component ', async () => {
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
