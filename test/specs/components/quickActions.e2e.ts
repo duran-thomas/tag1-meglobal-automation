@@ -41,21 +41,21 @@ describe('Quick Actions Component Tests', () => {
     });
 
     //clean up job
-    // afterEach(async function() { 
-    //     // Get the current test result
-    //     const testResult = this.currentTest;
+    afterEach(async function() { 
+        // Get the current test result
+        const testResult = this.currentTest;
 
-    //     // Check if the test passed
-    //     if (testResult.state === 'passed') {
-    //         await QuickActionsBlockPage.cleanUp();
-    //         await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
-    //         await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
+        // Check if the test passed
+        if (testResult.state === 'passed') {
+            await QuickActionsBlockPage.cleanUp();
+            await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
+            await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-    //     }
-    // });
+        }
+    });
 
 
-    it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with both external and internal URL links', async () => {
+    it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
         //create menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
@@ -90,8 +90,9 @@ describe('Quick Actions Component Tests', () => {
         await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
         await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-        //internal link test
+    });
 
+    it('[S3C1123] Verify that a site Content Administrator can create a Quick Actions Component with an internal link.', async () => {
         //create menu
         await QuickActionsBlockPage.openMenus();
         await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
@@ -121,40 +122,7 @@ describe('Quick Actions Component Tests', () => {
         await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
         await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.intLink);
 
-
     });
-
-    // it('[S3C925] Verify that a site Content Administrator can create a Quick Actions Component with an internal link.', async () => {
-    //     //create menu
-    //     await QuickActionsBlockPage.openMenus();
-    //     await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-    //     expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
-
-    //     //add link to menu
-    //     await QuickActionsBlockPage.openMenus();
-    //     await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.intMenuLinkTitle, quickActionsBlockData.intLink);
-    //     expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
-
-    //     //create node
-    //     await QuickActionsBlockPage.openNodes();
-    //     await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
-    //     await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
-
-    //     //create quick action component
-    //     await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     (await QALayoutPage.linkAddBlock).click();
-    //     (await QALayoutPage.linkQuickActions).click();
-    //     await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-    //     await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
-
-    //     await QALayoutPage.goToPageView();
-    //     await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-
-    //     await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
-    //     await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.intLink);
-
-    // });
 
 
 

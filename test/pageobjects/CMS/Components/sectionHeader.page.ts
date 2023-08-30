@@ -17,11 +17,11 @@ class SectionHeaderBlockPage extends Page {
     }
 
     public get inputHeadline() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-headline-0-headline');
+        return $$('.ck-content')[0];
     }
 
     public get inputContent() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-content-0-value');
+        return $$('.ck-content')[1];
     }
 
     public get btnAddButtons() {

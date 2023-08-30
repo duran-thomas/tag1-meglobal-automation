@@ -61,7 +61,7 @@ describe('Quotes Component Tests', () => {
 
      
     it('[S3C850] Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnQuote).scrollIntoView();
@@ -76,7 +76,7 @@ describe('Quotes Component Tests', () => {
     });
   
     it('[S3C851] Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnQuote).scrollIntoView();
@@ -89,7 +89,7 @@ describe('Quotes Component Tests', () => {
     });
 
     it('[S3C852] Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnQuote).scrollIntoView();
@@ -104,7 +104,7 @@ describe('Quotes Component Tests', () => {
     });
 
     it('[S3C853] Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnQuote).scrollIntoView();
@@ -119,7 +119,7 @@ describe('Quotes Component Tests', () => {
     });
 
     it('[S3C854] Verify that all design fields are present with the correct available options.', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnQuote).scrollIntoView();

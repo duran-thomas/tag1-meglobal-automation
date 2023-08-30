@@ -5,6 +5,8 @@ import {users} from '../../data/users.data';
 import { mediaBlockData } from '../../data/media.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
+import * as fs from "fs";
+
 
 
 describe('Media Component Tests', () => {
@@ -62,7 +64,7 @@ describe('Media Component Tests', () => {
      
     it('[S3C867] Verify that a site Content Administrator can create an Image Paragraph Type', async () => {
         const alt = mediaBlockData.altText;
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnImage).scrollIntoView();
@@ -83,7 +85,7 @@ describe('Media Component Tests', () => {
     });
 
     it('[S3C868] Verify that when the Cover field value is true for the Image paragraph type, the form is updated accordingly', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnImage).scrollIntoView();
@@ -133,6 +135,99 @@ describe('Media Component Tests', () => {
         
         await expect(MediaBlockPage.mediaElement).toExist; 
         await expect((await MediaBlockPage.durationElement)).toHaveText(mediaBlockData.duration);   
+    });
+
+    it.only('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+        const alt = mediaBlockData.altText;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnImage).scrollIntoView();
+        (await QALayoutPage.btnImage).click();
+        (await MediaBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
+        await MediaBlockPage.createImageType(mediaBlockData.title, imageFilePath, mediaBlockData.altText, mediaBlockData.link, mediaBlockData.caption);
+
+        await expect(MediaBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await MediaBlockPage.captionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(await $(`img[alt="${alt}"]`)).toExist; 
+        const text = await MediaBlockPage.captionElement;
+        await expect(text).toHaveText(mediaBlockData.caption);  
+
+
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'media image',
+            itemTitle: mediaBlockData.title,
+            linkType: 'link',
+            clickText: 'sampleImg3.jpg',
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`img[alt="${mediaBlockData.altText}"]`)).click();
+
+        // Pause the execution and set a timeout for resuming
+
+        //const element = await $(`img[alt="${mediaBlockData.altText}"]`);
+
+        // Simulate command + click using JavaScript
+        // await browser.execute(function (element) {
+        //     var event = new MouseEvent('click', {
+        //         bubbles: true,
+        //         cancelable: true,
+        //         view: window,
+        //         metaKey: true  // This simulates the Command key on Mac
+        //     });
+        //     (element as any).dispatchEvent(event); // Cast to 'any' to avoid TypeScript error
+        // }, element);
+
+        
+
+        // Switch back to the tab where the analytics is being generated
+        //await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/image.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/Media/Verify_that Analytics works as expected for the Image Component.png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+        
+        
     });
 
    

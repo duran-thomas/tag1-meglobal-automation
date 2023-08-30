@@ -61,7 +61,7 @@ describe('Icon List Component Tests', () => {
 
      
     it('[S3C899] Verify that a site Content Administrator can create an Icon List Component with a single Item', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnIconList).scrollIntoView();
@@ -80,7 +80,7 @@ describe('Icon List Component Tests', () => {
     });
 
     it('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnIconList).scrollIntoView();
@@ -100,7 +100,7 @@ describe('Icon List Component Tests', () => {
     });
 
     it('[S3C901] Verify that the text field item on the Icon List Component is a mandatory field', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnIconList).scrollIntoView();

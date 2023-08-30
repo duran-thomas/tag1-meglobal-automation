@@ -61,7 +61,7 @@ describe('Section Header Component Tests', () => {
 
      
     it('[S3C865] Verify that a site Content Administrator can create a Section Header Component', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnSectionHeader).scrollIntoView();
@@ -81,7 +81,7 @@ describe('Section Header Component Tests', () => {
 
 
     it('[S3C866] Verify that all design fields are present with the correct available options.', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnSectionHeader).scrollIntoView();

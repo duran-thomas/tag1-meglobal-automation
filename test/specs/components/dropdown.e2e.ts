@@ -53,7 +53,7 @@ describe('Dropdown Component Tests', () => {
     });
 
     it('[S3C855] Verify that a site Content Administrator can create a Dropdown Component with 1 menu item', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
@@ -74,7 +74,7 @@ describe('Dropdown Component Tests', () => {
     });
 
     it('[S3C856] Verify that a site Content Administrator can create a Dropdown Component with more than 1 menu item', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();

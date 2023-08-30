@@ -103,7 +103,7 @@ describe('Billboard Component Tests', () => {
     });
     
     
-    it.only('Verify that Analytics works as expected for a Billboard Component. [POC FOR DAP-2099]', async () => {
+    it('[S3C1075] Verify that Analytics works as expected for a Billboard Component. [POC FOR DAP-2099]', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

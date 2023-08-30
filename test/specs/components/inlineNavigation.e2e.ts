@@ -67,7 +67,7 @@ describe('Inline Navigation Component Tests', () => {
 
      
     it('[S3C895] Verify that a site Content Administrator can create an Inline Navigation Component with an external link', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnInlineNavigation).scrollIntoView();
@@ -86,7 +86,7 @@ describe('Inline Navigation Component Tests', () => {
     });
 
     it('[S3C896] Verify that a site Content Administrator can create an Inline Navigation Component with an internal link', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnInlineNavigation).scrollIntoView();
@@ -105,7 +105,7 @@ describe('Inline Navigation Component Tests', () => {
     });
 
     it('[S3C897] Verify that a site Content Administrator can create an Inline Navigation Component with a same page fragment', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnInlineNavigation).scrollIntoView();
@@ -117,9 +117,9 @@ describe('Inline Navigation Component Tests', () => {
         (await QALayoutPage.btnBillBoard).click();
         (await QALayoutPage.btnBillBoard).waitForDisplayed();
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
-        await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText);
+        await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText, '_self');
        
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await browser.pause(3000);
         await QALayoutPage.navigateToBlockList();
        
@@ -139,7 +139,7 @@ describe('Inline Navigation Component Tests', () => {
     });
 
     it('[S3C898] Verify that a site Content Administrator can create an Inline Navigation Component in a Freeform block', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
