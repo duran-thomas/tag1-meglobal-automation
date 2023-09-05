@@ -130,6 +130,10 @@ class LandingQAPage extends Page {
         return $('=Map');
     }
 
+    public get btnProgressIndicator() {
+        return $('=Progress Indicator');
+    }
+
     public get btnQuote() {
         return $('=Quote');
     }

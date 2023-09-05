@@ -237,6 +237,15 @@ class CarouselBlockPage extends Page {
         return $('span[aria-label="Go to slide 3"]');
     }
 
+    public get frames() {
+        return $$('#entity_browser_iframe_image_browser');
+    }
+
+    public get thirdFrame() {
+        return $('iframe[name="entity_browser_iframe_image_browser"]');
+    }
+
+
 
     /**
      * Helper methods to create Carousel Component
@@ -381,7 +390,7 @@ class CarouselBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
-        await browser.pause(8000);
+        await browser.pause(4000);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
         await (await this.inputEyebrow).setValue(eyebrow);
@@ -405,9 +414,9 @@ class CarouselBlockPage extends Page {
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
-
+        //second carousel
         await (await this.btnAddCardFeature).click();
-        await browser.pause(8000);
+        await browser.pause(4000);
         await (await this.inputHeadline1).scrollIntoView();
         await (await this.inputHeadline1).setValue(headline + ' 1');
         await (await this.inputEyebrow1).setValue(eyebrow + ' 1');
@@ -419,9 +428,9 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage1).scrollIntoView();
         await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
-        await browser.pause(2000);
-        await browser.switchToFrame(await this.entityIframe);
-        await browser.pause(2000);
+        const frame1 = await this.frames[1];
+        await frame1.waitForDisplayed();
+        await browser.switchToFrame(frame1); 
         await (await this.btnBrowse).scrollIntoView();
         await (await this.btnBrowse).setValue(remoteFilePath1);
         await browser.pause(6000); //explicit waits seem to be necessary here
@@ -432,9 +441,9 @@ class CarouselBlockPage extends Page {
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(3000); //explicit waits seem to be necessary here
-
+        //third carousel
         await (await this.btnAddCardFeature).click();
-        await browser.pause(8000);
+        await browser.pause(4000);
         await (await this.inputHeadline2).scrollIntoView();
         await (await this.inputHeadline2).setValue(headline) + ' 2';
         await (await this.inputEyebrow2).setValue(eyebrow + ' 2');
@@ -446,9 +455,9 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage2).scrollIntoView();
         await (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
-        await browser.pause(2000);
-        await browser.switchToFrame(await this.entityIframe);
-        await browser.pause(2000);
+        const frame2 = await this.frames[2];
+        await frame2.waitForExist({timeout:8000});
+        await browser.switchToFrame(frame2);
         await (await this.btnBrowse).scrollIntoView();
         await (await this.btnBrowse).setValue(remoteFilePath2);
         await browser.pause(6000); //explicit waits seem to be necessary here

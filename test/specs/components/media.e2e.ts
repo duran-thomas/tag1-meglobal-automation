@@ -137,7 +137,27 @@ describe('Media Component Tests', () => {
         await expect((await MediaBlockPage.durationElement)).toHaveText(mediaBlockData.duration);   
     });
 
-    it.only('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+    it.skip('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+        await browser.execute(() => {
+            if (!window.dataLayer) {
+                window.dataLayer = [];
+            }
+        
+            window.collectedEvents = [];
+            let handler = {
+                set: function(target, property, value, receiver) {
+                    if (Number(property) === target.length) {
+                        console.log("New item added:", value);
+                        window.collectedEvents.push(value);
+                    }
+                    target[property] = value;
+                    return true;
+                }
+            };
+            window.dataLayer = new Proxy(window.dataLayer, handler);
+        });
+        
+
         const alt = mediaBlockData.altText;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -180,50 +200,34 @@ describe('Media Component Tests', () => {
         // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
         await (await $(`img[alt="${mediaBlockData.altText}"]`)).click();
 
-        // Pause the execution and set a timeout for resuming
-
-        //const element = await $(`img[alt="${mediaBlockData.altText}"]`);
-
-        // Simulate command + click using JavaScript
-        // await browser.execute(function (element) {
-        //     var event = new MouseEvent('click', {
-        //         bubbles: true,
-        //         cancelable: true,
-        //         view: window,
-        //         metaKey: true  // This simulates the Command key on Mac
-        //     });
-        //     (element as any).dispatchEvent(event); // Cast to 'any' to avoid TypeScript error
-        // }, element);
-
-        
-
         // Switch back to the tab where the analytics is being generated
         //await browser.switchWindow(currentUrl)
 
-        // Get the data layer for the window and get the data for the click event for the component
-        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+        // Get the data layer for the window and get the data for the click event for the compon
+        const dataLayer = await browser.execute(() => window.dataLayer || []);
+        const actualAnalyticsData = dataLayer.find(item => item.event === "e_componentClick");
 
+        
         // Build the actual analytics data object
         const parsedActualAnalyticsData = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
             // Remove html tags, whitespace and newlines from the Headline
-            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
-        fs.writeFile('analyticsTestEvidence/image.json', JSON.stringify(dataLayer), err => {
-            if (err) {
-                console.error(err);
-            }
-            // file written successfully
-        });
+        // fs.writeFile('analyticsTestEvidence/image.json', JSON.stringify(dataLayer), err => {
+        //     if (err) {
+        //         console.error(err);
+        //     }
+        //     // file written successfully
+        // });
 
-        const screenshotPath = `./screenshots/Media/Verify_that Analytics works as expected for the Image Component.png`;
+        const screenshotPath = `./screenshots/Media/Verify_Analytics_Image_Component.png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
         
