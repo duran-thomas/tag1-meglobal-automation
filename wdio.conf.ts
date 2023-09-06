@@ -90,8 +90,8 @@ export const config: Options.Testrunner = {
         freeform: ['/test/specs/components/freeform.e2e.ts'],
         testimonial: ['/test/specs/components/testimonial.e2e.ts'],
         teamLeader: ['/test/specs/components/teamLeader.e2e.ts'],
-        progressIndicator: ['/test/specs/components/progressIndicator.e2e.ts']
-
+        progressIndicator: ['/test/specs/components/progressIndicator.e2e.ts'],
+        typeahead: ['/test/specs/components/typeahead.e2e.ts']
 
     },
     // Patterns to exclude.
