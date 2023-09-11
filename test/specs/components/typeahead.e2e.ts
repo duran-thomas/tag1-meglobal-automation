@@ -39,18 +39,6 @@ describe('Typeahed Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
 
-    //delete previously created sections
-    // afterEach(async function () {
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getTestPage(global.suiteDescription);
-    //     await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.cleanUpJob();
-    //     await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
-    //     //return to starting point
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getTestPage(global.suiteDescription);
-    // });
-
     //delete page
     after(async function () {
         await AdminContentPage.open();
@@ -95,7 +83,7 @@ describe('Typeahed Component Tests', () => {
     it('[S3C1127] Verify the display of "No Results Found" message when no relevant suggestions are available', async () => {
         await (await TypeaheadBlockPage.typeaheadSearch).clearValue();
         await (await TypeaheadBlockPage.typeaheadSearch).setValue(typeaheadBlockData.invalidTerm);
-
+        //Asserting the the college links to the Spanish version of the site
         await expect($(`span=No results found for '${typeaheadBlockData.invalidTerm}'`)).toBeDisplayed();
     });
 

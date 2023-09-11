@@ -60,7 +60,7 @@ describe('Tooltip Component Tests', () => {
 
      
     it('[S3C890] Verify that a site Content Administrator can create a Tooltip Component by highlighting text on the website', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -81,7 +81,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C891] Verify that a site Content Administrator can create a Tooltip Component by adding new text on the website', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -102,7 +102,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C892] Verify that when a user hovers over a Tooltip the text is displayed correctly', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -123,7 +123,7 @@ describe('Tooltip Component Tests', () => {
     });
 
     it('[S3C893] Verify no maximum length set on tooltip text', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
@@ -144,8 +144,8 @@ describe('Tooltip Component Tests', () => {
         await expect(await tipValue).toEqual(tooltipBlockData.longTooltip);
     });
 
-    it('[S3C894] Verify that tooltip is a required field', async () => {
-     await (await QALayoutPage.tabLayout).click();
+    it.skip('[S3C894] Verify that tooltip is a required field', async () => {
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();

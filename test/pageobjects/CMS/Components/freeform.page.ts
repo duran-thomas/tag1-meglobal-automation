@@ -561,10 +561,12 @@ class FreeformBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
-        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.dropdownToggle).click();
+        await (await this.linkAddSpacer).waitForDisplayed({timeout:4000});
         await (await this.linkAddSpacer).click();
-        await (await this.btnAddBlock).scrollIntoView();
+        browser.pause(2000);
+        await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
