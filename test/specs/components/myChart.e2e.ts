@@ -5,7 +5,6 @@ import {users} from '../../data/users.data';
 import { myChartBlockData } from '../../data/myChart.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { cookieData } from '../../data/cookie.data';
-import { beforeEach } from 'mocha';
 
 
 describe('MyChart Component Tests', () => {

@@ -108,6 +108,7 @@ class TabsBlockPage extends Page {
         await (await this.inputContent).setValue(content);
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout:4000 });
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -162,6 +163,7 @@ class TabsBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout:4000 });
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();

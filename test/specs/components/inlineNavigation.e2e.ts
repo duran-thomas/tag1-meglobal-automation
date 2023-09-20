@@ -70,9 +70,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createExtInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'1');
 
@@ -89,9 +89,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createIntInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.intLinkTxt, inlineNavigationBlockData.intUrl, inlineNavigationBlockData.id+'2');
 
@@ -108,14 +108,16 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createInlineNavFragment(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.jumpUrl, inlineNavigationBlockData.id+'3');
         
-        (await QALayoutPage.btnBillBoard).click();
-        (await QALayoutPage.btnBillBoard).waitForDisplayed();
+        await browser.refresh();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnBillBoard).click();
+        await (await QALayoutPage.btnBillBoard).waitForDisplayed();
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
         await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText, '_self');
        
@@ -142,9 +144,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnFreeform).scrollIntoView();
-        (await QALayoutPage.btnFreeform).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnFreeform).scrollIntoView();
+        await (await QALayoutPage.btnFreeform).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createFreeformInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'4');
 

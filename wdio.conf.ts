@@ -150,7 +150,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
     //
     // Set specific log levels per logger
     // loggers:
@@ -194,7 +194,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.22.11] Automated Regression(Mid-Sprint Re-run)",
+        //     testRunName: "[Release 0.23.9] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,

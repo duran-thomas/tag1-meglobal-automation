@@ -163,9 +163,10 @@ class QuickActionsBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.compTitle).setValue(title);
         await (await this.inputHeadline).setValue(healdine);
-        await (await this.dropdownSource).selectByIndex(1);
+        await (await this.dropdownSource).selectByVisibleText('Aesthetics: Quick Actions test menu');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout: 2000 });
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

@@ -92,6 +92,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.inputGroupID).setValue(groupID);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -114,6 +115,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.inputURL).setValue(url);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -139,6 +141,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.dropdownTarget).selectByVisibleText('_blank');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

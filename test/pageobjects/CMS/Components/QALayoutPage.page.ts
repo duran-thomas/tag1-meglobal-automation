@@ -246,15 +246,16 @@ class LandingQAPage extends Page {
     }
 
     public async navigateToBlockList() {
-        await (await this.linkAddBlock).waitForDisplayed();
+        await browser.refresh();
+        await (await this.linkAddBlock).waitForExist();
         await (await this.linkAddBlock).scrollIntoView();
         await (await this.linkAddBlock).click();
         await (await this.btnCreateCustomBlock).waitForDisplayed();
         await (await this.btnCreateCustomBlock).click();
         const closePrompt = await this.btnCloseChatPopUp;
-        if (await closePrompt.isDisplayedInViewport()) {
-            await closePrompt.click();
-        }
+        await closePrompt.waitForDisplayed();
+        await closePrompt.click();
+        
     }
 
     public async goToPageView() {
@@ -275,6 +276,7 @@ class LandingQAPage extends Page {
         await browser.pause(1800);
         await (await this.btnRemove).click();
         await browser.pause(2000);
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForClickable();
         await (await this.btnSaveLayout).click();
         await browser.pause(2000);

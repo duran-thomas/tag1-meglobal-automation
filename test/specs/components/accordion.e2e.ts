@@ -48,7 +48,7 @@ describe('Accordion Component Tests', () => {
     });
 
   
-    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component, Show|Hide included)', async () => {
+    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();

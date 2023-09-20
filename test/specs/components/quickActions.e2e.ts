@@ -54,6 +54,19 @@ describe('Quick Actions Component Tests', () => {
         }
     });
 
+    //delete menu created
+    // after(async function () {
+    //     await QuickActionsBlockPage.openMenus();
+    //     const allToggles = await $$('button.dropbutton__toggle');
+    //     const lastToggle =  await allToggles[allToggles.length - 1]; // Get the last element
+
+    //     await lastToggle.click();
+    //     await (await $('=Delete')).click();
+    //     await (await $('#edit-submit')).waitForDisplayed();
+    //     await (await $('#edit-submit')).click();
+    //     await expect($('.messages__content')).toHaveTextContaining('has been deleted.');
+    // });
+
 
     it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
         //create menu
@@ -74,8 +87,11 @@ describe('Quick Actions Component Tests', () => {
         //create quick action component
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
-        (await QALayoutPage.linkAddBlock).click();
-        (await QALayoutPage.linkQuickActions).click();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
         await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
@@ -111,8 +127,11 @@ describe('Quick Actions Component Tests', () => {
         //create quick action component
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
-        (await QALayoutPage.linkAddBlock).click();
-        (await QALayoutPage.linkQuickActions).click();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
         await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 

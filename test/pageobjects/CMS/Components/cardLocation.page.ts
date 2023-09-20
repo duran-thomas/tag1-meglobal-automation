@@ -626,7 +626,8 @@ class CardLocationBlockPage extends Page {
         await (await this.listResult).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
-        await browser.pause(3000);
+        await browser.pause(1500);
+        await browser.refresh();
     }
 
     public async createLocationComponentBlock2(title:string, location:string) {
@@ -645,6 +646,7 @@ class CardLocationBlockPage extends Page {
         await (await this.checkboxBorder).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({timeout:4000});
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -691,6 +693,7 @@ class CardLocationBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({timeout:4000});
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();

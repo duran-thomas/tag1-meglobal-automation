@@ -175,6 +175,7 @@ class TestimonialBlockPage extends Page {
         await browser.pause(3000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -215,6 +216,7 @@ class TestimonialBlockPage extends Page {
         await (await this.dropdownMobileAspectRatio).selectByVisibleText('16:9');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -345,6 +347,7 @@ class TestimonialBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

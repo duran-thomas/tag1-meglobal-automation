@@ -357,6 +357,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputContent).setValue(content);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -391,6 +392,7 @@ class FreeformBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -413,6 +415,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputExtraClasses).setValue('bg-tint-sky');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -436,6 +439,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputDropdownLinkText).setValue(linkText);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -469,7 +473,7 @@ class FreeformBlockPage extends Page {
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
-        await browser.pause(5000); //give image a chance to render
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -494,6 +498,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputInlineNavUrl).setValue(url);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -526,6 +531,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputLinkUrl2).setValue(url2);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -547,6 +553,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputContentRichText).setValue(content);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -568,6 +575,7 @@ class FreeformBlockPage extends Page {
         browser.pause(2000);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -593,6 +601,7 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -625,7 +634,7 @@ class FreeformBlockPage extends Page {
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
-        await browser.pause(5000); //give image a chance to render
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -652,6 +661,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputVisualLink).setValue(link);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -676,6 +686,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputExtraClasses).setValue('bg-tint-sky');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

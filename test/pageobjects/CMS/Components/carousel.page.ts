@@ -285,6 +285,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(4000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -331,6 +332,7 @@ class CarouselBlockPage extends Page {
         await (await this.dropdownIncludePagination).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -376,6 +378,7 @@ class CarouselBlockPage extends Page {
         await (await this.dropdownIncludeControls).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -472,6 +475,7 @@ class CarouselBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

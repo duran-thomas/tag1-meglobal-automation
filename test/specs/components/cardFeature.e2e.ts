@@ -44,7 +44,7 @@ describe('Card Feature Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
@@ -65,9 +65,9 @@ describe('Card Feature Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCardFeature).scrollIntoView();
-        (await QALayoutPage.btnCardFeature).click();
-        (await CardFeatureBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCardFeature).scrollIntoView();
+        await (await QALayoutPage.btnCardFeature).click();
+        await (await CardFeatureBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await CardFeatureBlockPage.createCardFeature(cardFeatureBlockData.title, cardFeatureBlockData.headline, cardFeatureBlockData.eyebrow, cardFeatureBlockData.list, cardFeatureBlockData.btnText, cardFeatureBlockData.url,imageFilePath, cardFeatureBlockData.altText);
@@ -87,9 +87,9 @@ describe('Card Feature Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCardFeature).scrollIntoView();
-        (await QALayoutPage.btnCardFeature).click();
-        (await CardFeatureBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCardFeature).scrollIntoView();
+        await (await QALayoutPage.btnCardFeature).click();
+        await (await CardFeatureBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
         await CardFeatureBlockPage.createCardFeatureInternal(cardFeatureBlockData.title, cardFeatureBlockData.headline, cardFeatureBlockData.eyebrow, cardFeatureBlockData.list, cardFeatureBlockData.btnText,imageFilePath, cardFeatureBlockData.altText);
