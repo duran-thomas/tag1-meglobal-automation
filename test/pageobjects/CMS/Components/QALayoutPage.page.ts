@@ -94,6 +94,10 @@ class LandingQAPage extends Page {
         return $('=Contact List');
     }
 
+    public get btnEvent() {
+        return $('=Event');
+    }
+
     public get btnDefault() {
         return $('=Default');
     }

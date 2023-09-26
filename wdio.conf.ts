@@ -92,7 +92,8 @@ export const config: Options.Testrunner = {
         teamLeader: ['/test/specs/components/teamLeader.e2e.ts'],
         progressIndicator: ['/test/specs/components/progressIndicator.e2e.ts'],
         typeahead: ['/test/specs/components/typeahead.e2e.ts'],
-        translation: ['/test/specs/components/typeahead.e2e.ts']
+        translation: ['/test/specs/components/translation.e2e.ts'],
+        event: ['/test/specs/components/event.e2e.ts'],
 
 
     },
