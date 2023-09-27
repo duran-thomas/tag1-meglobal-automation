@@ -59,6 +59,8 @@ If during test execution you would like the execution to be paused to inspect a 
 
 There may be times in executing a test suite when you no longer need the entire suite to be executed because you are focused on a specific test case. For e.g a specific case has failed and it is not dependent on other cases in the suite. In this instance it would be more time efficient to skip the tests that have passed and only execute the tests of focus. Here we can use `x` or `skip` to skip test cases. This is written as `xit` or `it.skip`. If only one particular case needs to be executed then you could also use the `it.only` format to execute only that test script.
 
+`skips` can also be placed on the describe block to skip an entire component suite from being executed, ie `describe.skip`.
+
 
 ## QualityWatcher Reporter
 
