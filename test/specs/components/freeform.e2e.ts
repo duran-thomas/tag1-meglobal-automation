@@ -143,6 +143,26 @@ describe('Freeform Component Tests', () => {
         await expect(await $(`button[data-analytics-click-text="${data.dropdownFreeformData.triggerText}"]`)).toBeExisting();
     });
 
+    it('[S3C1015] Verify that a site Content Administrator can create a Freeform Component with an Icon List block', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFreeform).scrollIntoView();
+        (await QALayoutPage.btnFreeform).click();
+        (await FreeformBlockPage.configBlock).waitForDisplayed();
+
+        await FreeformBlockPage.createFreeformIconList(data.freeformBlockData.adminTitle, data.freeformBlockData.headline, data.iconListFreeformData.text+' 1', data.iconListFreeformData.text+' 2', data.iconListFreeformData.text+' 3', data.iconListFreeformData.text+' 4', data.iconListFreeformData.text+' 5', data.iconListFreeformData.text+' 6');
+
+        await expect(FreeformBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await FreeformBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect($('span[data-analytics-click-text="bullet-square"]')).toBeExisting() 
+        await expect(FreeformBlockPage.listItem).toHaveText(data.iconListFreeformData.text+' 1');   
+        await expect(FreeformBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
+    });
+
     it('[S3C1016] Verify that a site Content Administrator can create a Freeform Component with an Image block)', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();

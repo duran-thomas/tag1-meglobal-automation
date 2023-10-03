@@ -25,6 +25,10 @@ export const dropdownFreeformData = {
     linkText: 'Google'
 };
 
+export const iconListFreeformData = {
+    text: 'List Item',
+};
+
 export const imageFreeformData = {
     altText: 'QA Image Text'
 };

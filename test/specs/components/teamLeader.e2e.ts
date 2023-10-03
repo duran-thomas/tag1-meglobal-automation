@@ -70,6 +70,24 @@ describe('Team Leader Component Tests', () => {
         await (await QALayoutPage.btnTeamMembersGrid).click();
         await (await TeamLeaderBlockPage.configBlock).waitForDisplayed();
 
+        await TeamLeaderBlockPage.createTeamMemberGridLeaders(teamLeaderBlockData.adminTitle, teamLeaderBlockData.teamGroupID);
+
+        await expect(TeamLeaderBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await TeamLeaderBlockPage.textBox[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(await TeamLeaderBlockPage.teamMemberGrid).toBeExisting(); 
+    });
+
+    it('[S3C1327] Verify the ability to display ONLY team members within a Team Members Grid', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnTeamMembersGrid).scrollIntoView();
+        await (await QALayoutPage.btnTeamMembersGrid).click();
+        await (await TeamLeaderBlockPage.configBlock).waitForDisplayed();
+
         await TeamLeaderBlockPage.createTeamMemberGrid(teamLeaderBlockData.adminTitle, teamLeaderBlockData.teamGroupID);
 
         await expect(TeamLeaderBlockPage.successMsg).toBeDisplayed();
