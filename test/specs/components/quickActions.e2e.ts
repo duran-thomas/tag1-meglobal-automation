@@ -41,31 +41,19 @@ describe('Quick Actions Component Tests', () => {
     });
 
     //clean up job
-    afterEach(async function() { 
-        // Get the current test result
-        const testResult = this.currentTest;
+    after(async function() { 
+        await QuickActionsBlockPage.cleanUp();
+        await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
+        await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-        // Check if the test passed
-        if (testResult.state === 'passed') {
-            await QuickActionsBlockPage.cleanUp();
-            await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
-            await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
-
-        }
     });
 
-    //delete menu created
-    // after(async function () {
-    //     await QuickActionsBlockPage.openMenus();
-    //     const allToggles = await $$('button.dropbutton__toggle');
-    //     const lastToggle =  await allToggles[allToggles.length - 1]; // Get the last element
-
-    //     await lastToggle.click();
-    //     await (await $('=Delete')).click();
-    //     await (await $('#edit-submit')).waitForDisplayed();
-    //     await (await $('#edit-submit')).click();
-    //     await expect($('.messages__content')).toHaveTextContaining('has been deleted.');
-    // });
+    //delete page
+    after(async function () {
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
 
 
     it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {

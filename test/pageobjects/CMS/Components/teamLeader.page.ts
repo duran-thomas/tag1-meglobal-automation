@@ -29,7 +29,7 @@ class TeamLeaderBlockPage extends Page {
     }
 
     public get inputContent() {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
     public get inputButtonText() {

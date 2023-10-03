@@ -46,7 +46,7 @@ class EventBlockPage extends Page {
     }
 
     public get textareaNoResults() {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
     public get inputLimit() {

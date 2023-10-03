@@ -7,6 +7,14 @@ import * as fs from "fs";
 
 dotenvLoader.config();
 
+// const url = require('./test/data/urls.data');
+// const ENV = process.env.ENV
+
+// if (!ENV  || !['qaAuto', 'dev', 'qaInt', 'uat'].includes(ENV) ) {
+//     console.log('Please use the following format when running the test script: ENV=dev|qaAuto|qaInt|uat [script]');
+//     process.exit();
+// }
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -151,7 +159,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -195,7 +203,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.23.9] Automated Regression",
+        //     testRunName: "[Release 0.24.8] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,
@@ -212,10 +220,10 @@ export const config: Options.Testrunner = {
     framework: 'mocha',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    //specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
-    // specFileRetriesDelay: 0,
+    // specFileRetriesDelay: 30,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,

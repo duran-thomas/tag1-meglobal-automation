@@ -213,7 +213,7 @@ class FreeformBlockPage extends Page {
     //RichText Block
 
     public get inputContentRichText () {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
 

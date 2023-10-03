@@ -17,11 +17,11 @@ class SectionHeaderBlockPage extends Page {
     }
 
     public get inputHeadline() {
-        return $$('.ck-content')[0];
+        return $$('.ck-editor__editable')[0];
     }
 
     public get inputContent() {
-        return $$('.ck-content')[1];
+        return $$('.ck-editor__editable')[1];
     }
 
     public get btnAddButtons() {

@@ -31,7 +31,7 @@ class QuickActionsBlockPage extends Page {
     }
 
     public get btnAddNewContent() {
-        return $('a[href="/group/1/node/create"]');
+        return $('a[href="/group/356/node/create"]');
     }
 
     public get linkGroupLayoutPage() {
@@ -176,33 +176,30 @@ class QuickActionsBlockPage extends Page {
 
     public async cleanUp() {
         await this.openNodes();
-        await (await this.createdNode).waitForDisplayed({ timeout: 2000 });
+        await (await this.createdNode).waitForDisplayed({ timeout: 4000 });
         await (await this.createdNode).click();
-        await (await this.pageDelete).waitForDisplayed({ timeout: 2000 });
+        await (await this.pageDelete).waitForDisplayed({ timeout: 4000 });
         await (await this.pageDelete).click();
-        await (await this.btnSave).waitForDisplayed({ timeout: 2500 });
+        await (await this.btnSave).waitForDisplayed({ timeout: 3500 });
         await (await this.btnSave).click();
         await this.openMenus();
         await (await this.createdMenu).click();
-        await (await this.btnDelete).waitForDisplayed({ timeout: 2500 });
+        await (await this.btnDelete).waitForDisplayed({ timeout: 3500 });
         await (await this.btnDelete).click();
         await (await this.btnSave).click();
         await browser.pause(1500);
     }
 
 
-
-
-
     /**
     * overwrite specific options to adapt it to page object
     */
     public openMenus() {
-        return super.open('group/1/menus');
+        return super.open('group/356/menus');
     }
 
     public openNodes() {
-        return super.open('group/1/nodes');
+        return super.open('group/356/nodes');
     }
 }
 

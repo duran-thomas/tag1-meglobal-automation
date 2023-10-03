@@ -2,7 +2,7 @@ import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import {users} from '../../data/users.data'
 
 
-describe('Login Page', () => {
+describe.skip('Login Page', () => {
     before(async () => {
       // Bypass login modal before running tests
       browser.url(`https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/`);

@@ -206,6 +206,10 @@ class LandingQAPage extends Page {
         return $('button[id="edit-submit"]');
     }
 
+    public get dialogFrame() {
+        return $('#hyro-frame');
+    }
+
     public get btnCloseChatPopUp() {
         return $('button[aria-label="closeButton"]');
     }
@@ -256,9 +260,12 @@ class LandingQAPage extends Page {
         await (await this.linkAddBlock).click();
         await (await this.btnCreateCustomBlock).waitForDisplayed();
         await (await this.btnCreateCustomBlock).click();
-        const closePrompt = await this.btnCloseChatPopUp;
-        await closePrompt.waitForDisplayed();
-        await closePrompt.click();
+        const frame = await this.dialogFrame;
+        if (await frame.isDisplayedInViewport() == true) {
+            await browser.switchToFrame(frame);
+            await this.btnCloseChatPopUp.click();
+            await browser.switchToParentFrame();
+        }
         
     }
 

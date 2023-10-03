@@ -25,7 +25,7 @@ class TabsBlockPage extends Page {
     }
 
     public get inputContent() {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
     public get btnAddTabs() {
@@ -39,7 +39,7 @@ class TabsBlockPage extends Page {
     }
 
     public get inputContent1() {
-        return $$('.ck-content')[1];
+        return $$('.ck-editor__editable')[1];
     }
 
     public get inputName2() {
@@ -47,7 +47,7 @@ class TabsBlockPage extends Page {
     }
 
     public get inputContent2() {
-        return $$('.ck-content')[2];
+        return $$('.ck-editor__editable')[2];
     }
 
     public get inputName3() {
@@ -55,7 +55,7 @@ class TabsBlockPage extends Page {
     }
 
     public get inputContent3() {
-        return $$('.ck-content')[3];
+        return $$('.ck-editor__editable')[3];
     }
 
     public get btnAddBlock() {

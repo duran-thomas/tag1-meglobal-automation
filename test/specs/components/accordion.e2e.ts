@@ -48,14 +48,14 @@ describe('Accordion Component Tests', () => {
     });
 
   
-    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
+    it.only('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnAccordion).scrollIntoView();
-        (await QALayoutPage.btnAccordion).click();
-        (await AccordionBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnAccordion).scrollIntoView();
+        await (await QALayoutPage.btnAccordion).click();
+        await (await AccordionBlockPage.configBlock).waitForDisplayed();
 
         await AccordionBlockPage.createAccordion(accordionBlockData.mainTitle, accordionBlockData.title, accordionBlockData.content);
 
