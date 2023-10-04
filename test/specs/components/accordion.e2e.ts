@@ -1,28 +1,11 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page';
-import {users} from '../../data/users.data';
 import { accordionBlockData } from '../../data/accordion.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 
 
 describe('Accordion Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
-    });
 
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
@@ -48,7 +31,7 @@ describe('Accordion Component Tests', () => {
     });
 
   
-    it.only('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
+    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();

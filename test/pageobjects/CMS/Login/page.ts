@@ -2,7 +2,6 @@
 * main page object containing all methods, selectors and functionality
 * that is shared across all page objects
 */
-import { urlData } from '../../../data/urls.data'
 
 export default class Page {
     /**
@@ -16,7 +15,7 @@ export default class Page {
          * username: meda2022
          * password: meda2022
          */
-        return browser.url(`https://meglobalode7.prod.acquia-sites.com/${path}`)
+        return browser.url(`/${path}`)
         //following a decision made ode environments will have incremental numeric value that updates after each release
     }
 }

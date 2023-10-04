@@ -7,10 +7,19 @@
 Installs the dependencies and creates the node modules folder.<br />
 
 ### Executing Tests
+Project has been formatted to run on different environments which can be achived using the `ENV`keyword.
+The environments available are;
 
-`npm run all` - runs all tests/spec files <br />
+- `qaAuto`: Dedicated automation environment
+- `qaInt`: Internal QA environment
+- `dev`: Developer environment
+- `uat`: The client User Acceptance Testing environment
 
-`npm run <component>` - runs tests in the specified component suite. All components are listed in the 'specs/component' folder.<br />
+Scripts can be executed in the formats below: 
+
+`ENV=qaAuto npm run all` - runs all tests/specs files
+
+`ENV=qaInt npm run <component>` - runs tests in the specified component suite. All components are listed in the 'specs/component' folder.<br />
 
 ### Generating Test Report
 

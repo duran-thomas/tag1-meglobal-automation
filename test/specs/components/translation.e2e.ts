@@ -1,24 +1,7 @@
 import TranslationBlockPage from '../../pageobjects/CMS/Components/translation.page';
-import {users} from '../../data/users.data';
-import { cookieData } from '../../data/cookie.data';
 
 
 describe('Translation Component Tests', () => {
-    before(async () => {
-        //Login
-        await browser.url(await users.bypassUrl);
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
-    });
 
     afterEach(async function() { 
         // Take a screenshot after each test/assertion

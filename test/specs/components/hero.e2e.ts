@@ -2,35 +2,11 @@ import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import HeroBlockPage from '../../pageobjects/CMS/Components/hero.page';
-import {users} from '../../data/users.data';
 import { heroBlockData } from '../../data/hero.data';
-import { cookieData } from '../../data/cookie.data';
 
-async function cleanJob() {
-    do {
-      await AdminContentPage.open();
-      await HeroBlockPage.deletePages();
-      await AdminContentPage.open();
-    } while (await (await HeroBlockPage.heroPageLink).isExisting());
-  }
 
 describe('Hero Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
-    });
-
+    
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page

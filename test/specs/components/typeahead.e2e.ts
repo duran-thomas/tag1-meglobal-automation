@@ -1,27 +1,10 @@
 import LoginPage from '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import TypeaheadBlockPage from '../../pageobjects/CMS/Components/typeahead.page';
-import { users } from '../../data/users.data';
 import {typeaheadBlockData} from '../../data/typeahead.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 
 describe('Typeahed Component Tests', () => {
-    before(async () => {
-        //Login
-        await browser.url(await users.bypassUrl);
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-                name: cookieData.name,
-                value: cookieData.value,
-                domain: cookieData.domain,
-                path: cookieData.path,
-            }
-        ]);
-    });
 
     before(async function () {
         global.suiteDescription = this.currentTest?.parent?.title;

@@ -1,10 +1,8 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import InlineNavigationBlockPage from '../../pageobjects/CMS/Components/inlineNavigation.page';
-import {users} from '../../data/users.data';
 import { inlineNavigationBlockData } from '../../data/inlineNavigation.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 import BillboardBlockPage from '../../pageobjects/CMS/Components/billboard.page';
 import { billboardBlockData } from '../../data/billboard.data';
 import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page';
@@ -14,22 +12,7 @@ import { accordionBlockData } from '../../data/accordion.data';
 
 
 describe('Inline Navigation Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
-    });
-
+    
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page

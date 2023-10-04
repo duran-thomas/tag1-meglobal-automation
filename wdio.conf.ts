@@ -5,15 +5,31 @@ import QualityWatcherService from "@qualitywatcher/wdio-service";
 import * as dotenvLoader from 'dotenv';
 import * as fs from "fs";
 
+import * as data from './test/data/cookie.data';
+
+
 dotenvLoader.config();
 
-// const url = require('./test/data/urls.data');
-// const ENV = process.env.ENV
+const qaAuto = 'https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/'
+const dev = 'https://meda2022:meda2022@meglobaldev.prod.acquia-sites.com/'
+const qaInt = 'https://meda2022:meda2022@qa-content.montefioreeinstein.org/'
+const uat = 'https://meda2022:meda2022@uat-content.montefioreeinstein.org/'
 
-// if (!ENV  || !['qaAuto', 'dev', 'qaInt', 'uat'].includes(ENV) ) {
-//     console.log('Please use the following format when running the test script: ENV=dev|qaAuto|qaInt|uat [script]');
-//     process.exit();
-// }
+let mainUrl:string;
+
+if(process.env.ENV == 'qaAuto') {
+    mainUrl = qaAuto
+} else if (process.env.ENV == 'dev') {
+    mainUrl = dev
+} else if (process.env.ENV == 'qaInt') {
+    mainUrl = qaInt
+} else if (process.env.ENV == 'uat') {
+    mainUrl = uat
+} else {
+    console.log('Please use the following format when running the test script: ENV=dev|qaAuto|qaInt|uat [script]');
+    process.exit();
+}
+
 
 export const config: Options.Testrunner = {
     //
@@ -183,7 +199,7 @@ export const config: Options.Testrunner = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: mainUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
@@ -301,9 +317,59 @@ export const config: Options.Testrunner = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
-     */
-    // before: function (capabilities, specs) {
-    // },
+     */,
+    before: (capabilities, specs, browser) => {
+        browser.maximizeWindow();
+        // Determine the environment and set cookies accordingly
+        const environment = process.env.ENV;
+
+        if (environment === 'qaAuto') {
+            browser.url(qaAuto);
+            // Set the cookies for the 'qaAuto' environment
+            browser.setCookies([
+                {
+                name: data.qaAutoCookieData.name,
+                value: data.qaAutoCookieData.value,
+                domain: data.qaAutoCookieData.domain,
+                path: data.qaAutoCookieData.path,
+                }
+            ]);
+           
+        } else if (environment === 'dev') {
+            browser.url(dev);
+            // Set cookies for the 'dev' environment
+            browser.setCookies([
+                {
+                name: data.devCookieData.name,
+                value: data.devCookieData.value,
+                domain: data.devCookieData.domain,
+                path: data.devCookieData.path,
+                }
+            ]);
+        } else if (environment === 'qaInt') {
+            browser.url(qaInt);
+            // Set cookies for the 'qaInt' environment
+            browser.setCookies([
+                {
+                name: data.qaIntCookieData.name,
+                value: data.qaIntCookieData.value,
+                domain: data.qaIntCookieData.domain,
+                path: data.qaIntCookieData.path,
+                }
+            ]);
+        } else if (environment === 'uat') {
+            browser.url(uat);
+            // Set cookies for the 'uat' environment
+            browser.setCookies([
+                {
+                name: data.uatCookieData.name,
+                value: data.uatCookieData.value,
+                domain: data.uatCookieData.domain,
+                path: data.uatCookieData.path,
+                }
+            ]);
+        }
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
