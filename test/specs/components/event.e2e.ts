@@ -4,10 +4,28 @@ import EventBlockPage from '../../pageobjects/CMS/Components/event.page';
 import { eventBlockData } from '../../data/event.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import * as fs from "fs";
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 describe('Event Component Tests', () => {
     
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+    });
+
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
@@ -38,6 +56,10 @@ describe('Event Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();

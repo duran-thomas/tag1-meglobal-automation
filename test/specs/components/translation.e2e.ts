@@ -1,7 +1,27 @@
 import TranslationBlockPage from '../../pageobjects/CMS/Components/translation.page';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Translation Component Tests', () => {
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+        await browser.url(await environment.baseUrl);
+    });
 
     afterEach(async function() { 
         // Take a screenshot after each test/assertion

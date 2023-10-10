@@ -2,6 +2,8 @@
 * main page object containing all methods, selectors and functionality
 * that is shared across all page objects
 */
+import { getEnvironmentConfig } from '../../../../envSelector';
+
 
 export default class Page {
     /**
@@ -15,7 +17,11 @@ export default class Page {
          * username: meda2022
          * password: meda2022
          */
-        return browser.url(`/${path}`)
+
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        return browser.url(`${environment.baseUrl}${path}`)
         //following a decision made ode environments will have incremental numeric value that updates after each release
     }
 }

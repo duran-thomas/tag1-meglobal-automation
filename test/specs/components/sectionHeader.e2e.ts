@@ -3,10 +3,29 @@ import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import SectionHeaderBlockPage from '../../pageobjects/CMS/Components/sectionHeader.page';
 import { sectionHeaderBlockData } from '../../data/sectionHeader.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Section Header Component Tests', () => {
     
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+    });
+
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
@@ -37,6 +56,10 @@ describe('Section Header Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();

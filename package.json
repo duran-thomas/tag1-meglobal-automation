@@ -40,14 +40,13 @@
     "typeahead": "npx wdio run wdio.conf.ts --spec ./test/specs/components/typeahead.e2e.ts",
     "translation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/translation.e2e.ts",
     "event": "npx wdio run wdio.conf.ts --spec ./test/specs/components/event.e2e.ts"
-
   },
   "author": "QW Team",
   "license": "ISC",
   "dependencies": {
     "@types/mocha": "^10.0.1",
     "chromedriver": "^116.0.0",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "webdriverio": "^7.25.4"
   },
   "devDependencies": {

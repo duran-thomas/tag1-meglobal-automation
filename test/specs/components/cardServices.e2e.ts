@@ -3,10 +3,29 @@ import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import CardServicesBlockPage from '../../pageobjects/CMS/Components/cardServices.page';
 import { cardServicesBlockData } from '../../data/cardServices.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Card Services Component Tests', () => {
     
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+    });
+
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
@@ -27,12 +46,23 @@ describe('Card Services Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
+    });
+
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
   
@@ -75,84 +105,5 @@ describe('Card Services Component Tests', () => {
         await expect(CardServicesBlockPage.internalLink).toExist;  
         await expect(await $('.mt-16')).toHaveText(cardServicesBlockData.resiText) 
     });
-
-    // it('[S3C905] Verify that all design fields are present with the correct available options.', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnCardServices).scrollIntoView();
-    //     (await QALayoutPage.btnCardServices).click();
-    //     (await CardServicesBlockPage.configBlock).waitForDisplayed();
-
-    //     await CardServicesBlockPage.navToStyling()
-        
-    //     await expect(CardServicesBlockPage.dropdownBackground).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('_none');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('white');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('soft-blue');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('soft-gray');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('mist-gray');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('soft-fuchsia');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('montefiore-primary-500');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('montefiore-secondary-500');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('einstein-primary-500');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('einstein-secondary-500');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('sky');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('water');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('flesh');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('wheat');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('mint');
-    //     await expect(CardServicesBlockPage.dropdownBackground).toHaveValue('bronze');
-
-    //     await expect(CardServicesBlockPage.dropdownContentPosition).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownContentPosition).toHaveValue('_none');
-    //     await expect(CardServicesBlockPage.dropdownContentPosition).toHaveValue('left');
-    //     await expect(CardServicesBlockPage.dropdownContentPosition).toHaveValue('right');
-
-    //     await expect(CardServicesBlockPage.dropdownServicesDisplay).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownServicesDisplay).toHaveValue('_none');
-    //     await expect(CardServicesBlockPage.dropdownServicesDisplay).toHaveValue('grid');
-    //     await expect(CardServicesBlockPage.dropdownServicesDisplay).toHaveValue('inline');
-
-    //     const minimalCheckbox = await CardServicesBlockPage.checkboxMinimal;
-    //     await expect(minimalCheckbox).toBeDisplayed();
-    //     await expect(minimalCheckbox.isSelected()).toBe(false);
-
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('none');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('fluid');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('1:1');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('5:4');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('4:3');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('3:4');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('3:2');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('16:9');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('2:1');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('21:9');
-    //     await expect(CardServicesBlockPage.dropdownMobileAspectRatio).toHaveValue('25:6');
-        
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('none');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('fluid');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('1:1');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('5:4');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('4:3');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:4');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:2');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('16:9');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('2:1');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('21:9');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('25:6');
-
-    //     await expect(CardServicesBlockPage.dropdownTheme).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('_none');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('dark');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('light');
-
-    //     await expect(CardServicesBlockPage.dropdownAlignment).toBeDisplayed();
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('_none');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('left');
-    //     await expect(CardServicesBlockPage.dropdownDesktopAspectRatio).toHaveValue('center');
-    // });
 
   });

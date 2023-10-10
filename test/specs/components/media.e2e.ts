@@ -4,10 +4,27 @@ import MediaBlockPage from '../../pageobjects/CMS/Components/media.page';
 import { mediaBlockData } from '../../data/media.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import * as fs from "fs";
-
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 describe('Media Component Tests', () => {
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+    });
 
     before(async function() {
         global.suiteDescription = this.currentTest?.parent?.title;
@@ -39,6 +56,10 @@ describe('Media Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
