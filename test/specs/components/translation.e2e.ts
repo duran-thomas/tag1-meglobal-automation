@@ -20,7 +20,7 @@ describe('Translation Component Tests', () => {
         // Set user cookies
         await browser.setCookies(await cookies);
 
-        await browser.url(await environment.baseUrl);
+        await browser.url(await environment.baseUrl+'home');
     });
 
     afterEach(async function() { 

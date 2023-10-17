@@ -147,6 +147,33 @@ describe('Carousel Component Tests', () => {
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
+        
+        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect(CarouselBlockPage.controlElement).toExist(); 
+
+        await expect ($('div[aria-label="3 / 3"]')).toBeExisting;
+        
+    });
+
+    it('[S3C829] If controls are enabled, verify that a user can navigate the carousel using the chevron arrows', async () => {
+        const headline = carouselBlockData.headline;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
+        (await CarouselBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        const imageFilePath1 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        
+        await CarouselBlockPage.createCarouselDoubleSlide(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText, imageFilePath1);
+
+        expect(CarouselBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
@@ -155,81 +182,52 @@ describe('Carousel Component Tests', () => {
         await (await $('.mf-card-content')).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await CarouselBlockPage.controlElement[1]).click();
         await expect(await $('a[data-analytics-click-text="Carousel Button 1"]')).toBeDisplayedInViewport();
-
-        //verify that a user can navigate the carousel using the pagination icons
-        (await CarouselBlockPage.swiperElement).click();
-        await expect(CarouselBlockPage.swiperElement).toHaveAttribute('aria-current', 'true');
-
-        await (await CarouselBlockPage.carouselElement).scrollIntoView();
-        await browser.pause(3000);
         
     });
 
+    it('[S3C828] If pagination is enabled, verify that a user can navigate the carousel using the pagination icons', async () => {
+        const headline = carouselBlockData.headline;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
+        (await CarouselBlockPage.configBlock).waitForDisplayed();
 
-    // it('[S3C831] [Components Carousel] Verify that all design fields are present with the correct available options.', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnCarousel).scrollIntoView();
-    //     (await QALayoutPage.btnCarousel).click();
-    //     (await CarouselBlockPage.configBlock).waitForDisplayed();
-
-    //     await CarouselBlockPage.navToStyling()
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        const imageFilePath1 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        const imageFilePath2 = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
         
-    //     await expect(CarouselBlockPage.dropdownLayout).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownLayout).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownLayout).toHaveValue('center');
-    //     await expect(CarouselBlockPage.dropdownLayout).toHaveValue('overlay');
-    //     await expect(CarouselBlockPage.dropdownLayout).toHaveValue('full');
+        await CarouselBlockPage.createCarouselDoubleSlide(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText, imageFilePath1);
 
-    //     const offsetCheckbox = await CarouselBlockPage.checkboxInitialOffset;
-    //     await offsetCheckbox.scrollIntoView();
-    //     await expect(offsetCheckbox).toBeDisplayed();
-    //     await expect(offsetCheckbox.isSelected()).toBe(false);
+        expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toHaveValue('always');
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toHaveValue('never');
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toHaveValue('mobile-only');
-    //     await expect(CarouselBlockPage.dropdownIncludePagination).toHaveValue('desktop-only');
+        await QALayoutPage.goToPageView();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
 
-    //     await CarouselBlockPage.dropdownPaginationType.scrollIntoView();
-    //     await expect(CarouselBlockPage.dropdownPaginationType).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownPaginationType).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownPaginationType).toHaveValue('bullets');
-    //     await expect(CarouselBlockPage.dropdownPaginationType).toHaveValue('stories');
+        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect(CarouselBlockPage.controlElement).toExist(); 
+      
+        //verify that a user can navigate the carousel using the pagination icons
+        (await CarouselBlockPage.swiperElement).click();
+        await expect(CarouselBlockPage.swiperElement).toHaveAttribute('aria-current', 'true');        
+    });
 
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('always');
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('never');
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('desktop-only');
 
-    //     await CarouselBlockPage.dropdownIncludeControls.scrollIntoView();
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('center');
-    //     await expect(CarouselBlockPage.dropdownIncludeControls).toHaveValue('bottom');
+    it.only('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
+        (await CarouselBlockPage.configBlock).waitForDisplayed();
 
-    //     await CarouselBlockPage.dropdownControlsPosition.scrollIntoView();
-    //     await expect(CarouselBlockPage.dropdownControlsPosition).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownControlsPosition).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownControlsPosition).toHaveValue('center');
-    //     await expect(CarouselBlockPage.dropdownControlsPosition).toHaveValue('bottom');
+        const areAllElementsDisplayed = await CarouselBlockPage.areAllElementsDisplayed();
 
-    //     await CarouselBlockPage.dropdownControlsIcon.scrollIntoView();
-    //     await expect(CarouselBlockPage.dropdownControlsIcon).toBeDisplayed();
-    //     await expect(CarouselBlockPage.dropdownControlsIcon).toHaveValue('_none');
-    //     await expect(CarouselBlockPage.dropdownControlsIcon).toHaveValue('chevron');
-    //     await expect(CarouselBlockPage.dropdownControlsIcon).toHaveValue('arrow');
+        await CarouselBlockPage.openParaTypes();
+        
+        await expect(areAllElementsDisplayed).toBe(true);            
+    });
 
-    //     const animationCheckbox = await CarouselBlockPage.checkboxAnimationIntro;
-    //     await expect(animationCheckbox).toBeDisplayed();
-    //     await expect(animationCheckbox.isSelected()).toBe(false);
-
-    //     await expect(CarouselBlockPage.inputCarouselConfig).toBeDisplayed();
-
-    // });
 
   });
