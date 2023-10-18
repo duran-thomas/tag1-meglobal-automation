@@ -109,6 +109,7 @@ describe('Billboard Component Tests', () => {
     
     
     it('[S3C1075] Verify that Analytics for the Billboard Component is configured', async () => {
+
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
