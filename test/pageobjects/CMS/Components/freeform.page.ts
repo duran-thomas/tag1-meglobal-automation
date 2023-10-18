@@ -71,6 +71,10 @@ class FreeformBlockPage extends Page {
         return $('.add-more-button-typeahead');
     }
 
+    public get linkAddIconList() {
+        return $('.add-more-button-icon-list');
+    }
+
     public get freeformHeadline() {
         return $('h3=Freeform Headline');
     }
@@ -144,6 +148,85 @@ class FreeformBlockPage extends Page {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-title-"]');
     }
 
+    //Icon List Block
+
+    public get dropdownIcon() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list"]');
+    }
+
+    public get inputText() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-0-text"]');
+    }
+
+    public get dropdownInnerIcon() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-0-icon"]');
+    }
+
+    public get btnAddlistItem() {
+        return $('input[value="Add another list item"]');
+    }
+
+    public get inputText1() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-1-text"]');
+    }
+
+    public get dropdownInnerIcon1() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-1-icon"]');
+    }
+
+    public get inputText2() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-2-text"]');
+    }
+
+    public get dropdownInnerIcon2() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-2-icon"]');
+    }
+
+    public get inputText3() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-3-text"]');
+    }
+
+    public get dropdownInnerIcon3() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-3-icon"]');
+    }
+
+    public get inputText4() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-4-text"]');
+    }
+
+    public get dropdownInnerIcon4() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-4-icon"]');
+    }
+
+    public get inputText5() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-5-text"]');
+    }
+
+    public get dropdownInnerIcon5() {
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-icon-list-item-5-icon"]');
+    }
+
+    public get iconListElement() {
+        return $('.mf-icon-list');
+    }
+
+    public get iconStyle() {
+        return $('.mf-icon-list__icon > span');
+    }
+
+    public get listItem() {
+        return $('.mf-icon-list__item');
+    }
+
+    public get lastItem() {
+        return $('div[class="layout-content "] li:nth-child(6)');
+    }
+
+    // public get () {
+    //     return $('');
+    // }
+
+
     //Image Block
     public get dropdownImage () {
         return $('details[id^="edit-field-image-"]');
@@ -213,7 +296,7 @@ class FreeformBlockPage extends Page {
     //RichText Block
 
     public get inputContentRichText () {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
 
@@ -284,46 +367,6 @@ class FreeformBlockPage extends Page {
         return $('#edit-settings-block-form-field-headline-0-more-options-render-as');
     }
 
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
     public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
@@ -357,6 +400,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputContent).setValue(content);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -391,6 +435,7 @@ class FreeformBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -413,6 +458,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputExtraClasses).setValue('bg-tint-sky');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -436,11 +482,68 @@ class FreeformBlockPage extends Page {
         await (await this.inputDropdownLinkText).setValue(linkText);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
+
+
+    public async createFreeformIconList(adminTitle: string, headline: string, text: string, text1: string, text2: string, text3: string, text4: string, text5: string) {
+        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputAdminTitle).setValue(adminTitle);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.linkAddIconList).click();
+        await (await this.dropdownIcon).waitForDisplayed({timeout:4000});
+
+        await (await this.dropdownIcon).selectByIndex(0);
+        await browser.pause(2000);
+        await (await this.inputText).scrollIntoView();
+        await (await this.inputText).setValue(text);
+        await (await this.dropdownInnerIcon).selectByIndex(1);
+        await browser.pause(2000);
+        await (await this.btnAddlistItem).click();
+        await (await this.inputText1).waitForDisplayed();
+        await (await this.inputText1).setValue(text1);
+        await (await this.dropdownInnerIcon1).selectByIndex(2);
+        await browser.pause(2000);
+        await (await this.btnAddlistItem).click();
+        await (await this.inputText2).waitForDisplayed();
+        await (await this.inputText2).setValue(text2);
+        await (await this.dropdownInnerIcon2).selectByIndex(3);
+        await browser.pause(2000);
+        await (await this.btnAddlistItem).click();
+        await (await this.inputText3).waitForDisplayed();
+        await (await this.inputText3).setValue(text3);
+        await (await this.dropdownInnerIcon3).selectByIndex(4);
+        await browser.pause(2000);
+        await (await this.btnAddlistItem).click();
+        await (await this.inputText4).waitForDisplayed();
+        await (await this.inputText4).setValue(text4);
+        await (await this.dropdownInnerIcon4).selectByIndex(5);
+        await browser.pause(2000);
+        await (await this.btnAddlistItem).click();
+        await (await this.inputText5).waitForDisplayed();
+        await (await this.inputText5).setValue(text5);
+        await (await this.dropdownInnerIcon5).selectByIndex(0);
+
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+
 
     public async createFreeformImage(adminTitle: string, headline: string, remoteFilePath: string, altText: string) {
         await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
@@ -469,7 +572,7 @@ class FreeformBlockPage extends Page {
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
-        await browser.pause(5000); //give image a chance to render
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -494,6 +597,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputInlineNavUrl).setValue(url);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -526,6 +630,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputLinkUrl2).setValue(url2);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -547,6 +652,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputContentRichText).setValue(content);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -568,6 +674,7 @@ class FreeformBlockPage extends Page {
         browser.pause(2000);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -593,6 +700,7 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -625,7 +733,7 @@ class FreeformBlockPage extends Page {
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
-        await browser.pause(5000); //give image a chance to render
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -652,6 +760,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputVisualLink).setValue(link);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -676,6 +785,7 @@ class FreeformBlockPage extends Page {
         await (await this.inputExtraClasses).setValue('bg-tint-sky');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

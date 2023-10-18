@@ -103,6 +103,7 @@ class InlineNavigationBlockPage extends Page {
         await (await this.inputID).setValue(id);
         await browser.pause(2000);
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -126,6 +127,7 @@ class InlineNavigationBlockPage extends Page {
         await (await this.inputID).setValue(id);
         await browser.pause(2000);
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -172,6 +174,7 @@ class InlineNavigationBlockPage extends Page {
         await (await this.inputID).setValue(id);
         await browser.pause(2000);
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

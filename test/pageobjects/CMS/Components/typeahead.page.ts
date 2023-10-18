@@ -96,6 +96,7 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

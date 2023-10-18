@@ -1,27 +1,29 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import TooltipBlockPage from '../../pageobjects/CMS/Components/tooltip.page';
-import {users} from '../../data/users.data';
 import { tooltipBlockData } from '../../data/tooltip.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Tooltip Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
+    
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -53,6 +55,10 @@ describe('Tooltip Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();

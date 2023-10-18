@@ -1,28 +1,29 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import BillboardBlockPage from '../../pageobjects/CMS/Components/billboard.page';
-import {users} from '../../data/users.data';
 import { billboardBlockData } from '../../data/billboard.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 import * as fs from "fs";
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 describe('Billboard Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
+    
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -55,6 +56,10 @@ describe('Billboard Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
@@ -103,7 +108,8 @@ describe('Billboard Component Tests', () => {
     });
     
     
-    it('[S3C1075] Verify that Analytics works as expected for a Billboard Component', async () => {
+    it('[S3C1075] Verify that Analytics for the Billboard Component is configured', async () => {
+
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -174,67 +180,5 @@ describe('Billboard Component Tests', () => {
 
     });
 
-    // it('[S3C889] Verify that all design fields are present with the correct available options.', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnBillBoard).scrollIntoView();
-    //     (await QALayoutPage.btnBillBoard).click();
-    //     (await BillboardBlockPage.configBlock).waitForDisplayed();
-
-    //     await BillboardBlockPage.navToStyling()
-        
-    //     await expect(BillboardBlockPage.dropdownTheme).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownTheme).toHaveValue('dark');
-    //     await expect(BillboardBlockPage.dropdownTheme).toHaveValue('light');
-
-    //     await expect(BillboardBlockPage.dropdownGradientIntensity).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownGradientIntensity).toHaveValue('soft');
-    //     await expect(BillboardBlockPage.dropdownGradientIntensity).toHaveValue('medium');
-    //     await expect(BillboardBlockPage.dropdownGradientIntensity).toHaveValue('hard');
-
-    //     await BillboardBlockPage.inputMobileFixedHeight.scrollIntoView();
-    //     await expect(BillboardBlockPage.inputMobileFixedHeight).toBeDisplayed();
-    //     await expect(BillboardBlockPage.inputMobileFixedHeight).toHaveValue('');
-
-    //     await expect(BillboardBlockPage.inputDesktopFixedHeight).toBeDisplayed();
-    //     await expect(BillboardBlockPage.inputDesktopFixedHeight).toHaveValue('');
-
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('none');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('fluid');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('1:1');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('5:4');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('4:3');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('3:4');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('3:2');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('16:9');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('2:1');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('21:9');
-    //     await expect(BillboardBlockPage.dropdownMobileAspectRatio).toHaveValue('25:6');
-        
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('none');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('fluid');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('1:1');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('5:4');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('4:3');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:4');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:2');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('16:9');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('2:1');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('21:9');
-    //     await expect(BillboardBlockPage.dropdownDesktopAspectRatio).toHaveValue('25:6');
-
-    //     await expect(BillboardBlockPage.dropdownContentPosition).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownContentPosition).toHaveValue('bottom left');
-    //     await expect(BillboardBlockPage.dropdownContentPosition).toHaveValue('left center');
-    //     await expect(BillboardBlockPage.dropdownContentPosition).toHaveValue('right center');
-
-    //     await expect(BillboardBlockPage.dropdownContentColumns).toBeDisplayed();
-    //     await expect(BillboardBlockPage.dropdownContentColumns).toHaveValue('1');
-    //     await expect(BillboardBlockPage.dropdownContentColumns).toHaveValue('2');
-
-    // });
 
   });

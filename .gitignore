@@ -136,3 +136,5 @@ test/brainstorm.txt
 .history/
 screenshots/
 QualityWatcher/
+allure-report/
+.DS_Store/

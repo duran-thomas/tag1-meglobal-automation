@@ -142,6 +142,7 @@ class DropdownBlockPage extends Page {
         await (await this.dropdownTarget).selectByIndex(1);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -178,6 +179,7 @@ class DropdownBlockPage extends Page {
         await (await this.dropdownTarget).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

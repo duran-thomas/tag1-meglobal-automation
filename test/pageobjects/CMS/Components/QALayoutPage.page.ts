@@ -94,6 +94,10 @@ class LandingQAPage extends Page {
         return $('=Contact List');
     }
 
+    public get btnEvent() {
+        return $('=Event');
+    }
+
     public get btnDefault() {
         return $('=Default');
     }
@@ -202,6 +206,10 @@ class LandingQAPage extends Page {
         return $('button[id="edit-submit"]');
     }
 
+    public get dialogFrame() {
+        return $('#hyro-frame');
+    }
+
     public get btnCloseChatPopUp() {
         return $('button[aria-label="closeButton"]');
     }
@@ -246,15 +254,22 @@ class LandingQAPage extends Page {
     }
 
     public async navigateToBlockList() {
-        await (await this.linkAddBlock).waitForDisplayed();
+        await browser.refresh();
+        await (await this.linkAddBlock).waitForExist();
         await (await this.linkAddBlock).scrollIntoView();
         await (await this.linkAddBlock).click();
         await (await this.btnCreateCustomBlock).waitForDisplayed();
         await (await this.btnCreateCustomBlock).click();
-        const closePrompt = await this.btnCloseChatPopUp;
-        if (await closePrompt.isDisplayedInViewport()) {
-            await closePrompt.click();
-        }
+        await (await this.btnCloseChatPopUp).click();
+        //const frame = await this.dialogFrame;
+        // if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+        //     await browser.switchToFrame(frame);
+        //     await this.btnCloseChatPopUp.click();
+        //     await browser.switchToParentFrame();
+        // } else {
+        //     console.log('Button not found');
+        // }
+        
     }
 
     public async goToPageView() {
@@ -275,6 +290,7 @@ class LandingQAPage extends Page {
         await browser.pause(1800);
         await (await this.btnRemove).click();
         await browser.pause(2000);
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForClickable();
         await (await this.btnSaveLayout).click();
         await browser.pause(2000);

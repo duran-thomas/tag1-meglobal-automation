@@ -17,11 +17,11 @@ class SectionHeaderBlockPage extends Page {
     }
 
     public get inputHeadline() {
-        return $$('.ck-content')[0];
+        return $$('.ck-editor__editable')[0];
     }
 
     public get inputContent() {
-        return $$('.ck-content')[1];
+        return $$('.ck-editor__editable')[1];
     }
 
     public get btnAddButtons() {
@@ -109,6 +109,7 @@ class SectionHeaderBlockPage extends Page {
         await browser.pause(3000); //explicit wait seems necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

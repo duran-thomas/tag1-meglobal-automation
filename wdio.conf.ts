@@ -92,7 +92,8 @@ export const config: Options.Testrunner = {
         teamLeader: ['/test/specs/components/teamLeader.e2e.ts'],
         progressIndicator: ['/test/specs/components/progressIndicator.e2e.ts'],
         typeahead: ['/test/specs/components/typeahead.e2e.ts'],
-        translation: ['/test/specs/components/typeahead.e2e.ts']
+        translation: ['/test/specs/components/translation.e2e.ts'],
+        event: ['/test/specs/components/event.e2e.ts'],
 
 
     },
@@ -150,7 +151,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -174,7 +175,7 @@ export const config: Options.Testrunner = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    //baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
@@ -194,7 +195,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.22.11] Automated Regression(Mid-Sprint Re-run)",
+        //     testRunName: "[Release 0.25.9] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,
@@ -211,10 +212,10 @@ export const config: Options.Testrunner = {
     framework: 'mocha',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    //specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
-    // specFileRetriesDelay: 0,
+    // specFileRetriesDelay: 30,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
@@ -292,8 +293,8 @@ export const config: Options.Testrunner = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
-     */
-    // before: function (capabilities, specs) {
+     */,
+    // before: fuuntion (capabilities, specs) => {
     // },
     /**
      * Runs before a WebdriverIO command gets executed.

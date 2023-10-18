@@ -19,6 +19,11 @@ class TeamLeaderBlockPage extends Page {
     public get inputGroupID() {
         return $('#edit-settings-block-form-field-group-id-0-value');
     }
+
+    public get checkboxOnlyLeaders() {
+        return $('#edit-settings-block-form-field-show-only-leaders-value');
+    }
+
     //Team Leader Carousel
     public get inputTitle() {
         return $('#edit-settings-block-form-field-title-0-value');
@@ -29,7 +34,7 @@ class TeamLeaderBlockPage extends Page {
     }
 
     public get inputContent() {
-        return $('.ck-content');
+        return $('.ck-editor__editable');
     }
 
     public get inputButtonText() {
@@ -82,6 +87,23 @@ class TeamLeaderBlockPage extends Page {
      * Helper methods to create Team Leader Component
      */
 
+    public async createTeamMemberGridLeaders(adminTitle: string, groupID: string) {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.adminTitle).setValue(adminTitle);
+        await (await this.inputGroupID).setValue(groupID);
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
     public async createTeamMemberGrid(adminTitle: string, groupID: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
@@ -92,6 +114,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.inputGroupID).setValue(groupID);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -114,6 +137,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.inputURL).setValue(url);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -139,6 +163,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.dropdownTarget).selectByVisibleText('_blank');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

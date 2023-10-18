@@ -1,29 +1,30 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import TeamLeaderBlockPage from '../../pageobjects/CMS/Components/teamLeader.page';
-import {users} from '../../data/users.data';
 import { teamLeaderBlockData } from '../../data/teamLeader.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 import * as fs from "fs";
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 
 describe('Team Leader Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
+    
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -56,6 +57,10 @@ describe('Team Leader Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
@@ -63,6 +68,24 @@ describe('Team Leader Component Tests', () => {
 
   
     it('[S3C1124] Verify a Content Administrator can create a Team Member Grid component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnTeamMembersGrid).scrollIntoView();
+        await (await QALayoutPage.btnTeamMembersGrid).click();
+        await (await TeamLeaderBlockPage.configBlock).waitForDisplayed();
+
+        await TeamLeaderBlockPage.createTeamMemberGridLeaders(teamLeaderBlockData.adminTitle, teamLeaderBlockData.teamGroupID);
+
+        await expect(TeamLeaderBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await TeamLeaderBlockPage.textBox[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(await TeamLeaderBlockPage.teamMemberGrid).toBeExisting(); 
+    });
+
+    it('[S3C1327] Verify the ability to display ONLY team members within a Team Members Grid', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

@@ -61,6 +61,7 @@ class ProgressIndicatorBlockPage extends Page {
         await (await this.inputAdminTitle).setValue(title);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -80,6 +81,7 @@ class ProgressIndicatorBlockPage extends Page {
         await (await this.dropdownTheme).selectByVisibleText('minimal');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
@@ -96,6 +98,7 @@ class ProgressIndicatorBlockPage extends Page {
         await (await this.inputPercentage).setValue(value);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();

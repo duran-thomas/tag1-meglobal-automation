@@ -1,33 +1,35 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import InlineNavigationBlockPage from '../../pageobjects/CMS/Components/inlineNavigation.page';
-import {users} from '../../data/users.data';
 import { inlineNavigationBlockData } from '../../data/inlineNavigation.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 import BillboardBlockPage from '../../pageobjects/CMS/Components/billboard.page';
 import { billboardBlockData } from '../../data/billboard.data';
 import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page';
 import { accordionBlockData } from '../../data/accordion.data';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 
 
 describe('Inline Navigation Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
+    
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -60,6 +62,10 @@ describe('Inline Navigation Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
@@ -70,9 +76,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createExtInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'1');
 
@@ -89,9 +95,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createIntInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.intLinkTxt, inlineNavigationBlockData.intUrl, inlineNavigationBlockData.id+'2');
 
@@ -108,14 +114,16 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnInlineNavigation).scrollIntoView();
-        (await QALayoutPage.btnInlineNavigation).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createInlineNavFragment(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.jumpUrl, inlineNavigationBlockData.id+'3');
         
-        (await QALayoutPage.btnBillBoard).click();
-        (await QALayoutPage.btnBillBoard).waitForDisplayed();
+        await browser.refresh();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnBillBoard).click();
+        await (await QALayoutPage.btnBillBoard).waitForDisplayed();
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
         await BillboardBlockPage.createBillboard(billboardBlockData.title, billboardBlockData.headline, billboardBlockData.eyebrow, billboardBlockData.intro, billboardBlockData.content, billboardBlockData.btnText, billboardBlockData.url,imageFilePath, billboardBlockData.altText, '_self');
        
@@ -142,9 +150,9 @@ describe('Inline Navigation Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnFreeform).scrollIntoView();
-        (await QALayoutPage.btnFreeform).click();
-        (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnFreeform).scrollIntoView();
+        await (await QALayoutPage.btnFreeform).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
 
         await InlineNavigationBlockPage.createFreeformInlineNav(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'4');
 

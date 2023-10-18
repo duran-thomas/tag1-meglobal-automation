@@ -16,8 +16,40 @@ class CarouselBlockPage extends Page {
         return $('#edit-settings-label');
     }
 
+    public get dropdownToggle() {
+        return $('.dropbutton__toggle');
+    }
+
     public get btnAddCardFeature() {
         return $('.add-more-button-card-feature');
+    }
+
+    public get btnAddCardGeneral() {
+        return $('.add-more-button-card-general');
+    }
+
+    public get btnAddCardLocation() {
+        return $('.add-more-button-card-location');
+    }
+
+    public get btnAddCardMyChart() {
+        return $('.add-more-button-card-mychart');
+    }
+
+    public get btnAddHero() {
+        return $('.add-more-button-hero');
+    }
+
+    public get btnAddImage() {
+        return $('.add-more-button-image');
+    }
+
+    public get btnAddQuote() {
+        return $('.add-more-button-quote');
+    }
+
+    public get btnAddBillboard() {
+        return $('.add-more-button-billboard');
     }
 
     //content area 1 start
@@ -234,7 +266,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get swiperElement() {
-        return $('span[aria-label="Go to slide 3"]');
+        return $('span[aria-label="Go to slide 2"]');
     }
 
     public get frames() {
@@ -285,6 +317,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(4000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -331,6 +364,7 @@ class CarouselBlockPage extends Page {
         await (await this.dropdownIncludePagination).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -376,6 +410,7 @@ class CarouselBlockPage extends Page {
         await (await this.dropdownIncludeControls).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -472,11 +507,111 @@ class CarouselBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
     }
+
+    public async createCarouselDoubleSlide(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, remoteFilePath1: string) {
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(4000);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.inputInfo).scrollIntoView();
+        await browser.pause(2000);
+        await (await this.dropdownImage).click();
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(8000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        //second carousel
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(4000);
+        await (await this.inputHeadline1).scrollIntoView();
+        await (await this.inputHeadline1).setValue(headline + ' 1');
+        await (await this.inputEyebrow1).setValue(eyebrow + ' 1');
+        await (await this.inputList1).setValue(list + ' 1');
+        await (await this.inputContent1).scrollIntoView();
+        await (await this.inputContent1).setValue(content + ' 1');
+        await (await this.inputButtonText1).setValue(btnText + ' 1');
+        await (await this.inputURL1).setValue(url);
+        await browser.pause(2000);
+        await (await this.dropdownImage1).scrollIntoView();
+        await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
+        const frame1 = await this.frames[1];
+        await frame1.waitForDisplayed();
+        await browser.switchToFrame(frame1); 
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath1);
+        await browser.pause(6000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText + ' 1');
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async openParaTypes() {
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await browser.pause(2500);
+    }
+
+    public async areAllElementsDisplayed() {
+        const elements = [
+            await this.btnAddCardFeature,
+            await this.btnAddCardGeneral,
+            await this.btnAddCardLocation,
+            await this.btnAddCardMyChart,
+            await this.btnAddHero,
+            await this.btnAddImage,
+            await this.btnAddQuote,
+            await this.btnAddBillboard
+        ];
+    
+        // Check if all elements are displayed
+        const allDisplayed = elements.every((element) => element.isDisplayed());
+    
+        return allDisplayed;
+    }
+    
 
     public async navToStyling() {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work

@@ -143,7 +143,8 @@ class StepperBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
-        await browser.pause(2000);
+        await browser.pause(1500);
+        await browser.refresh();
     }
 
     public async createHorizontalStepper(adminTitle: string, title: string, content: string, title1: string, content1: string, title2: string, content2: string, title3: string, content3: string, title4: string, content4: string, backLabel: string, contLabel: string) {
@@ -185,6 +186,7 @@ class StepperBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout: 4000 });
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();
@@ -232,6 +234,7 @@ class StepperBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed({ timeout: 4000 });
         await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
         await (await this.btnSaveLayout).click();

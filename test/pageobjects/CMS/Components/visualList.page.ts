@@ -197,11 +197,13 @@ class VisualListBlockPage extends Page {
         await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.simpleVisualList).waitForDisplayed();
         await (await this.simpleVisualList).scrollIntoView();
-        await (await this.simpleVisualList).waitForClickable();
         await (await this.simpleVisualList).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.inputItemTitle).waitForDisplayed();
+        await (await this.inputItemTitle).scrollIntoView();
         await (await this.inputItemTitle).setValue(itemTitle);
         await (await this.inputItemLink).setValue(link);
         await (await this.dropdownAttributes).scrollIntoView();
@@ -212,6 +214,7 @@ class VisualListBlockPage extends Page {
         await (await this.inputItemDescription).setValue(description);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
@@ -260,6 +263,7 @@ class VisualListBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
@@ -283,11 +287,13 @@ class VisualListBlockPage extends Page {
         await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.iconVisualList).waitForDisplayed();
         await (await this.iconVisualList).scrollIntoView();
-        await (await this.iconVisualList).waitForClickable();
         await (await this.iconVisualList).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.inputItemTitle).waitForDisplayed();
+        await (await this.inputItemTitle).scrollIntoView();
         await (await this.inputItemTitle).setValue(itemTitle);
         await (await this.inputItemLink).setValue(link);
         await (await this.inputItemDescription).click();
@@ -300,6 +306,7 @@ class VisualListBlockPage extends Page {
         await (await this.iconVisualListDropdown).selectByIndex(1);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
@@ -323,10 +330,13 @@ class VisualListBlockPage extends Page {
         await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
-        await browser.pause(5000);
-        await (await this.illustrationCardVisualList).waitForClickable();
+        await browser.pause(2000);
+        await (await this.illustrationCardVisualList).waitForDisplayed();
+        await (await this.illustrationCardVisualList).scrollIntoView();
         await (await this.illustrationCardVisualList).click();
-        await browser.pause(5000);
+        await browser.pause(20000);
+        await (await this.illustrationCardVisualListEyebrow).waitForDisplayed();
+        await (await this.illustrationCardVisualListEyebrow).scrollIntoView();
         await (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
         await (await this.illustrationCardVisualListHeading).setValue(heading);
         await (await this.illustrationCardVisualListDescription).setValue(description);
@@ -352,6 +362,7 @@ class VisualListBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
@@ -375,10 +386,13 @@ class VisualListBlockPage extends Page {
         await (await this.inputTitle).setValue(mainTitle);
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
-        await browser.pause(5000);
-        await (await this.imageCardVisualList).waitForClickable();
+        await browser.pause(2000);
+        await (await this.imageCardVisualList).waitForDisplayed();
+        await (await this.imageCardVisualList).scrollIntoView();
         await (await this.imageCardVisualList).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.illustrationCardVisualListEyebrow).waitForDisplayed();
+        await (await this.illustrationCardVisualListEyebrow).scrollIntoView();
         await (await this.illustrationCardVisualListEyebrow).setValue(eyebrow);
         await (await this.illustrationCardVisualListHeading).setValue(heading);
         await (await this.illustrationCardVisualListDescription).setValue(description);
@@ -403,6 +417,7 @@ class VisualListBlockPage extends Page {
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
@@ -453,17 +468,19 @@ class VisualListBlockPage extends Page {
         await (await this.dropdownToggle).scrollIntoView();
         await (await this.dropdownToggle).waitForClickable();
         await (await this.dropdownToggle).click();
-        await browser.pause(5000);
+        await browser.pause(2000);
+        await (await this.simpleVisualList).waitForDisplayed();
         await (await this.simpleVisualList).scrollIntoView();
-        await (await this.simpleVisualList).waitForClickable();
         await (await this.simpleVisualList).click();
-        await browser.pause(5000);
+        await browser.pause(4000);
         await (await this.secondInputItemTitle).scrollIntoView();
         await (await this.secondInputItemTitle).setValue(simpleItemTitle);
         await (await this.secondInputItemLink).scrollIntoView();
         await (await this.secondInputItemLink).setValue(link);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);

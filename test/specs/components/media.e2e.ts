@@ -1,29 +1,29 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import MediaBlockPage from '../../pageobjects/CMS/Components/media.page';
-import {users} from '../../data/users.data';
 import { mediaBlockData } from '../../data/media.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 import * as fs from "fs";
-
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 describe('Media Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await users.bypassUrl);
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -56,6 +56,10 @@ describe('Media Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
@@ -137,148 +141,72 @@ describe('Media Component Tests', () => {
         await expect((await MediaBlockPage.durationElement)).toHaveText(mediaBlockData.duration);   
     });
 
-    it.skip('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
-        await browser.execute(() => {
-            if (!window.dataLayer) {
-                window.dataLayer = [];
-            }
-        
-            window.collectedEvents = [];
-            let handler = {
-                set: function(target, property, value, receiver) {
-                    if (Number(property) === target.length) {
-                        console.log("New item added:", value);
-                        window.collectedEvents.push(value);
-                    }
-                    target[property] = value;
-                    return true;
-                }
-            };
-            window.dataLayer = new Proxy(window.dataLayer, handler);
-        });
-        
 
-        const alt = mediaBlockData.altText;
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnImage).scrollIntoView();
-        (await QALayoutPage.btnImage).click();
-        (await MediaBlockPage.configBlock).waitForDisplayed();
+// it.only('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+//     const alt = mediaBlockData.altText;
+//     await (await QALayoutPage.tabLayout).click();
+//     await QALayoutPage.createNewSection();
+//     await QALayoutPage.navigateToBlockList();
+//     await (await QALayoutPage.btnImage).scrollIntoView();
+//     await (await QALayoutPage.btnImage).click();
+//     await (await MediaBlockPage.configBlock).waitForDisplayed();
 
-        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
-        await MediaBlockPage.createImageType(mediaBlockData.title, imageFilePath, mediaBlockData.altText, mediaBlockData.link, mediaBlockData.caption);
+//     const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
+//     await MediaBlockPage.createImageType(mediaBlockData.title, imageFilePath, mediaBlockData.altText, mediaBlockData.link, mediaBlockData.caption);
 
-        await expect(MediaBlockPage.successMsg).toBeDisplayed();
+//     await expect(MediaBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPage.goToPageView();
-        await (await MediaBlockPage.captionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-        
-        await expect(await $(`img[alt="${alt}"]`)).toExist; 
-        const text = await MediaBlockPage.captionElement;
-        await expect(text).toHaveText(mediaBlockData.caption);  
+//     await QALayoutPage.goToPageView();
 
+//    /**
+//          * Create the expected analytics 
+//          * object based on the spec below: 
+//          * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
+//          *  */ 
+//    const expectedAnalyticsData = {
+//     event: 'e_componentClick',
+//     componentType:'media image',
+//     linkType: 'image',
+//     clickText: mediaBlockData.altText,
+//     pageSlot: '1'
+// }
 
+// // Get the current url of the page
+// //const currentUrl = await browser.getUrl();
 
-        /**
-         * Create the expected analytics 
-         * object based on the spec below: 
-         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
-         *  */ 
-        const expectedAnalyticsData = {
-            event: 'e_componentClick',
-            componentType:'media image',
-            itemTitle: mediaBlockData.title,
-            linkType: 'link',
-            clickText: 'sampleImg3.jpg',
-            pageSlot: '1'
-        }
+// // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
+// await (await $(`a[href="${mediaBlockData.link}"]`)).click();
 
-        // Get the current url of the page
-        const currentUrl = await browser.getUrl();
+// // Switch back to the tab where the analytics is being generated
+// //await browser.switchWindow(currentUrl)
 
-        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`img[alt="${mediaBlockData.altText}"]`)).click();
+// // Get the data layer for the window and get the data for the click event for the component
+// const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+// const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
 
-        // Switch back to the tab where the analytics is being generated
-        //await browser.switchWindow(currentUrl)
+// // Build the actual analytics data object
+// const parsedActualAnalyticsData = {
+//     //Remove whitespace from the Headline
+//     clickText: actualAnalyticsData.clickText.trim(),
+//     componentType: actualAnalyticsData.componentType,
+//     event: actualAnalyticsData.event,
+//     // Remove html tags, whitespace and newlines from the Headline
+//     itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+//     linkType: actualAnalyticsData.linkType,
+//     pageSlot: actualAnalyticsData.pageSlot
+// }
 
-        // Get the data layer for the window and get the data for the click event for the compon
-        const dataLayer = await browser.execute(() => window.dataLayer || []);
-        const actualAnalyticsData = dataLayer.find(item => item.event === "e_componentClick");
+// fs.writeFile('analyticsTestEvidence/mediaImage.json', JSON.stringify(dataLayer), err => {
+//     if (err) {
+//         console.error(err);
+//     }
+//     // file written successfully
+// });
 
-        
-        // Build the actual analytics data object
-        const parsedActualAnalyticsData = {
-            //Remove whitespace from the Headline
-            clickText: actualAnalyticsData.clickText.trim(),
-            componentType: actualAnalyticsData.componentType,
-            event: actualAnalyticsData.event,
-            // Remove html tags, whitespace and newlines from the Headline
-            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
-            linkType: actualAnalyticsData.linkType,
-            pageSlot: actualAnalyticsData.pageSlot
-        }
+// const screenshotPath = `./screenshots/Media/Verify that Analytics for the Image Component is configured`;
+// await browser.saveScreenshot(screenshotPath);
+// await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 
-        // fs.writeFile('analyticsTestEvidence/image.json', JSON.stringify(dataLayer), err => {
-        //     if (err) {
-        //         console.error(err);
-        //     }
-        //     // file written successfully
-        // });
+// });
 
-        const screenshotPath = `./screenshots/Media/Verify_Analytics_Image_Component.png`;
-        await browser.saveScreenshot(screenshotPath);
-        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
-        
-        
-    });
-
-   
-    // it('[S3C871] Verify that all design fields are present with the correct available options for the Video Paragraph Type', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnVideo).scrollIntoView();
-    //     (await QALayoutPage.btnVideo).click();
-    //     (await MediaBlockPage.configBlock).waitForDisplayed();
-
-    //     await MediaBlockPage.navToStyling()
-        
-    //     await expect(MediaBlockPage.dropdownContentPadding).toBeDisplayed();
-    //     await expect(MediaBlockPage.dropdownContentPadding).toHaveValue('base');
-
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toBeDisplayed();
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('none');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('fluid');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('1:1');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('5:4');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('4:3');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:4');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('3:2');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('16:9');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('2:1');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('21:9');
-    //     await expect(MediaBlockPage.dropdownDesktopAspectRatio).toHaveValue('25:6');
-
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toBeDisplayed();
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('none');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('fluid');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('1:1');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('5:4');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('4:3');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('3:4');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('3:2');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('16:9');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('2:1');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('21:9');
-    //     await expect(MediaBlockPage.dropdownMobileAspectRatio).toHaveValue('25:6');
-
-    //     await expect(MediaBlockPage.dropdownSite).toBeDisplayed();
-    //     await expect(MediaBlockPage.dropdownSite).toHaveValue('_none');
-    //     await expect(MediaBlockPage.dropdownSite).toHaveValue('montefiore');
-    //     await expect(MediaBlockPage.dropdownSite).toHaveValue('einstein');
-
-    // });
-
-  });
+});

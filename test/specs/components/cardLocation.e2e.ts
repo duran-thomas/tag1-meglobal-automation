@@ -1,27 +1,28 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import CardLocationBlockPage from '../../pageobjects/CMS/Components/cardLocation.page';
-import {users} from '../../data/users.data';
 import { cardLocationBlockData, cardLocationComponentData } from '../../data/cardLocation.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
 describe('Card Location Component Tests', () => {
-    before(async () => {
-        // Bypass AlertPrompt
-        await browser.url(await users.bypassUrl);
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.admin;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function() {
@@ -61,12 +62,16 @@ describe('Card Location Component Tests', () => {
         }      
       });
       
-        //delete page
-        after(async function () {
-            await AdminContentPage.open();
-            await AdminContentPage.deleteTestPage(global.suiteDescription);
-            await expect($('.mf-alert__container--highlight')).toBeDisplayed();
-        });
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
       
 
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {

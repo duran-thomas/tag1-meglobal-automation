@@ -1,27 +1,29 @@
 import LoginPage from '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import QuickActionsBlockPage from '../../pageobjects/CMS/Components/quickActions.page';
-import { users } from '../../data/users.data';
 import { quickActionsBlockData } from '../../data/quickActions.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Quick Actions Component Tests', () => {
-    before(async () => {
-        // Bypass AlertPrompt
-        await browser.url(await users.bypassUrl);
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-                name: cookieData.name,
-                value: cookieData.value,
-                domain: cookieData.domain,
-                path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function () {
@@ -41,17 +43,22 @@ describe('Quick Actions Component Tests', () => {
     });
 
     //clean up job
-    afterEach(async function() { 
-        // Get the current test result
-        const testResult = this.currentTest;
+    after(async function() { 
+        await QuickActionsBlockPage.cleanUp();
+        await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
+        await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-        // Check if the test passed
-        if (testResult.state === 'passed') {
-            await QuickActionsBlockPage.cleanUp();
-            await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
-            await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
+    });
 
-        }
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
 
@@ -74,8 +81,11 @@ describe('Quick Actions Component Tests', () => {
         //create quick action component
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
-        (await QALayoutPage.linkAddBlock).click();
-        (await QALayoutPage.linkQuickActions).click();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
         await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
@@ -111,8 +121,11 @@ describe('Quick Actions Component Tests', () => {
         //create quick action component
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
-        (await QALayoutPage.linkAddBlock).click();
-        (await QALayoutPage.linkQuickActions).click();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
         await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 

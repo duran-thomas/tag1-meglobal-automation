@@ -1,28 +1,11 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import HeaderBlockPage from '../../pageobjects/CMS/Components/header.page';
-import {users} from '../../data/users.data';
 import { globalUtilityData } from '../../data/header.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
 
 
 describe.skip('Header Component Tests', () => {
-    before(async () => {
-        // //Login
-        await browser.url(await 'https://meda2022:meda2022@meglobalode6.prod.acquia-sites.com/');
-        await browser.maximizeWindow();
-
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: 'SSESS9e2d425922cbef95519d96d95a52e59d',
-              value: 'MOlCogB0apAVLQQREozKeL4bmWItCYGjOP%2CLk7bGWbXYmJ5p',
-              domain: '.meglobalode6.prod.acquia-sites.com',
-              path: cookieData.path,
-            }
-        ]);
-    });
 
     beforeEach(async function() {
         //navigate to home

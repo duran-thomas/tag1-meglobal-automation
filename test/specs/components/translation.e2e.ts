@@ -1,23 +1,26 @@
 import TranslationBlockPage from '../../pageobjects/CMS/Components/translation.page';
-import {users} from '../../data/users.data';
-import { cookieData } from '../../data/cookie.data';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 
 describe('Translation Component Tests', () => {
-    before(async () => {
-        //Login
-        await browser.url(await users.bypassUrl);
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-              name: cookieData.name,
-              value: cookieData.value,
-              domain: cookieData.domain,
-              path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
+        await browser.url(await environment.baseUrl+'home');
     });
 
     afterEach(async function() { 

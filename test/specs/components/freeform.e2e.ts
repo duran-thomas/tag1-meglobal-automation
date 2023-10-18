@@ -1,26 +1,28 @@
 import LoginPage from '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import FreeformBlockPage from '../../pageobjects/CMS/Components/freeform.page';
-import { users } from '../../data/users.data';
 import * as data from '../../data/freeform.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
-import { cookieData } from '../../data/cookie.data';
+import { getEnvironmentConfig } from '../../../envSelector';
+
 
 describe('Freeform Component Tests', () => {
-    before(async () => {
-        //Login
-        await browser.url(await users.bypassUrl);
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
-        // Set the cookie for a logged in user
-        await browser.setCookies([
-            {
-                name: cookieData.name,
-                value: cookieData.value,
-                domain: cookieData.domain,
-                path: cookieData.path,
-            }
-        ]);
+        // Set user cookies
+        await browser.setCookies(await cookies);
+
     });
 
     before(async function () {
@@ -53,12 +55,14 @@ describe('Freeform Component Tests', () => {
 
     //delete page
     after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect(await $('.mf-alert__container--highlight')).toBeDisplayed();
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
-
-
 
 
     it('[S3C1011] Verify that a site Content Administrator can create a Freeform Component with an Accordion block)', async () => {
@@ -141,6 +145,26 @@ describe('Freeform Component Tests', () => {
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
         await expect(await $(`button[data-analytics-click-text="${data.dropdownFreeformData.triggerText}"]`)).toBeExisting();
+    });
+
+    it('[S3C1015] Verify that a site Content Administrator can create a Freeform Component with an Icon List block', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnFreeform).scrollIntoView();
+        (await QALayoutPage.btnFreeform).click();
+        (await FreeformBlockPage.configBlock).waitForDisplayed();
+
+        await FreeformBlockPage.createFreeformIconList(data.freeformBlockData.adminTitle, data.freeformBlockData.headline, data.iconListFreeformData.text+' 1', data.iconListFreeformData.text+' 2', data.iconListFreeformData.text+' 3', data.iconListFreeformData.text+' 4', data.iconListFreeformData.text+' 5', data.iconListFreeformData.text+' 6');
+
+        await expect(FreeformBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await FreeformBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect($('span[data-analytics-click-text="bullet-square"]')).toBeExisting() 
+        await expect(FreeformBlockPage.listItem).toHaveText(data.iconListFreeformData.text+' 1');   
+        await expect(FreeformBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
     });
 
     it('[S3C1016] Verify that a site Content Administrator can create a Freeform Component with an Image block)', async () => {
