@@ -109,4 +109,17 @@ describe('Card Feature Component Tests', () => {
         await expect(CardFeatureBlockPage.cardFeatureImage).toBeDisplayed();   
     });
 
+    it('[S3C1083] Verify that the Headline size defaults to h3 when creating a Card Feature Component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnCardFeature).scrollIntoView();
+        await (await QALayoutPage.btnCardFeature).click();
+        await (await CardFeatureBlockPage.configBlock).waitForDisplayed();
+
+        await CardFeatureBlockPage.checkHeadingSize();
+
+        await expect(CardFeatureBlockPage.dropdownRenderAs).toHaveValue('h3');
+    });
+
   });

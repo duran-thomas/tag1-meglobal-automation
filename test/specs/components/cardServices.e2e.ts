@@ -4,6 +4,7 @@ import CardServicesBlockPage from '../../pageobjects/CMS/Components/cardServices
 import { cardServicesBlockData } from '../../data/cardServices.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 
@@ -67,12 +68,12 @@ describe('Card Services Component Tests', () => {
 
   
     it('[S3C903] Verify that a site Content Administrator can create a Card Services Component with an external link', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCardServices).scrollIntoView();
-        (await QALayoutPage.btnCardServices).click();
-        (await CardServicesBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCardServices).scrollIntoView();
+        await (await QALayoutPage.btnCardServices).click();
+        await (await CardServicesBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await CardServicesBlockPage.createCardServiceExtLink(cardServicesBlockData.title, cardServicesBlockData.eyebrow, cardServicesBlockData.headline, cardServicesBlockData.content, cardServicesBlockData.list, cardServicesBlockData.btnText, cardServicesBlockData.btnUrl,cardServicesBlockData.linkText, cardServicesBlockData.linkUrl, cardServicesBlockData.infolabel, imageFilePath, cardServicesBlockData.altText);
@@ -87,7 +88,7 @@ describe('Card Services Component Tests', () => {
     });
 
     it('[S3C904] Verify that a site Content Administrator can create a Card Services Component with an internal link', async () => {
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardServices).scrollIntoView();
@@ -105,5 +106,90 @@ describe('Card Services Component Tests', () => {
         await expect(CardServicesBlockPage.internalLink).toExist;  
         await expect(await $('.mt-16')).toHaveText(cardServicesBlockData.resiText) 
     });
+
+    it('[S3C1084] Verify that the Headline size defaults to h3 when creating a Card General Component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnCardServices).scrollIntoView();
+        await (await QALayoutPage.btnCardServices).click();
+        await (await CardServicesBlockPage.configBlock).waitForDisplayed();
+
+        await CardServicesBlockPage.checkHeadingSize();
+
+        await expect(CardServicesBlockPage.dropdownRenderAs).toHaveValue('h3');
+    });
+
+    it('[S3C1103] Verify that Analytics for the Card Services Component is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnCardServices).scrollIntoView();
+        await (await QALayoutPage.btnCardServices).click();
+        await (await CardServicesBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await CardServicesBlockPage.createCardServicesAnalytics(cardServicesBlockData.title, cardServicesBlockData.eyebrow, cardServicesBlockData.headline, cardServicesBlockData.content, cardServicesBlockData.list, cardServicesBlockData.btnText, cardServicesBlockData.btnUrl,cardServicesBlockData.linkText, cardServicesBlockData.linkUrl, cardServicesBlockData.infolabel, imageFilePath, cardServicesBlockData.altText);
+
+        await expect(CardServicesBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await CardServicesBlockPage.cardContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(CardServicesBlockPage.cardServicesElement).toExist; 
+        await expect(await CardServicesBlockPage.cardContent).toHaveText(cardServicesBlockData.content); 
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23a9f051951_1_86
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'card services',
+            itemTitle: cardServicesBlockData.headline,
+            linkType: 'button',
+            clickText: cardServicesBlockData.btnText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a.mf-button`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText.trim(),
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/cardServices.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/CardServices/Verify that Analytics for the Card Services Component is configured..png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
+
 
   });
