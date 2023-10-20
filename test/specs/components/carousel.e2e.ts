@@ -4,6 +4,7 @@ import CarouselBlockPage from '../../pageobjects/CMS/Components/carousel.page';
 import { carouselBlockData } from '../../data/carousel.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 
@@ -214,7 +215,7 @@ describe('Carousel Component Tests', () => {
     });
 
 
-    it.only('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -228,6 +229,69 @@ describe('Carousel Component Tests', () => {
         
         await expect(areAllElementsDisplayed).toBe(true);            
     });
+
+    it('[S3C1125] Verify that Analytics for the Carousel Component is configured', async () => {
+        const headline = carouselBlockData.headline;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnCarousel).scrollIntoView();
+        (await QALayoutPage.btnCarousel).click();
+        (await CarouselBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        
+        await CarouselBlockPage.createCarouselWithExternalButtonLink(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText);
+
+        expect(CarouselBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
+
+        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect(CarouselBlockPage.controlElement).toExist(); 
+
+        const expectedAnalyticsData = {
+            clickText: 'Carousel Button',
+            componentType:'carousel > card feature',
+            event: 'e_componentClick',
+            itemTitle: carouselBlockData.headline,
+            linkType: 'button',
+            pageSlot: '1'
+        };
+
+        const currentUrl = await browser.getUrl();
+
+        // Click Carousel button to trigger events
+        await $('a[data-analytics-click-text="Carousel Button"]').click()
+
+        await browser.switchWindow(currentUrl)
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+
+        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalayticsData.clickText,
+            componentType: actualAnalayticsData.componentType,
+            event: actualAnalayticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalayticsData.linkType,
+            pageSlot: actualAnalayticsData.pageSlot,
+        };
+
+        fs.writeFile('analyticsTestEvidence/carousel.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/Carousel/Verify that Analytics for the Carousel Component is configured.png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+    })
 
 
   });

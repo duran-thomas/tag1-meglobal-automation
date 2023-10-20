@@ -81,6 +81,14 @@ class CarouselBlockPage extends Page {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-info-label-0-"]');
     }
 
+    public get additionalBtnOptionsDropdown(){
+        return $('details[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options"]');
+    }
+
+    public get setTargetDropdown(){
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options-target"]');
+    }
+
     public get dropdownImage() {
         return $('div[id^="edit-settings-block-form-field-content-0-subform-field-image-wrapper-"]');
     }
@@ -531,8 +539,8 @@ class CarouselBlockPage extends Page {
         await (await this.inputContent).setValue(content);
         await (await this.inputButtonText).setValue(btnText);
         await (await this.inputURL).setValue(url);
+        await browser.pause(2000)
         await (await this.inputInfo).scrollIntoView();
-        await browser.pause(2000);
         await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.entityIframe);
@@ -568,6 +576,50 @@ class CarouselBlockPage extends Page {
         await browser.pause(6000); //explicit waits seem to be necessary here
         await (await this.inputAltText).waitForEnabled();
         await (await this.inputAltText).setValue(altText + ' 1');
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async createCarouselWithExternalButtonLink(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.btnAddCardFeature).click();
+        await browser.pause(4000);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.inputURL).setValue(url);
+        await (await this.additionalBtnOptionsDropdown).click();
+        await (await this.setTargetDropdown).selectByAttribute('value', '_blank');
+        await browser.pause(2000)
+        await (await this.inputInfo).scrollIntoView();
+        await (await this.dropdownImage).click();
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(8000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
         await (await this.btnSaveImage).scrollIntoView();
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
