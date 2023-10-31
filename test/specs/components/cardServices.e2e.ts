@@ -164,18 +164,18 @@ describe('Card Services Component Tests', () => {
 
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
 
         // Build the actual analytics data object
         const parsedActualAnalyticsData = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
             // Remove html tags, whitespace and newlines from the Headline
-            itemTitle: actualAnalayticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/cardServices.json', JSON.stringify(dataLayer), err => {

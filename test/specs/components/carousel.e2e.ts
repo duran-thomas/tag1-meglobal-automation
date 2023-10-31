@@ -214,7 +214,7 @@ describe('Carousel Component Tests', () => {
     });
 
 
-    it.only('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
+    it('[S3C830] Verify that the available paragraph types in the Carousel form are correct.', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

@@ -379,6 +379,10 @@ class FreeformBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
+    public get headlineOptions() {
+        return $('summary[class="claro-details__summary"]');
+    }
+
 
     /**
      * Helper methods to create freeform Components
@@ -671,7 +675,7 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownToggle).click();
         await (await this.linkAddSpacer).waitForDisplayed({timeout:4000});
         await (await this.linkAddSpacer).click();
-        browser.pause(2000);
+        await browser.pause(5000);
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -790,6 +794,17 @@ class FreeformBlockPage extends Page {
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
+    }
+
+    public async checkHeadingSize(){
+        await browser.pause(4000); 
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.headlineOptions).scrollIntoView();
+        await (await this.headlineOptions).click();
+        await browser.pause(2500);
     }
 
 }

@@ -250,9 +250,9 @@ describe('Freeform Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnFreeform).scrollIntoView();
-        (await QALayoutPage.btnFreeform).click();
-        (await FreeformBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnFreeform).scrollIntoView();
+        await (await QALayoutPage.btnFreeform).click();
+        await (await FreeformBlockPage.configBlock).waitForDisplayed();
 
         await FreeformBlockPage.createFreeformSpacer(data.freeformBlockData.adminTitle, data.freeformBlockData.headline);
 
@@ -348,19 +348,13 @@ describe('Freeform Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnFreeform).scrollIntoView();
-        (await QALayoutPage.btnFreeform).click();
-        (await FreeformBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnFreeform).scrollIntoView();
+        await (await QALayoutPage.btnFreeform).click();
+        await (await FreeformBlockPage.configBlock).waitForDisplayed();
 
-        await FreeformBlockPage.createFreeformSpacer(data.freeformBlockData.adminTitle, data.freeformBlockData.headline);
+        await FreeformBlockPage.checkHeadingSize();
 
-        await expect(FreeformBlockPage.successMsg).toBeDisplayed();
-
-        await QALayoutPage.goToPageView();
-
-        await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
-
-        await expect(await $(`h3=${data.freeformBlockData.headline}`)).toBeExisting();
+        await expect(FreeformBlockPage.dropdownRenderAs).toHaveValue('h3');
     });
 
     it('[S3C1087] Verify that Analytics for the Freeform Component with Rich Text is configured)', async () => {

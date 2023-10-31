@@ -6,7 +6,7 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
 
 
-describe('Typeahed Component Tests', () => {
+describe('Typeahead Component Tests', () => {
 
     before(async ()=>{
         // Get the environment configuration
