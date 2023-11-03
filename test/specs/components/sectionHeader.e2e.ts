@@ -4,6 +4,7 @@ import SectionHeaderBlockPage from '../../pageobjects/CMS/Components/sectionHead
 import { sectionHeaderBlockData } from '../../data/sectionHeader.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 
@@ -46,7 +47,7 @@ describe('Section Header Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
@@ -70,19 +71,19 @@ describe('Section Header Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnSectionHeader).scrollIntoView();
-        (await QALayoutPage.btnSectionHeader).click();
-        (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnSectionHeader).scrollIntoView();
+        await (await QALayoutPage.btnSectionHeader).click();
+        await (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
 
         await SectionHeaderBlockPage.createSectionHeader(sectionHeaderBlockData.title, sectionHeaderBlockData.headline, sectionHeaderBlockData.content, sectionHeaderBlockData.btnText, sectionHeaderBlockData.btnUrl, sectionHeaderBlockData.linkText, sectionHeaderBlockData.linkUrl);
 
-        expect(SectionHeaderBlockPage.successMsg).toBeDisplayed();
+        await expect(SectionHeaderBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await SectionHeaderBlockPage.sectionHeaderElement).scrollIntoView();
         
         await expect(SectionHeaderBlockPage.sectionHeaderElement).toExist; 
-        expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline);   
+        await expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline);   
     });
 
 
@@ -90,9 +91,9 @@ describe('Section Header Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnSectionHeader).scrollIntoView();
-        (await QALayoutPage.btnSectionHeader).click();
-        (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnSectionHeader).scrollIntoView();
+        await (await QALayoutPage.btnSectionHeader).click();
+        await (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
 
         await SectionHeaderBlockPage.navToStyling()
 
@@ -100,6 +101,131 @@ describe('Section Header Component Tests', () => {
         await minimalCheckbox.scrollIntoView();
         await expect(minimalCheckbox).toBeDisplayed();
         await expect(await minimalCheckbox.isSelected()).toBe(false);
+    });
+
+    it('[S3C1085] Verify that the Headline size defaults to h2 when creating a Section Header Component', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnSectionHeader).scrollIntoView();
+        await (await QALayoutPage.btnSectionHeader).click();
+        await (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
+
+        await SectionHeaderBlockPage.checkHeadingSize();
+
+        await expect(SectionHeaderBlockPage.dropdownRenderAs).toHaveValue('h2');
+    });
+
+    it('[S3C1356] Verify that Analytics for the Section Header Component is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnSectionHeader).scrollIntoView();
+        await (await QALayoutPage.btnSectionHeader).click();
+        await (await SectionHeaderBlockPage.configBlock).waitForDisplayed();
+
+        await SectionHeaderBlockPage.createSectionHeaderAnalytics(sectionHeaderBlockData.title, sectionHeaderBlockData.headline, sectionHeaderBlockData.content, sectionHeaderBlockData.btnText, sectionHeaderBlockData.btnUrl, sectionHeaderBlockData.linkText, sectionHeaderBlockData.linkUrl);
+
+        await expect(SectionHeaderBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await SectionHeaderBlockPage.sectionHeaderElement).scrollIntoView();
+        
+        await expect(SectionHeaderBlockPage.sectionHeaderElement).toExist; 
+        await expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline); 
+        
+         /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g127fd856972_0_393
+         *  */ 
+
+        //Button Analytics
+        const expectedButtonAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'section header',
+            itemTitle: sectionHeaderBlockData.headline,
+            linkType: 'button',
+            clickText: sectionHeaderBlockData.btnText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        let currentUrl = await browser.getUrl();
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${sectionHeaderBlockData.btnText}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const buttonDataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualButtonAnalyticsData = buttonDataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedButtonAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualButtonAnalyticsData.clickText.trim(),
+            componentType: actualButtonAnalyticsData.componentType,
+            event: actualButtonAnalyticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualButtonAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualButtonAnalyticsData.linkType,
+            pageSlot: actualButtonAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/sectionHeaderButton.json', JSON.stringify(buttonDataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        //Link Analytics
+        const expectedLinkAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'section header',
+            itemTitle: sectionHeaderBlockData.headline,
+            linkType: 'link',
+            clickText: sectionHeaderBlockData.linkText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        currentUrl = await browser.getUrl();
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${sectionHeaderBlockData.linkText}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[1];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/sectionHeaderLink.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedLinkAnalyticsData);
+
     });
 
   });

@@ -4,6 +4,8 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import HeroBlockPage from '../../pageobjects/CMS/Components/hero.page';
 import { heroBlockData } from '../../data/hero.data';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
+
 
 
 
@@ -70,9 +72,9 @@ describe('Hero Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnHero).scrollIntoView();
-        (await QALayoutPage.btnHero).click();
-        (await HeroBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnHero).scrollIntoView();
+        await (await QALayoutPage.btnHero).click();
+        await (await HeroBlockPage.configBlock).waitForDisplayed();
 
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
@@ -112,9 +114,9 @@ describe('Hero Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnHero).scrollIntoView();
-        (await QALayoutPage.btnHero).click();
-        (await HeroBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnHero).scrollIntoView();
+        await (await QALayoutPage.btnHero).click();
+        await (await HeroBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         await HeroBlockPage.createComponentWithImage(heroBlockData.title, heroBlockData.headline, heroBlockData.eyebrow, heroBlockData.intro, heroBlockData.content, heroBlockData.btnText, heroBlockData.url,imageFilePath, heroBlockData.altText);
@@ -126,6 +128,79 @@ describe('Hero Component Tests', () => {
 
         const tagName = await HeroBlockPage.headlineElement.getTagName();
         expect(tagName).toBe('h1');
+    });
+
+    it('[S3C1105] Verify that Analytics for the Hero Component is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnHero).scrollIntoView();
+        await (await QALayoutPage.btnHero).click();
+        await (await HeroBlockPage.configBlock).waitForDisplayed();
+
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await HeroBlockPage.createHeroAnalytics(heroBlockData.title, heroBlockData.headline, heroBlockData.eyebrow, heroBlockData.intro, heroBlockData.content, heroBlockData.btnText, heroBlockData.url,imageFilePath, heroBlockData.altText);
+        
+        await expect(HeroBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        
+        await (await HeroBlockPage.headlineElement).scrollIntoView();
+        const elem = await HeroBlockPage.headlineElement;
+        await expect(elem).toHaveTextContaining(heroBlockData.headline);
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23a9f051951_1_185
+         * */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'hero',
+            itemTitle: heroBlockData.headline,
+            linkType: 'button',
+            clickText: heroBlockData.btnText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${heroBlockData.btnText}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/hero.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/Hero/Verify that Analytics for the Hero Component is configured..png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+
     });
 
 

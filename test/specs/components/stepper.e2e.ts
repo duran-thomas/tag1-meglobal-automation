@@ -4,6 +4,8 @@ import StepperBlockPage from '../../pageobjects/CMS/Components/stepper.page';
 import { stepperBlockData } from '../../data/stepper.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
+
 
 describe('Stepper Component Tests', () => {
 
@@ -156,13 +158,13 @@ describe('Stepper Component Tests', () => {
     });
 
 
-    it('[S3C1076] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
+    it.only('[S3C1076] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnStepper).scrollIntoView();
-        (await QALayoutPage.btnStepper).click();
-        (await StepperBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnStepper).scrollIntoView();
+        await (await QALayoutPage.btnStepper).click();
+        await (await StepperBlockPage.configBlock).waitForDisplayed();
 
         await StepperBlockPage.createHorizontalStepper(stepperBlockData.adminTitle, stepperBlockData.steps.title1, stepperBlockData.steps.content1, stepperBlockData.steps.title2, stepperBlockData.steps.content2, stepperBlockData.steps.title3, stepperBlockData.steps.content3, stepperBlockData.steps.title4, stepperBlockData.steps.content4, stepperBlockData.steps.title5, stepperBlockData.steps.content5, stepperBlockData.backLabel, stepperBlockData.contLabel);
 
@@ -192,16 +194,16 @@ describe('Stepper Component Tests', () => {
 
          // Get the data layer for the window and get the data for the click event for the component
         let dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        let actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
+        let actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
 
         // Build the actual analytics data object for using the forward button
         const parsedActualAnalyticsDataForwardBtn = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/horizontalStepper_forward.json', JSON.stringify(dataLayer), err => {
@@ -226,16 +228,16 @@ describe('Stepper Component Tests', () => {
 
          // Get the data layer for the window and get the data for the click event for the component
         dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "link")))[0];
+        actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "link")))[0];
 
         // Build the actual analytics data object for using the back link
         const parsedActualAnalyticsDataBackLink = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/horizontalStepper_back.json', JSON.stringify(dataLayer), err => {
@@ -260,16 +262,16 @@ describe('Stepper Component Tests', () => {
 
         // Get the data layer for the window and get the data for the click event for the component
         dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
+        actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
 
         // Build the actual analytics data object for using the back link
         const parsedActualAnalyticsDataStep = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/horizontalStepper_step.json', JSON.stringify(dataLayer), err => {
@@ -319,16 +321,16 @@ describe('Stepper Component Tests', () => {
 
          // Get the data layer for the window and get the data for the click event for the component
         let dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        let actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
+        let actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "button")))[0];
 
         // Build the actual analytics data object for using the forward button
         const parsedActualAnalyticsDataForwardBtn = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/verticalStepper_forward.json', JSON.stringify(dataLayer), err => {
@@ -353,16 +355,16 @@ describe('Stepper Component Tests', () => {
 
         // Get the data layer for the window and get the data for the click event for the component
         dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        actualAnalayticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
+        actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
 
         // Build the actual analytics data object for using the back link
         const parsedActualAnalyticsDataStep = {
             //Remove whitespace from the Headline
-            clickText: actualAnalayticsData.clickText.trim(),
-            componentType: actualAnalayticsData.componentType,
-            event: actualAnalayticsData.event,
-            linkType: actualAnalayticsData.linkType,
-            pageSlot: actualAnalayticsData.pageSlot
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
         }
 
         fs.writeFile('analyticsTestEvidence/verticalStepper_step.json', JSON.stringify(dataLayer), err => {

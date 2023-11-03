@@ -56,6 +56,14 @@ class InlineNavigationBlockPage extends Page {
         return $('=Google');
     }
 
+    public get dropdownLinkOptions() {
+        return $('summary[aria-controls="edit-settings-block-form-field-content-0-subform-field-links-0-link-options"]');
+    }
+
+    public get dropdownTarget() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-links-0-link-options-target');
+    }
+
     //freeform selectors
     public get dropdownToggle() {
         return $('.dropbutton__toggle');
@@ -170,6 +178,32 @@ class InlineNavigationBlockPage extends Page {
         await (await this.inputLinkText1).scrollIntoView();
         await (await this.inputLinkText1).setValue(linkText);
         await (await this.inputURL1).setValue(url);
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id);
+        await browser.pause(2000);
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async createInlineNavAnalytics(title: string, label: string, headline: string, linkText: string, url: string, id: string) {
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputLabel).scrollIntoView();
+        await (await this.inputLabel).setValue(label);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputURL).setValue(url);
+        await (await this.dropdownLinkOptions).click();
+        await (await this.dropdownTarget).selectByVisibleText('_blank');
         await (await this.inputID).scrollIntoView();
         await (await this.inputID).setValue(id);
         await browser.pause(2000);

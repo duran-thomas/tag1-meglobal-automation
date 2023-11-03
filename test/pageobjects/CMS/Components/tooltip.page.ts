@@ -30,19 +30,19 @@ class TooltipBlockPage extends Page {
 
     //Tooltip component has no unique identifiers, accessing based on index
     public get inputAddText() {
-        return $$('input[id^="ck-labeled-field-view"]')[1];
+        return $$('input[id^="ck-labeled-field-view"]')[0];
     }
 
     public get inputAddTooltip() {
-        return $$('input[id^="ck-labeled-field-view"]')[2];
+        return $$('input[id^="ck-labeled-field-view"]')[1];
     }
 
     public get inputPlacement() {
-        return $$('input[id^="ck-labeled-field-view"]')[3];
+        return $$('input[id^="ck-labeled-field-view"]')[2];
     }
 
     public get inputTheme() {
-        return $$('input[id^="ck-labeled-field-view"]')[4];
+        return $$('input[id^="ck-labeled-field-view"]')[3];
     }
 
 

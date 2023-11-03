@@ -8,6 +8,7 @@ import { billboardBlockData } from '../../data/billboard.data';
 import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page';
 import { accordionBlockData } from '../../data/accordion.data';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 
@@ -165,5 +166,68 @@ describe('Inline Navigation Component Tests', () => {
         await expect($(`#${inlineNavigationBlockData.id}4`)).toHaveElementClassContaining('scrollto'); 
     });
 
+
+    it('[S3C1120] Verify that Analytics for the Inline Navigation Component is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnInlineNavigation).scrollIntoView();
+        await (await QALayoutPage.btnInlineNavigation).click();
+        await (await InlineNavigationBlockPage.configBlock).waitForDisplayed();
+
+        await InlineNavigationBlockPage.createInlineNavAnalytics(inlineNavigationBlockData.title, inlineNavigationBlockData.label, inlineNavigationBlockData.headline, inlineNavigationBlockData.linkTxt, inlineNavigationBlockData.url, inlineNavigationBlockData.id+'1');
+
+        await expect(InlineNavigationBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await InlineNavigationBlockPage.inlineNavElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect($(`#${inlineNavigationBlockData.id}1`)).toExist; 
+        await expect($(`#${inlineNavigationBlockData.id}1`)).toHaveElementClassContaining('scrollto'); 
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23a9f051951_1_185
+         * */ 
+        const expectedAnalyticsData = {
+            event: 'e_navigationClick',
+            navigationType:'inline navigation',
+            clickText: inlineNavigationBlockData.linkTxt
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${inlineNavigationBlockData.linkTxt}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            navigationType: actualAnalyticsData.navigationType,
+            event: actualAnalyticsData.event
+        }
+
+        fs.writeFile('analyticsTestEvidence/inlineNavigation.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        const screenshotPath = `./screenshots/InlineNavigation/Verify that Analytics for the Inline Navigation Component is configured..png`;
+        await browser.saveScreenshot(screenshotPath);
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
    
   });
