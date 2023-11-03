@@ -20,7 +20,7 @@ describe('Translation Component Tests', () => {
         // Set user cookies
         await browser.setCookies(await cookies);
 
-        await browser.url(await environment.baseUrl+'home');
+        await browser.url(await environment.baseUrl);
     });
 
     afterEach(async function() { 
@@ -58,7 +58,7 @@ describe('Translation Component Tests', () => {
         await (await TranslationBlockPage.listItems[1]).click();
 
         const expectedLanguage = 'es'; 
-        const expectedURL = 'es/home'; 
+        const expectedURL = '/es'; 
         const langAttribute = await TranslationBlockPage.htmlElem.getAttribute('lang');
         const currentURL = await browser.getUrl();
         
@@ -90,7 +90,7 @@ describe('Translation Component Tests', () => {
         await (await TranslationBlockPage.listItems[0]).click();
 
         const expectedLanguage = 'en'; 
-        const expectedURL = '/home'; 
+        const expectedURL = '/'; 
         const langAttribute = await TranslationBlockPage.htmlElem.getAttribute('lang');
         const currentURL = await browser.getUrl();
         
