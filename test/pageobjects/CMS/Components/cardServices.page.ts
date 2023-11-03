@@ -140,13 +140,28 @@ class CardServicesBlockPage extends Page {
         return $('.mf-icon-list__item');
     }
 
+    public get headlineOptions() {
+        return $('summary[class="claro-details__summary"]');
+    }
+
+    public get dropdownRenderAs() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-rich-headline-0-more-options-render-as');
+    }
+
+    public get dropdownButtonOptions() {
+        return $('summary[aria-controls="edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options"]');
+    }
+
+    public get dropdownTarget() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options-target');
+    }
 
     /**
      * Helper methods to create Cards Services Component
      */
 
     public async createCardServiceExtLink(title: string, eyebrow: string, headline: string, content: string, list: string, btnText: string, btnUrl: string, linkText: string, linkUrl: string, info: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -190,7 +205,7 @@ class CardServicesBlockPage extends Page {
     }
 
     public async createCardServiceIntLink(title: string, eyebrow: string, headline: string, content: string, list: string, resiText: string, resiLink:string, info: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -217,6 +232,64 @@ class CardServicesBlockPage extends Page {
         await (await this.btnBrowse).scrollIntoView();
         await (await this.btnBrowse).setValue(remoteFilePath);
         await browser.pause(5200); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForClickable();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(6000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+    }
+
+    public async checkHeadingSize(){
+        await browser.pause(4000); 
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.headlineOptions).scrollIntoView();
+        await (await this.headlineOptions).click();
+        await browser.pause(2500);
+    }
+
+    public async createCardServicesAnalytics(title: string, eyebrow: string, headline: string, content: string, list: string, btnText: string, btnUrl: string, linkText: string, linkUrl: string, info: string, remoteFilePath: string, altText: string) {
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputEyebrow).scrollIntoView();
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputContent).scrollIntoView();
+        await (await this.inputContent).setValue(content);
+        await (await this.inputList).setValue(list);
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.dropdownButtonOptions).click();
+        await (await this.dropdownTarget).selectByVisibleText('_blank');
+        await (await this.inputButtonURL).scrollIntoView();
+        await (await this.inputButtonURL).setValue(btnUrl);
+        await (await this.inputLinkText).scrollIntoView();
+        await (await this.inputLinkText).setValue(linkText);
+        await (await this.inputLinkURL).setValue(linkUrl);
+        await (await this.inputInfo).scrollIntoView();
+        await (await this.inputInfo).setValue(info);
+        await browser.pause(2000);
+        await (await this.dropdownImage).click();
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(4500); //explicit waits seem to be necessary here
         await (await this.inputAltText).waitForClickable();
         await (await this.inputAltText).setValue(altText);
         await (await this.btnSaveImage).scrollIntoView();

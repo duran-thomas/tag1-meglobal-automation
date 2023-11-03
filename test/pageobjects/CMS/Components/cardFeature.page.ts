@@ -116,13 +116,21 @@ class CardFeatureBlockPage extends Page {
         return $('=Residency Programs')
     }
 
+    public get headlineOptions() {
+        return $('summary[class="claro-details__summary"]');
+    }
+
+    public get dropdownRenderAs() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-rich-headline-0-more-options-render-as');
+    }
+
 
     /**
      * Helper methods to create card feature Component
      */
 
     public async createCardFeature(title: string, headline: string, eyebrow: string, list: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -160,7 +168,7 @@ class CardFeatureBlockPage extends Page {
     }
 
     public async createCardFeatureInternal(title: string, headline: string, eyebrow: string, list: string, btnText: string, remoteFilePath: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -197,9 +205,20 @@ class CardFeatureBlockPage extends Page {
         await browser.pause(3000);
     }
 
+    public async checkHeadingSize(){
+        await browser.pause(4000); 
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.headlineOptions).scrollIntoView();
+        await (await this.headlineOptions).click();
+        await browser.pause(2500);
+    }
+
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
