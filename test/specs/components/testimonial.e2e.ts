@@ -110,7 +110,7 @@ describe('Testimonial Component Tests', () => {
         await expect(await TestimonialBlockPage.quotes).toHaveText(data.testimonialBgBlockData.quote); 
     });
 
-    it.only('[S3C932] Verify that a site Content Administrator can create multiple Testimonial Components', async () => {
+    it('[S3C932] Verify that a site Content Administrator can create multiple Testimonial Components', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

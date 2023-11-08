@@ -1,9 +1,10 @@
 import LoginPage from '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import VisualListBlockPage from '../../pageobjects/CMS/Components/visualList.page';
-import { visualListBlockData, illustrationVisualListBlockData, simplevisualListBlockData, stylingData } from '../../data/visualList.data';
+import { visualListBlockData, illustrationVisualListBlockData, simplevisualListBlockData, stylingData, illustrationCard, imageCardData } from '../../data/visualList.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 describe('Visual List Component Tests', () => {
@@ -171,11 +172,11 @@ describe('Visual List Component Tests', () => {
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
         await (await VisualListBlockPage.configBlock).waitForDisplayed();
-        await VisualListBlockPage.createVisualListComponentSimple(visualListBlockData[0].mainTitle, visualListBlockData[0].itemTitle, visualListBlockData[0].link, visualListBlockData[0].description);
+        await VisualListBlockPage.createVisualListComponentSimple(visualListBlockData[4].mainTitle, visualListBlockData[4].itemTitle, visualListBlockData[4].link, visualListBlockData[4].description);
 
         await QALayoutPage.goToPageView();
         await (await VisualListBlockPage.visualListElement).scrollIntoView();
-        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[0].itemTitle);
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[4].itemTitle);
         await expect(VisualListBlockPage.visualListElement).toExist();
 
     });
@@ -224,83 +225,193 @@ describe('Visual List Component Tests', () => {
 
         await verifyBackgroundOptions();
 
+    });
 
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('none');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-montefiore-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-montefiore-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-montefiore-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-einstein-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-einstein-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('primary-einstein-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-montefiore-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-montefiore-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-montefiore-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-einstein-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-einstein-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('secondary-einstein-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-100');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-300');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-400');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-600');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('gray-700');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('soft-blue');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('soft-fuchsia');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('soft-gray');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('black');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('white');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-sky');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-water');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-flesh');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-wheat');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-mint');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('tint-bronze');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-success-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-success-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-success-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-error-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-error-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-error-800');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-warning-200');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-warning-500');
-        // await expect(VisualListBlockPage.dropdownMediaBackground).toHaveValueContaining('functional-warning-800');
+    it('[S3C1070] Verify that Analytics for the Visual List Component with a Simple Visual List item is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnVisualList).scrollIntoView();
+        await (await QALayoutPage.btnVisualList).click();
+        await (await VisualListBlockPage.configBlock).waitForDisplayed();
+        await VisualListBlockPage.createSimpleVisualListAnalytics(visualListBlockData[4].mainTitle, visualListBlockData[4].itemTitle, visualListBlockData[4].link, visualListBlockData[4].description);
 
-        // await expect(VisualListBlockPage.dropdownMediaSize).toBeDisplayed();
-        // await expect(VisualListBlockPage.dropdownMediaSize).toHaveValueContaining('_none');
-        // await expect(VisualListBlockPage.dropdownMediaSize).toHaveValueContaining('small');
-        // await expect(VisualListBlockPage.dropdownMediaSize).toHaveValueContaining('medium');
-        // await expect(VisualListBlockPage.dropdownMediaSize).toHaveValueContaining('large');
+        await QALayoutPage.goToPageView();
+        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[4].itemTitle);
+        await expect(VisualListBlockPage.visualListElement).toExist();
 
-        // await expect(VisualListBlockPage.dropdownMediaSpacing).toBeDisplayed();
-        // await expect(VisualListBlockPage.dropdownMediaSpacing).toHaveValueContaining('base');
-        // await expect(VisualListBlockPage.dropdownMediaSpacing).toHaveValueContaining('none');
-        // await expect(VisualListBlockPage.dropdownMediaSpacing).toHaveValueContaining('narrow');
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g176e8b0086d_0_3
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'visual list',
+            linkType: 'link',
+            clickText: visualListBlockData[4].itemTitle,
+            pageSlot: '1'
+        }
 
-        // await expect(VisualListBlockPage.dropdownMediaAlign).toBeDisplayed();
-        // await expect(VisualListBlockPage.dropdownMediaAlign).toHaveValueContaining('_none');
-        // await expect(VisualListBlockPage.dropdownMediaAlign).toHaveValueContaining('left');
-        // await expect(VisualListBlockPage.dropdownMediaAlign).toHaveValueContaining('right');
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
 
-        // const roundedCheckbox = await VisualListBlockPage.checkboxRoundedMedia;
-        // await expect(roundedCheckbox).toBeDisplayed();
-        // await expect(roundedCheckbox.isSelected()).toBe(false);
+        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${visualListBlockData[4].itemTitle}"]`)).click();
 
-        // await expect(VisualListBlockPage.dropdownTemplate).toBeDisplayed();
-        // await expect(VisualListBlockPage.dropdownTemplate).toHaveValueContaining('list');
-        // await expect(VisualListBlockPage.dropdownTemplate).toHaveValueContaining('card');
-        // await expect(VisualListBlockPage.dropdownTemplate).toHaveValueContaining('card-small');
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
 
-        // const dividerCheckbox = await VisualListBlockPage.checkboxDivider;
-        // await expect(dividerCheckbox).toBeDisplayed();
-        // await expect(dividerCheckbox.isSelected()).toBe(true);
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
 
-        // await expect(VisualListBlockPage.dropdownDividerStyle).toBeDisplayed();
-        // await expect(VisualListBlockPage.dropdownDividerStyle).toHaveValueContaining('light');
-        // await expect(VisualListBlockPage.dropdownDividerStyle).toHaveValueContaining('dark');
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
 
+        fs.writeFile('analyticsTestEvidence/simpleVisualList.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 
     });
-    //#endregion
+
+    it('[S3C1320] Verify that Analytics for the Visual List Component with a Illustration Card List item is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnVisualList).scrollIntoView();
+        await (await QALayoutPage.btnVisualList).click();
+        await (await VisualListBlockPage.configBlock).waitForDisplayed();
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await VisualListBlockPage.createVisualListIllustrationCardAnalytics(illustrationCard[1].mainTitle,illustrationCard[1].eyebrow, illustrationCard[1].heading, illustrationCard[1].url, illustrationCard[1].linkText, illustrationCard[1].description, imageFilePath, illustrationCard[1].altText)
+
+        await QALayoutPage.goToPageView();
+        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(illustrationCard[1].heading);
+        await expect(VisualListBlockPage.visualListElement).toExist();
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_145
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'visual list',
+            linkType: 'link',
+            clickText: illustrationCard[1].heading,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${illustrationCard[1].heading}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/illustrationCardVisualList.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
+
+    it('[S3C1321] Verify that Analytics for the Visual List Component with an Image Card List item is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnVisualList).scrollIntoView();
+        await (await QALayoutPage.btnVisualList).click();
+        await (await VisualListBlockPage.configBlock).waitForDisplayed();
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await VisualListBlockPage.createVisualListImageCardAnalytics(imageCardData.mainTitle, imageCardData.eyebrow, imageCardData.heading, imageCardData.url, imageCardData.linkText, imageCardData.description, imageFilePath, imageCardData.altText)
+
+        await QALayoutPage.goToPageView();
+        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(imageCardData.heading);
+        await expect(VisualListBlockPage.visualListElement).toExist();
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_156
+         *  */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'visual list',
+            linkType: 'link',
+            clickText: imageCardData.heading,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await $(`a[data-analytics-click-text="${imageCardData.heading}"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/imageCardVisualList.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
+
+
 
 });
