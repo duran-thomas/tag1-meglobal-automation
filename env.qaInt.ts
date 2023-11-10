@@ -1,15 +1,15 @@
 export const environment = {
-    bypassURL: 'https://meda2022:meda2022@qa-content.montefioreeinstein.org/home',
-    baseUrl: 'https://qa-content.montefioreeinstein.org/home',
+    bypassURL: 'https://meda2022:meda2022@qa-content.montefioreeinstein.org/',
+    baseUrl: 'https://qa-content.montefioreeinstein.org/',
     cookies: {
         name: 'SSESS4259417db96d324c1be8c15c64a74f10',
-        value: 'vjtFJY8BSe2VtVImajnatlEymHuhacArelpJBqrrwVI1hjah',
+        value: 'fDFv4K7FrAmokRPKbnnp4vAPCdrE%2CV15LBIqSDlNkWLBW%2CgH',
         domain: '.qa-content.montefioreeinstein.org',
         path: '/',
     },
     admin: {
-        name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-        value: 'S7BPDRrXTWbbwil0%2Cw7JRhPrG00mCbGKRrjOyQy57CXSQEXT',
+        name: 'SSESS4259417db96d324c1be8c15c64a74f10',
+        value: 'BiWbt-XWbDwyajE131L3HXR9P8NDsgTe57xF2Ck1vr43e9IW',
         domain: '.qa-content.montefioreeinstein.org',
         path: '/',
     }
