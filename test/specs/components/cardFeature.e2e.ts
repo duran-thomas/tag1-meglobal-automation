@@ -123,7 +123,7 @@ describe('Card Feature Component Tests', () => {
         await expect(CardFeatureBlockPage.dropdownRenderAs).toHaveValue('h3');
     });
 
-    it('[S3C862] Verify that a site Content Administrator can create a Card Feature Component', async () => {
+    it.only('[S3C1352] Verify that Analytics for the Card Feature Component is configured', async () => {
         const headline = cardFeatureBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
