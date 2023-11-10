@@ -135,7 +135,7 @@ describe('Card General Component Tests', () => {
         // Get the current url of the page
         const currentUrl = await browser.getUrl();
 
-        // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
         await (await $(`a[data-analytics-click-text="${cardGeneralBlockData.btnText}"]`)).click();
 
         // Switch back to the tab where the analytics is being generated
