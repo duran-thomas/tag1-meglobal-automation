@@ -160,3 +160,15 @@ export const stylingData = {
     backgroundOptions: ['none', 'primary-montefiore-200', 'primary-montefiore-500', 'primary-montefiore-800', 'primary-einstein-200', 'primary-einstein-500', 'primary-einstein-800', 'secondary-montefiore-200', 'secondary-montefiore-500', 'secondary-montefiore-800', 'secondary-einstein-200', 'secondary-einstein-500', 'secondary-einstein-800', 'gray-100', 'gray-200', 'gray-300', 'gray-400', 'gray-500', 'gray-600', 'gray-700', 'soft-blue', 'soft-fuchsia', 'soft-gray', 'black', 'white', 'tint-sky', 'tint-water', 'tint-flesh', 'tint-wheat', 'tint-mint', 'tint-bronze', 'functional-success-200', 'functional-success-500', 'functional-success-800', 'functional-error-200', 'functional-error-500', 'functional-error-800', 'functional-warning-200', 'functional-warning-500', 'functional-warning-800'],
 
 }
+
+export const imageCardData = {
+    mainTitle: 'Image Card Visual List Title',
+    eyebrow: 'QA Illustration Card Visual List Item Eyebrow',
+    heading: 'QA Illustration Card Visual List Item Heading',
+    description: 'QA Illustration Card Visual List Item',
+    link: 'Google',
+    url: 'https://google.com',
+    linkText: 'Google',
+    altText: 'QA Illustration Card Visual List Item Alt Text',
+
+}
