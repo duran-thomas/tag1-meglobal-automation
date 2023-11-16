@@ -324,7 +324,7 @@ describe('Contact List Component Tests', () => {
 
     });
 
-    it.only('Verify analytics for Contact components are configured', async () => {
+    it('Verify analytics for Contact components are configured', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
