@@ -8,8 +8,6 @@ class QuickActionsBlockPage extends Page {
      * define selectors using getter methods
      */
 
-
-
     public get btnAddNewMenu() {
         return $('.button');
     }
@@ -118,7 +116,6 @@ class QuickActionsBlockPage extends Page {
         return $('=Delete');
     }
 
-
     /**
      * Helper methods to create Quick Actions Component
      */
@@ -189,7 +186,6 @@ class QuickActionsBlockPage extends Page {
         await (await this.btnSave).click();
         await browser.pause(1500);
     }
-
 
     /**
     * overwrite specific options to adapt it to page object
