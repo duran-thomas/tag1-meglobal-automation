@@ -6,202 +6,209 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
 import * as fs from "fs";
 
-
 describe('Quick Actions Component Tests', () => {
 
-    before(async ()=>{
-        // Get the environment configuration
-        const environment = getEnvironmentConfig(process.env.ENV);
+before(async () => {
+    // Get the environment configuration
+    const environment = getEnvironmentConfig(process.env.ENV);
 
-        // Use the environment data
-        const bypassURL = environment.bypassURL;
-        const cookies = environment.cookies;
+    // Use the environment data
+    const bypassURL = environment.bypassURL;
+    const cookies = environment.cookies;
 
-        //Bypass login
-        await browser.url(await bypassURL);
-        await browser.maximizeWindow();
+    //Bypass login
+    await browser.url(await bypassURL);
+    await browser.maximizeWindow();
 
-        // Set user cookies
-        await browser.setCookies(await cookies);
+    // Set user cookies
+    await browser.setCookies(await cookies);
 
-    });
+});
 
-    before(async function () {
-        global.suiteDescription = this.currentTest?.parent?.title;
-        //navigate to admin content page
-        await AdminContentPage.open();
-        // Navigate to QA Landing page to execute tests
-        await AdminContentPage.getTestPage(global.suiteDescription);
-        await expect(QALayoutPage.tabLayout).toBeDisplayed();
-    })
+before(async function () {
+    global.suiteDescription = this.currentTest?.parent?.title;
+    //navigate to admin content page
+    await AdminContentPage.open();
+    // Navigate to QA Landing page to execute tests
+    await AdminContentPage.getTestPage(global.suiteDescription);
+    await expect(QALayoutPage.tabLayout).toBeDisplayed();
+})
 
-    afterEach(async function () {
-        // Take a screenshot after each test/assertion
-        const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/QuickActions/${testName}.png`;
-        await browser.saveScreenshot(screenshotPath);
-    });
+afterEach(async function () {
+    // Take a screenshot after each test/assertion
+    const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
+    const screenshotPath = `./screenshots/QuickActions/${testName}.png`;
+    await browser.saveScreenshot(screenshotPath);
+});
 
-    //clean up job
-    after(async function() { 
-        await AdminContentPage.open();
-        await browser.debug()
-        await QuickActionsBlockPage.cleanUp();
-        await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
-        await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
+//clean up job
+after(async function () {
+    // // Get the environment configuration
+    // const environment = getEnvironmentConfig(process.env.ENV);
+    // //await browser.url(environment.baseUrl+'user/logout');
+    // await browser.setCookies(environment.admin);
+    // await AdminContentPage.open();
+    // await AdminContentPage.deleteTestPage('Quick Action test node');
+    // await expect($('.mf-alert__container--highlight')).toBeDisplayed();
 
-    });
+    await QuickActionsBlockPage.cleanUp();
+    await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
+    await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-    //delete page
-    after(async function () {
-        // Get the environment configuration
-        const environment = getEnvironmentConfig(process.env.ENV);
-        //await browser.url(environment.baseUrl+'user/logout');
-        await browser.setCookies(environment.admin);
-        await AdminContentPage.open();
-        await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
-    });
+});
 
-    it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
-        //create menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
-        //add link to menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.extMenuLinkTitle, quickActionsBlockData.extLink);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
+//delete page
+after(async function () {
+    // Get the environment configuration
+    const environment = getEnvironmentConfig(process.env.ENV);
+    //await browser.url(environment.baseUrl+'user/logout');
+    await browser.setCookies(environment.admin);
+    await AdminContentPage.open();
+    await AdminContentPage.deleteTestPage(global.suiteDescription);
+    await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+});
 
-        //create node
-        await QuickActionsBlockPage.openNodes();
-        await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
-        //create quick action component
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await browser.refresh();
-        await (await QALayoutPage.linkAddBlock).waitForExist();
-        await (await QALayoutPage.linkAddBlock).scrollIntoView();
-        await (await QALayoutPage.linkAddBlock).click();
-        await (await QALayoutPage.linkQuickActions).click();
-        await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
+    //create menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
-        await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+    //add link to menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.extMenuLinkTitle, quickActionsBlockData.extLink);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
 
-        await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
-        await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.extLink);
+    //create node
+    await QuickActionsBlockPage.openNodes();
+    await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
-        //clear above
-        await QuickActionsBlockPage.cleanUp();
-        await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
-        await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
+    //create quick action component
+    await (await QALayoutPage.tabLayout).click();
+    await QALayoutPage.createNewSection();
+    await browser.refresh();
+    await (await QALayoutPage.linkAddBlock).waitForExist();
+    await (await QALayoutPage.linkAddBlock).scrollIntoView();
+    await (await QALayoutPage.linkAddBlock).click();
+    await (await QALayoutPage.linkQuickActions).click();
+    await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
-    });
+    await QALayoutPage.goToPageView();
+    await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-    it('[S3C1123] Verify that a site Content Administrator can create a Quick Actions Component with an internal link.', async () => {
-        //create menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
+    await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
+    await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.extLink);
 
-        //add link to menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.intMenuLinkTitle, quickActionsBlockData.intLink);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
+    //clear above
+    await QuickActionsBlockPage.cleanUp();
+    await expect(QuickActionsBlockPage.statusMsg).toBeDisplayedInViewport();
+    await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
-        //create node
-        await QuickActionsBlockPage.openNodes();
-        await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
+});
 
-        //create quick action component
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await browser.refresh();
-        await (await QALayoutPage.linkAddBlock).waitForExist();
-        await (await QALayoutPage.linkAddBlock).scrollIntoView();
-        await (await QALayoutPage.linkAddBlock).click();
-        await (await QALayoutPage.linkQuickActions).click();
-        await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+it('[S3C1123] Verify that a site Content Administrator can create a Quick Actions Component with an internal link.', async () => {
+    //create menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
-        await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+    //add link to menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.intMenuLinkTitle, quickActionsBlockData.intLink);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
 
-        await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
-        await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.intLink);
+    //create node
+    await QuickActionsBlockPage.openNodes();
+    await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
-    });
+    //create quick action component
+    await (await QALayoutPage.tabLayout).click();
+    await QALayoutPage.createNewSection();
+    await browser.refresh();
+    await (await QALayoutPage.linkAddBlock).waitForExist();
+    await (await QALayoutPage.linkAddBlock).scrollIntoView();
+    await (await QALayoutPage.linkAddBlock).click();
+    await (await QALayoutPage.linkQuickActions).click();
+    await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
-    it.only('[S3C1322] Verify that Analytics for the Quick Actions Component is configured', async () => {
-        //create menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
+    await QALayoutPage.goToPageView();
+    await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        //add link to menu
-        await QuickActionsBlockPage.openMenus();
-        await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.intMenuLinkTitle, quickActionsBlockData.intLink);
-        expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
+    await expect(QuickActionsBlockPage.quickActionsElement).toBeDisplayedInViewport();
+    await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.intLink);
 
-        //create node
-        await QuickActionsBlockPage.openNodes();
-        await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
+});
 
-        //create quick action component
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
-        await browser.refresh();
-        await (await QALayoutPage.linkAddBlock).waitForExist();
-        await (await QALayoutPage.linkAddBlock).scrollIntoView();
-        await (await QALayoutPage.linkAddBlock).click();
-        await (await QALayoutPage.linkQuickActions).click();
-        await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-        await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+it('[S3C1322] Verify that Analytics for the Quick Actions Component is configured', async () => {
+    //create menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.createMenu(quickActionsBlockData.title);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.menuSucess);
 
-        await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+    //add link to menu
+    await QuickActionsBlockPage.openMenus();
+    await QuickActionsBlockPage.addLinkToMenu(quickActionsBlockData.extMenuLinkTitle, quickActionsBlockData.extLink);
+    expect(await QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.linkSuccess);
 
-        const expectedAnalyticsData = {
-            clickText: quickActionsBlockData.extMenuLinkTitle,
-            event:'e_navigationClick',
-            linkType: 'button',
-            navigationType: 'quick actions'  
+    //create node
+    await QuickActionsBlockPage.openNodes();
+    await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
+
+    //create quick action component
+    await (await QALayoutPage.tabLayout).click();
+    await QALayoutPage.createNewSection();
+    await browser.refresh();
+    await (await QALayoutPage.linkAddBlock).waitForExist();
+    await (await QALayoutPage.linkAddBlock).scrollIntoView();
+    await (await QALayoutPage.linkAddBlock).click();
+    await (await QALayoutPage.linkQuickActions).click();
+    await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
+    await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+
+    await QALayoutPage.goToPageView();
+    await (await QuickActionsBlockPage.quickActionsElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+
+    const expectedAnalyticsData = {
+        clickText: quickActionsBlockData.extMenuLinkTitle,
+        event: 'e_navigationClick',
+        linkType: 'button',
+        navigationType: 'quick actions'
+    }
+
+    const currentUrl = await browser.getUrl();
+
+    await $('a[data-analytics-click-text="Test External Link"]').click();
+    await browser.switchWindow(currentUrl);
+
+    const dataLayer = await browser.executeScript('return window.dataLayer', []);
+    const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
+    let parsedAnalyticsData = []
+
+    for (let x in actualAnalyticsData) {
+        parsedAnalyticsData.push({
+            clickText: actualAnalyticsData[x].clickText,
+            event: actualAnalyticsData[x].event,
+            linkType: actualAnalyticsData[x].linkType,
+            navigationType: actualAnalyticsData[x].navigationType
+        })
+    }
+
+    fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
+        if (err) {
+            console.error(err);
         }
-
-        const currentUrl = await browser.getUrl();
-
-        await $$('a[data-analytics-click-text="Test External Link"]')[0].click()
-        await browser.switchWindow(currentUrl);
-
-        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
-        let parsedAnalyticsData = []
-        
-        for(let x in actualAnalyticsData){
-            parsedAnalyticsData.push({
-                clickText: actualAnalyticsData[x].clickText,
-                event: actualAnalyticsData[x].event,
-                linkType: actualAnalyticsData[x].linkType,
-                navigationType: actualAnalyticsData[x].navigationType
-            })
-        }
-
-        fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
-            if (err) {
-                console.error(err);
-            }
-            // file written successfully
-        });
-
-        const screenshotPath = `./screenshots/QuickActions/Verify that Analytics for the Quick Actions Component is configured.png`;
-        await browser.saveScreenshot(screenshotPath);
-        await expect(parsedAnalyticsData[0]).toEqual(expectedAnalyticsData);
+        // file written successfully
     });
+
+    const screenshotPath = `./screenshots/QuickActions/Verify that Analytics for the Quick Actions Component is configured.png`;
+    await browser.saveScreenshot(screenshotPath);
+    await expect(parsedAnalyticsData[0]).toEqual(expectedAnalyticsData);
+});
 });
