@@ -20,6 +20,4 @@ export const contactListBlockData = {
     btnText: 'QA Button Text',
     altText: 'QA Alt Text',
     name: 'QA Name'
-    
-    
 };

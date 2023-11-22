@@ -148,6 +148,10 @@ class ContactListBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-heading-0-value"]');
     }
 
+    public get inputHeading6() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-6-subform-field-heading-0-value"]');
+    }
+
     public get inputInfo1() {
         return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-1-subform-field-info-0-value"]');
     }
@@ -162,6 +166,10 @@ class ContactListBlockPage extends Page {
 
     public get inputInfo4() {
         return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-4-subform-field-info-0-value"]');
+    }
+
+    public get inputInfo5() {
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-info-0-value"]');
     }
 
     public get checkboxDivider1() {
@@ -180,6 +188,10 @@ class ContactListBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-4-subform-field-divider-value"]');
     }
 
+    public get checkboxDivider5() {
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-divider-value"]');
+    }
+
     public get checkboxDisplayAsLink1() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-1-subform-field-display-as-link-value"]');
     }
@@ -191,6 +203,16 @@ class ContactListBlockPage extends Page {
     public get checkboxDisplayAsLink3() {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-3-subform-field-display-as-link-value"]');
     }
+
+    public get inputButtonText6(){
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-6-subform-field-button-0-title"]')
+    }
+
+    public get inputButtonUrl6(){
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-6-subform-field-button-0-uri"]')
+    }
+
+
 
     //*email multi
     public get inputEmailAddressM() {
@@ -234,7 +256,19 @@ class ContactListBlockPage extends Page {
         return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-4-subform-field-name-0-value"]');
     }
 
-    ////
+    //*text multi
+
+    public get inputChatTextM(){
+        return $('textarea[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-text-0-value"]')
+    }
+
+    public get inputChatLinkUrlM(){
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-link-0-uri"]')
+    }
+
+    public get inputChatLinkTextM(){
+        return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-items-5-subform-field-link-0-title"]')
+    }
 
 
     public get dropdownToggle() {
@@ -701,7 +735,6 @@ class ContactListBlockPage extends Page {
         await (await this.inputLink).setValue(link);
         await browser.pause(3000);
         await (await this.checkboxDivider).click();
-
         //email block
         await (await this.dropdownToggle).scrollIntoView();
         await (await this.dropdownToggle).click();
@@ -781,6 +814,129 @@ class ContactListBlockPage extends Page {
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
+    }
+
+    public async createAllContactTypes(title: string, headline: string, content: string, heading: string, address: string, latitude: string, longitude: string, link: string, email: string, subTitle: string, text: string, phone: string, url: string, cta: string, remoteFilePath: string, altText: string, name: string, info: string, btnText: string){
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputContent).setValue(content);
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await browser.pause(2000);
+        // Create location block
+        await (await this.locationListItem).click();
+        await browser.pause(3000);
+        await (await this.inputHeading).setValue(heading);
+        await (await this.inputAddress).setValue(address);
+        await (await this.inputLatitude).scrollIntoView();
+        await (await this.inputLatitude).setValue(latitude);
+        await (await this.inputLongitude).setValue(longitude);
+        await (await this.inputLink).setValue(link);
+        await browser.pause(3000);
+        await (await this.checkboxDivider).click();
+        // Create email block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.emailListItem).click();
+        await browser.pause(2000);
+        await (await this.inputHeading1).setValue(heading);
+        await (await this.inputEmailAddressM).setValue(email);
+        await (await this.checkboxDisplayAsLinkM).click();
+        await (await this.inputInfo1).scrollIntoView();
+        await (await this.inputInfo1).setValue(info);
+        await (await this.checkboxDivider1).click();
+        await browser.pause(1500);
+        // Create phone block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.phoneListItem).click();
+        await browser.pause(2000);
+        await (await this.inputHeading2).setValue(heading);
+        await (await this.inputTitleM).setValue(subTitle);
+        await (await this.inputTextM).setValue(text);
+        await (await this.inputPhoneNumberM).scrollIntoView();
+        await (await this.inputPhoneNumberM).setValue(phone);
+        await browser.pause(2000);
+        await (await this.checkboxPhoneLink).click();
+        await (await this.inputInfo2).setValue(info);
+        await (await this.checkboxDivider2).click();
+        await browser.pause(1500);
+        // Create chat block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.chatListItem).click();
+        await browser.pause(2000);
+        await (await this.inputHeading3).setValue(heading);
+        await (await this.inputChatUrl).setValue(url);
+        await (await this.inputChatCta).setValue(cta);
+        await (await this.inputInfo3).scrollIntoView();
+        await (await this.inputInfo3).setValue(info);
+        await browser.pause(2000);
+        await (await this.checkboxDisplayAsLink3).click();
+        await (await this.checkboxDivider3).click();
+        await browser.pause(1500);
+        // Create Person block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.personListItem).click();
+        await browser.pause(3500);
+        await (await this.inputHeading4).setValue(heading);
+        await browser.pause(3000);
+        await (await this.dropdownImage).click();
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(8000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        await (await this.inputNameM).setValue(name);
+        await (await this.inputInfo4).scrollIntoView();
+        await (await this.inputInfo4).setValue(info);
+        await (await this.checkboxDivider4).click();
+        await browser.pause(2000);
+        //Create text block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.textListItem).click();
+        await browser.pause(2000);
+        await (await this.inputHeading5).setValue(heading);
+        await (await this.inputChatTextM).setValue(text);
+        await (await this.inputChatLinkUrlM).setValue(url);
+        await (await this.inputChatLinkTextM).setValue(text);
+        await (await this.inputInfo5).setValue(info);
+        await (await this.checkboxDivider5).click();
+        await browser.pause(1500);
+        //Create button block
+        await (await this.dropdownToggle).scrollIntoView();
+        await (await this.dropdownToggle).click();
+        await (await this.buttonListItem).click();
+        await browser.pause(2000);
+        await (await this.inputHeading6).setValue(heading);
+        await (await this.inputButtonText6).setValue(btnText);
+        await (await this.inputButtonUrl6).setValue(url);
+        await (await this.checkboxDivider5).click();
+        await browser.pause(1500);
+        //complete form
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
+
     }
 
     public async navToStyling() {

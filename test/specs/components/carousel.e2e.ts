@@ -290,18 +290,18 @@ describe('Carousel Component Tests', () => {
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         
-        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick");
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
         let parsedAnalyticsData = []
 
-        for(let x in actualAnalayticsData){
+        for(let x in actualAnalyticsData){
             parsedAnalyticsData.push({
-                clickText: actualAnalayticsData[x].clickText,
-                componentType: actualAnalayticsData[x].componentType,
-                event: actualAnalayticsData[x].event,
+                clickText: actualAnalyticsData[x].clickText,
+                componentType: actualAnalyticsData[x].componentType,
+                event: actualAnalyticsData[x].event,
                 // Remove html tags, whitespace and newlines from the Headline
-                itemTitle: actualAnalayticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
-                linkType: actualAnalayticsData[x].linkType,
-                pageSlot: actualAnalayticsData[x].pageSlot
+                itemTitle: actualAnalyticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+                linkType: actualAnalyticsData[x].linkType,
+                pageSlot: actualAnalyticsData[x].pageSlot
             })
         }
 
@@ -381,18 +381,18 @@ describe('Carousel Component Tests', () => {
         await browser.switchWindow(currentUrl);
 
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_componentClick");
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
         let parsedAnalyticsData = []
 
-        for(let x in actualAnalayticsData){
+        for(let x in actualAnalyticsData){
             parsedAnalyticsData.push({
-                clickText: actualAnalayticsData[x].clickText,
-                componentType: actualAnalayticsData[x].componentType,
-                event: actualAnalayticsData[x].event,
+                clickText: actualAnalyticsData[x].clickText,
+                componentType: actualAnalyticsData[x].componentType,
+                event: actualAnalyticsData[x].event,
                 // Remove html tags, whitespace and newlines from the Headline
-                itemTitle: actualAnalayticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
-                linkType: actualAnalayticsData[x].linkType,
-                pageSlot: actualAnalayticsData[x].pageSlot
+                itemTitle: actualAnalyticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+                linkType: actualAnalyticsData[x].linkType,
+                pageSlot: actualAnalyticsData[x].pageSlot
             })
         }
 
@@ -452,19 +452,19 @@ describe('Carousel Component Tests', () => {
         await $('blockquote  button').click()
 
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalayticsData = dataLayer.filter((item) => item.event === "e_mediaEngagement");
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_mediaEngagement");
 
         let parsedAnalyticsData = []
 
-        for(let x in actualAnalayticsData){
+        for(let x in actualAnalyticsData){
             parsedAnalyticsData.push({
-                clickSlot: actualAnalayticsData[x].clickSlot,
-                event: actualAnalayticsData[x].event,
-                mediaAction: actualAnalayticsData[x].mediaAction,
-                mediaLength: actualAnalayticsData[x].mediaLength,
-                mediaTitle: actualAnalayticsData[x].mediaTitle.replace(/_\d+/, ''),
-                mediaType: actualAnalayticsData[x].mediaType,
-                pageSlot: actualAnalayticsData[x].pageSlot
+                clickSlot: actualAnalyticsData[x].clickSlot,
+                event: actualAnalyticsData[x].event,
+                mediaAction: actualAnalyticsData[x].mediaAction,
+                mediaLength: actualAnalyticsData[x].mediaLength,
+                mediaTitle: actualAnalyticsData[x].mediaTitle.replace(/_\d+/, ''),
+                mediaType: actualAnalyticsData[x].mediaType,
+                pageSlot: actualAnalyticsData[x].pageSlot
             })
         }
 
