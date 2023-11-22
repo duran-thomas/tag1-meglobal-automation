@@ -124,6 +124,14 @@ class CardFeatureBlockPage extends Page {
         return $('#edit-settings-block-form-field-content-0-subform-field-rich-headline-0-more-options-render-as');
     }
 
+    public get dropdownButtonOptions() {
+        return $('summary[aria-controls="edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options"]');
+    }
+
+    public get dropdownTarget() {
+        return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options-target');
+    }
+
 
     /**
      * Helper methods to create card feature Component
@@ -214,6 +222,46 @@ class CardFeatureBlockPage extends Page {
         await (await this.headlineOptions).scrollIntoView();
         await (await this.headlineOptions).click();
         await browser.pause(2500);
+    }
+
+    public async createCardFeatureAnalytics(title: string, headline: string, eyebrow: string, list: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
+        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.inputTitle).setValue(title);
+        await (await this.inputHeadline).scrollIntoView();
+        await (await this.inputHeadline).setValue(headline);
+        await (await this.inputEyebrow).setValue(eyebrow);
+        await (await this.inputList).setValue(list);
+        await (await this.inputButtonText).scrollIntoView();
+        await (await this.inputButtonText).setValue(btnText);
+        await (await this.dropdownButtonOptions).click();
+        await (await this.dropdownTarget).selectByVisibleText('_blank');
+        await (await this.inputURL).setValue(url);
+        await (await this.dropdownImage).scrollIntoView();
+        await (await this.dropdownImage).click();
+        await browser.pause(2000);
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(4500); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(6000); //explicit waits seem to be necessary here
+        await browser.switchToFrame(iframe);
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await (await this.btnAddBlock).scrollIntoView();
+        await (await this.btnAddBlock).click();
+        await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed();
+        await (await this.btnSaveLayout).scrollIntoView();
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
     }
 
 
