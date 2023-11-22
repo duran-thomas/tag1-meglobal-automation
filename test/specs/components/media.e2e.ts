@@ -142,7 +142,7 @@ describe('Media Component Tests', () => {
     });
 
 
-it.only('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+it('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
     await (await QALayoutPage.tabLayout).click();
     await QALayoutPage.createNewSection();
     await QALayoutPage.navigateToBlockList();

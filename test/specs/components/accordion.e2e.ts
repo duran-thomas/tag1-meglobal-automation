@@ -4,6 +4,7 @@ import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page'
 import { accordionBlockData } from '../../data/accordion.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 describe('Accordion Component Tests', () => {
@@ -53,7 +54,7 @@ describe('Accordion Component Tests', () => {
     });
 
   
-    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component)', async () => {
+    it('[S3C906] Verify that a site Content Administrator can create an Accordion Component', async () => {
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -87,6 +88,69 @@ describe('Accordion Component Tests', () => {
         //Re-open accordion for screenshot
         await (await AccordionBlockPage.accordionBtn).click();
         await browser.pause(1500);
+
+    });
+
+    it('[S3C1350] Verify that Analytics for the Accordion Component is configured', async () => {
+        const title = accordionBlockData.title;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnAccordion).scrollIntoView();
+        await (await QALayoutPage.btnAccordion).click();
+        await (await AccordionBlockPage.configBlock).waitForDisplayed();
+
+        await AccordionBlockPage.createAccordion(accordionBlockData.mainTitle, accordionBlockData.title, accordionBlockData.content);
+
+        await expect(AccordionBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+        await (await AccordionBlockPage.accordionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        
+        await expect(AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+
+        /**
+         * Create the expected analytics 
+         * object based on the spec below: 
+         * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g127fd856972_0_321
+         * */ 
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType:'accordion',
+            clickText: accordionBlockData.title,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        //const currentUrl = await browser.getUrl();
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await (await AccordionBlockPage.accordionBtn).click();
+
+        // Switch back to the tab where the analytics is being generated
+        //await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/accordion.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 
     });
 
