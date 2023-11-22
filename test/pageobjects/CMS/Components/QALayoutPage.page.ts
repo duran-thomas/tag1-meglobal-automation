@@ -260,7 +260,7 @@ class LandingQAPage extends Page {
         await (await this.linkAddBlock).click();
         await (await this.btnCreateCustomBlock).waitForDisplayed();
         await (await this.btnCreateCustomBlock).click();
-        await (await this.btnCloseChatPopUp).click();
+        // await (await this.btnCloseChatPopUp).click();
         //const frame = await this.dialogFrame;
         // if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
         //     await browser.switchToFrame(frame);
