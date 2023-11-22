@@ -1,15 +1,14 @@
 import Page from '../Login/page';
 
 /**
- * sub page containing specific selectors and methods for a specific page
- */
+
+sub page containing specific selectors and methods for a specific page
+*/
 class QuickActionsBlockPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
+    /*
 
-
-
+    define selectors using getter methods
+    */
     public get btnAddNewMenu() {
         return $('.button');
     }
@@ -24,6 +23,10 @@ class QuickActionsBlockPage extends Page {
 
     public get btnSave() {
         return $('#edit-submit');
+    }
+
+    public get confirmDelete() {
+        return $('button.button:nth-child(1)')
     }
 
     public get statusMsg() {
@@ -118,26 +121,43 @@ class QuickActionsBlockPage extends Page {
         return $('=Delete');
     }
 
+    public get dropdownToggle() {
+        return $('.dropbutton__toggle');
+    }
+
+    public get deleteOption() {
+        return $('=Delete relation');
+    }
 
     /**
-     * Helper methods to create Quick Actions Component
-     */
 
+    Helper methods to create Quick Actions Component
+    */
     public async createMenu(title: string) {
         await (await this.btnAddNewMenu).click();
-        await this.linkGroupQuickActions.waitForDisplayed({ timeout: 2000 });
+        await this.linkGroupQuickActions.waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.linkGroupQuickActions).click();
-        await (await this.inputTitle).waitForDisplayed({ timeout: 2000 });
+        await (await this.inputTitle).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.inputTitle).setValue(title);
-        await (await this.btnSave).waitForEnabled({ timeout: 2000 });
+        await (await this.btnSave).waitForEnabled({
+            timeout: 2000
+        });
         await (await this.btnSave).click();
     }
 
     public async addLinkToMenu(menuTitle: string, link: string) {
-        await (await this.createdMenu).waitForDisplayed({ timeout: 2000 });
+        await (await this.createdMenu).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.createdMenu).click();
         await (await this.addLink).click();
-        await (await this.inputMenuLinkTitle).waitForDisplayed({ timeout: 2000 });
+        await (await this.inputMenuLinkTitle).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.inputMenuLinkTitle).setValue(menuTitle);
         await (await this.inputLink).setValue(link);
         await (await this.btnSave).scrollIntoView();
@@ -145,11 +165,17 @@ class QuickActionsBlockPage extends Page {
     }
 
     public async createNode(title: string) {
-        await (await this.btnAddNewContent).waitForDisplayed({ timeout: 2000 });
+        await (await this.btnAddNewContent).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.btnAddNewContent).click();
-        await this.linkGroupLayoutPage.waitForDisplayed({ timeout: 2000 });
+        await this.linkGroupLayoutPage.waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.linkGroupLayoutPage).click();
-        await (await this.inputNodeTitle).waitForDisplayed({ timeout: 2000 });
+        await (await this.inputNodeTitle).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.inputNodeTitle).setValue(title);
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();
@@ -159,7 +185,9 @@ class QuickActionsBlockPage extends Page {
         await browser.pause(3000);
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
+        await iframe.waitForDisplayed({
+            timeout: 2000
+        });
         await browser.switchToFrame(iframe);
         await (await this.compTitle).setValue(title);
         await (await this.inputHeadline).setValue(healdine);
@@ -167,7 +195,9 @@ class QuickActionsBlockPage extends Page {
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
-        await (await this.btnSaveLayout).waitForDisplayed({ timeout: 2000 });
+        await (await this.btnSaveLayout).waitForDisplayed({
+            timeout: 2000
+        });
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(2000);
@@ -176,28 +206,36 @@ class QuickActionsBlockPage extends Page {
 
     public async cleanUp() {
         await this.openNodes();
-        await (await this.createdNode).waitForDisplayed({ timeout: 4000 });
-        await (await this.createdNode).click();
-        await (await this.pageDelete).waitForDisplayed({ timeout: 4000 });
-        await (await this.pageDelete).click();
-        await (await this.btnSave).waitForDisplayed({ timeout: 3500 });
+        await (await this.dropdownToggle).waitForDisplayed({
+            timeout: 4000
+        });
+        await (await this.dropdownToggle).click();
+        await (await this.deleteOption).waitForDisplayed({
+            timeout: 4000
+        });
+        await (await this.deleteOption).click();
+        await (await this.btnSave).waitForDisplayed({
+            timeout: 3500
+        });
         await (await this.btnSave).click();
         await this.openMenus();
         await (await this.createdMenu).click();
-        await (await this.btnDelete).waitForDisplayed({ timeout: 3500 });
+        await (await this.btnDelete).waitForDisplayed({
+            timeout: 3500
+        });
         await (await this.btnDelete).click();
-        await (await this.btnSave).click();
+        await (await this.confirmDelete).click();
         await browser.pause(1500);
+
     }
 
-
     /**
-    * overwrite specific options to adapt it to page object
+
+    overwrite specific options to adapt it to page object
     */
     public openMenus() {
         return super.open('group/356/menus');
     }
-
     public openNodes() {
         return super.open('group/356/nodes');
     }
