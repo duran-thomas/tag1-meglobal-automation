@@ -261,11 +261,11 @@ class LandingQAPage extends Page {
         await (await this.btnCreateCustomBlock).waitForDisplayed();
         await (await this.btnCreateCustomBlock).click();
         // await (await this.btnCloseChatPopUp).click();
-        //const frame = await this.dialogFrame;
-        // if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
-        //     await browser.switchToFrame(frame);
-        //     await this.btnCloseChatPopUp.click();
-        //     await browser.switchToParentFrame();
+        const frame = await this.dialogFrame;
+        //if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+            await browser.switchToFrame(frame);
+            await this.btnCloseChatPopUp.click();
+            await browser.switchToParentFrame();
         // } else {
         //     console.log('Button not found');
         // }
