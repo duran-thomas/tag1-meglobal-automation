@@ -65,7 +65,7 @@ describe('Map Component Tests', () => {
     });
 
      
-    it.only('[S3C872] Verify that a site Content Administrator can create a Map Component', async () => {
+    it('[S3C872] Verify that a site Content Administrator can create a Map Component', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
