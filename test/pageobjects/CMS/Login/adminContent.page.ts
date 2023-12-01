@@ -115,6 +115,9 @@ class AdminContentPage extends Page {
         return super.open('admin/content');
     }
 
+    public openPopularSearches() {
+        return super.open('admin/structure/menu/manage/popular-searches')
+    }
 }
 
 export default new AdminContentPage();
