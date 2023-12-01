@@ -86,9 +86,9 @@ describe('Popular Searches Tests', () => {
 
     await browser.pause(2000);
     (await $('div button.mf-top-bar__button--search')).click();
-    await $$('div.mf-navigation__drawer div div div div div ul li a')[0].waitForExist();
-    await $$('div.mf-navigation__drawer div div div div div ul li a')[0].click();
-    const searchResultTitle = await ($$('#search-results div ul li a h4')[0]).getText()
+    await $('a[data-analytics-click-text="Pulmonary"]').waitForExist();
+    await $('a[data-analytics-click-text="Pulmonary"]').click();
+    const searchResultTitle = await ($$('h4.mf-result-item__headline')[0]).getText()
     await expect(searchResultTitle).toContain(popularSearchData.title)
   })
 
