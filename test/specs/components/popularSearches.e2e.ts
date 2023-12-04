@@ -72,7 +72,7 @@ describe('Popular Searches Tests', () => {
     await expect($$('div.mf-navigation__drawer div div div div div ul li a span span')[0]).toHaveTextContaining(popularSearchData.title)
   })
 
-  it.only('[S3C995] Verify that the search results are populated when a popular search term is clicked', async () => {
+  it('[S3C995] Verify that the search results are populated when a popular search term is clicked', async () => {
     await popularSearchesPage.addNewMenuLink(popularSearchData.title, popularSearchData.link);
     await expect(popularSearchesPage.successMsg).toHaveTextContaining('The menu link has been saved.');
     await (await popularSearchesPage.btnSave).scrollIntoView();
