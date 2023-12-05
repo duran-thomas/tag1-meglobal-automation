@@ -36,6 +36,7 @@
     "freeform": "npx wdio run wdio.conf.ts --spec ./test/specs/components/freeform.e2e.ts",
     "testimonial": "npx wdio run wdio.conf.ts --spec ./test/specs/components/testimonial.e2e.ts",
     "teamLeader": "npx wdio run wdio.conf.ts --spec ./test/specs/components/teamLeader.e2e.ts",
+    "popularSearches": "npx wdio run wdio.conf.ts --spec ./test/specs/components/popularSearches.e2e.ts",
     "progressIndicator": "npx wdio run wdio.conf.ts --spec ./test/specs/components/progressIndicator.e2e.ts",
     "typeahead": "npx wdio run wdio.conf.ts --spec ./test/specs/components/typeahead.e2e.ts",
     "translation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/translation.e2e.ts",

@@ -3,13 +3,13 @@ export const environment = {
     baseUrl: 'https://meglobalode7.prod.acquia-sites.com/',
     cookies: {
         name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-        value: 'LKsrofZ5qm9XLUL2DrG80MJT-QS2pjG-rDzlXXqoo0tlUOTp',
+        value: 'f%2CIa8duQ1g%2CGOZqtcPuv48h85h4uYSKIozppO3POPboLKfqh',
         domain: '.meglobalode7.prod.acquia-sites.com',
         path: '/',
     },
     admin: {
         name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-        value: '8nD61ddF1qGij2bLYHp9HJJ1q09QzV1g0KtruY2gUwDKWDV6',
+        value: 'lzrVuTfiG-wZfUYoao-aWfOxuxO%2CCBywMIE%2C9GEqbBlpg%2CkP',
         domain: '.meglobalode7.prod.acquia-sites.com',
         path: '/',
     }
