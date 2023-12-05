@@ -94,6 +94,7 @@ export const config: Options.Testrunner = {
         typeahead: ['/test/specs/components/typeahead.e2e.ts'],
         translation: ['/test/specs/components/translation.e2e.ts'],
         event: ['/test/specs/components/event.e2e.ts'],
+        indexList: ['/test/specs/components/indexList.e2e.ts']
 
 
     },
