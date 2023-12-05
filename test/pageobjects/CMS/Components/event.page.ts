@@ -142,7 +142,8 @@ class EventBlockPage extends Page {
         await (await this.adminTitle).setValue(title);
         await (await this.dropdownToggle).click();
         await (await this.linkAddEventList).click();
-        await (await this.dropdownTemplate).waitForExist();
+        //await (await this.dropdownTemplate).waitForExist();
+        await browser.pause(3000);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

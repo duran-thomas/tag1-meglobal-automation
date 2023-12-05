@@ -4,6 +4,7 @@ import CardLocationBlockPage from '../../pageobjects/CMS/Components/cardLocation
 import { cardLocationBlockData, cardLocationComponentData } from '../../data/cardLocation.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 describe('Card Location Component Tests', () => {
@@ -145,6 +146,54 @@ describe('Card Location Component Tests', () => {
         const elem = await CardLocationBlockPage.cardLocationElements.length;
         await expect(elem).toEqual(2);   
     });
+
+    it('[S3C1353]  Verify that Analytics for the Card Location Component is configured', async () => {
+         /**
+       * Create the expected analytics 
+       * object based on the spec below: 
+       * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_185
+       * */
+       
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType: 'card location',
+            itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+            linkType: 'button',
+            clickText: 'map-trifold',
+            pageSlot: '1'
+        }
+
+        // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
+        await ($(`button[data-analytics-click-text="map-trifold"]`)).click();
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer', []);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            itemTitle: actualAnalyticsData.itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/cardLocation.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+    });
+
+
 
     it('[S3C909] Verify that a site Content Administrator can create Card Location Components in the Carousel Block', async () => {
         await AdminContentPage.open();

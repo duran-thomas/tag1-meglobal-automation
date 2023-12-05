@@ -81,7 +81,7 @@ describe('Event Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await EventBlockPage.stringDate).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await EventBlockPage.stringDate).toHaveTextContaining('m to'); 
+        await expect(await EventBlockPage.stringDate).toHaveTextContaining('m - '); 
         await expect(EventBlockPage.eventElement).toBeExisting();   
     });
 
@@ -151,7 +151,7 @@ describe('Event Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await EventBlockPage.stringDate).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await EventBlockPage.stringDate).toHaveTextContaining('m to'); 
+        await expect(await EventBlockPage.stringDate).toHaveTextContaining('m - '); 
         await expect(EventBlockPage.eventElement).toBeExisting();   
 
         const text = await (await EventBlockPage.linkMoreAboutEvent).getText();
