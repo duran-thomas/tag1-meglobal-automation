@@ -3,6 +3,10 @@
 export const mapBlockData = {
     title: 'QA Map Block Title',
     highlightTitle: 'Highlight Title',
+    latitude: '40.73061',
+    longitude: '-73.935242',
+    altText: 'Map Image Alt Text',
+    iconAltText: 'Map Icon Alt Text',
     mapConfig: `{
         "center": {
           "lng": -73.935242,

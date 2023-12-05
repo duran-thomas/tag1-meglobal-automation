@@ -20,6 +20,14 @@ class MapBlockPage extends Page {
         return $('#edit-settings-block-form-field-highlights-0-subform-field-title-0-value');
     }
 
+    public get inputLatitude() {
+        return $('#edit-settings-block-form-field-highlights-0-subform-field-coordinates-0-value-lat');
+    }
+
+    public get inputLongitude() {
+        return $('#edit-settings-block-form-field-highlights-0-subform-field-coordinates-0-value-lon');
+    }
+
     public get inputMapConfig() {
         return $('#edit-settings-block-form-field-map-config-0-value');
     }
@@ -52,12 +60,39 @@ class MapBlockPage extends Page {
         return $('.mf-map');
     }
 
+    public get dropdownImage() {
+        return $('#edit-field-image');
+    }
+
+    public get dropdownIcon() {
+        return $('#edit-field-icon-image');
+    }
+
+    public get entityIframe() {
+        return $('#entity_browser_iframe_image_browser');
+    }
+
+    public get btnBrowse() {
+        return $("input[type='file']");
+    }
+
+    public get inputAltText() {
+        return $('input[id^="edit-inline-entity-form-field-media-image-0-alt"]');
+    }
+
+    public get btnSaveImage() {
+        return $('#edit-submit');
+    }
+
+    public get frames() {
+        return $('#entity_browser_iframe_image_browser');
+    }
 
     /**
      * Helper methods to create Map Component
      */
 
-    public async createMap(title: string, highlightTitle: string, mapConfig: string) {
+    public async createMap(title: string, highlightTitle: string, latitude: string, longitude, remoteFilePath: string, altText: string, remoteFilePath1: string, altText1: string) {
         await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
@@ -66,10 +101,42 @@ class MapBlockPage extends Page {
         await (await this.inputTitle).setValue(title);
         await (await this.inputHighlightTitle).scrollIntoView();
         await (await this.inputHighlightTitle).setValue(highlightTitle);
+        await (await this.inputLatitude).scrollIntoView();
+        await (await this.inputLatitude).setValue(latitude);
+        await (await this.inputLongitude).scrollIntoView();
+        await (await this.inputLongitude).setValue(longitude);
+        await (await this.dropdownImage).click();
+        // switch to the iframe
+        await browser.switchToFrame(await this.entityIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath);
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await (await this.dropdownIcon).scrollIntoView();
         await browser.pause(2000);
-        await (await this.inputMapConfig).scrollIntoView();
-        await (await this.inputMapConfig).setValue(mapConfig);
+        await (await this.dropdownIcon).click();
+        // switch to the iframe
+        const frame1 = await this.frames;
+       //await frame1.waitForDisplayed();
+        await browser.switchToFrame(frame1);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath1);
+        await browser.pause(4000); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).setValue(altText1);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
         await browser.pause(2000);
+        // await (await this.inputMapConfig).scrollIntoView();
+        // await (await this.inputMapConfig).setValue(mapConfig);
+        // await browser.pause(2000);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

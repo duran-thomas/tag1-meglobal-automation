@@ -69,11 +69,13 @@ describe('Map Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnMap).scrollIntoView();
-        (await QALayoutPage.btnMap).click();
-        (await MapBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnMap).scrollIntoView();
+        await (await QALayoutPage.btnMap).click();
+        await (await MapBlockPage.configBlock).waitForDisplayed();
 
-        await MapBlockPage.createMap(mapBlockData.title, mapBlockData.highlightTitle, mapBlockData.mapConfig);
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        const imageFilePath2 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        await MapBlockPage.createMap(mapBlockData.title, mapBlockData.highlightTitle, mapBlockData.latitude, mapBlockData.longitude, imageFilePath, mapBlockData.altText, imageFilePath2, mapBlockData.iconAltText);
 
         await expect(MapBlockPage.successMsg).toBeDisplayed();
 
