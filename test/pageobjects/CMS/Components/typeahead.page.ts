@@ -72,6 +72,21 @@ class FreeformBlockPage extends Page {
     public get typeaheadSearch() {
         return $('input[id^="meda-typeahead-"]');
     }
+    public get inputSearch() {
+        return $('input[placeholder="Keyword(s)"]');
+    }
+
+    public get btnSearch(){
+        return $('div button.mf-top-bar__button--search')
+    }
+
+    public get btnNavSearch(){
+        return $('div button.mf-top-bar__button--search')
+    }
+
+    public get inputNavSearch(){
+        return $('#text-input-typeahead')
+    }
 
     /**
      * Helper methods to create freeform typeahead Component
