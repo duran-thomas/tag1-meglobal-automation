@@ -4,7 +4,9 @@ import TypeaheadBlockPage from '../../pageobjects/CMS/Components/typeahead.page'
 import {typeaheadBlockData} from '../../data/typeahead.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import { generateRandomString } from '../../../utils/utils'
 const assert = require('assert');
+
 
 
 describe('Typeahead Component Tests', () => {
@@ -54,17 +56,6 @@ describe('Typeahead Component Tests', () => {
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
-   
-            // Function to generate a specified length random characters
-    const generateRandomString = (length) => {
-        let result = '';
-        const characters = 'abcdefghijklmnopqrstuvwxyz';
-        const charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    };
 
     it('[S3C1112] Verify Content Administrator can create a Typeahead with default settings', async () => {
         await (await QALayoutPage.tabLayout).click();
