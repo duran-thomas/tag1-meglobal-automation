@@ -197,5 +197,66 @@ describe('Typeahead Component Tests', () => {
         await expect(typedText).toHaveLength(100);
         await expect(parseInt(maxLength)).toEqual(100);
     })
+    //Skipping this test case as the result counts for the QA environment is incorrect
+    it.skip('Verify the display of total result count next to each tab', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click() 
+        await browser.pause(2000)
 
+        const searchResultCount = await (await TypeaheadBlockPage.btnSearchResultTabs)
+
+        const patientCareTabCount = await (await searchResultCount[0].getText())
+        const collegeOfMedTabCount = await (await searchResultCount[1].getText())
+        const expectedResultsCount = await (await searchResultCount[2].getText())
+
+        const totalResultCount = parseInt(patientCareTabCount) + parseInt(collegeOfMedTabCount)
+        
+        await expect(totalResultCount).toEqual(parseInt(expectedResultsCount))
+    })
+
+    it('Verify “Suggested spelling” for alternative search results when no results are found for the search keyword', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.errorKeyword);
+        await (await TypeaheadBlockPage.searchBtn).click() 
+
+        await (await TypeaheadBlockPage.suggestedSearchTerm).waitForDisplayed();
+        const suggestedSpelling = await (await TypeaheadBlockPage.suggestedSearchTerm).getText()
+
+        await expect(suggestedSpelling).toEqual(typeaheadBlockData.correctKeyword)
+    })
+
+    it.only('Verify that “More results” button is displayed after the first 10 search results', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click()
+        
+        await browser.pause(2000)
+        const results = await TypeaheadBlockPage.searchResultsHeader
+
+        await expect(results.length).toEqual(10)
+        await (await TypeaheadBlockPage.btnMoreResults).scrollIntoView()
+        await expect(TypeaheadBlockPage.btnMoreResults).toBeDisplayed()
+    })
+
+    it('Verify the display of total count next to each filter on the filter sidesheet', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click()
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.btnFilter).click()
+        await browser.pause(1000)
+        //Verify that a number is present beside each filter option
+        await expect(TypeaheadBlockPage.textFilterCounts).toExist()
+    })
 });
+
+

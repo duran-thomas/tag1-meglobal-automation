@@ -88,6 +88,34 @@ class FreeformBlockPage extends Page {
         return $('#text-input-typeahead')
     }
 
+    public get searchBtn() {
+        return $('#edit-actions button')
+    }
+
+    public get btnSearchResultTabs(){
+        return $$('button.mf-inline-menu__list__link span')
+    }
+
+    public get suggestedSearchTerm(){
+        return $('a[data-analytics-click-text="covid-19"] span span')
+    }
+
+    public get searchResultsHeader(){
+        return $$('.mf-result-item__headline')
+    }
+
+    public get btnMoreResults(){
+        return $('button[data-analytics-click-text="More results"]')
+    }
+
+    public get btnFilter(){
+        return $('a[data-analytics-click-text="filter"]')
+    }
+
+    public get textFilterCounts(){
+        return $$('div.mf-modal__body > ul > li > span')
+    }
+
     /**
      * Helper methods to create freeform typeahead Component
      */
