@@ -4,9 +4,14 @@ import TypeaheadBlockPage from '../../pageobjects/CMS/Components/typeahead.page'
 import {typeaheadBlockData} from '../../data/typeahead.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import { generateRandomString } from '../../../utils/utils'
+const assert = require('assert');
+
 
 
 describe('Typeahead Component Tests', () => {
+    const environment = getEnvironmentConfig(process.env.ENV);
+    const baseURL = environment.baseUrl;
 
     before(async ()=>{
         // Get the environment configuration
@@ -51,7 +56,6 @@ describe('Typeahead Component Tests', () => {
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
-   
 
     it('[S3C1112] Verify Content Administrator can create a Typeahead with default settings', async () => {
         await (await QALayoutPage.tabLayout).click();
@@ -81,7 +85,6 @@ describe('Typeahead Component Tests', () => {
         results.forEach(async (result)=> {
             const resultText = await result.getText();
             const expectedText = typeaheadBlockData.searchTerm; 
-
             await expect(resultText).toContain(expectedText);
         })
     });
@@ -93,4 +96,167 @@ describe('Typeahead Component Tests', () => {
         await expect($(`span=No results found for '${typeaheadBlockData.invalidTerm}'`)).toBeDisplayed();
     });
 
+    it('[S3C1131] Verify typeahead in the search box provides relevant suggestions based on user input', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(3000)
+
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue('h')
+        await browser.pause(1000)
+        
+        const results = await TypeaheadBlockPage.resultList
+
+        // Filter out blank results
+        const filteredResults = [];
+
+        for (const result of results) {
+            const resultText = await result.getText();
+            const trimmedText = resultText.trim();
+
+            // Check if the trimmed text is not empty
+            if (trimmedText !== '') {
+                filteredResults.push(result);
+            }
+        }
+
+        for (const result of filteredResults) {
+            const resultText = await result.getText();
+            const wordsInResult = resultText.split(' ');
+
+            // Check the first letter of each word
+            for (const word of wordsInResult) {
+                assert.strictEqual(word.charAt(0), 'h');
+            }
+        }
+    });
+
+    it('Verify typeahead for global navigation search provides relevant suggestions based in user input', async () => {
+        await browser.url(await baseURL);
+        await browser.pause(1000)
+        await (await TypeaheadBlockPage.btnNavSearch).click()
+        await (await TypeaheadBlockPage.inputNavSearch).setValue('h')
+        await browser.pause(1000)
+        
+        const results = await TypeaheadBlockPage.resultList
+
+        // Filter out blank results
+        const filteredResults = [];
+
+        for (const result of results) {
+            const resultText = await result.getText();
+            const trimmedText = resultText.trim();
+
+            // Check if the trimmed text is not empty
+            if (trimmedText !== '') {
+                filteredResults.push(result);
+            }
+        }
+
+        for (const result of filteredResults) {
+            const resultText = await result.getText();
+            const wordsInResult = resultText.split(' ');
+
+            // Check the first letter of each word
+            for (const word of wordsInResult) {
+                assert.strictEqual(word.charAt(0), 'h');
+            }
+        }
+    });
+
+    it('[S3C1436] Verify search field maximum character limit', async() => {
+
+        // Generate 105 characters 
+        const testString = generateRandomString(105)
+
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(3000)
+
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(testString)
+        const typedText = await TypeaheadBlockPage.inputSearch.getValue()
+
+        const maxLength = await (await TypeaheadBlockPage.inputSearch).getAttribute('maxlength');
+
+        await expect(typedText).toHaveLength(100);
+        await expect(parseInt(maxLength)).toEqual(100);
+    })
+
+    it('Verify navigation search field maximum character limit', async() => {
+        // Generate 105 characters 
+        const testString = generateRandomString(105)
+
+        await browser.url(await baseURL);
+        await browser.pause(3000)
+
+        await (await TypeaheadBlockPage.btnNavSearch).click()
+        await (await TypeaheadBlockPage.inputNavSearch).setValue(testString)
+        const typedText = await TypeaheadBlockPage.inputNavSearch.getValue()
+
+        const maxLength = await (await TypeaheadBlockPage.inputNavSearch).getAttribute('maxlength');
+
+        await expect(typedText).toHaveLength(100);
+        await expect(parseInt(maxLength)).toEqual(100);
+    })
+    //Skipping this test case as the result counts for the QA environment is incorrect
+    it.skip('Verify the display of total result count next to each tab', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click() 
+        await browser.pause(2000)
+
+        const searchResultCount = await (await TypeaheadBlockPage.btnSearchResultTabs)
+
+        const patientCareTabCount = await (await searchResultCount[0].getText())
+        const collegeOfMedTabCount = await (await searchResultCount[1].getText())
+        const expectedResultsCount = await (await searchResultCount[2].getText())
+
+        const totalResultCount = parseInt(patientCareTabCount) + parseInt(collegeOfMedTabCount)
+        
+        await expect(totalResultCount).toEqual(parseInt(expectedResultsCount))
+    })
+
+    it('Verify “Suggested spelling” for alternative search results when no results are found for the search keyword', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.errorKeyword);
+        await (await TypeaheadBlockPage.searchBtn).click() 
+
+        await (await TypeaheadBlockPage.suggestedSearchTerm).waitForDisplayed();
+        const suggestedSpelling = await (await TypeaheadBlockPage.suggestedSearchTerm).getText()
+
+        await expect(suggestedSpelling).toEqual(typeaheadBlockData.correctKeyword)
+    })
+
+    it.only('Verify that “More results” button is displayed after the first 10 search results', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click()
+        
+        await browser.pause(2000)
+        const results = await TypeaheadBlockPage.searchResultsHeader
+
+        await expect(results.length).toEqual(10)
+        await (await TypeaheadBlockPage.btnMoreResults).scrollIntoView()
+        await expect(TypeaheadBlockPage.btnMoreResults).toBeDisplayed()
+    })
+
+    it('Verify the display of total count next to each filter on the filter sidesheet', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click()
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.btnFilter).click()
+        await browser.pause(1000)
+        //Verify that a number is present beside each filter option
+        await expect(TypeaheadBlockPage.textFilterCounts).toExist()
+    })
 });
+
+
