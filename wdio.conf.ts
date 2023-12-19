@@ -136,7 +136,7 @@ export const config: Options.Testrunner = {
         'goog:chromeOptions': {
             args: [
                 'disable-gpu', '--headless'],
-            extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
+            //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,
         //'--auto-open-devtools-for-tabs' opens console
