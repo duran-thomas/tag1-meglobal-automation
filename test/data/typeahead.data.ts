@@ -5,5 +5,8 @@ export const typeaheadBlockData = {
     label: 'Search for keywords',
     placeholder: 'Type diagnostic keywords to search for here',
     searchTerm: 'Abo',
-    invalidTerm: 'xkcd'
+    invalidTerm: 'xkcd',
+    searchWord: 'heart',
+    errorKeyword: 'coid-19',
+    correctKeyword: 'covid-19'
 };
