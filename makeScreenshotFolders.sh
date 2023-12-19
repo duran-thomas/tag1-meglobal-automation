@@ -7,7 +7,7 @@
 source_directory="./test/pageobjects/CMS/Components/"
 
 # Destination directory where new folders will be created
-destination_directory="./screenshots2"
+destination_directory="./screenshots"
 
 # Ensure the destination directory exists
 mkdir -p "$destination_directory"
