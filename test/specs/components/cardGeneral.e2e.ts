@@ -38,7 +38,7 @@ describe('Card General Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/CardGeneral/${testName}.png`;
+        const screenshotPath = `./screenshots/Cardgeneral/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 

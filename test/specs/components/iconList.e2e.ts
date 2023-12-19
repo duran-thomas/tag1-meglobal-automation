@@ -38,7 +38,7 @@ describe('Icon List Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/IconList/${testName}.png`;
+        const screenshotPath = `./screenshots/Iconlist/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
