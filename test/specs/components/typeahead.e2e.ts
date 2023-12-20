@@ -263,7 +263,7 @@ describe('Typeahead Component Tests', () => {
         await expect(TypeaheadBlockPage.textFilterCounts).toExist()
     })
     //Search Page
-    it.only('Verify the display of “No Results Found” message when no relevant suggestions are available', async () => {
+    it('Verify the display of “No Results Found” message when no relevant suggestions are available', async () => {
         await browser.url(await `${baseURL}search`);
         await browser.pause(2000)
         await (await TypeaheadBlockPage.inputSearch).click()
@@ -271,7 +271,7 @@ describe('Typeahead Component Tests', () => {
         await expect($(`span=No results found for '${typeaheadBlockData.invalidTerm}'`)).toBeDisplayed();  
     })
 
-    it.only('Verify the absence of Flyout Menu (Primary Navigation) on the %2Fsearch page', async () => {
+    it('Verify the absence of Flyout Menu (Primary Navigation) on the %2Fsearch page', async () => {
         await browser.url(await baseURL);
         const flyoutNavLinks = await TypeaheadBlockPage.flyoutMenuItems
 
@@ -284,7 +284,7 @@ describe('Typeahead Component Tests', () => {
         }
     })
     //Search Page
-    it.only('Verify the ability to search with a single filter', async () => {
+    it('Verify the ability to search with a single filter', async () => {
         await browser.url(await `${baseURL}search`);
         await browser.pause(2000)
         await (await TypeaheadBlockPage.inputSearch).click()
