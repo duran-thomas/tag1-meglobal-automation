@@ -116,6 +116,22 @@ class FreeformBlockPage extends Page {
         return $$('div.mf-modal__body > ul > li > span')
     }
 
+    public get flyoutMenuItems(){
+        return $$('mf-flyout__nav__link');
+    }
+
+    public get resultCount(){
+        return $('span[x-text="count"]')
+    }
+
+    public get checkboxFirstFilterItem(){
+        return $$('div.mf-modal__body > ul > li > div')[0]
+    }
+
+    public get btnApplyFilter(){
+        return $('button[data-analytics-click-text="Show results"]')
+    }
+
     /**
      * Helper methods to create freeform typeahead Component
      */
