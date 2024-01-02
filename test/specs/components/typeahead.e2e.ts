@@ -230,7 +230,7 @@ describe('Typeahead Component Tests', () => {
         await expect(suggestedSpelling).toEqual(typeaheadBlockData.correctKeyword)
     })
 
-    it.only('Verify that “More results” button is displayed after the first 10 search results', async () => {
+    it('Verify that “More results” button is displayed after the first 10 search results', async () => {
         await browser.url(await `${baseURL}search`);
         await browser.pause(2000)
         await (await TypeaheadBlockPage.inputSearch).click()
@@ -243,6 +243,11 @@ describe('Typeahead Component Tests', () => {
         await expect(results.length).toEqual(10)
         await (await TypeaheadBlockPage.btnMoreResults).scrollIntoView()
         await expect(TypeaheadBlockPage.btnMoreResults).toBeDisplayed()
+        await (await TypeaheadBlockPage.btnMoreResults).click()
+        await browser.pause(4000)
+        const updatedResults = await TypeaheadBlockPage.searchResultsHeader
+
+        await expect(updatedResults.length).toEqual(20)
     })
 
     it('Verify the display of total count next to each filter on the filter sidesheet', async () => {
@@ -256,6 +261,43 @@ describe('Typeahead Component Tests', () => {
         await browser.pause(1000)
         //Verify that a number is present beside each filter option
         await expect(TypeaheadBlockPage.textFilterCounts).toExist()
+    })
+    //Search Page
+    it('Verify the display of “No Results Found” message when no relevant suggestions are available', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.invalidTerm);
+        await expect($(`span=No results found for '${typeaheadBlockData.invalidTerm}'`)).toBeDisplayed();  
+    })
+
+    it('Verify the absence of Flyout Menu (Primary Navigation) on the %2Fsearch page', async () => {
+        await browser.url(await baseURL);
+        const flyoutNavLinks = await TypeaheadBlockPage.flyoutMenuItems
+
+        for (const result of flyoutNavLinks) {
+            await expect(result).toBeDisplayed()
+        }
+        await browser.url(await `${baseURL}search`);
+        for (const result of flyoutNavLinks) {
+            await expect(result).not.toBeDisplayed()
+        }
+    })
+    //Search Page
+    it('Verify the ability to search with a single filter', async () => {
+        await browser.url(await `${baseURL}search`);
+        await browser.pause(2000)
+        await (await TypeaheadBlockPage.inputSearch).click()
+        await (await TypeaheadBlockPage.inputSearch).setValue(typeaheadBlockData.searchWord);
+        await (await TypeaheadBlockPage.searchBtn).click()
+        await browser.pause(2000)
+        const initialResultCount = await ((await TypeaheadBlockPage.resultCount).getText())
+        await (await TypeaheadBlockPage.btnFilter).click()
+        await (await TypeaheadBlockPage.checkboxFirstFilterItem).click()
+        await (await TypeaheadBlockPage.btnApplyFilter).click()
+        await browser.pause(2000)
+        const newResultCount = await ((await TypeaheadBlockPage.resultCount).getText())
+        await expect(parseInt(newResultCount)).toBeLessThan(parseInt(initialResultCount));
     })
 });
 
