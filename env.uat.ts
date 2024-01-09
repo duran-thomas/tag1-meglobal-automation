@@ -1,6 +1,6 @@
 export const environment = {
-    bypassURL: 'https://meda2022:meda2022@uat-content.montefioreeinstein.org/home',
-    baseUrl: 'https://uat-content.montefioreeinstein.org/home',
+    bypassURL: 'https://meda2022:meda2022@uat-content.montefioreeinstein.org/',
+    baseUrl: 'https://uat-content.montefioreeinstein.org/',
     //unable to login
     cookies: {
         name: 'SSESS933b071c7c2e2830c46695ffbb11e015',
