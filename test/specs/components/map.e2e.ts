@@ -85,7 +85,6 @@ describe('Map Component Tests', () => {
 
         //dismiss google alert for clean screenshot
         (await $('.dismissButton')).click(); 
-        await browser.debug()
     });
 
 
@@ -105,7 +104,7 @@ describe('Map Component Tests', () => {
         await expect(await hideLocationCheckbox.isSelected()).toBe(false);
     });
 
-    it.only('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
+    it('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -184,15 +183,12 @@ describe('Map Component Tests', () => {
             const phoneIcon = phoneIconsElements[3]
             const phoneText = phoneTextElements[5]
 
-            console.log(phoneIcon)
-            console.log(phoneText)
-
-            // if (phoneIconsElements.getAttribute('target') !== '_blank') {
-            //     phoneIconsElements.setAttribute('target', '_blank');
-            // }
-            // if (phoneTextElements.getAttribute('target') !== '_blank') {
-            //     phoneTextElements.setAttribute('target', '_blank');
-            // }
+            if (phoneIcon.getAttribute('target') !== '_blank') {
+                phoneIcon.setAttribute('target', '_blank');
+            }
+            if (phoneText.getAttribute('target') !== '_blank') {
+                phoneText.setAttribute('target', '_blank');
+            }
         })
         const icons = $$('a[data-analytics-link-type="button"]')
         const text = $$('a[data-analytics-click-text="phone"]')
