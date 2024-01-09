@@ -96,6 +96,14 @@ class MapBlockPage extends Page {
         return $$('div[data-analytics-link-type="button"]')[0]
     }
 
+    public get btnMapIcon() {
+        return $$('button[data-analytics-click-text="map-trifold"]')[0]
+    }
+
+    public get btnPhoneIcon() {
+        return $$('a[data-analytics-link-type="button"]')[0]
+    }
+
     public get btnOverlayMapIcon() {
         return $$('button[data-analytics-click-text="map-trifold"]')[2]
     }
@@ -111,6 +119,7 @@ class MapBlockPage extends Page {
     public get overlayPhoneText() {
         return $$('a[data-analytics-click-text="phone"]')[5]
     }
+
 
     /**
      * Helper methods to create Map Component

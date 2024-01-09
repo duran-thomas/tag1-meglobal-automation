@@ -122,7 +122,7 @@ describe('Map Component Tests', () => {
         await (await MapBlockPage.mapElement).scrollIntoView();
         await expect(MapBlockPage.mapElement).toBeDisplayed(); 
 
-        (await $('.dismissButton')).click(); 
+        (await $('.dismissButton')).click();
         await (await MapBlockPage.btnFirstLocation).click();
         await browser.pause(2000);
         await (await MapBlockPage.btnOverlayMapIcon).click();
@@ -132,48 +132,7 @@ describe('Map Component Tests', () => {
         const currentUrl = await browser.getUrl();
 
         const expectedAnalyticsData = [
-            {
-                clickText: 'text',
-                componentType: 'map',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1'
-            },
-            {
-                clickText: 'map-trifold',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1'
-            },
-            {
-                clickText: '111 East 210th Street Bronx, NY 10467-2401',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'link',
-                pageSlot: '1'
-            },
-            {
-                clickText: 'phone',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1',
-                phoneNumber: '718.430.2000'
-            },
-            {
-                clickText: 'phone',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'link',
-                pageSlot: '1',
-                phoneNumber: '718.430.2000'
-            }
+            
         ]
 
         await browser.execute(() => {
@@ -230,4 +189,101 @@ describe('Map Component Tests', () => {
             await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
         }
     });
-  });
+
+    it('[S3C1348] Verify that Analytics for the Map: Locations: Rail Component is configured', async () => {
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnMap).scrollIntoView();
+        await (await QALayoutPage.btnMap).click();
+        await (await MapBlockPage.configBlock).waitForDisplayed();
+
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        const imageFilePath2 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        await MapBlockPage.createMapWithLocation(mapBlockData.title, mapBlockData.location, mapBlockData.highlightTitle, mapBlockData.latitude, mapBlockData.longitude, imageFilePath, mapBlockData.altText, imageFilePath2, mapBlockData.iconAltText);
+        await expect(MapBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
+
+        await (await MapBlockPage.mapElement).scrollIntoView();
+        await expect(MapBlockPage.mapElement).toBeDisplayed(); 
+
+        (await $('.dismissButton')).click();
+        await (await MapBlockPage.btnFirstLocation).click();
+        await browser.pause(2000);
+        await (await MapBlockPage.btnMapIcon).click();
+        await browser.pause(1000)
+        const currentUrl = await browser.getUrl();
+        await browser.execute(() => {
+            const phoneIconsElements = document.querySelectorAll('a[data-analytics-link-type="button"]')
+
+            const phoneIcon = phoneIconsElements[0]
+
+            if (phoneIcon.getAttribute('target') !== '_blank') {
+                phoneIcon.setAttribute('target', '_blank');
+            }
+        })
+        const icons = $$('a[data-analytics-link-type="button"]')
+        icons[0].click();
+        await browser.switchWindow(currentUrl);
+        
+        const expectedAnalyticsData = [
+            {
+                clickText: 'text',
+                componentType: 'map',
+                event: 'e_componentClick',
+                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+                linkType: 'button',
+                pageSlot: '1'
+            },
+            {
+                clickText: 'text > map-trifold',
+                componentType: 'map',
+                event: 'e_componentClick',
+                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+                linkType: 'button',
+                pageSlot: '1'
+            },
+            {
+                clickText: 'text > phone',
+                componentType: 'map',
+                event: 'e_componentClick',
+                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+                linkType: 'button',
+                pageSlot: '1',
+                phoneNumber: '718.430.2000'
+            }
+        ]
+
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
+        let parsedAnalyticsData = []
+        for(let x in actualAnalyticsData){
+            if ('phoneNumber' in actualAnalyticsData[x]) {
+                parsedAnalyticsData.push({
+                    clickText: actualAnalyticsData[x].clickText,
+                    componentType: actualAnalyticsData[x].componentType,
+                    event: actualAnalyticsData[x].event,
+                    itemTitle: actualAnalyticsData[x].itemTitle,
+                    linkType: actualAnalyticsData[x].linkType,
+                    phoneNumber: actualAnalyticsData[x].phoneNumber,
+                    pageSlot: actualAnalyticsData[x].pageSlot,  
+                });
+            }else {
+                parsedAnalyticsData.push({
+                    clickText: actualAnalyticsData[x].clickText,
+                    componentType: actualAnalyticsData[x].componentType,
+                    event: actualAnalyticsData[x].event,
+                    itemTitle: actualAnalyticsData[x].itemTitle,
+                    linkType: actualAnalyticsData[x].linkType,
+                    pageSlot: actualAnalyticsData[x].pageSlot
+                })
+            }
+        }
+        const screenshotPath = `./screenshots/Map/Verify that Analytics for the Map: Locations: Rail Component is configured.png`;
+        await browser.saveScreenshot(screenshotPath);
+        for(let x in parsedAnalyticsData){
+            await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
+        }
+    });
+});
