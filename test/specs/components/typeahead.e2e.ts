@@ -96,7 +96,7 @@ describe('Typeahead Component Tests', () => {
         await expect($(`span=No results found for '${typeaheadBlockData.invalidTerm}'`)).toBeDisplayed();
     });
 
-    it.only('[S3C1131] Verify typeahead in the search box provides relevant suggestions based on user input', async () => {
+    it('[S3C1131] Verify typeahead in the search box provides relevant suggestions based on user input', async () => {
         await browser.url(await `${baseURL}search`);
         await browser.pause(3000)
 
@@ -163,7 +163,7 @@ describe('Typeahead Component Tests', () => {
         }
     });
 
-    it.only('[S3C1436] Verify search field maximum character limit', async() => {
+    it('[S3C1481] Verify search field maximum character limit', async() => {
 
         // Generate 105 characters 
         const testString = generateRandomString(105)

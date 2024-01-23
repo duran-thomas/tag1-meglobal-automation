@@ -305,7 +305,7 @@ describe('Freeform Component Tests', () => {
         await expect(await $('.mf-media')).toBeDisplayed();
     });
 
-    it('[S3C1023] Verify that a site Content Administrator can create a Freeform Component with a Visual List block)', async () => {
+    it('[S3C1023] Verify that a site Content Administrator can create a Freeform Component with a Visual List block', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

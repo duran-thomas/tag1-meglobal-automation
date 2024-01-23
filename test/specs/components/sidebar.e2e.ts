@@ -70,18 +70,18 @@ describe('Sidebar Component Tests', () => {
         // await expect (SidebarBlockPage.successMsg).toHaveText('The Layout Page QA Test - Sidebar page has been deleted.');
 
 
-        // //968 return menu link to original text
-        // await SidebarBlockPage.editMenuLink(sidebarBlockData.originalText);
-        // await expect(SidebarBlockPage.messageContent).toHaveTextContaining('The menu link has been saved.');
-        // //968 delete node
-        // await SidebarBlockPage.openDummyTestGroupNodes();
-        // await (await SidebarBlockPage.linkDummyQANode).waitForClickable();
-        // await (await SidebarBlockPage.linkDummyQANode).click();
-        // await (await SidebarBlockPage.deleteBtn).waitForDisplayed();
-        // await (await SidebarBlockPage.deleteBtn).click();
-        // await (await SidebarBlockPage.btnSave).waitForDisplayed();
-        // await (await SidebarBlockPage.btnSave).click();
-        // await expect(SidebarBlockPage.successMsg).toBeDisplayed();
+        //968 return menu link to original text
+        await SidebarBlockPage.editMenuLink(sidebarBlockData.originalText);
+        await expect(SidebarBlockPage.messageContent).toHaveTextContaining('The menu link has been saved.');
+        //968 delete node
+        await SidebarBlockPage.openDummyTestGroupNodes();
+        await (await SidebarBlockPage.linkDummyQANode).waitForClickable();
+        await (await SidebarBlockPage.linkDummyQANode).click();
+        await (await SidebarBlockPage.deleteBtn).waitForDisplayed();
+        await (await SidebarBlockPage.deleteBtn).click();
+        await (await SidebarBlockPage.btnSave).waitForDisplayed();
+        await (await SidebarBlockPage.btnSave).click();
+        await expect(SidebarBlockPage.successMsg).toBeDisplayed();
 
     });
 
@@ -215,9 +215,9 @@ describe('Sidebar Component Tests', () => {
         await (await SidebarBlockPage.btnMenuEdit).click(); 
         await (await SidebarBlockPage.linkTestMenu).waitForDisplayed();
         await (await SidebarBlockPage.linkTestMenu).click();
-        await browser.pause(2000);
-        const currentUrl = await browser.getUrl();       
-        await expect(currentUrl).toBe('https://www.google.com/');
+        await browser.pause(3000);
+        //const currentUrl = await browser.getUrl();       
+        await expect(await browser.getUrl()).toBe('https://www.google.com/');
 
     });
 
