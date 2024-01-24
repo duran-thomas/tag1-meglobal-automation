@@ -43,17 +43,6 @@ describe('Sidebar Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
    
-    // //delete previously created sections
-    // afterEach(async function() { 
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getTestPage(global.suiteDescription);
-    //     await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.cleanUpJob();
-    //     await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
-    //     //return to starting point
-    //     await AdminContentPage.open();
-    //     await AdminContentPage.getTestPage(global.suiteDescription);  
-    // });
 
     //delete page
     after(async function () {
@@ -61,9 +50,9 @@ describe('Sidebar Component Tests', () => {
         const environment = getEnvironmentConfig(process.env.ENV);
         //await browser.url(environment.baseUrl+'user/logout');
         await browser.setCookies(environment.admin);
-        // await AdminContentPage.open();
-        // await AdminContentPage.deleteTestPage(global.suiteDescription);
-        // await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
         // //1025 delete created node
         // await SidebarBlockPage.deleteNode();
         // await expect (SidebarBlockPage.successMsg).toBeDisplayed();
