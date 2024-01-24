@@ -108,57 +108,63 @@ describe('Sidebar Component Tests', () => {
         await (await SidebarBlockPage.sidebarElement).scrollIntoView({ behavior: 'auto', block: 'center' });
     });
 
-    it.skip('[S3C1326] Verify that Analytics is correctly configured for Sidebar Component', async () => {
-        /**
-       * Create the expected analytics 
-       * object based on the spec below: 
-       */
+    //Unable to get capture analytics regardless of method used
+    // it('[S3C1326] Verify that Analytics is correctly configured for Sidebar Component', async () => {
+    //     await browser.url('https://meda2022:meda2022@content.montefioreeinstein.org/internal/component-testing/sidebar-default');
+    //     const link = await $$('a[href="/internal/component-testing/sidebar-default/components-testing-sub-page-sidebar-navigation"]')[1];
+    //     const sidebar = await $('div[data-analytics-navigation-type="sidebar"]');
+    //     await sidebar.scrollIntoView();
+    //     /**
+    //    * Create the expected analytics 
+    //    * object based on the spec below: 
+    //    */
 
-        const expectedAnalyticsData = {
-            event: 'e_componentClick',
-            navigationType:'sidebar',
-            linkType: 'button',
-            clickText: sidebarBlockData.analyticsText,
-        }
+    //     const expectedAnalyticsData = {
+    //         event: 'e_componentClick',
+    //         navigationType:'sidebar',
+    //         linkType: 'link',
+    //         clickText: 'Sidebar: Default > Components testing sub-page for the Sidebar navigation',
+    //     }
 
-        // Get the current url of the page
-        const currentUrl = await browser.getUrl();
+    //     let variable='placeholder value';
+    
+    //     // Get the data layer for the window and get the data for the click event for the component
+    //     const dataLayer = await browser.execute(function(argument:any, element:any){
+    //         /**
+    //          * Add the event listener to store the window.dataLayer object into the argument variable before the window unloads
+    //          */
+    //         window.addEventListener('beforeunload',function(){
+    //             argument = window.dataLayer;
+    //         })
+    //         // Interact with the Image link to generate the analytics. (Clicking the image link brings the user to a new page)
+    //         element.click();
+    //         return Array.from(window.dataLayer);
+    //     }, variable, (await $$(`a[href="/internal/component-testing/sidebar-default/components-testing-sub-page-sidebar-navigation"]`)[1]))
+        
+        
+        
+    //     const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
 
-        //set element to open links in new tab
-        await browser.execute(() => {
-            const clickElement = document.querySelector('a[data-analytics-click-text="Professional Training Programs"]');
-            clickElement.setAttribute('target', '_blank');
-        })
 
-        // Interact with the link to generate the analytics. (Clicking the button navigates us to a new tab)
-        await ($(`a[data-analytics-click-text="Professional Training Programs"]`)).click();
+    //     // Build the actual analytics data object
+    //     const parsedActualAnalyticsData = {
+    //         //Remove whitespace from the Headline
+    //         clickText: actualAnalyticsData.clickText.trim(),
+    //         navigationType: actualAnalyticsData.navigationType,
+    //         event: actualAnalyticsData.event,
+    //         linkType: actualAnalyticsData.linkType,
+    //     }
 
-        // Switch back to the tab where the analytics is being generated
-        await browser.switchWindow(currentUrl)
+    //     fs.writeFile('analyticsTestEvidence/sidebar.json', JSON.stringify(dataLayer), err => {
+    //         if (err) {
+    //             console.error(err);
+    //         }
+    //         // file written successfully
+    //     });
 
-        // Get the data layer for the window and get the data for the click event for the component
-        const dataLayer = await browser.executeScript('return window.dataLayer', []);
-        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+    //     await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 
-        // Build the actual analytics data object
-        const parsedActualAnalyticsData = {
-            //Remove whitespace from the Headline
-            clickText: actualAnalyticsData.clickText.trim(),
-            navigationType: actualAnalyticsData.componentType,
-            event: actualAnalyticsData.event,
-            linkType: actualAnalyticsData.linkType,
-        }
-
-        fs.writeFile('analyticsTestEvidence/sidebar.json', JSON.stringify(dataLayer), err => {
-            if (err) {
-                console.error(err);
-            }
-            // file written successfully
-        });
-
-        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
-
-    });
+    // });
 
     it('[S3C1026] Verify sidebar section configurations', async () => {
         await (await QALayoutPage.tabLayout).click();
@@ -205,7 +211,7 @@ describe('Sidebar Component Tests', () => {
         
     });
 
-    /**Executively deciding not to automate [S3C966] Verify that links can be added to and removed from a Group Content Menu, 
+    /**Not automating '[S3C966] Verify that links can be added to and removed from a Group Content Menu', 
     as this is done as a precondition to the preceding tests. indirectly passing this case. LOE not worth it
     */
 
@@ -238,9 +244,7 @@ describe('Sidebar Component Tests', () => {
 
     });
 
-
-
-
+    //Unable to complete '[S3C1378] Verify that the current page link is highlighted' on ode7. Resources not available.
 
 
   });
