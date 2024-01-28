@@ -42,8 +42,8 @@
     "translation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/translation.e2e.ts",
     "event": "npx wdio run wdio.conf.ts --spec ./test/specs/components/event.e2e.ts",
     "indexList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/indexList.e2e.ts",
+    "alertBar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/alertBar.e2e.ts"
     "sidebar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sidebar.e2e.ts"
-
   },
   "author": "QW Team",
   "license": "ISC",
