@@ -2,6 +2,7 @@
 
 export const mapBlockData = {
     title: 'QA Map Block Title',
+    location: 'P0001: Montefiore Einstein Hospital, Moses Campus (131)',
     highlightTitle: 'Highlight Title',
     latitude: '40.73061',
     longitude: '-73.935242',
