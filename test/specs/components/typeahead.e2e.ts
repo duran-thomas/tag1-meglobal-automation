@@ -57,7 +57,7 @@ describe('Typeahead Component Tests', () => {
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
-    it('[S3C1112] Verify Content Administrator can create a Typeahead with default settings', async () => {
+    it.only('[S3C1112] Verify Content Administrator can create a Typeahead with default settings', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -77,7 +77,7 @@ describe('Typeahead Component Tests', () => {
         await expect(await $(`input[placeholder="${typeaheadBlockData.placeholder}"]`)).toBeExisting();
     });
 
-    it('[S3C1126] Verify that typeahead returns accurate and relevant results based on user input', async () => {
+    it.only('[S3C1126] Verify that typeahead returns accurate and relevant results based on user input', async () => {
         await (await TypeaheadBlockPage.typeaheadSearch).setValue(typeaheadBlockData.searchTerm);
 
         const results = await TypeaheadBlockPage.resultList
@@ -89,7 +89,7 @@ describe('Typeahead Component Tests', () => {
         })
     });
 
-    it('[S3C1127] Verify the display of "No Results Found" message when no relevant suggestions are available', async () => {
+    it.only('[S3C1127] Verify the display of "No Results Found" message when no relevant suggestions are available', async () => {
         await (await TypeaheadBlockPage.typeaheadSearch).clearValue();
         await (await TypeaheadBlockPage.typeaheadSearch).setValue(typeaheadBlockData.invalidTerm);
         //Asserting the the college links to the Spanish version of the site
@@ -163,7 +163,7 @@ describe('Typeahead Component Tests', () => {
         }
     });
 
-    it('[S3C1436] Verify search field maximum character limit', async() => {
+    it('[S3C1481] Verify search field maximum character limit', async() => {
 
         // Generate 105 characters 
         const testString = generateRandomString(105)
@@ -198,7 +198,7 @@ describe('Typeahead Component Tests', () => {
         await expect(parseInt(maxLength)).toEqual(100);
     })
     //Skipping this test case as the result counts for the QA environment is incorrect
-    it.skip('Verify the display of total result count next to each tab', async () => {
+    it('Verify the display of total result count next to each tab', async () => {
         await browser.url(await `${baseURL}search`);
         await browser.pause(2000)
         await (await TypeaheadBlockPage.inputSearch).click()

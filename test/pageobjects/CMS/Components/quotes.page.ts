@@ -122,7 +122,7 @@ class QuotesBlockPage extends Page {
      */
 
     public async completeWithBorderNoAudio(title: string, quote: string, author: string, authorTitle: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -144,7 +144,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithoutBorder(title: string, quote: string, author: string, authorTitle: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -169,7 +169,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithAudioAndTranscript(title: string, quote: string, author: string, authorTitle: string, remoteAudioFilePath: string, transcript: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -206,7 +206,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithAudioNoTranscript(title: string, quote: string, author: string, authorTitle: string, remoteAudioFilePath: string) {
-        await browser.pause(10000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();

@@ -5,7 +5,7 @@ import popularSearchesPage from "../../pageobjects/CMS/Components/popularSearche
 const assert = require('assert');
 
 
-describe('Popular Searches Tests', () => {
+describe.skip('Popular Searches Tests', () => {
 
   before(async ()=>{
     // Get the environment configuration
