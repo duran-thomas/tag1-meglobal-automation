@@ -98,6 +98,7 @@ describe('Event Component Tests', () => {
         await expect(EventBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
+        await browser.pause(2000);
         await (await EventBlockPage.timeElements[0]).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         const elements = await $$('time.block');
@@ -155,7 +156,8 @@ describe('Event Component Tests', () => {
         await expect(EventBlockPage.eventElement).toBeExisting();   
 
         const text = await (await EventBlockPage.linkMoreAboutEvent).getText();
-        const title = await EventBlockPage.testEventTitle;
+        const title = "Recurring test event";
+        //const title = await EventBlockPage.testEventTitle;
 
         /**
          * Create the expected analytics 

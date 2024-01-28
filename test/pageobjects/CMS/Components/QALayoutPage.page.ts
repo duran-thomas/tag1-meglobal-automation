@@ -174,11 +174,11 @@ class LandingQAPage extends Page {
         return $('=Testimonial');
     }
 
-    public get btnTeamLeadersCarousel(){
+    public get btnTeamLeadersCarousel() {
         return $('=Team Leaders Carousel');
     }
 
-    public get btnTeamMembersGrid(){
+    public get btnTeamMembersGrid() {
         return $('=Team Members Grid');
     }
 
@@ -295,14 +295,18 @@ class LandingQAPage extends Page {
         await (await this.btnCreateCustomBlock).click();
         // await (await this.btnCloseChatPopUp).click();
         const frame = await this.dialogFrame;
-        if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+        if (await frame.isExisting() == true) {
             await browser.switchToFrame(frame);
-            await this.btnCloseChatPopUp.click();
+            await browser.pause(2000);
+            if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+                await this.btnCloseChatPopUp.click();
+                await browser.switchToParentFrame();
+            } else {
+                console.log('Button not displayed');
+            }
             await browser.switchToParentFrame();
-        } else {
-            console.log('Button not found');
         }
-        
+
     }
 
     public async goToPageView() {

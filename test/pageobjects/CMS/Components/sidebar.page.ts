@@ -246,16 +246,16 @@ class SidebarBlockPage extends Page {
     */
     public openDentistryGroup() {
         //return super.open('group/71');
-        return super.open('group/16');
+        return super.open('group/71');
 
     }
 
     public openDummyTestGroupMenus() {
-        return super.open('group/366/menus');
+        return super.open('group/361/menus');
     }
 
     public openDummyTestGroupNodes() {
-        return super.open('group/366/nodes');
+        return super.open('group/361/nodes');
     }
 }
 
