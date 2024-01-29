@@ -149,64 +149,65 @@ describe('Media Component Tests', () => {
         await (await QALayoutPage.btnImage).scrollIntoView();
         await (await QALayoutPage.btnImage).click();
         await (await MediaBlockPage.configBlock).waitForDisplayed();
-
+    
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
         await MediaBlockPage.createImageType(mediaBlockData.title, imageFilePath, mediaBlockData.altText, mediaBlockData.link, mediaBlockData.caption);
-
+    
         await expect(MediaBlockPage.successMsg).toBeDisplayed();
-
+    
         await QALayoutPage.goToPageView();
-
+    
+       /**
+             * Create the expected analytics 
+             * object based on the spec below: 
+             * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
+             *  */ 
+       const expectedAnalyticsData = {
+        event: 'e_componentClick',
+        componentType:'media image',
+        linkType: 'image',
+        //clickText: `sampleImg3.jpg`,
+        pageSlot: '1'
+    }
+    
+    let variable='placeholder value';
+    
+    // Get the data layer for the window and get the data for the click event for the component
+    const dataLayer = await browser.execute(function(argument:any, element:any){
         /**
-              * Create the expected analytics 
-              * object based on the spec below: 
-              * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
-              *  */
-        const expectedAnalyticsData = {
-            event: 'e_componentClick',
-            componentType: 'media image',
-            linkType: 'image',
-            //clickText: `sampleImg3.jpg`,
-            pageSlot: '1'
+         * Add the event listener to store the window.dataLayer object into the argument variable before the window unloads
+         */
+        window.addEventListener('beforeunload',function(){
+            argument = window.dataLayer;
+        })
+        // Interact with the Image link to generate the analytics. (Clicking the image link brings the user to a new page)
+        element.click();
+        return Array.from(window.dataLayer);
+    }, variable, (await $(`a[href="${mediaBlockData.link}"]`)))
+    
+    
+    
+     const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+    
+    // Build the actual analytics data object
+    const parsedActualAnalyticsData = {
+        //clickText: actualAnalyticsData.clickText.trim(),
+        componentType: actualAnalyticsData.componentType,
+        event: actualAnalyticsData.event,
+        // Remove html tags, whitespace and newlines from the Headline
+        linkType: actualAnalyticsData.linkType,
+        pageSlot: actualAnalyticsData.pageSlot
+    }
+    
+    fs.writeFile('analyticsTestEvidence/mediaImage.json', JSON.stringify(dataLayer), err => {
+        if (err) {
+            console.error(err);
         }
-
-        let variable = 'placeholder value';
-
-        // Get the data layer for the window and get the data for the click event for the component
-        const dataLayer = await browser.execute(function (argument: any, element: any) {
-            /**
-             * Add the event listener to store the window.dataLayer object into the argument variable before the window unloads
-             */
-            window.addEventListener('beforeunload', function () {
-                argument = window.dataLayer;
-            })
-            // Interact with the Image link to generate the analytics. (Clicking the image link brings the user to a new page)
-            element.click();
-            return argument;
-        }, variable, (await $(`a[href="${mediaBlockData.link}"]`)))
-
-
-        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
-
-        // Build the actual analytics data object
-        const parsedActualAnalyticsData = {
-            //clickText: actualAnalyticsData.clickText.trim(),
-            componentType: actualAnalyticsData.componentType,
-            event: actualAnalyticsData.event,
-            // Remove html tags, whitespace and newlines from the Headline
-            linkType: actualAnalyticsData.linkType,
-            pageSlot: actualAnalyticsData.pageSlot
-        }
-
-        fs.writeFile('analyticsTestEvidence/mediaImage.json', JSON.stringify(dataLayer), err => {
-            if (err) {
-                console.error(err);
-            }
-            // file written successfully
-        });
-
-        await expect(expectedAnalyticsData).toEqual(parsedActualAnalyticsData);
-        await expect(actualAnalyticsData.clickText.trim()).toContain('sampleImg3');
+        // file written successfully
+    });
+    
+    await expect(expectedAnalyticsData).toEqual(parsedActualAnalyticsData);
+    await expect(actualAnalyticsData.clickText.trim()).toContain('sampleImg3')
     });
 
 });

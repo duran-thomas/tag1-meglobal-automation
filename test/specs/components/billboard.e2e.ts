@@ -67,8 +67,9 @@ describe('Billboard Component Tests', () => {
 
      
     it('[S3C887] Verify that a site Content Administrator can create a Billboard Component.', async () => {
+        const id=`Billboard-S3C887-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnBillBoard).scrollIntoView();
         (await QALayoutPage.btnBillBoard).click();
@@ -80,15 +81,16 @@ describe('Billboard Component Tests', () => {
         await expect(BillboardBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await BillboardBlockPage.billboardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await BillboardBlockPage.billboardEyebrow(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(BillboardBlockPage.billboardHeadline).toHaveText(billboardBlockData.headline); 
-        await expect(BillboardBlockPage.billboardImage).toBeDisplayedInViewport();   
+        await expect(BillboardBlockPage.billboardHeadline(id)).toHaveText(billboardBlockData.headline); 
+        await expect(BillboardBlockPage.billboardImage(id)).toBeDisplayedInViewport();   
     });
 
     it('[S3C888] Verify that a site Content Administrator can create a Billboard Component in a Carousel Block', async () => {
+        const id=`Billboard-S3C888-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -100,18 +102,18 @@ describe('Billboard Component Tests', () => {
         await expect(BillboardBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await BillboardBlockPage.billboardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await BillboardBlockPage.billboardEyebrow(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(BillboardBlockPage.carouselElement).toExist();
-        await expect(BillboardBlockPage.billboardHeadline).toHaveText(billboardBlockData.headline); 
-        await expect(BillboardBlockPage.billboardImage).toBeDisplayedInViewport();   
+        await expect(BillboardBlockPage.carouselElement(id)).toExist();
+        await expect(BillboardBlockPage.billboardHeadline(id)).toHaveText(billboardBlockData.headline); 
+        await expect(BillboardBlockPage.billboardImage(id)).toBeDisplayedInViewport();   
     });
     
     
     it('[S3C1075] Verify that Analytics for the Billboard Component is configured', async () => {
-
+        const id=`Billboard-S3C1075-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnBillBoard).scrollIntoView();
         (await QALayoutPage.btnBillBoard).click();
@@ -123,10 +125,10 @@ describe('Billboard Component Tests', () => {
         await expect(BillboardBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await BillboardBlockPage.billboardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await BillboardBlockPage.billboardEyebrow(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(BillboardBlockPage.billboardHeadline).toHaveText(billboardBlockData.headline); 
-        await expect(BillboardBlockPage.billboardImage).toBeDisplayedInViewport();
+        await expect(BillboardBlockPage.billboardHeadline(id)).toHaveText(billboardBlockData.headline); 
+        await expect(BillboardBlockPage.billboardImage(id)).toBeDisplayedInViewport();
 
         /**
          * Create the expected analytics 

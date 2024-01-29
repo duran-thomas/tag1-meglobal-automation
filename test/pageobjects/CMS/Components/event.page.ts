@@ -206,7 +206,7 @@ class EventBlockPage extends Page {
         await (await this.adminTitle).setValue(title);
         await (await this.dropdownToggle).click();
         await (await this.linkAddEventList).click();
-        await (await this.dropdownTemplate).waitForExist();
+        //await (await this.dropdownTemplate).waitForExist();
         await (await this.dropdownDepartment).scrollIntoView();
         await (await this.dropdownDepartment).selectByVisibleText('Montefiore Einstein Center for Heart and Vascular Care');
         await (await this.dropdownEventType).selectByVisibleText('Support Groups');

@@ -55,9 +55,10 @@ describe('Accordion Component Tests', () => {
 
   
     it('[S3C906] Verify that a site Content Administrator can create an Accordion Component', async () => {
+        const id=`Accordion-S3C906-${Date.now()}`;
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnAccordion).scrollIntoView();
         await (await QALayoutPage.btnAccordion).click();
@@ -68,22 +69,35 @@ describe('Accordion Component Tests', () => {
         await expect(AccordionBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await AccordionBlockPage.accordionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await AccordionBlockPage.accordionElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+        await expect(AccordionBlockPage.accordionElement(id)).toBeDisplayedInViewport();
 
     });
 
     it('[S3C907] Verify that contents of the Accordion Component can be toggled (hide and show)', async () => {
+        const id=`Accordion-S3C907-${Date.now()}`;
         const title = accordionBlockData.title;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection(id);
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnAccordion).scrollIntoView();
+        await (await QALayoutPage.btnAccordion).click();
+        await (await AccordionBlockPage.configBlock).waitForDisplayed();
+
+        await AccordionBlockPage.createAccordion(accordionBlockData.mainTitle, accordionBlockData.title, accordionBlockData.content);
+
+        await expect(AccordionBlockPage.successMsg).toBeDisplayed();
+
+        await QALayoutPage.goToPageView();
 
         //Verify that the accordion content can be shown
         await (await AccordionBlockPage.accordionBtn).click();
-        await expect($('.mf-rich-text')).toBeDisplayedInViewport(); 
+        await expect($(`#${id} .mf-rich-text`)).toBeDisplayedInViewport(); 
 
         //Verify that the accordion content can be hidden
         await (await AccordionBlockPage.accordionBtn).click();
-        await expect($('.mf-rich-text')).not.toBeDisplayedInViewport(); 
+        await expect($(`#${id} .mf-rich-text`)).not.toBeDisplayedInViewport(); 
 
         //Re-open accordion for screenshot
         await (await AccordionBlockPage.accordionBtn).click();
@@ -92,9 +106,10 @@ describe('Accordion Component Tests', () => {
     });
 
     it('[S3C1350] Verify that Analytics for the Accordion Component is configured', async () => {
+        const id=`Accordion-S3C1350-${Date.now()}`;
         const title = accordionBlockData.title;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnAccordion).scrollIntoView();
         await (await QALayoutPage.btnAccordion).click();
@@ -105,9 +120,9 @@ describe('Accordion Component Tests', () => {
         await expect(AccordionBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await AccordionBlockPage.accordionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await AccordionBlockPage.accordionElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(AccordionBlockPage.accordionElement).toBeDisplayedInViewport();
+        await expect(AccordionBlockPage.accordionElement(id)).toBeDisplayedInViewport();
 
         /**
          * Create the expected analytics 
