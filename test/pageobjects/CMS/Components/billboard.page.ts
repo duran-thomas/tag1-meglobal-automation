@@ -116,20 +116,20 @@ class BillboardBlockPage extends Page {
         return $('#entity_browser_iframe_image_and_video');
     }
 
-    public get billboardElement() {
-        return $('.mf-billboard');
+    public billboardElement(id:string) {
+        return $(`#${id} .mf-billboard`);
     }
 
-    public get billboardHeadline() {
-        return $('.mf-text-title-1-serif');
+    public billboardHeadline(id:string) {
+        return $(`#${id} .mf-text-title-1-serif`);
     }
 
-    public get billboardEyebrow() {
-        return $('.mf-text-body-3-serif');
+    public billboardEyebrow(id:string) {
+        return $(`#${id} .mf-text-body-3-serif`);
     }
 
-    public get billboardImage() {
-        return $('.mf-media__image');
+    public billboardImage(id:string) {
+        return $(`#${id} .mf-media__image`);
     }
     //carousel layer selectors start
     public get dropdownToggle() {
@@ -168,8 +168,8 @@ class BillboardBlockPage extends Page {
         return $('details[id^="edit-field-media-entity-"]');
     }
 
-    public get carouselElement() {
-        return $('.mf-carousel');
+    public carouselElement(id:string) {
+        return $(`#${id} .mf-carousel`);
     }
     //carousel layer selectors end
 
