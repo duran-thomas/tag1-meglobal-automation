@@ -135,7 +135,6 @@ export const config: Options.Testrunner = {
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
-            binary: process.env.IS_CI_RUN ? "/opt/hostedtoolcache/chromium/latest/x64/chrome" : undefined,
             args: [
                 'disable-gpu', 'headless', 'window-size=1920,1080', 'no-sandbox'],
             //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
