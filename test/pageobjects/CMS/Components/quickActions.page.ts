@@ -10,7 +10,7 @@ class QuickActionsBlockPage extends Page {
     define selectors using getter methods
     */
     public get btnAddNewMenu() {
-        return $('.button');
+        return $('a[href="/group/356/menu/add"]');
     }
 
     public get linkGroupQuickActions() {
@@ -234,9 +234,16 @@ class QuickActionsBlockPage extends Page {
     overwrite specific options to adapt it to page object
     */
     public openMenus() {
-        return super.open('group/356/menus');
+        return super.open('group/1/menus');
     }
     public openNodes() {
+        return super.open('group/1/nodes');
+    }
+    //ode7 group was recreated and as such has a different path
+    public openMenusQaAuto() {
+        return super.open('group/356/menus');
+    }
+    public openNodesQaAuto() {
         return super.open('group/356/nodes');
     }
 }
