@@ -63,7 +63,7 @@ export const config: Options.Testrunner = {
         all: ['./test/specs/components/**.ts'],
         login: [ './test/specs/login/*.ts'],
         quotes: ['./test/specs/components/quotes.e2e.ts'],
-        caorusel: ['/test/specs/components/carousel.e2e.ts'],
+        carousel: ['/test/specs/components/carousel.e2e.ts'],
         facts: ['/test/specs/components/facts.e2e.ts'],
         myChart: ['/test/specs/components/myChart.e2e.ts'],
         hero: ['/test/specs/components/hero.e2e.ts'],
@@ -94,7 +94,8 @@ export const config: Options.Testrunner = {
         typeahead: ['/test/specs/components/typeahead.e2e.ts'],
         translation: ['/test/specs/components/translation.e2e.ts'],
         event: ['/test/specs/components/event.e2e.ts'],
-        indexList: ['/test/specs/components/indexList.e2e.ts']
+        indexList: ['/test/specs/components/indexList.e2e.ts'],
+        sidebar: ['/test/specs/components/sidebar.e2e.ts']
 
 
     },

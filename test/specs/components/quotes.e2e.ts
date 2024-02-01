@@ -132,8 +132,6 @@ describe('Quotes Component Tests', () => {
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
         await (await QuotesBlockPage.configBlock).waitForDisplayed();
-        await (await QuotesBlockPage.dropdownStyling).scrollIntoView();
-        await (await QuotesBlockPage.dropdownStyling).click();
         await QuotesBlockPage.navToStyling();
         //assert its displayed as well as it's default not ticked
         const checkbox = await QuotesBlockPage.checkboxShowBorder;

@@ -180,7 +180,8 @@ describe('Carousel Component Tests', () => {
         await expect(CarouselBlockPage.controlElement).toExist(); 
         
         //verify that a user can navigate the carousel using the chevron arrows
-        await (await $('.mf-card-content')).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await $('.mf-card-content')).scrollIntoView({ behavior: 'auto', block: 'start' });
+        await browser.pause(3000);
         await (await CarouselBlockPage.controlElement[1]).click();
         await expect(await $('a[data-analytics-click-text="Carousel Button 1"]')).toBeDisplayedInViewport();
         
@@ -235,9 +236,9 @@ describe('Carousel Component Tests', () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
-        (await QALayoutPage.btnCarousel).scrollIntoView();
-        (await QALayoutPage.btnCarousel).click();
-        (await CarouselBlockPage.configBlock).waitForDisplayed();
+        await (await QALayoutPage.btnCarousel).scrollIntoView();
+        await (await QALayoutPage.btnCarousel).click();
+        await (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
         
@@ -246,7 +247,7 @@ describe('Carousel Component Tests', () => {
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CarouselBlockPage.carouselElement).scrollIntoView();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView({ behavior: 'auto', block: 'start' });
 
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
@@ -286,6 +287,7 @@ describe('Carousel Component Tests', () => {
         await (await CarouselBlockPage.controlElement[1]).click();
         await browser.pause(1000);
         await ((await CarouselBlockPage.carouselLocationAddressLink).click());
+        await browser.pause(2000);
         await ((await CarouselBlockPage.carouselLocationAddressIcon).click());
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);

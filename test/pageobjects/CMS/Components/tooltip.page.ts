@@ -74,7 +74,7 @@ class TooltipBlockPage extends Page {
      */
 
     public async createHighlightTooltip(title: string, tooltip: string, content: string, placement: string, theme: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed({ timeout: 3000 });
