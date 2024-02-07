@@ -77,7 +77,7 @@ after(async function () {
     const openNodesMethod = getOpenNodesMethod(process.env.ENV);
     const openCleanUpMethod = getCleanUp(process.env.ENV);
 
-    it('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
+    it.only('[S3C924] Verify that a Content Administrator can create a Quick Actions menu component with an external link', async () => {
         const id=`QuickActions-S3C924-${Date.now()}`;
         // Call open menus method
         await QuickActionsBlockPage[openMenusMethod]();

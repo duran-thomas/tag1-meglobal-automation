@@ -105,6 +105,14 @@ class QuickActionsBlockPage extends Page {
         return $(`#${id} a.mf-button`);
     }
 
+    // public get quickActionsElement() {
+    //     return $('.mf-quick-actions');
+    // }
+
+    // public get quickActionsButton() {
+    //     return $('a.mf-button');
+    // }
+
     public get inputNodeTitle() {
         return $('input[data-drupal-selector="edit-title-0-value"]');
     }
