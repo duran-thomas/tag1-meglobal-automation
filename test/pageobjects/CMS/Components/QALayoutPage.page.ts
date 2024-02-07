@@ -38,6 +38,11 @@ class LandingQAPage extends Page {
     public get modalBtnAddSection() {
         return $$('#edit-actions-submit')[0];
     }
+
+    public get sectionIDInput() {
+        return $('#edit-layout-settings-id');
+    }
+    
     /** The other fields in the modal will be added as they become necessary */
 
     //base page with section added making add block become available
@@ -223,16 +228,21 @@ class LandingQAPage extends Page {
      * Methods to create a new section on a page, navigate to block list types
      */
 
-    public async createNewSection() {
+    public async createNewSection(id:string | undefined = undefined) {
         await (await this.linkAddSection).scrollIntoView();
         await (await this.linkAddSection).click();
         await (await this.sectionTypeOneColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
+        // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
+        if(id){
+            await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
+            await (await this.sectionIDInput).setValue(id);
+        }
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
