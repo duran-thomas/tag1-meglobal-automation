@@ -319,6 +319,10 @@ class FreeformBlockPage extends Page {
         return $('select[id^="edit-settings-block-form-field-content-0-subform-field-typeahead-config-0-config-type-"]');
     }
 
+    public get inputCharacterThreshold(){
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-typeahead-config-0-character-threshold"]');
+    }
+
     //Video Block
     public get dropdownVideo () {
         return $('details[id^="edit-field-video-"]');
@@ -702,6 +706,8 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeEndpoint).selectByVisibleText('Clinical categories');
         await (await this.dropdownTypeaheadType).waitForDisplayed({timeout:6000});
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
+        await (await this.inputCharacterThreshold).scrollIntoView();
+        await (await this.inputCharacterThreshold).setValue('256');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

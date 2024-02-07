@@ -98,7 +98,8 @@ describe('Carousel Component Tests', () => {
         (await CarouselBlockPage.configBlock).waitForDisplayed();
 
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
-        await CarouselBlockPage.createCarouselNoPagination(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText);
+        const imageFilePath1 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
+        await CarouselBlockPage.createCarouselNoPagination(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText, imageFilePath1);
 
         expect(CarouselBlockPage.successMsg).toBeDisplayed();
 

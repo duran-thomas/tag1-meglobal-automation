@@ -100,6 +100,10 @@ class FreeformBlockPage extends Page {
         return $('a[data-analytics-click-text="covid-19"] span span')
     }
 
+    public get inputCharacterThreshold(){
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-typeahead-config-0-character-threshold"]');
+    }
+
     public get searchResultsHeader(){
         return $$('.mf-result-item__headline')
     }
@@ -137,6 +141,8 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeEndpoint).selectByVisibleText('Clinical categories');
         await (await this.dropdownTypeaheadType).waitForDisplayed({timeout:6000});
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
+        await (await this.inputCharacterThreshold).scrollIntoView();
+        await (await this.inputCharacterThreshold).setValue('256');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
