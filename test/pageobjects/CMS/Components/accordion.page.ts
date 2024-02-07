@@ -40,8 +40,8 @@ class AccordionBlockPage extends Page {
         return $('#accordion-title');
     }
 
-    public get accordionElement() {
-        return $('div[data-analytics-component-type="accordion"]');
+    public accordionElement(id: string) {
+        return $(`#${id} div[data-analytics-component-type="accordion"]`);
     }
 
     public get inputID() {

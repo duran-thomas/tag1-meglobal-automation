@@ -11,7 +11,13 @@ describe('Quick Actions Component Tests', () => {
     before(async () => {
         // Get the environment configuration
         const environment = getEnvironmentConfig(process.env.ENV);
+    before(async () => {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
 
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
         // Use the environment data
         const bypassURL = environment.bypassURL;
         const cookies = environment.cookies;
@@ -19,10 +25,14 @@ describe('Quick Actions Component Tests', () => {
         //Bypass login
         await browser.url(await bypassURL);
         await browser.maximizeWindow();
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
 
         // Set user cookies
         await browser.setCookies(await cookies);
 
+    });
     });
 
     before(async function () {
@@ -33,7 +43,21 @@ describe('Quick Actions Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
     })
+    before(async function () {
+        global.suiteDescription = this.currentTest?.parent?.title;
+        //navigate to admin content page
+        await AdminContentPage.open();
+        // Navigate to QA Landing page to execute tests
+        await AdminContentPage.getTestPage(global.suiteDescription);
+        await expect(QALayoutPage.tabLayout).toBeDisplayed();
+    })
 
+    afterEach(async function () {
+        // Take a screenshot after each test/assertion
+        const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
+        const screenshotPath = `./screenshots/QuickActions/${testName}.png`;
+        await browser.saveScreenshot(screenshotPath);
+    });
     afterEach(async function () {
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
@@ -59,8 +83,19 @@ describe('Quick Actions Component Tests', () => {
         await expect(QuickActionsBlockPage.statusMsg).toHaveTextContaining(quickActionsBlockData.statMsg.deleted);
 
     });
+    });
 
 
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
     //delete page
     after(async function () {
         // Get the environment configuration
@@ -126,6 +161,7 @@ describe('Quick Actions Component Tests', () => {
         }
 
     });
+    });
 
     it('[S3C1123] Verify that a site Content Administrator can create a Quick Actions Component with an internal link.', async () => {
         const id = `QuickActions-S3C1123-${Date.now()}`;
@@ -177,6 +213,7 @@ describe('Quick Actions Component Tests', () => {
         }
 
     });
+    });
 
     it('[S3C1322] Verify that Analytics for the Quick Actions Component is configured', async () => {
         const id = `QuickActions-S3C1322-${Date.now()}`;
@@ -216,12 +253,24 @@ describe('Quick Actions Component Tests', () => {
             linkType: 'button',
             navigationType: 'quick actions'
         }
+        const expectedAnalyticsData = {
+            clickText: quickActionsBlockData.extMenuLinkTitle,
+            event: 'e_navigationClick',
+            linkType: 'button',
+            navigationType: 'quick actions'
+        }
 
+        const currentUrl = await browser.getUrl();
         const currentUrl = await browser.getUrl();
 
         await $('a[data-analytics-click-text="Test External Link"]').click();
         await browser.switchWindow(currentUrl);
+        await $('a[data-analytics-click-text="Test External Link"]').click();
+        await browser.switchWindow(currentUrl);
 
+        const dataLayer = await browser.executeScript('return window.dataLayer', []);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
+        let parsedAnalyticsData = []
         const dataLayer = await browser.executeScript('return window.dataLayer', []);
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
         let parsedAnalyticsData = []
@@ -234,7 +283,21 @@ describe('Quick Actions Component Tests', () => {
                 navigationType: actualAnalyticsData[x].navigationType
             })
         }
+        for (let x in actualAnalyticsData) {
+            parsedAnalyticsData.push({
+                clickText: actualAnalyticsData[x].clickText,
+                event: actualAnalyticsData[x].event,
+                linkType: actualAnalyticsData[x].linkType,
+                navigationType: actualAnalyticsData[x].navigationType
+            })
+        }
 
+        fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
         fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
             if (err) {
                 console.error(err);

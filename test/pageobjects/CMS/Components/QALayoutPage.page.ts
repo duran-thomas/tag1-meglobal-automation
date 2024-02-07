@@ -30,6 +30,10 @@ class LandingQAPage extends Page {
         return $('a[href$="/meda_layouts__section_two_column"]');
     }
 
+    public get sidebarSection() {
+        return $('a[href$="/meda_layouts__section_layout"]');
+    }
+
     //section modal
     public get inputLabel() {
         return $('#edit-layout-settings-label');
@@ -48,6 +52,10 @@ class LandingQAPage extends Page {
     //base page with section added making add block become available
     public get linkAddBlock() {
         return $$('div[class="layout-builder__add-block"]')[0];
+    }
+
+    public get leftAddBlock() {
+        return $('div[data-layout-builder-highlight-id="block-0-first"]');
     }
 
     //right window block menu
@@ -151,6 +159,10 @@ class LandingQAPage extends Page {
         return $('=Rich Text');
     }
 
+    public get btnSidebarNav() {
+        return $('=Sidebar Navigation');
+    }
+
     public get btnSectionHeader() {
         return $('=Section Header');
     }
@@ -167,11 +179,11 @@ class LandingQAPage extends Page {
         return $('=Testimonial');
     }
 
-    public get btnTeamLeadersCarousel(){
+    public get btnTeamLeadersCarousel() {
         return $('=Team Leaders Carousel');
     }
 
-    public get btnTeamMembersGrid(){
+    public get btnTeamMembersGrid() {
         return $('=Team Members Grid');
     }
 
@@ -243,6 +255,11 @@ class LandingQAPage extends Page {
             await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
             await (await this.sectionIDInput).setValue(id);
         }
+        // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
+        if(id){
+            await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
+            await (await this.sectionIDInput).setValue(id);
+        }
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -253,7 +270,28 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeTwoColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        // switch to the iframe
+        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await this.modalBtnAddSection).scrollIntoView();
+        await (await this.modalBtnAddSection).click();
+        await browser.pause(2000);
+    }
+
+    public async createSidebarSection() {
+        await (await this.linkAddSection).scrollIntoView();
+        await (await this.linkAddSection).click();
+
+        // const frame = await this.dialogFrame;
+        // await browser.switchToFrame(frame);
+        // await this.btnCloseChatPopUp.click();
+        // await browser.switchToParentFrame();
+
+        await (await this.sidebarSection).click();
+        await (await this.sectionModal).waitForDisplayed();
+        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -272,14 +310,18 @@ class LandingQAPage extends Page {
         await (await this.btnCreateCustomBlock).click();
         // await (await this.btnCloseChatPopUp).click();
         const frame = await this.dialogFrame;
-        //if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+        if (await frame.isExisting() == true) {
             await browser.switchToFrame(frame);
-            await this.btnCloseChatPopUp.click();
+            await browser.pause(2000);
+            if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+                await this.btnCloseChatPopUp.click();
+                await browser.switchToParentFrame();
+            } else {
+                console.log('Button not displayed');
+            }
             await browser.switchToParentFrame();
-        // } else {
-        //     console.log('Button not found');
-        // }
-        
+        }
+
     }
 
     public async goToPageView() {

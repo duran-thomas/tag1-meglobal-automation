@@ -152,7 +152,7 @@ describe('MyChart Component Tests', () => {
         // Build the actual analytics data object
         const parsedActualAnalyticsData = {
             //Remove whitespace from the Headline
-            clickText: actualAnalyticsData.clickText.trim(),
+            clickText: actualAnalyticsData.clickText,
             componentType: actualAnalyticsData.componentType,
             event: actualAnalyticsData.event,
             // Remove html tags, whitespace and newlines from the Headline

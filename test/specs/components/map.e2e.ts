@@ -5,7 +5,6 @@ import { mapBlockData } from '../../data/map.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
 
-
 describe('Map Component Tests', () => {
     
     before(async ()=>{
@@ -45,7 +44,7 @@ describe('Map Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
@@ -105,7 +104,7 @@ describe('Map Component Tests', () => {
         await expect(await hideLocationCheckbox.isSelected()).toBe(false);
     });
 
-    it.only('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
+    it('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
