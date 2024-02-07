@@ -10,11 +10,7 @@ class QuickActionsBlockPage extends Page {
     define selectors using getter methods
     */
     public get btnAddNewMenu() {
-<<<<<<< Updated upstream
-        return $('.button');
-=======
         return $('=Add new menu');
->>>>>>> Stashed changes
     }
 
     public get linkGroupQuickActions() {
@@ -265,11 +261,6 @@ class QuickActionsBlockPage extends Page {
    
     public openMenus() {
         return super.open('group/356/menus');
-<<<<<<< Updated upstream
-    }
-    public openNodes() {
-        return super.open('group/356/nodes');
-=======
     }
     public openNodes() {
         return super.open('group/356/nodes');
@@ -282,7 +273,6 @@ class QuickActionsBlockPage extends Page {
     }
     public openDevNodes() {
         return super.open('group/1/nodes');
->>>>>>> Stashed changes
     }
 }
 
