@@ -67,9 +67,10 @@ describe('Card Feature Component Tests', () => {
 
      
     it('[S3C862] Verify that a site Content Administrator can create a Card Feature Component', async () => {
+        const id=`CardFeature-S3C862-${Date.now()}`;
         const headline = cardFeatureBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardFeature).scrollIntoView();
         await (await QALayoutPage.btnCardFeature).click();
@@ -82,16 +83,16 @@ describe('Card Feature Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         await (await CardFeatureBlockPage.cardFeatureElement).scrollIntoView();
-        
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect($('a[href="https://google.com/"]')).toExist; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect($(`#${id} a[href="https://google.com/"]`)).toExist; 
         await expect(CardFeatureBlockPage.cardFeatureImage).toBeDisplayed();   
     });
 
     it('[S3C863] Verify that a site Content Administrator can create a Card Clinical Feature Component, using an internal url', async () => {
         const headline = cardFeatureBlockData.headline;
+        const id=`CardFeature-S3C863-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardFeature).scrollIntoView();
         await (await QALayoutPage.btnCardFeature).click();
@@ -105,14 +106,15 @@ describe('Card Feature Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CardFeatureBlockPage.cardFeatureElement).scrollIntoView();
         
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect($('a[href="/education/residency"]')).toExist; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect($(`#${id} a[href="/education/residency"]`)).toExist; 
         await expect(CardFeatureBlockPage.cardFeatureImage).toBeDisplayed();   
     });
 
     it('[S3C1083] Verify that the Headline size defaults to h3 when creating a Card Feature Component', async () => {
+        const id=`CardFeature-S3C1083-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardFeature).scrollIntoView();
         await (await QALayoutPage.btnCardFeature).click();
@@ -125,8 +127,9 @@ describe('Card Feature Component Tests', () => {
 
     it('[S3C1352] Verify that Analytics for the Card Feature Component is configured', async () => {
         const headline = cardFeatureBlockData.headline;
+        const id=`CardFeature-S3C1352-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardFeature).scrollIntoView();
         await (await QALayoutPage.btnCardFeature).click();
@@ -140,10 +143,9 @@ describe('Card Feature Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CardFeatureBlockPage.cardFeatureElement).scrollIntoView();
         
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect($('a[href="https://google.com/"]')).toExist; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect($(`#${id} a[href="https://google.com/"]`)).toExist;
         await expect(CardFeatureBlockPage.cardFeatureImage).toBeDisplayed();  
-        
         
         /**
          * Create the expected analytics 

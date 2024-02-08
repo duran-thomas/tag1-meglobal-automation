@@ -109,7 +109,7 @@ class CardFeatureBlockPage extends Page {
     }
 
     public get cardFeatureImage() {
-        return $('img[alt="Card Feature Alt Text"]');
+        return $(`img[alt="Card Feature Alt Text"]`);
     }
 
     public get internalUrl() {
@@ -121,7 +121,7 @@ class CardFeatureBlockPage extends Page {
     }
 
     public get dropdownRenderAs() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-rich-headline-0-more-options-render-as');
+        return $(`#edit-settings-block-form-field-content-0-subform-field-rich-headline-0-more-options-render-as`);
     }
 
     public get dropdownButtonOptions() {
