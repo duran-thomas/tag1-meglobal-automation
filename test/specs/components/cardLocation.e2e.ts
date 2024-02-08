@@ -30,7 +30,6 @@ describe('Card Location Component Tests', () => {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
-        await browser.debug()
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();
@@ -41,6 +40,17 @@ describe('Card Location Component Tests', () => {
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
         const screenshotPath = `./screenshots/CardLocation/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
+    });
+
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
     after(async function () {
@@ -63,17 +73,6 @@ describe('Card Location Component Tests', () => {
             }
         }      
       });
-      
-    //delete page
-    after(async function () {
-        // Get the environment configuration
-        const environment = getEnvironmentConfig(process.env.ENV);
-        //await browser.url(environment.baseUrl+'user/logout');
-        await browser.setCookies(environment.admin);
-        await AdminContentPage.open();
-        await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
-    });
       
 
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {
