@@ -131,12 +131,12 @@ export const config: Options.Testrunner = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 2,
+        maxInstances: 1,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                'disable-gpu', 'headless', 'window-size=1920,1080', 'no-sandbox'],
+                'disable-gpu', 'window-size=1920,1080', 'no-sandbox'],
             //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,

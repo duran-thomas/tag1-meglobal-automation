@@ -54,7 +54,7 @@ class AccordionBlockPage extends Page {
      */
 
     public async createAccordion(mainTitle: string, title: string, content: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        //await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -63,19 +63,19 @@ class AccordionBlockPage extends Page {
         await (await this.inputTitle).scrollIntoView();
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).setValue(content);
-        await browser.pause(1500);
+        //await browser.pause(1500);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
-        await browser.pause(3000);
+        //await browser.pause(3000);
     }
 
     //This method is to facillitate a test from another component
     public async createAccordionWithID(mainTitle: string, title: string, content: string, jumpID: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        //await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -84,7 +84,7 @@ class AccordionBlockPage extends Page {
         await (await this.inputTitle).scrollIntoView();
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).setValue(content);
-        await browser.pause(1500);
+        //await browser.pause(1500);
         await (await this.inputID).scrollIntoView();
         await (await this.inputID).setValue(jumpID);
         await (await this.btnAddBlock).scrollIntoView();
@@ -93,7 +93,7 @@ class AccordionBlockPage extends Page {
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
-        await browser.pause(3000);
+        //await browser.pause(3000);
     }
 
 }
