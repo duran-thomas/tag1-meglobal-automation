@@ -331,20 +331,20 @@ class ContactListBlockPage extends Page {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get contactElement() {
-        return $('.mf-contact');
+    public contactElement(id:string) {
+        return $(`#${id}  .mf-contact`);
     }
 
-    public get contactHeadline() {
-        return $('p.mf-text-title-5-serif');
+    public contactHeadline(id:string) {
+        return $(`#${id}  p.mf-text-title-5-serif`);
     }
 
-    public get contactContent() {
-        return $('div[class="mf-text-body-3-sans text-gray-600"] div[class="mf-rich-text"]');
+    public contactContent(id:string) {
+        return $(`#${id}  div[class="mf-text-body-3-sans text-gray-600"] div[class="mf-rich-text"]`);
     }
 
-    public get contactHeading() {
-        return $('.mf-text-body-2-sans');
+    public contactHeading(id:string) {
+        return $(`#${id} .mf-text-body-2-sans`);
     }
 
     public get editTrigger() {
