@@ -136,7 +136,7 @@ export const config: Options.Testrunner = {
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                'disable-gpu', 'window-size=1920,1080', 'no-sandbox'],
+                'disable-gpu', 'window-size=1920,1080', 'no-sandbox', 'headless'],
             //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,
