@@ -3,7 +3,7 @@ export const environment = {
     baseUrl: 'https://meglobaldev.prod.acquia-sites.com/',
     cookies: {
         name: 'SSESS933b071c7c2e2830c46695ffbb11e015',
-        value: 'w3rn1f4hN47O-5tTXlCDN3zSAYibuEg5W8VMrepO1Lmqp9WI',
+        value: 'laJggXlSEuGsl6I1V9M-nuDQNYxSFTP1XmqBZk5sdsuGPZvS',
         domain: '.meglobaldev.prod.acquia-sites.com',
         path: '/',
     },
