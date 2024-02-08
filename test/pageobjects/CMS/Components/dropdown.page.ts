@@ -98,24 +98,24 @@ class DropdownBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get dropdownElement() {
-        return $('.mf-button--tertiary');
+    public dropdownElement(id:string) {
+        return $(`#${id} .mf-button--tertiary`);
     }
 
     public get dropdownElements() {
         return $$('.mf-button--tertiary');
     }
 
-    public get duckDuckItem() {
-        return $('.mf-dropdown__link[href="https://duckduckgo.com/"]');
+    public duckDuckItem(id:string) {
+        return $(`#${id} .mf-dropdown__link[href="https://duckduckgo.com/"]`);
     }
 
-    public get dropdownElement1() {
-        return $('button[data-analytics-click-text="Dropdown Trigger 1"]')
+    public dropdownElement1(id:string) {
+        return $(`#${id} button[data-analytics-click-text="Dropdown Trigger 1"]`)
     }
 
-    public get wikiItem() {
-        return $('.mf-dropdown__link[href="https://wikipedia.org/"]');
+    public wikiItem(id:string) {
+        return $(`#${id} .mf-dropdown__link[href="https://wikipedia.org/"]`);
     }
 
 
