@@ -111,7 +111,7 @@ describe('Inline Navigation Component Tests', () => {
         await expect($(`#${inlineNavigationBlockData.id}2`)).toHaveElementClassContaining('scrollto'); 
     });
 
-    it.only('[S3C897] Verify that a site Content Administrator can create an Inline Navigation Component with a same page fragment', async () => {
+    it('[S3C897] Verify that a site Content Administrator can create an Inline Navigation Component with a same page fragment', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

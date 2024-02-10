@@ -66,7 +66,7 @@ describe('Event Component Tests', () => {
     });
 
   
-    it.only('[S3C918] Verify that a site Content Administrator can create a Event Component in an Event Block', async () => {
+    it('[S3C918] Verify that a site Content Administrator can create a Event Component in an Event Block', async () => {
         const id=`Event-S3C918-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection(id);
