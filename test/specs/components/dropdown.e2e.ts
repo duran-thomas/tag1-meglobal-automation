@@ -65,8 +65,9 @@ describe('Dropdown Component Tests', () => {
     });
 
     it('[S3C855] Verify that a site Content Administrator can create a Dropdown Component with 1 menu item', async () => {
+        const id=`Dropdown-S3C855-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -77,17 +78,18 @@ describe('Dropdown Component Tests', () => {
         await expect(DropdownBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await DropdownBlockPage.dropdownElement).scrollIntoView();
+        await (await DropdownBlockPage.dropdownElement(id)).scrollIntoView();
         
-        await expect(DropdownBlockPage.dropdownElement).toExist; 
+        await expect(DropdownBlockPage.dropdownElement(id)).toExist; 
 
-        await (await DropdownBlockPage.dropdownElement).click();
-        await expect(DropdownBlockPage.duckDuckItem).toBeDisplayedInViewport(); 
+        await (await DropdownBlockPage.dropdownElement(id)).click();
+        await expect(DropdownBlockPage.duckDuckItem(id)).toBeDisplayedInViewport(); 
     });
 
     it('[S3C856] Verify that a site Content Administrator can create a Dropdown Component with more than 1 menu item', async () => {
+        const id=`Dropdown-S3C856-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -98,53 +100,15 @@ describe('Dropdown Component Tests', () => {
         await expect(DropdownBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await DropdownBlockPage.dropdownElement).scrollIntoView();
+        await (await DropdownBlockPage.dropdownElement(id)).scrollIntoView();
 
         const elem = await DropdownBlockPage.dropdownElements.length;
         
         await expect(elem).toEqual(2); 
 
-        await (await DropdownBlockPage.dropdownElement1).click();
-        await expect(DropdownBlockPage.wikiItem).toBeDisplayedInViewport(); 
+        await (await DropdownBlockPage.dropdownElement1(id)).click();
+        await expect(DropdownBlockPage.wikiItem(id)).toBeDisplayedInViewport(); 
     });
     
-
-    // it('[S3C857] Verify that all design fields are present with the correct available options.', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnFreeform).scrollIntoView();
-    //     (await QALayoutPage.btnFreeform).click();
-    //     (await DropdownBlockPage.configBlock).waitForDisplayed();
-
-    //     await DropdownBlockPage.navToStyling()
-        
-    //     await expect(DropdownBlockPage.dropdownSize).toBeDisplayed();
-    //     await expect(DropdownBlockPage.dropdownSize).toHaveValue('auto');
-    //     await expect(DropdownBlockPage.dropdownSize).toHaveValue('small');
-    //     await expect(DropdownBlockPage.dropdownSize).toHaveValue('base');
-    //     await expect(DropdownBlockPage.dropdownSize).toHaveValue('large');
-    //     await expect(DropdownBlockPage.dropdownSize).toHaveValue('full-width');
-
-    //     await expect(DropdownBlockPage.inputMaxHeight).toBeDisplayed();
-    //     await expect(DropdownBlockPage.inputMaxHeight).toHaveValue('370');
-
-    //     await expect(DropdownBlockPage.dropdownMobileListPosition).toBeDisplayed();
-    //     await expect(DropdownBlockPage.dropdownMobileListPosition).toHaveValue('left');
-    //     await expect(DropdownBlockPage.dropdownMobileListPosition).toHaveValue('right');
-    //     await expect(DropdownBlockPage.dropdownMobileListPosition).toHaveValue('center');
-
-    //     await expect(DropdownBlockPage.dropdownDesktopListPosition).toBeDisplayed();
-    //     await expect(DropdownBlockPage.dropdownDesktopListPosition).toHaveValue('left');
-    //     await expect(DropdownBlockPage.dropdownDesktopListPosition).toHaveValue('right');
-    //     await expect(DropdownBlockPage.dropdownDesktopListPosition).toHaveValue('center');
-
-    //     await expect(DropdownBlockPage.inputVerticalOffset).toBeDisplayed();
-    //     await expect(DropdownBlockPage.inputVerticalOffset).toHaveValue('8');
-        
-    //     await expect(DropdownBlockPage.inputHorizontalOffset).toBeDisplayed();
-    //     await expect(DropdownBlockPage.inputHorizontalOffset).toHaveValue('0');
-
-    // });
 
   });

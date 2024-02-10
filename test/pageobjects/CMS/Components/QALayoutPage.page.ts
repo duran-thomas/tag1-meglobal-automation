@@ -46,6 +46,7 @@ class LandingQAPage extends Page {
     public get sectionIDInput() {
         return $('#edit-layout-settings-id');
     }
+    
     /** The other fields in the modal will be added as they become necessary */
 
     //base page with section added making add block become available
@@ -249,6 +250,11 @@ class LandingQAPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
+        // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
+        if(id){
+            await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
+            await (await this.sectionIDInput).setValue(id);
+        }
         // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
         if(id){
             await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });

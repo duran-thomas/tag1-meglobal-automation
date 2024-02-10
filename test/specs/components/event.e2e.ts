@@ -67,8 +67,9 @@ describe('Event Component Tests', () => {
 
   
     it('[S3C918] Verify that a site Content Administrator can create a Event Component in an Event Block', async () => {
+        const id=`Event-S3C918-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -82,12 +83,13 @@ describe('Event Component Tests', () => {
         await (await EventBlockPage.stringDate).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await EventBlockPage.stringDate).toHaveTextContaining('m - '); 
-        await expect(EventBlockPage.eventElement).toBeExisting();   
+        await expect(EventBlockPage.eventElement(id)).toBeExisting();   
     });
 
     it('[S3C1108] Verify that a site Content Administrator can create a Event List Component in an Event Block', async () => {
+        const id=`Event-S3C1108-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -99,7 +101,7 @@ describe('Event Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         await browser.pause(2000);
-        await (await EventBlockPage.timeElements[0]).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await EventBlockPage.timeElements(id)[0]).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         const elements = await $$('time.block');
         const dateValues = [];
@@ -128,7 +130,7 @@ describe('Event Component Tests', () => {
         const oldWindowHandles = await browser.getWindowHandles();
 
         // Perform the click action that is expected to open a new tab
-        await (await EventBlockPage.linkMoreAboutEvent).click();
+        await (await EventBlockPage.linkMoreAboutEvent(id)).click();
 
         // Get the updated window handles after the click
         const newWindowHandles = await browser.getWindowHandles();
@@ -138,8 +140,9 @@ describe('Event Component Tests', () => {
     });
 
     it('[S3C1086] Verify that Analytics for the Events Component is configured', async () => {
+        const id=`Event-S3C1086-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -153,9 +156,9 @@ describe('Event Component Tests', () => {
         await (await EventBlockPage.stringDate).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await EventBlockPage.stringDate).toHaveTextContaining('m - '); 
-        await expect(EventBlockPage.eventElement).toBeExisting();   
+        await expect(EventBlockPage.eventElement(id)).toBeExisting();   
 
-        const text = await (await EventBlockPage.linkMoreAboutEvent).getText();
+        const text = await (await EventBlockPage.linkMoreAboutEvent(id)).getText();
         const title = "Recurring test event";
         //const title = await EventBlockPage.testEventTitle;
 
@@ -177,7 +180,7 @@ describe('Event Component Tests', () => {
         const currentUrl = await browser.getUrl();
 
         // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await EventBlockPage.linkMoreAboutEvent).click();
+        await (await EventBlockPage.linkMoreAboutEvent(id)).click();
 
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)
@@ -212,8 +215,9 @@ describe('Event Component Tests', () => {
 
 
     it('[S3C1144] Verify that a site Content Administrator can create a Event Component for a Hybrid Event in an Event Block', async () => {
+        const id=`Event-S3C1144-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -227,13 +231,14 @@ describe('Event Component Tests', () => {
         await (await EventBlockPage.stringDate).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await EventBlockPage.stringDate).toHaveTextContaining(' at '); 
-        await expect(EventBlockPage.eventElement).toBeExisting();   
-        await expect(EventBlockPage.hybridTextElement).toBeDisplayed();
+        await expect(EventBlockPage.eventElement(id)).toBeExisting();   
+        await expect(EventBlockPage.hybridTextElement(id)).toBeDisplayed();
     });
 
     it('[S3C1146] Verify that an Event block with no data displays correctly', async () => {
+        const id=`Event-S3C1146-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -245,14 +250,15 @@ describe('Event Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        const text = await $(`p=${eventBlockData.eventResults}`);
+        const text = await $(`#${id} p=${eventBlockData.eventResults}`);
         
         await expect(text).toBeDisplayed();   
     });
 
     it('[S3C1147] Verify that an Event List with no data displays correctly', async () => {
+        const id=`Event-S3C1147-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnEvent).scrollIntoView();
         await (await QALayoutPage.btnEvent).click();
@@ -264,7 +270,7 @@ describe('Event Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        const text = await $(`p=${eventBlockData.eventListResults}`);
+        const text = await $(`#${id} p=${eventBlockData.eventListResults}`);
         
         await expect(text).toBeDisplayed();   
     });
