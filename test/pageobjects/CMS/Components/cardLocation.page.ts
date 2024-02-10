@@ -377,16 +377,24 @@ class CardLocationBlockPage extends Page {
         return $('.ui-menu-item');
     }
 
-    public get cardLocationElements () {
-        return $$('.mf-card-location');
+    public cardLocationElements (id: string) {
+        return $$(`#${id} .mf-card-location`);
     }
 
-    public get carouselElement () {
-        return $('.mf-carousel');
+    public carouselElement (id: string) {
+        return $(`#${id} .mf-carousel`);
     }
 
     public get btnApplyToSelected () {
         return $('#edit-submit--2');
+    }
+
+    public get dropdownEditAction () {
+        return $('#edit-action');
+    }
+
+    public get btnSelect () {
+        return $('#edit-submit')
     }
    
     /**
@@ -604,11 +612,14 @@ class CardLocationBlockPage extends Page {
         await browser.pause(1500);
     }
 
-    public async renameClone (title:string) {
+    public async renameClone (title:string, id:string) {
         await (await this.tabEditGreene).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.tabEditGreene).click();
         await (await this.inputTitle).clearValue();
+
         await (await this.inputTitle).setValue(title+' - VERT');
+        await (await this.inputID).scrollIntoView();
+        await (await this.inputID).setValue(id+'01');
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();
         await browser.pause(1500);
@@ -719,18 +730,18 @@ class CardLocationBlockPage extends Page {
     }
 
     public async deleteAll() {
-        await (await this.selectRowsByTitle('QA Landing Page'));
+        // await (await this.selectRowsByTitle('QA Landing Page'));
         await (await this.selectRowsByTitle('Greene Medical Arts Pavilion QA Test - VERT'));
-        await (await this.selectRowsByTitle('Montefiore Medical Group Greene Medical Arts Pavilion - Cloned'));
+        await (await this.selectRowsByTitle(process.env.ENV === 'dev' ? "Greene Medical Arts Pavilion QA Test - Cloned" : "Montefiore Medical Group Greene Medical Arts Pavilion - Cloned"));
         await (await this.selectRowsByTitle('Jack D. Weiler Hospital'));
         await (await this.selectRowsByTitle('Greene Medical Arts Pavilion QA Test'));
         await (await this.selectRowsByTitle('White Plains Hospital'));
         await (await this.btnApplyToSelected).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await (await this.btnApplyToSelected).click();
+        await (await this.dropdownEditAction).selectByIndex(1);
+        await (await this.btnSelect).click();
         await (await this.btnSave).waitForDisplayed({timeout:5000});
         await (await this.btnSave).click();
         await browser.pause(2000);
-
     }
 
 
