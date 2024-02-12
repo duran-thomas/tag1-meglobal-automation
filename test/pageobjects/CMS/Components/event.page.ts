@@ -61,18 +61,6 @@ class EventBlockPage extends Page {
         return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-event-type"]');
     }
 
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
-    // public get () {
-    //     return $('');
-    // }
-
     public get btnAddBlock() {
         return $('#edit-actions-submit');
     }
@@ -85,28 +73,28 @@ class EventBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get eventElement() {
-        return $('.mf-event');
+    public eventElement(id:string) {
+        return $(`#${id} .mf-event`);
     }
 
     public get stringDate() {
         return $('p.grid:nth-child(1)')
     }
 
-    public get timeElements() {
-        return $$('time.block');
+    public timeElements(id:string) {
+        return $$(`#${id} time.block`);
     }
 
-    public get linkMoreAboutEvent() {
-        return $('a[data-analytics-click-text="More About Event"]')
+    public linkMoreAboutEvent(id:string) {
+        return $(`#${id} a[data-analytics-click-text="More About Event"]`)
     }
 
     public get testEventTitle() {
         return $('a.text-gray-700').getAttribute('data-analytics-click-text');
     }
 
-    public get hybridTextElement() {
-        return $('.mf-text-body-4-serif');
+    public hybridTextElement(id:string) {
+        return $(`#${id} .mf-text-body-4-serif`);
     }
 
     /**
@@ -154,7 +142,7 @@ class EventBlockPage extends Page {
     }
 
     public async createHybridEvent(title: string, eventID: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
+        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
         // switch to the iframe
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed();
@@ -169,6 +157,7 @@ class EventBlockPage extends Page {
         await (await this.inputEventID).setValue(eventID);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
+        await browser.pause(2500);
         await browser.refresh();
         await (await this.btnSaveLayout).waitForDisplayed();
         await (await this.btnSaveLayout).scrollIntoView();

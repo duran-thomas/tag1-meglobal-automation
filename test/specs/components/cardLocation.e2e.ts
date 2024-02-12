@@ -42,6 +42,17 @@ describe('Card Location Component Tests', () => {
         await browser.saveScreenshot(screenshotPath);
     });
 
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
+
     after(async function () {
         const tests = this.test.parent.tests;
         const allPassed = tests.every((test) => test.state === 'passed');
@@ -62,17 +73,6 @@ describe('Card Location Component Tests', () => {
             }
         }      
       });
-      
-    //delete page
-    after(async function () {
-        // Get the environment configuration
-        const environment = getEnvironmentConfig(process.env.ENV);
-        //await browser.url(environment.baseUrl+'user/logout');
-        await browser.setCookies(environment.admin);
-        await AdminContentPage.open();
-        await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
-    });
       
 
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {
@@ -107,7 +107,7 @@ describe('Card Location Component Tests', () => {
 
         //rename clone
         await AdminContentPage.open();
-        await CardLocationBlockPage.renameClone(cardLocationBlockData.location2.title);
+        await CardLocationBlockPage.renameClone(cardLocationBlockData.location2.title, cardLocationBlockData.location1.id);
         await expect(CardLocationBlockPage.statusMsg).toBeDisplayed();
 
         //assert all locations are present
@@ -121,10 +121,11 @@ describe('Card Location Component Tests', () => {
     });
 
     it('[S3C908] Verify that a site Content Administrator can create Card Location Components in a Card Location Block', async () => {
+        const id=`CardLocation-S3C908-${Date.now()}`;
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription); 
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardLocation).scrollIntoView();
         await (await QALayoutPage.btnCardLocation).click();
@@ -142,22 +143,22 @@ describe('Card Location Component Tests', () => {
         //await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardLocationBlockPage.cardLocationElements[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
-        const elem = await CardLocationBlockPage.cardLocationElements.length;
+        await (await CardLocationBlockPage.cardLocationElements(id)[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
+        const elem = await CardLocationBlockPage.cardLocationElements(id).length;
         await expect(elem).toEqual(2);   
     });
 
-    it('[S3C1353]  Verify that Analytics for the Card Location Component is configured', async () => {
+    it('[S3C1353] Verify that Analytics for the Card Location Component is configured', async () => {
          /**
        * Create the expected analytics 
        * object based on the spec below: 
        * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_185
        * */
-       
+        const title = process.env.ENV === 'dev' ? "Children's Hospital at Montefiore" : "Montefiore Einstein Hospital, Moses Campus"
         const expectedAnalyticsData = {
             event: 'e_componentClick',
             componentType: 'card location',
-            itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+            itemTitle: title,
             linkType: 'button',
             clickText: 'map-trifold',
             pageSlot: '1'
@@ -196,10 +197,11 @@ describe('Card Location Component Tests', () => {
 
 
     it('[S3C909] Verify that a site Content Administrator can create Card Location Components in the Carousel Block', async () => {
+        const id=`CardLocation-S3C909-${Date.now()}`;
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription); 
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCarousel).scrollIntoView();
         await (await QALayoutPage.btnCarousel).click();
@@ -208,14 +210,13 @@ describe('Card Location Component Tests', () => {
         await CardLocationBlockPage.createCarouselCardLocation();
 
         await QALayoutPage.goToPageView();
-        await (await CardLocationBlockPage.carouselElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardLocationBlockPage.carouselElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
 
-        await expect(await CardLocationBlockPage.carouselElement).toBeExisting();
-        await expect($('span[aria-label="Go to slide 1"]')).toBeExisting();
-        await expect($('span[aria-label="Go to slide 2"]')).toBeExisting();
-        await expect($('span[aria-label="Go to slide 3"]')).toBeExisting();
-        
+        await expect(await CardLocationBlockPage.carouselElement(id)).toBeExisting();
+        await expect($(`#${id} span[aria-label="Go to slide 1"]`)).toBeExisting();
+        await expect($(`#${id} span[aria-label="Go to slide 2"]`)).toBeExisting();
+        await expect($(`#${id} span[aria-label="Go to slide 3"]`)).toBeExisting();
     });
 
   });

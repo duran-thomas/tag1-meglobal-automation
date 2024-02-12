@@ -10,7 +10,7 @@ class QuickActionsBlockPage extends Page {
     define selectors using getter methods
     */
     public get btnAddNewMenu() {
-        return $('.button');
+        return $('=Add new menu');
     }
 
     public get linkGroupQuickActions() {
@@ -34,7 +34,7 @@ class QuickActionsBlockPage extends Page {
     }
 
     public get btnAddNewContent() {
-        return $('a[href="/group/356/node/create"]');
+        return $('=Add new content');
     }
 
     public get linkGroupLayoutPage() {
@@ -97,13 +97,21 @@ class QuickActionsBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get quickActionsElement() {
-        return $('.mf-quick-actions');
+    public quickActionsElement(id:string) {
+        return $(`#${id} .mf-quick-actions`);
     }
 
-    public get quickActionsButton() {
-        return $('a.mf-button');
+    public quickActionsButton(id:string) {
+        return $(`#${id} a.mf-button`);
     }
+
+    // public get quickActionsElement() {
+    //     return $('.mf-quick-actions');
+    // }
+
+    // public get quickActionsButton() {
+    //     return $('a.mf-button');
+    // }
 
     public get inputNodeTitle() {
         return $('input[data-drupal-selector="edit-title-0-value"]');
@@ -205,20 +213,45 @@ class QuickActionsBlockPage extends Page {
     }
 
     public async cleanUp() {
-        await this.openNodes();
-        await (await this.dropdownToggle).waitForDisplayed({
-            timeout: 4000
-        });
-        await (await this.dropdownToggle).click();
-        await (await this.deleteOption).waitForDisplayed({
-            timeout: 4000
-        });
-        await (await this.deleteOption).click();
-        await (await this.btnSave).waitForDisplayed({
+        // await this.openNodes();
+        // await (await this.dropdownToggle).waitForDisplayed({
+        //     timeout: 4000
+        // });
+        // await (await this.dropdownToggle).click();
+        // await (await this.deleteOption).waitForDisplayed({
+        //     timeout: 4000
+        // });
+        // await (await this.deleteOption).click();
+        // await (await this.btnSave).waitForDisplayed({
+        //     timeout: 3500
+        // });
+        // await (await this.btnSave).click();
+        await this.openMenus();
+        await (await this.createdMenu).click();
+        await (await this.btnDelete).waitForDisplayed({
             timeout: 3500
         });
-        await (await this.btnSave).click();
-        await this.openMenus();
+        await (await this.btnDelete).click();
+        await (await this.confirmDelete).click();
+        await browser.pause(1500);
+
+    }
+
+    public async devCleanUp() {
+        // await this.openDevNodes();
+        // await (await this.dropdownToggle).waitForDisplayed({
+        //     timeout: 4000
+        // });
+        // await (await this.dropdownToggle).click();
+        // await (await this.deleteOption).waitForDisplayed({
+        //     timeout: 4000
+        // });
+        // await (await this.deleteOption).click();
+        // await (await this.btnSave).waitForDisplayed({
+        //     timeout: 3500
+        // });
+        // await (await this.btnSave).click();
+        await this.openDevMenus();
         await (await this.createdMenu).click();
         await (await this.btnDelete).waitForDisplayed({
             timeout: 3500
@@ -233,11 +266,28 @@ class QuickActionsBlockPage extends Page {
 
     overwrite specific options to adapt it to page object
     */
+   
     public openMenus() {
-        return super.open('group/356/menus');
+        return super.open('group/1/menus');
     }
     public openNodes() {
+        return super.open('group/1/nodes');
+    }
+    //ode7 group was recreated and as such has a different path
+    public openMenusQaAuto() {
+        return super.open('group/356/menus');
+    }
+    public openNodesQaAuto() {
         return super.open('group/356/nodes');
+    }
+
+    //ode7 group was recreated and as such has a different path
+
+    public openDevMenus() {
+        return super.open('group/1/menus');
+    }
+    public openDevNodes() {
+        return super.open('group/1/nodes');
     }
 }
 

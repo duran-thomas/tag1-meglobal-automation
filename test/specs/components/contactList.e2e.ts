@@ -67,8 +67,9 @@ describe('Contact List Component Tests', () => {
 
      
     it('[S3C874] Verify that a site Content Administrator can create a Contact List Component with an Email Contact List Item', async () => {
+        const id=`ContactList-S3C874-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -79,17 +80,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.email}"]`)).toExist();   
     });
 
     it('[S3C875] Verify that a site Content Administrator can create a Contact List Component with an Text Contact List Item', async () => {
+        const id=`ContactList-S3C875-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -100,17 +102,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[href="${contactListBlockData.url}"]`)).toExist();   
     });
 
     it('[S3C876] Verify that a site Content Administrator can create a Contact List Component with an Text Contact List Item using an internal node as its link', async () => {
+        const id=`ContactList-S3C876-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -121,17 +124,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-click-text="${contactListBlockData.intLinkText}"]`)).toExist();   
     });
 
     it('[S3C877]  Verify that a site Content Administrator can create a Contact List Component with a Phone Contact List Item', async () => {
+        const id=`ContactList-S3C877-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -142,17 +146,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.subTitle}"]`)).toExist();   
     });
 
     it('[S3C878]  Verify that a site Content Administrator can create a Contact List Component with a Location Contact List Item', async () => {
+        const id=`ContactList-S3C878-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -163,17 +168,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[href="${contactListBlockData.url}"]`)).toExist();   
     });
 
     it('[S3C879]  Verify that a site Content Administrator can create a Contact List Component with a Location Contact List Item using an internal node as its link', async () => {
+        const id=`ContactList-S3C879-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -184,17 +190,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[href="${contactListBlockData.intUrl}"]`)).toExist();   
     });
 
     it('[S3C880] Verify that a site Content Administrator can create a Contact List Component with a Chat Contact List Item', async () => {
+        const id=`ContactList-S3C880-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -205,17 +212,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.linkText}"]`)).toExist();   
     });
 
     it('[S3C881] Verify that a site Content Administrator can create a Contact List Component with a Chat Contact List Item using an internal node as its link', async () => {
+        const id=`ContactList-S3C881-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -226,17 +234,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.intLinkText}"]`)).toExist();   
     });
 
     it('[S3C882] Verify that a site Content Administrator can create a Contact List Component with an Button Contact List Item', async () => {
+        const id=`ContactList-S3C882-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -247,17 +256,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.btnText}"]`)).toExist();   
     });
 
     it('[S3C883] Verify that a site Content Administrator can create a Contact List Component with an Button Contact List Item using an internal node as its link', async () => {
+        const id=`ContactList-S3C883-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -268,17 +278,18 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.btnText}"]`)).toExist();   
     });
 
     it('[S3C884] Verify that a site Content Administrator can create a Contact List Component with a Person Contact List Item', async () => {
+        const id=`ContactList-S3C884-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -290,16 +301,17 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
     });
 
     it('[S3C885] Verify that a site Content Administrator can create a Contact List Component with multiple Items', async () => {
+        const id=`ContactList-S3C885-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -312,11 +324,11 @@ describe('Contact List Component Tests', () => {
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ContactListBlockPage.contactElement).scrollIntoView();
+        await (await ContactListBlockPage.contactElement(id)).scrollIntoView();
         
-        await expect(ContactListBlockPage.contactHeadline).toHaveText(contactListBlockData.headline); 
-        await expect(ContactListBlockPage.contactHeading).toHaveText(contactListBlockData.heading); 
-        await expect(ContactListBlockPage.contactContent).toHaveText(contactListBlockData.content); 
+        await expect(ContactListBlockPage.contactHeadline(id)).toHaveText(contactListBlockData.headline); 
+        await expect(ContactListBlockPage.contactHeading(id)).toHaveText(contactListBlockData.heading); 
+        await expect(ContactListBlockPage.contactContent(id)).toHaveText(contactListBlockData.content); 
         await expect($(`a[data-analytics-item-title="${contactListBlockData.email}"]`)).toExist();   
         await expect($(`a[data-analytics-item-title="${contactListBlockData.linkText}"]`)).toExist();   
         await expect($(`a[data-analytics-item-title="${contactListBlockData.subTitle}"]`)).toExist();   
@@ -324,9 +336,10 @@ describe('Contact List Component Tests', () => {
 
     });
 
-    it('Verify analytics for Contact components are configured', async () => {
+    it('[S3C1104] Verify analytics for Contact components are configured', async () => {
+        const id=`ContactList-S3C1104-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -507,24 +520,5 @@ describe('Contact List Component Tests', () => {
         }
     })
 
-    // it('[S3C886] Verify that all design fields are present with the correct available options and they are correctly applied', async () => {
-    //  await (await QALayoutPage.tabLayout).click();
-    //     await QALayoutPage.createNewSection();
-    //     await QALayoutPage.navigateToBlockList();
-    //     (await QALayoutPage.btnContactList).scrollIntoView();
-    //     (await QALayoutPage.btnContactList).click();
-    //     (await ContactListBlockPage.configBlock).waitForDisplayed();
-
-    //     await ContactListBlockPage.navToStyling()
-        
-    //     await expect(ContactListBlockPage.dropdownBackground).toBeDisplayed();
-    //     await expect(ContactListBlockPage.dropdownBackground).toHaveValue('white');
-    //     await expect(ContactListBlockPage.dropdownBackground).toHaveValue('soft-gray');
-    //     await expect(ContactListBlockPage.dropdownBackground).toHaveValue('soft-blue');
-
-    //     await expect(ContactListBlockPage.dropdownContentPadding).toBeDisplayed();
-    //     await expect(ContactListBlockPage.dropdownContentPadding).toHaveValue('base');
-
-    // });
 
   });

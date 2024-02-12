@@ -9,6 +9,7 @@ export const quickActionsBlockData = {
     intMenuLinkTitle: 'Test Internal Link',
     extLink: 'https://google.com',
     intLink: '/education/residency',
+    devLink: '/profiles',
     statMsg: {
         menuSucess: 'New group menu has been created.',
         linkSuccess: 'The menu link has been saved.',

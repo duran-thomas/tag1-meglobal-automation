@@ -201,7 +201,7 @@ export const config: Options.Testrunner = {
             description: 'This test run was created by the CI pipeline during the daily regression run..',
             projectId: 1,
             includeAllCases: false,
-            excludeSkip: true
+            excludeSkip: true,
         }]
     ],
 

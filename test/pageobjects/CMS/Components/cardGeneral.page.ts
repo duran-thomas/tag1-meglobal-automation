@@ -112,12 +112,12 @@ class CardGeneralBlockPage extends Page {
         return $('#entity_browser_iframe_image_and_video');
     }
 
-    public get cardGeneralElement() {
-        return $('.mf-card-general');
+    public cardGeneralElement(id:string) {
+        return $(`#${id} .mf-card-general`);
     }
 
-    public get cardEyebrow() {
-        return $('.mf-text-body-4-serif');
+    public cardEyebrow(id:string) {
+        return $(`#${id} .mf-text-body-4-serif`);
     }
 
     public get headlineOptions() {

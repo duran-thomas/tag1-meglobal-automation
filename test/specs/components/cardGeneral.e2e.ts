@@ -67,8 +67,9 @@ describe('Card General Component Tests', () => {
 
   
     it('[S3C860] Verify that a site Content Administrator can create a  Card - General Component.', async () => {
+        const id=`CardGeneral-S3C860-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardGeneral).scrollIntoView();
         await (await QALayoutPage.btnCardGeneral).click();
@@ -80,15 +81,16 @@ describe('Card General Component Tests', () => {
         await expect(CardGeneralBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardGeneralBlockPage.cardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardGeneralBlockPage.cardEyebrow(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await CardGeneralBlockPage.cardEyebrow).toHaveText(cardGeneralBlockData.eyebrow); 
-        await expect(CardGeneralBlockPage.cardGeneralElement).toBeExisting();   
+        await expect(await CardGeneralBlockPage.cardEyebrow(id)).toHaveText(cardGeneralBlockData.eyebrow); 
+        await expect(CardGeneralBlockPage.cardGeneralElement(id)).toBeExisting();   
     });
 
     it('[S3C1082] Verify that the Headline size defaults to h3 when creating a Card General Component', async () => {
+        const id=`CardGeneral-S3C1082-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardGeneral).scrollIntoView();
         await (await QALayoutPage.btnCardGeneral).click();
@@ -100,8 +102,9 @@ describe('Card General Component Tests', () => {
     });
 
     it('[S3C1075] Verify that Analytics for the Card General Component is configured', async () => {
+        const id=`CardGeneral-S3C1075-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardGeneral).scrollIntoView();
         await (await QALayoutPage.btnCardGeneral).click();
@@ -113,10 +116,10 @@ describe('Card General Component Tests', () => {
         await expect(CardGeneralBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardGeneralBlockPage.cardEyebrow).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardGeneralBlockPage.cardEyebrow(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await CardGeneralBlockPage.cardEyebrow).toHaveText(cardGeneralBlockData.eyebrow); 
-        await expect(CardGeneralBlockPage.cardGeneralElement).toBeExisting(); 
+        await expect(await CardGeneralBlockPage.cardEyebrow(id)).toHaveText(cardGeneralBlockData.eyebrow); 
+        await expect(CardGeneralBlockPage.cardGeneralElement(id)).toBeExisting(); 
 
         /**
          * Create the expected analytics 
