@@ -202,6 +202,7 @@ export const config: Options.Testrunner = {
             projectId: 1,
             includeAllCases: false,
             excludeSkip: true,
+            consoleLogResults: true
         }]
     ],
 
