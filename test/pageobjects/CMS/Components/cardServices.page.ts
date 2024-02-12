@@ -120,24 +120,24 @@ class CardServicesBlockPage extends Page {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get cardServicesElement() {
-        return $('.mf-card-services');
+    public cardServicesElement(id:string) {
+        return $(`#${id} .mf-card-services`);
     }
 
-    public get cardContent() {
-        return $('.mf-rich-text');
+    public cardContent(id:string) {
+        return $(`#${id} .mf-rich-text`);
     }
 
     public get internalUrl() {
         return $('=Residency Programs');
     }
 
-    public get internalLink() {
-        return $('a[data-analytics-click-text="Residency Programs"]');
+    public internalLink(id:string) {
+        return $(`#${id} a[data-analytics-click-text="Residency Programs"]`);
     }
 
-    public get listElement() {
-        return $('.mf-icon-list__item');
+    public listElement(id:string) {
+        return $(`#${id} .mf-icon-list__item`);
     }
 
     public get headlineOptions() {
