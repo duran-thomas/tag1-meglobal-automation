@@ -56,8 +56,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "@qualitywatcher/wdio-reporter": "^1.0.7",
-    "@qualitywatcher/wdio-service": "^1.0.15",
+    "@qualitywatcher/wdio-reporter": "^1.0.9",
+    "@qualitywatcher/wdio-service": "^1.1.1",
     "@types/jest": "^29.5.2",
     "@types/webdriverio": "^5.0.0",
     "@wdio/allure-reporter": "^7.26.0",
