@@ -106,8 +106,8 @@ class MyChartBlockPage extends Page {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
 
-    public get myChartElement() {
-        return $('.block-inline-blockcard-mychart');
+    public myChartElement(id:string) {
+        return $(`#${id} .block-inline-blockcard-mychart`);
     }
 
     public get headlineOptions() {
