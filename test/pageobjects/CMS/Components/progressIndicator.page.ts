@@ -40,12 +40,12 @@ class ProgressIndicatorBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get progressIndicatorElement() {
-        return $('.mf-progress-indicator');
+    public progressIndicatorElement(id:string) {
+        return $(`#${id} .mf-progress-indicator`);
     }
 
-    public get indicatorTextElement() {
-        return $('.absolute.inset-0.flex');
+    public indicatorTextElement(id:string) {
+        return $(`#${id} .absolute.inset-0.flex`);
     }
 
     /**

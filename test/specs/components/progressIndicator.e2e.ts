@@ -66,8 +66,9 @@ describe('Progress Indicator Component Tests', () => {
 
   
     it('[S3C1115] Verify a Content Administrator can create a Progress Indicator with default settings', async () => {
+        const id=`ProgressIndicator-S3C1115-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnProgressIndicator).scrollIntoView();
         await (await QALayoutPage.btnProgressIndicator).click();
@@ -80,13 +81,14 @@ describe('Progress Indicator Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await $('h1')).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ProgressIndicatorBlockPage.progressIndicatorElement).toBeExisting();   
-        await expect(await ProgressIndicatorBlockPage.indicatorTextElement).toHaveText('100%'); 
+        await expect(ProgressIndicatorBlockPage.progressIndicatorElement(id)).toBeExisting();   
+        await expect(await ProgressIndicatorBlockPage.indicatorTextElement(id)).toHaveText('100%'); 
     });
 
     it('[S3C1116] Verify the results of Theme field settings', async () => {
+        const id=`ProgressIndicator-S3C1116-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnProgressIndicator).scrollIntoView();
         await (await QALayoutPage.btnProgressIndicator).click();
@@ -99,10 +101,10 @@ describe('Progress Indicator Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await $('h1')).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ProgressIndicatorBlockPage.progressIndicatorElement).toBeExisting();   
-        await expect(await ProgressIndicatorBlockPage.indicatorTextElement).not.toBeExisting(); 
+        await expect(ProgressIndicatorBlockPage.progressIndicatorElement(id)).toBeExisting();   
+        await expect(await ProgressIndicatorBlockPage.indicatorTextElement(id)).not.toBeExisting(); 
         //await expect(await ProgressIndicatorBlockPage.progressIndicatorElement.getAttribute('class')).toHaveTextContaining('h-4'); //h-4 is the change in class for a thin bar 
-        const indicatorElement = await ProgressIndicatorBlockPage.progressIndicatorElement;
+        const indicatorElement = await ProgressIndicatorBlockPage.progressIndicatorElement(id);
         const thinBar = await indicatorElement.getAttribute('class');
         await expect(thinBar).toContain('h-4');
 
@@ -117,7 +119,7 @@ describe('Progress Indicator Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
 
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnProgressIndicator).scrollIntoView();
         await (await QALayoutPage.btnProgressIndicator).click();
@@ -130,19 +132,20 @@ describe('Progress Indicator Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await $('h1')).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(ProgressIndicatorBlockPage.progressIndicatorElement).toBeExisting();   
-        await expect(await ProgressIndicatorBlockPage.indicatorTextElement).toHaveText('23%'); 
+        await expect(ProgressIndicatorBlockPage.progressIndicatorElement(id)).toBeExisting();   
+        await expect(await ProgressIndicatorBlockPage.indicatorTextElement(id)).toHaveText('23%'); 
         //await expect((await ProgressIndicatorBlockPage.progressIndicatorElement).getAttribute('class')).toContain('h-20'); //h-20 is the change in class for a full bar 
 
-        const progressIndicatorElement = await ProgressIndicatorBlockPage.progressIndicatorElement;
+        const progressIndicatorElement = await ProgressIndicatorBlockPage.progressIndicatorElement(id);
         const fullBar = await progressIndicatorElement.getAttribute('class');
         await expect(fullBar).toContain('h-20');
 
     });
 
     it('[S3C1117] Verify limits of Percentage field', async () => {
+        const id=`ProgressIndicator-S3C1117-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnProgressIndicator).scrollIntoView();
         await (await QALayoutPage.btnProgressIndicator).click();
