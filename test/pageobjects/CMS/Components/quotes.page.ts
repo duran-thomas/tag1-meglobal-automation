@@ -101,12 +101,12 @@ class QuotesBlockPage extends Page {
         return $('#edit-actions-submit');
     }
 
-    public get borderElement() {
-        return $('.mf-quotes--border');
+    public borderElement(id:string) {
+        return $(`#${id} .mf-quotes--border`);
     }
 
-    public get quoteElement() {
-        return $('.mf-quotes__text');
+    public quoteElement(id:string) {
+        return $(`#${id} .mf-quotes__text`);
     }
 
     public get quoteShowTranscriptElement() {

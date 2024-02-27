@@ -68,36 +68,39 @@ describe('Quotes Component Tests', () => {
 
      
     it('[S3C850] Verify that a site Content Administrator can create a Quotes Component with the border being shown, without audio', async () => {
+        const id=`Quotes-S3C850-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
         await (await QuotesBlockPage.configBlock).waitForDisplayed();
         await QuotesBlockPage.completeWithBorderNoAudio(quoteBlockData.title, quoteBlockData.quoteWithBorderNoAudio, quoteBlockData.author, quoteBlockData.authorTitle);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.borderElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await QuotesBlockPage.borderElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await $('.mf-quotes__text')).toHaveText(quoteBlockData.quoteWithBorderNoAudio);
-        await expect(QuotesBlockPage.borderElement).toBeDisplayed();  
+        await expect(QuotesBlockPage.borderElement(id)).toBeDisplayed();  
     });
   
     it('[S3C851] Verify that a site Content Administrator can create a Quotes Component without the border being shown', async () => {
+        const id=`Quotes-S3C851-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
         await (await QuotesBlockPage.configBlock).waitForDisplayed();
         await QuotesBlockPage.completeWithoutBorder(quoteBlockData.title, quoteBlockData.quoteWithoutBorder, quoteBlockData.author, quoteBlockData.authorTitle);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithoutBorder);
+        await (await QuotesBlockPage.quoteElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement(id)).toHaveText(quoteBlockData.quoteWithoutBorder);
     });
 
     it('[S3C852] Verify that a site Content Administrator can create a Quotes Component with Audio and Transcript', async () => {
+        const id=`Quotes-S3C852-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
@@ -105,14 +108,15 @@ describe('Quotes Component Tests', () => {
         const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
         await QuotesBlockPage.completeWithAudioAndTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioAndTranscript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath, quoteBlockData.transcript);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithAudioAndTranscript);  
+        await (await QuotesBlockPage.quoteElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement(id)).toHaveText(quoteBlockData.quoteWithAudioAndTranscript);  
         await expect(QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
     });
 
     it('[S3C853] Verify that a site Content Administrator can create a Quotes Component with Audio and without Transcript', async () => {
+        const id=`Quotes-S3C853-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
@@ -120,14 +124,15 @@ describe('Quotes Component Tests', () => {
         const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
         await QuotesBlockPage.completeWithAudioNoTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioNoTranscript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithAudioNoTranscript);  
+        await (await QuotesBlockPage.quoteElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement(id)).toHaveText(quoteBlockData.quoteWithAudioNoTranscript);  
         await expect(QuotesBlockPage.quoteShowTranscriptElement).not.toBeDisplayed();
     });
 
     it('[S3C854] Verify that all design fields are present with the correct available options.', async () => {
+        const id=`Quotes-S3C854-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
@@ -140,8 +145,9 @@ describe('Quotes Component Tests', () => {
     });
 
     it('[S3C1355] Verify that Analytics for the Quotes Component is configured', async () => {
+        const id=`Quotes-S3C855-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnQuote).scrollIntoView();
         await (await QALayoutPage.btnQuote).click();
@@ -149,8 +155,8 @@ describe('Quotes Component Tests', () => {
         const audioRemoteFilePath = await browser.uploadFile('scriptFiles/sampleAudio.mp3');
         await QuotesBlockPage.completeWithAudioAndTranscript(quoteBlockData.title, quoteBlockData.quoteWithAudioAndTranscript, quoteBlockData.author, quoteBlockData.authorTitle, audioRemoteFilePath, quoteBlockData.transcript);
         await QALayoutPage.goToPageView();
-        await (await QuotesBlockPage.quoteElement).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await expect(await QuotesBlockPage.quoteElement).toHaveText(quoteBlockData.quoteWithAudioAndTranscript);  
+        await (await QuotesBlockPage.quoteElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await expect(await QuotesBlockPage.quoteElement(id)).toHaveText(quoteBlockData.quoteWithAudioAndTranscript);  
         await expect(QuotesBlockPage.quoteShowTranscriptElement).toBeDisplayed();
 
         /**
