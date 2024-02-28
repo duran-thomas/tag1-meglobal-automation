@@ -48,8 +48,8 @@ class InlineNavigationBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get inlineNavElement() {
-        return $('.mf-inline-navigation');
+    public inlineNavElement(id:String) {
+        return $(`#${id} .mf-inline-navigation`);
     }
 
     public get inlineLink() {
