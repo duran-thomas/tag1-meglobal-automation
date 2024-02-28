@@ -76,8 +76,8 @@ class HeroBlockPage extends Page {
         return $('#block-meda-page-title');
     }
 
-    public get headlineElement() {
-        return $('.mf-text-title-1-serif');
+    public headlineElement(id: string) {
+        return $(`#${id} .mf-text-title-1-serif`);
     }
 
     public get heroPageLink() {

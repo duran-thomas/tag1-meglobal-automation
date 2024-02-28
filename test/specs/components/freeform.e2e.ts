@@ -66,9 +66,10 @@ describe('Freeform Component Tests', () => {
 
 
     it('[S3C1011] Verify that a site Content Administrator can create a Freeform Component with an Accordion block)', async () => {
+        const id=`Freeform-S3C1011-${Date.now()}`;
         const titleID = data.accordionFreeformData.title.replace(/\s+/g, '-').toLowerCase();
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -82,13 +83,14 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.btnAccordion).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`button#${titleID}`)).toBeExisting();
+        await expect(await $(`#${id} button#${titleID}`)).toBeExisting();
 
     });
 
     it('[S3C1012] Verify that a site Content Administrator can create a Freeform Component with a Button)', async () => {
+        const id=`Freeform-S3C1012-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -102,15 +104,16 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`a[href="${data.buttonFreeformData.url}"]`)).toBeExisting();
-        await expect(await $(`a[href="${data.buttonFreeformData.url1}"]`)).toBeExisting();
-        await expect(await $(`a[href="${data.buttonFreeformData.url2}"]`)).toBeExisting();
+        await expect(await $(`#${id} a[href="${data.buttonFreeformData.url}"]`)).toBeExisting();
+        await expect(await $(`#${id} a[href="${data.buttonFreeformData.url1}"]`)).toBeExisting();
+        await expect(await $(`#${id} a[href="${data.buttonFreeformData.url2}"]`)).toBeExisting();
 
     });
 
     it('[S3C1013] Verify that a site Content Administrator can create a Freeform Component with a Divider)', async () => {
+        const id=`Freeform-S3C1013-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -124,13 +127,14 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await FreeformBlockPage.dividerElement).toBeExisting();
+        await expect(await FreeformBlockPage.dividerElement(id)).toBeExisting();
 
     });
 
     it('[S3C1014] Verify that a site Content Administrator can create a Freeform Component with a Dropdown block)', async () => {
+        const id=`Freeform-S3C1014-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -144,12 +148,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`button[data-analytics-click-text="${data.dropdownFreeformData.triggerText}"]`)).toBeExisting();
+        await expect(await $(`#${id} button[data-analytics-click-text="${data.dropdownFreeformData.triggerText}"]`)).toBeExisting();
     });
 
     it('[S3C1015] Verify that a site Content Administrator can create a Freeform Component with an Icon List block', async () => {
+        const id=`Freeform-S3C1015-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -162,14 +167,15 @@ describe('Freeform Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await FreeformBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect($('span[data-analytics-click-text="bullet-square"]')).toBeExisting() 
-        await expect(FreeformBlockPage.listItem).toHaveText(data.iconListFreeformData.text+' 1');   
+        await expect($(`#${id} span[data-analytics-click-text="bullet-square"]`)).toBeExisting() 
+        await expect(FreeformBlockPage.listItem(id)).toHaveText(data.iconListFreeformData.text+' 1'); 
         await expect(FreeformBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
     });
 
     it('[S3C1016] Verify that a site Content Administrator can create a Freeform Component with an Image block)', async () => {
+        const id=`Freeform-S3C1016-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -184,12 +190,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`img[alt="${data.imageFreeformData.altText}"]`)).toBeDisplayed();
+        await expect(await $(`#${id} img[alt="${data.imageFreeformData.altText}"]`)).toBeDisplayed();
     });
 
     it('[S3C1017] Verify that a site Content Administrator can create a Freeform Component with an Inline Navigation block)', async () => {
+        const id=`Freeform-S3C1017-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -203,12 +210,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`nav[aria-label="${data.inlineNavFreeformData.label}"]`)).toBeExisting();
+        await expect(await $(`#${id} nav[aria-label="${data.inlineNavFreeformData.label}"]`)).toBeExisting();
     });
 
     it('[S3C1018] Verify that a site Content Administrator can create a Freeform Component with Links)', async () => {
+        const id=`Freeform-S3C1018-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -222,14 +230,15 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $(`a[data-analytics-click-text="${data.linksFreeformData.linkText1}"`)).toBeExisting();
-        await expect(await $(`a[data-analytics-click-text="${data.linksFreeformData.linkText2}"`)).toBeExisting();
-        await expect(await $(`a[data-analytics-click-text="${data.linksFreeformData.linkText3}"`)).toBeExisting();
+        await expect(await $(`#${id} a[data-analytics-click-text="${data.linksFreeformData.linkText1}"`)).toBeExisting();
+        await expect(await $(`#${id} a[data-analytics-click-text="${data.linksFreeformData.linkText2}"`)).toBeExisting();
+        await expect(await $(`#${id} a[data-analytics-click-text="${data.linksFreeformData.linkText3}"`)).toBeExisting();
     });
 
     it('[S3C1019] Verify that a site Content Administrator can create a Freeform Component with Rich Text)', async () => {
+        const id=`Freeform-S3C1019-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -243,12 +252,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $('.mf-rich-text')).toBeExisting();
+        await expect(await $(`#${id} .mf-rich-text`)).toBeExisting();
     });
 
     it('[S3C1020] Verify that a site Content Administrator can create a Freeform Component with a Spacer block)', async () => {
+        const id=`Freeform-S3C1020-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnFreeform).scrollIntoView();
         await (await QALayoutPage.btnFreeform).click();
@@ -262,12 +272,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $('.mf-spacer')).toBeExisting();
+        await expect(await $(`#${id} .mf-spacer`)).toBeExisting();
     });
 
     it('[S3C1021] Verify that a site Content Administrator can create a Freeform Component with Typeahead block)', async () => {
+        const id=`Freeform-S3C1021-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -281,13 +292,14 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $('.mf-typeahead')).toBeExisting();
-        await expect(await $(`input[placeholder="${data.typeaheadFreeformData.placeholder}"]`)).toBeExisting();
+        await expect(await $(`#${id} .mf-typeahead`)).toBeExisting();
+        await expect(await $(`#${id} input[placeholder="${data.typeaheadFreeformData.placeholder}"]`)).toBeExisting();
     });
 
     it('[S3C1022] Verify that a site Content Administrator can create a Freeform Component with a Video block)', async () => {
+        const id=`Freeform-S3C1022-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -302,12 +314,13 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $('.mf-media')).toBeDisplayed();
+        await expect(await $(`#${id} .mf-media`)).toBeDisplayed();
     });
 
     it('[S3C1023] Verify that a site Content Administrator can create a Freeform Component with a Visual List block', async () => {
+        const id=`Freeform-S3C1023-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -321,13 +334,14 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        await expect(await $('.mf-visual-list')).toBeExisting();
-        await expect(await $(`a[data-analytics-click-text="${data.visualListFreeformData.title}"]`)).toBeExisting();
+        await expect(await $(`#${id} .mf-visual-list`)).toBeExisting();
+        await expect(await $(`#${id} a[data-analytics-click-text="${data.visualListFreeformData.title}"]`)).toBeExisting();
     });
 
     it('[S3C1024] Verify that a site Content Administrator can specify headline sizing when creating a Freeform Component)', async () => {
+        const id=`Freeform-S3C1024-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -338,10 +352,11 @@ describe('Freeform Component Tests', () => {
         await expect(FreeformBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await FreeformBlockPage.dividerElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await FreeformBlockPage.dividerElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await FreeformBlockPage.dividerElement).toBeExisting();
-        await expect(await $(`h4=${data.freeformBlockData.headline}`)).toBeExisting();
+        await expect(await FreeformBlockPage.dividerElement(id)).toBeExisting();
+        await expect(await $(`#${id} h4`)).toBeExisting();
+        await expect(await $(`#${id} h4`)).toHaveText(data.freeformBlockData.headline);
     });
 
     it('[S3C1080] Verify that the Headline size defaults to h3 when creating a Freeform Component)', async () => {
@@ -358,8 +373,9 @@ describe('Freeform Component Tests', () => {
     });
 
     it('[S3C1087] Verify that Analytics for the Freeform Component with Rich Text is configured)', async () => {
+        const id=`Freeform-S3C1087-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -373,15 +389,16 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        const elem = await $('.mf-rich-text');
+        const elem = await $(`#${id} .mf-rich-text`);
 
         await expect(elem).toHaveAttribute('data-analytics-event','e_componentClick');
         await expect(elem).toHaveAttribute('data-analytics-component-type','rich text');
     });
 
     it('[S3C1106] Verify that Analytics for the Freeform Component with an Image block is configured)', async () => {
+        const id=`Freeform-S3C1106-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();
@@ -396,7 +413,8 @@ describe('Freeform Component Tests', () => {
         await (await FreeformBlockPage.freeformHeadline).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
-        const elem = await $('.mf-media');
+
+        const elem = await $(`#${id} .mf-media`);
 
         await expect(elem).toHaveAttribute('data-analytics-event','e_mediaEngagement');
     });
