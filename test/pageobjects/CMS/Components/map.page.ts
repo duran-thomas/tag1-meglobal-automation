@@ -60,8 +60,8 @@ class MapBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get mapElement() {
-        return $('.mf-map');
+    public mapElement(id:string) {
+        return $(`#${id} .mf-map`);
     }
 
     public get dropdownImage() {
