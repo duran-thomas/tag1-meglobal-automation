@@ -197,8 +197,8 @@ class EventBlockPage extends Page {
         await (await this.linkAddEventList).click();
         //await (await this.dropdownTemplate).waitForExist();
         await (await this.dropdownDepartment).scrollIntoView();
-        await (await this.dropdownDepartment).selectByVisibleText('Montefiore Einstein Center for Heart and Vascular Care');
-        await (await this.dropdownEventType).selectByVisibleText('Support Groups');
+        await (await this.dropdownDepartment).selectByVisibleText('Advanced Pulmonary Failure & Lung Transplant Program');
+        await (await this.dropdownEventType).selectByVisibleText('Classes & Workshops');
         await (await this.textareaNoResults).setValue(text);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();

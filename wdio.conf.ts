@@ -197,7 +197,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.33.14] Automated Regression - Just A Test",
+        //     testRunName: "[Release 0.34.10] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,
