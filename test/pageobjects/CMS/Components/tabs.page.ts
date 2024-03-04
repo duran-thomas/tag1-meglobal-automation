@@ -66,8 +66,8 @@ class TabsBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get tabElement() {
-        return $('.mf-tabs');
+    public tabElement(id:string) {
+        return $(`#${id} .mf-tabs`);
     }
 
     public get tabPanel() {
