@@ -67,8 +67,9 @@ describe('Testimonial Component Tests', () => {
 
   
     it('[S3C914] Verify that a site Content Administrator can create a Testimonial Component', async () => {
+        const id=`Testimonial-S3C914-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnTestimonial).scrollIntoView();
         (await QALayoutPage.btnTestimonial).click();
@@ -81,16 +82,17 @@ describe('Testimonial Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        await expect(await TestimonialBlockPage.testimonialElement).toBeExisting();   
+        await expect(await TestimonialBlockPage.testimonialElement(id)).toBeExisting();   
 
-        await (await TestimonialBlockPage.testimonialElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TestimonialBlockPage.testimonialElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await TestimonialBlockPage.quotes[0]).toHaveText(data.testimonialBlockData.quote); 
     });
 
     it('[S3C915] Verify that a site Content Administrator can create a Testimonial Component with the Image Background field set to True', async () => {
+        const id=`Testimonial-S3C914-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnTestimonial).scrollIntoView();
         (await QALayoutPage.btnTestimonial).click();
@@ -103,7 +105,7 @@ describe('Testimonial Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        await expect(await TestimonialBlockPage.testimonialElement).toBeExisting();   
+        await expect(await TestimonialBlockPage.testimonialElement(id)).toBeExisting();   
 
         await (await TestimonialBlockPage.quotes[0]).scrollIntoView({ behavior: 'auto', block: 'center' });
         
@@ -111,8 +113,9 @@ describe('Testimonial Component Tests', () => {
     });
 
     it('[S3C932] Verify that a site Content Administrator can create multiple Testimonial Components', async () => {
+        const id=`Testimonial-S3C914-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnTestimonial).scrollIntoView();
         (await QALayoutPage.btnTestimonial).click();
@@ -132,7 +135,7 @@ describe('Testimonial Component Tests', () => {
 
         await (await TestimonialBlockPage.quotes[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await TestimonialBlockPage.testimonialElement).toBeExisting();   
+        await expect(await TestimonialBlockPage.testimonialElement(id)).toBeExisting();   
 
         await expect(await TestimonialBlockPage.quotes.length).toEqual(5);
         await expect(await TestimonialBlockPage.allTestimonials.length).toEqual(5);

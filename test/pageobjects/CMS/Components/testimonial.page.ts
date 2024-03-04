@@ -132,8 +132,8 @@ class TestimonialBlockPage extends Page {
         return $$('#entity_browser_iframe_image_browser');
     }
 
-    public get testimonialElement() {
-        return $('.mf-testimonial');
+    public testimonialElement(id:string) {
+        return $(`#${id} .mf-testimonial`);
     }
 
     public get allTestimonials() {
