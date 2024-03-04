@@ -61,16 +61,16 @@ class TeamLeaderBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get teamMemberGrid() {
-        return $('.mf-grid');
+    public teamMemberGrid(id:string) {
+        return $(`#${id} .mf-grid`);
     }
 
     public get textBox() {
         return $$('.mf-card-general__box');
     }
 
-    public get teamCarousel() {
-        return $('.mf-carousel');
+    public teamCarousel(id:string) {
+        return $(`#${id} .mf-carousel`);
     }
 
     public get headerTitleElem() {
