@@ -245,11 +245,7 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeOneColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
         if(id){
             await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -270,11 +266,7 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeTwoColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -291,11 +283,7 @@ class LandingQAPage extends Page {
 
         await (await this.sidebarSection).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -335,10 +323,7 @@ class LandingQAPage extends Page {
         await (await this.btnRemoveSection).scrollIntoView();
         await this.btnRemoveSection.isDisplayedInViewport();
         await (await this.btnRemoveSection).click();
-        await browser.pause(2000); // find a better wait criteria
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await browser.pause(1800);
         await (await this.btnRemove).click();
         await browser.pause(2000);

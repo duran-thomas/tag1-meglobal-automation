@@ -124,11 +124,7 @@ class DropdownBlockPage extends Page {
      */
 
     public async createDropdownItem(title: string, triggerText: string, url: string, linkText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.dropdownToggle).scrollIntoView();
@@ -150,11 +146,7 @@ class DropdownBlockPage extends Page {
     }
 
     public async createDropdownMultiItem(title: string, triggerText: string, url: string, linkText: string, triggerText1: string, url1: string, linkText1: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000); //explicit waits seem to be necessary here
         await (await this.dropdownToggle).scrollIntoView();
@@ -187,12 +179,7 @@ class DropdownBlockPage extends Page {
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownToggle).scrollIntoView();
         await (await this.dropdownToggle).click();
         await (await this.linkAddDropdownList).click();

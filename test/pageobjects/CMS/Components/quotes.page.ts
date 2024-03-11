@@ -122,11 +122,7 @@ class QuotesBlockPage extends Page {
      */
 
     public async completeWithBorderNoAudio(title: string, quote: string, author: string, authorTitle: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputQuote).setValue(quote);
         await (await this.inputAuthor).setValue(author);
@@ -144,11 +140,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithoutBorder(title: string, quote: string, author: string, authorTitle: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputQuote).setValue(quote);
         await (await this.inputAuthor).setValue(author);
@@ -169,11 +161,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithAudioAndTranscript(title: string, quote: string, author: string, authorTitle: string, remoteAudioFilePath: string, transcript: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputQuote).setValue(quote);
         await (await this.inputAuthor).setValue(author);
@@ -192,7 +180,7 @@ class QuotesBlockPage extends Page {
         await (await this.btnSaveAudio).waitForClickable();
         await (await this.btnSaveAudio).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await (await this.checkboxShowTranscript).waitForClickable();
         await (await this.checkboxShowTranscript).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
@@ -206,11 +194,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async completeWithAudioNoTranscript(title: string, quote: string, author: string, authorTitle: string, remoteAudioFilePath: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputQuote).setValue(quote);
         await (await this.inputAuthor).setValue(author);
@@ -228,8 +212,8 @@ class QuotesBlockPage extends Page {
         await (await this.btnSaveAudio).waitForClickable();
         await (await this.btnSaveAudio).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -240,11 +224,7 @@ class QuotesBlockPage extends Page {
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await browser.pause(2000);

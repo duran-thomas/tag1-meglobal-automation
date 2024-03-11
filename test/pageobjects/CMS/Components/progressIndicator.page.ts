@@ -53,11 +53,7 @@ class ProgressIndicatorBlockPage extends Page {
      */
 
     public async createDefaultProgressIndicator(title: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
@@ -69,11 +65,7 @@ class ProgressIndicatorBlockPage extends Page {
     }
 
     public async createMinimalProgressIndicator(title: string, value: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.inputPercentage).setValue(value);
         await (await this.dropdownStyling).click();
@@ -89,11 +81,7 @@ class ProgressIndicatorBlockPage extends Page {
     }
 
     public async createFullProgressIndicator(title: string, value: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.inputPercentage).setValue(value);
         await (await this.btnAddBlock).scrollIntoView();

@@ -134,11 +134,7 @@ class StepperBlockPage extends Page {
      */
 
     public async checkRequired(adminTitle: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
 
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
@@ -148,12 +144,7 @@ class StepperBlockPage extends Page {
     }
 
     public async createHorizontalStepper(adminTitle: string, title: string, content: string, title1: string, content1: string, title2: string, content2: string, title3: string, content3: string, title4: string, content4: string, backLabel: string, contLabel: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
-        await browser.switchToFrame(iframe);
-        //await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
 
         await (await this.inputAdminTitle).setValue(adminTitle);
 
@@ -196,11 +187,7 @@ class StepperBlockPage extends Page {
     }
 
     public async createVerticalStepper(adminTitle: string, title: string, content: string, title1: string, content1: string, title2: string, content2: string, title3: string, content3: string, title4: string, content4: string, backLabel: string, contLabel: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
 
         await (await this.inputTitle).scrollIntoView({ block: 'center' });

@@ -149,11 +149,7 @@ class TestimonialBlockPage extends Page {
      */
 
     public async createTestimonial(title: string, quote: string, name: string, remoteFilePath: string, altText: string) {
-        await browser.pause(5000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.inputQuote).scrollIntoView();
         await (await this.inputQuote).setValue(quote);
@@ -172,7 +168,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -183,11 +179,7 @@ class TestimonialBlockPage extends Page {
     }
 
     public async createBackgroundTestimonial(title: string, quote: string, name: string, remoteFilePath: string, altText: string) {
-        await browser.pause(5000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.inputQuote).scrollIntoView();
         await (await this.inputQuote).setValue(quote);
@@ -206,7 +198,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await (await this.checkboxImageBackground).click();
@@ -224,11 +216,7 @@ class TestimonialBlockPage extends Page {
     }
 
     public async createMultiTestimonialBlock1(title: string, quote: string, name: string, remoteFilePath: string, altText: string, quote1: string, name1: string, remoteFilePath1: string, altText1: string, quote2: string, name2: string, remoteFilePath2: string, altText2: string, quote3: string, name3: string, remoteFilePath3: string, altText3: string, quote4: string, name4: string, remoteFilePath4: string, altText4: string) {
-        await browser.pause(5000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(title);
         await (await this.inputQuote).scrollIntoView();
         await (await this.inputQuote).setValue(quote);
@@ -247,7 +235,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(1500); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //second quote
         await (await this.btnAddTestimonial).scrollIntoView({ block: 'center' });
         await (await this.btnAddTestimonial).click();
@@ -271,7 +259,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //third quote
         await (await this.btnAddTestimonial).scrollIntoView({ block: 'center' });
         await (await this.btnAddTestimonial).click();
@@ -295,7 +283,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //fourth quote
         await (await this.btnAddTestimonial).scrollIntoView({ block: 'center' });
         await (await this.btnAddTestimonial).click();
@@ -319,7 +307,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //fifth quote
         await (await this.btnAddTestimonial).scrollIntoView({ block: 'center' });
         await (await this.btnAddTestimonial).click();
@@ -343,7 +331,7 @@ class TestimonialBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
@@ -355,12 +343,7 @@ class TestimonialBlockPage extends Page {
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await browser.pause(3000);

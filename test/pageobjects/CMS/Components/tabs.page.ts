@@ -91,11 +91,7 @@ class TabsBlockPage extends Page {
      */
 
     public async createTab(title: string, label: string, name: string, content: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputLabel).scrollIntoView();
         await (await this.inputLabel).setValue(label);
@@ -116,11 +112,7 @@ class TabsBlockPage extends Page {
     }
 
     public async createMultiTab(title: string, label: string, name: string, content: string, name1: string, content1: string, name2: string, content2: string, name3: string, content3: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 2000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         
         await (await this.inputTitle).setValue(title);
         await (await this.inputLabel).scrollIntoView();
