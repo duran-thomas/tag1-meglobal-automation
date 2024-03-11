@@ -248,6 +248,10 @@ class FreeformBlockPage extends Page {
         return $('#entity_browser_iframe_image_browser');
     }
 
+    public get inputLink() {
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-link-0-uri-"]');
+    }
+
     //Inline Navigation Block
     public get inputInlineNavLabel() {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-label-0-value-"]');
@@ -578,6 +582,8 @@ class FreeformBlockPage extends Page {
         await browser.pause(5000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(2000); //explicit waits seem to be necessary here
+        await (await this.inputLink).scrollIntoView();
+        await (await this.inputLink).setValue('https://google.com');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

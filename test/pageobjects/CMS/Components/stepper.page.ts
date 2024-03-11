@@ -153,6 +153,8 @@ class StepperBlockPage extends Page {
         const iframe = await $('iframe[name="lbim-dialog-iframe"]');
         await iframe.waitForDisplayed({ timeout: 2000 });
         await browser.switchToFrame(iframe);
+        //await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+
         await (await this.inputAdminTitle).setValue(adminTitle);
 
         await (await this.inputTitle).scrollIntoView({ block: 'center' });

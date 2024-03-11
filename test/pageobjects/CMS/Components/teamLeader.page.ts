@@ -20,8 +20,8 @@ class TeamLeaderBlockPage extends Page {
         return $('#edit-settings-block-form-field-team-identifier');
     }
 
-    public get listChoiceTwo() {
-        return $('#choices--edit-settings-block-form-field-team-identifier-item-choice-2');
+    public get listChoiceThree() {
+        return $('#choices--edit-settings-block-form-field-team-identifier-item-choice-3');
     }
 
     public get checkboxOnlyLeaders() {
@@ -99,7 +99,7 @@ class TeamLeaderBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.dropdownGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -117,7 +117,7 @@ class TeamLeaderBlockPage extends Page {
         await browser.switchToFrame(iframe);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.dropdownGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -136,7 +136,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.inputTitle).setValue(title);
         await (await this.dropdownTeamGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).setValue(content);
         await (await this.inputButtonText).scrollIntoView();
@@ -160,7 +160,7 @@ class TeamLeaderBlockPage extends Page {
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.inputTitle).setValue(title);
         await (await this.dropdownTeamGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).setValue(content);
         await (await this.inputButtonText).scrollIntoView();
