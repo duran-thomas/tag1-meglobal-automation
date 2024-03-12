@@ -380,7 +380,7 @@ describe('Freeform Component Tests', () => {
         await expect(elem).toHaveAttribute('data-analytics-component-type','rich text');
     });
 
-    it.only('[S3C1106] Verify that Analytics for the Freeform Component with an Image block is configured)', async () => {
+    it('[S3C1106] Verify that Analytics for the Freeform Component with an Image block is configured)', async () => {
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();

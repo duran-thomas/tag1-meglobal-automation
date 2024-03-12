@@ -46,7 +46,7 @@ describe('Tabs Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point

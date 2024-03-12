@@ -228,7 +228,9 @@ class LandingQAPage extends Page {
     }
 
     public get btnCloseChatPopUp() {
-        return $('button[aria-label="closeButton"]');
+        //class changed in sprint 35
+        //return $('button[aria-label="closeButton"]');
+        return $('.css-19ftm6o');
     }
 
     public get linkQuickActions() {
@@ -300,7 +302,7 @@ class LandingQAPage extends Page {
         const frame = await this.dialogFrame;
         if (await frame.isExisting() == true) {
             await browser.switchToFrame(frame);
-            await browser.pause(2000);
+            await browser.pause(1000);
             if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
                 await this.btnCloseChatPopUp.click();
                 await browser.switchToParentFrame();
