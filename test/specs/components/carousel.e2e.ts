@@ -68,9 +68,10 @@ describe('Carousel Component Tests', () => {
 
      
     it('[S3C824] Verify that a site Content Administrator can create a Carousel Component', async () => {
+        const id=`Carousel-S3C824-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -84,14 +85,15 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(CarouselBlockPage.carouselImage).toBeDisplayed();   
+        await expect($(`${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect(CarouselBlockPage.carouselImage(id)).toBeDisplayed();   
     });
 
     it('[S3C825] Verify that a site Content Administrator can create a Carousel Component with pagination disabled', async () => {
+        const id=`Carousel-S3C825-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -105,15 +107,15 @@ describe('Carousel Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
-        
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect($('div[x-ref="swiperButtonPrev"]')).toHaveElementClassContaining('mf-button--disabled');  
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect($(`#${id} div[x-ref="swiperButtonPrev"]`)).toHaveElementClassContaining('mf-button--disabled');  
     });
 
     it('[S3C826] Verify that a site Content Administrator can create a Carousel Component with controls disabled', async () => {
+        const id=`Carousel-S3C826-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -127,11 +129,12 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toExist; 
         await expect(CarouselBlockPage.controlElement).not.toBeExisting();  
     });
 
     it.skip('[S3C827] Verify that a site Content Administrator can create a Carousel Component with multiple slides', async () => {
+        const id=`Carousel-S3C827-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
@@ -154,14 +157,15 @@ describe('Carousel Component Tests', () => {
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
 
-        await expect ($('div[aria-label="3 / 3"]')).toBeExisting;
+        await expect ($(`div[aria-label="3 / 3"]`)).toBeExisting;
         
     });
 
     it('[S3C829] If controls are enabled, verify that a user can navigate the carousel using the chevron arrows', async () => {
+        const id=`Carousel-S3C829-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -177,21 +181,23 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
         
         //verify that a user can navigate the carousel using the chevron arrows
-        await (await $('.mf-card-content')).scrollIntoView({ behavior: 'auto', block: 'start' });
+        await (await $(`#${id} .mf-card-content`)).scrollIntoView({ behavior: 'auto', block: 'start' });
         await browser.pause(3000);
         await (await CarouselBlockPage.controlElement[1]).click();
-        await expect(await $('a[data-analytics-click-text="Carousel Button 1"]')).toBeDisplayedInViewport();
+        await expect(await $(`#${id} a[data-analytics-click-text="Carousel Button 1"]`)).toBeDisplayedInViewport();
         
     });
 
+    //Recheck this test
     it('[S3C828] If pagination is enabled, verify that a user can navigate the carousel using the pagination icons', async () => {
+        const id=`Carousel-S3C828-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -208,7 +214,7 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
 
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
       
         //verify that a user can navigate the carousel using the pagination icons
@@ -233,9 +239,10 @@ describe('Carousel Component Tests', () => {
     });
 
     it('[S3C1125] Verify that Analytics for the Card Feature And Image Carousel Component is configured', async () => {
+        const id=`Carousel-S3C1125-${Date.now()}`;
         const headline = carouselBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCarousel).scrollIntoView();
         await (await QALayoutPage.btnCarousel).click();
@@ -250,7 +257,7 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView({ behavior: 'auto', block: 'start' });
 
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
 
         const expectedCardAnalyticsData = {
@@ -281,15 +288,15 @@ describe('Carousel Component Tests', () => {
         const currentUrl = await browser.getUrl();
 
         // Click Carousel button to switch to second card
-        await $('a[data-analytics-click-text="Carousel Button"]').click()
+        await $(`#${id} a[data-analytics-click-text="Carousel Button"]`).click()
 
         await browser.switchWindow(currentUrl);
 
         await (await CarouselBlockPage.controlElement[1]).click();
         await browser.pause(1000);
-        await ((await CarouselBlockPage.carouselLocationAddressLink).click());
+        await ((await CarouselBlockPage.carouselLocationAddressLink(id)).click());
         await browser.pause(2000);
-        await ((await CarouselBlockPage.carouselLocationAddressIcon).click());
+        await ((await CarouselBlockPage.carouselLocationAddressIcon(id)).click());
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         
@@ -323,9 +330,10 @@ describe('Carousel Component Tests', () => {
     })
 
     it('Verify that Analytics for the Billboard and MyChart Carousel Component is configured', async () => {
+        const id=`Carousel-Billboard-and-MyChart-${Date.now()}`;
         const headline = carouselBlockData.headline
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -340,7 +348,7 @@ describe('Carousel Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await CarouselBlockPage.carouselElement).scrollIntoView();
 
-        await expect($(`div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
+        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
         await expect(CarouselBlockPage.controlElement).toExist(); 
 
         const expectedBillboardAnalyticsData = {
@@ -372,15 +380,15 @@ describe('Carousel Component Tests', () => {
 
         const currentUrl = await browser.getUrl();
         // Click Carousel button to switch to second card
-        await $('a[data-analytics-click-text="Carousel Button"]').click()
+        await $(`#${id} a[data-analytics-click-text="Carousel Button"]`).click()
         await browser.switchWindow(currentUrl);
 
         await (await CarouselBlockPage.controlElement[1]).click();
         await browser.pause(1000);
 
-        await $('a[data-analytics-click-text="MyChart Carousel Button"]').click()
+        await $(`#${id} a[data-analytics-click-text="MyChart Carousel Button"]`).click()
         await browser.switchWindow(currentUrl);
-        await $('a[data-analytics-click-text="MyChart Carousel Link Title"]').click()
+        await $(`#${id} a[data-analytics-click-text="MyChart Carousel Link Title"]`).click()
         await browser.switchWindow(currentUrl);
 
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
@@ -415,9 +423,10 @@ describe('Carousel Component Tests', () => {
     })
 
     it('Verify that Analytics for the Quote Carousel Component is configured', async () => {
+        const id=`Carousel-Quote-${Date.now()}`;
         const headline = carouselBlockData.headline
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCarousel).scrollIntoView();
         (await QALayoutPage.btnCarousel).click();
@@ -450,9 +459,9 @@ describe('Carousel Component Tests', () => {
             pageSlot: '1',
         }
 
-        await $('blockquote  button').click()
+        await $(`#${id} blockquote  button`).click()
         await browser.pause(1000)
-        await $('blockquote  button').click()
+        await $(`#${id} blockquote  button`).click()
 
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_mediaEngagement");
@@ -465,7 +474,7 @@ describe('Carousel Component Tests', () => {
                 event: actualAnalyticsData[x].event,
                 mediaAction: actualAnalyticsData[x].mediaAction,
                 mediaLength: actualAnalyticsData[x].mediaLength,
-                mediaTitle: actualAnalyticsData[x].mediaTitle.replace(/_\d+/, ''),
+                mediaTitle: actualAnalyticsData[x].mediaTitle.replace(/^(sampleAudio)_\d+(\.mp3).*$/, '$1$2'),
                 mediaType: actualAnalyticsData[x].mediaType,
                 pageSlot: actualAnalyticsData[x].pageSlot
             })
