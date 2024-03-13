@@ -1,0 +1,47 @@
+[
+  {
+    "testRunName": "[Release 0.33.14] Automated Regression - Just A Test",
+    "description": "This test run was created by the automation suite.",
+    "include_all_cases": false,
+    "projectId": 1,
+    "suites": [
+      3
+    ],
+    "results": [
+      {
+        "comment": "[S3C906] Verify that a site Content Administrator can create an Accordion Component",
+        "status": "passed",
+        "time": 34390,
+        "attachments": [
+          "https://prod-qualitywatcher-imports.s3.amazonaws.com/attachments/attachment-3-906-e3e90ee8-660e-4d62-adf9-57245feda98f",
+          "https://prod-qualitywatcher-imports.s3.amazonaws.com/attachments/attachment-3-906-57fdbd45-c70a-4416-8b1a-d3937f472239",
+          "https://prod-qualitywatcher-imports.s3.amazonaws.com/attachments/attachment-3-906-0f671d6f-4457-4bfd-aa03-942b4a4b5a14"
+        ],
+        "suite_id": 3,
+        "test_id": 906
+      },
+      {
+        "comment": "[S3C907989] Verify that contents of the Accordion Component can be toggled (hide and show)",
+        "status": "passed",
+        "time": 32883,
+        "attachments": [
+          "https://prod-qualitywatcher-imports.s3.amazonaws.com/attachments/attachment-3-907989-4b08c51f-ba79-41ef-8c7c-599bf11fc9b3"
+        ],
+        "suite_id": 3,
+        "test_id": 907989
+      },
+      {
+        "comment": "[S3C1350] Verify that Analytics for the Accordion Component is configured",
+        "status": "passed",
+        "time": 31137,
+        "attachments": [
+          "https://prod-qualitywatcher-imports.s3.amazonaws.com/attachments/attachment-3-1350-324022b0-8a4b-4166-9229-5872c029c443"
+        ],
+        "suite_id": 3,
+        "test_id": 1350
+      }
+    ],
+    "complete": false,
+    "shareableReport": true
+  }
+]

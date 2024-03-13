@@ -20,8 +20,8 @@ class TeamLeaderBlockPage extends Page {
         return $('#edit-settings-block-form-field-team-identifier');
     }
 
-    public get listChoiceTwo() {
-        return $('#choices--edit-settings-block-form-field-team-identifier-item-choice-2');
+    public get listChoiceThree() {
+        return $('#choices--edit-settings-block-form-field-team-identifier-item-choice-3');
     }
 
     public get checkboxOnlyLeaders() {
@@ -61,16 +61,16 @@ class TeamLeaderBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get teamMemberGrid() {
-        return $('.mf-grid');
+    public teamMemberGrid(id:string) {
+        return $(`#${id} .mf-grid`);
     }
 
     public get textBox() {
         return $$('.mf-card-general__box');
     }
 
-    public get teamCarousel() {
-        return $('.mf-carousel');
+    public teamCarousel(id:string) {
+        return $(`#${id} .mf-carousel`);
     }
 
     public get headerTitleElem() {
@@ -92,14 +92,10 @@ class TeamLeaderBlockPage extends Page {
      */
 
     public async createTeamMemberGridLeaders(adminTitle: string, groupID: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.dropdownGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -110,14 +106,10 @@ class TeamLeaderBlockPage extends Page {
     }
 
     public async createTeamMemberGrid(adminTitle: string, groupID: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.dropdownGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -128,15 +120,11 @@ class TeamLeaderBlockPage extends Page {
     }
 
     public async createTeamLeaderCarousel(adminTitle: string, title: string, teamGroupID: string, content: string, btnText: string, url: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.inputTitle).setValue(title);
         await (await this.dropdownTeamGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).setValue(content);
         await (await this.inputButtonText).scrollIntoView();
@@ -152,15 +140,11 @@ class TeamLeaderBlockPage extends Page {
     }
 
     public async createAnalyticsCarousel(adminTitle: string, title: string, teamGroupID: string, content: string, btnText: string, url: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.adminTitle).setValue(adminTitle);
         await (await this.inputTitle).setValue(title);
         await (await this.dropdownTeamGroupID).click();
-        await (await this.listChoiceTwo).click();
+        await (await this.listChoiceThree).click();
         await (await this.inputContent).scrollIntoView();
         await (await this.inputContent).setValue(content);
         await (await this.inputButtonText).scrollIntoView();

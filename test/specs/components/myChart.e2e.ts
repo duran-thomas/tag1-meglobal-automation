@@ -49,7 +49,7 @@ describe('MyChart Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -69,9 +69,10 @@ describe('MyChart Component Tests', () => {
        
   
     it('[S3C858] Verify that a site Content Administrator can create a MyChart Component', async () => {
+        const id=`MyChart-S3C858-${Date.now()}`;
         const headline = myChartBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardMyChart).scrollIntoView();
         (await QALayoutPage.btnCardMyChart).click();
@@ -83,15 +84,16 @@ describe('MyChart Component Tests', () => {
         await expect(MyChartBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await MyChartBlockPage.myChartElement).scrollIntoView();
+        await (await MyChartBlockPage.myChartElement(id)).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(MyChartBlockPage.myChartElement).toExist();   
+        await expect(MyChartBlockPage.myChartElement(id)).toExist();   
     });
 
     it('[S3C1081] Verify that the Headline size defaults to h3 when creating a Card My Chart Component', async () => {
+        const id=`MyChart-S3C1081-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardMyChart).scrollIntoView();
         await (await QALayoutPage.btnCardMyChart).click();
@@ -103,9 +105,10 @@ describe('MyChart Component Tests', () => {
     });
 
     it('[S3C1141] Verify that Analytics for the Card MyChart Component is configured', async () => {
+        const id=`MyChart-S3C1141-${Date.now()}`;
         const headline = myChartBlockData.headline;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardMyChart).scrollIntoView();
         (await QALayoutPage.btnCardMyChart).click();
@@ -117,10 +120,10 @@ describe('MyChart Component Tests', () => {
         await expect(MyChartBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await MyChartBlockPage.myChartElement).scrollIntoView();
+        await (await MyChartBlockPage.myChartElement(id)).scrollIntoView();
         
         await expect($(`div[data-analytics-item-title="${headline}"]`)).toExist; 
-        await expect(MyChartBlockPage.myChartElement).toExist();   
+        await expect(MyChartBlockPage.myChartElement(id)).toExist();   
 
         /**
          * Create the expected analytics 

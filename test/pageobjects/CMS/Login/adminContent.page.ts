@@ -40,6 +40,14 @@ class AdminContentPage extends Page {
         return $('=Layout');
     }
 
+    public get btnCloseCookieBanner() {
+        return $('.onetrust-close-btn-ui');
+    }
+
+    public get btnAcceptCookie() {
+        return $('#onetrust-accept-btn-handler');
+    }
+
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to create a QA landing page if needed
@@ -107,6 +115,15 @@ class AdminContentPage extends Page {
             console.error('Error occurred while performing getTestPage:', error);
         }
       }
+
+    public async closeCookieBanner(){
+        const btn = await this.btnAcceptCookie;
+        if (await btn.isExisting() == true){
+            await btn.click();
+        } else {
+            console.log('Cookie banner not displayed');
+        }
+    }
 
     /**
      * overwrite specific options to adapt it to page object

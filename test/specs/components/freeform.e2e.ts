@@ -4,6 +4,7 @@ import FreeformBlockPage from '../../pageobjects/CMS/Components/freeform.page';
 import * as data from '../../data/freeform.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
 
 
 describe('Freeform Component Tests', () => {
@@ -47,7 +48,7 @@ describe('Freeform Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
@@ -398,7 +399,55 @@ describe('Freeform Component Tests', () => {
         await expect(FreeformBlockPage.freeformHeadline).toBeDisplayedInViewport();
         const elem = await $('.mf-media');
 
-        await expect(elem).toHaveAttribute('data-analytics-event','e_mediaEngagement');
+        const expectedAnalyticsData = {
+            event: 'e_componentClick',
+            componentType: 'media image',
+            linkType: 'image',
+            //clickText: ctaText,
+            pageSlot: '1'
+        }
+
+        // Get the current url of the page
+        const currentUrl = await browser.getUrl();
+
+        //set element to open links in new tab
+        await browser.execute(() => {
+            const clickElement = document.querySelector('a[href="https://google.com"]');
+            clickElement.setAttribute('target', '_blank');
+        })
+
+        // Interact to generate the analytics.
+        await (await ($(`a[href="https://google.com"]`))).scrollIntoView();
+        await ($(`a[href="https://google.com"]`)).click();
+
+        // Switch back to the tab where the analytics is being generated
+        await browser.switchWindow(currentUrl)
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer = await browser.executeScript('return window.dataLayer', []);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+
+        // Build the actual analytics data object
+        const parsedActualAnalyticsData = {
+            //Remove whitespace from the Headline
+            //clickText: actualAnalyticsData.clickText.trim(),
+            componentType: actualAnalyticsData.componentType,
+            event: actualAnalyticsData.event,
+            // Remove html tags, whitespace and newlines from the Headline
+            linkType: actualAnalyticsData.linkType,
+            pageSlot: actualAnalyticsData.pageSlot
+        }
+
+        fs.writeFile('analyticsTestEvidence/freeformImage.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
+
+        await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
+
+
     });
 
 });

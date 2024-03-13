@@ -367,11 +367,7 @@ class ContactListBlockPage extends Page {
      */
 
     public async createEmailContact(title: string, headline: string, content: string, heading: string, email: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -396,11 +392,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createTextContact(title: string, headline: string, content: string, heading: string, text: string, url: string, linkText: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -426,11 +418,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createIntTextContact(title: string, headline: string, content: string, heading: string, text: string, intUrl: string, intLinkText: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -456,11 +444,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createPhoneContact(title: string, headline: string, content: string, heading: string, subTitle: string, text: string, phone: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -487,11 +471,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createLocationContact(title: string, headline: string, content: string, heading: string, address: string, latitude: string, longitude: string, link: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -517,11 +497,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createIntLocationContact(title: string, headline: string, content: string, heading: string, address: string, latitude: string, longitude: string, intLink: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -547,11 +523,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createChatContact(title: string, headline: string, content: string, heading: string, url: string, cta: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -577,11 +549,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createIntChatContact(title: string, headline: string, content: string, heading: string, intUrl: string, cta: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -607,11 +575,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createButtonContact(title: string, headline: string, content: string, heading: string, btnText: string, url: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -637,11 +601,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createIntButtonContact(title: string, headline: string, content: string, heading: string, btnText: string, intUrl: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -667,11 +627,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createPersonContact(title: string, headline: string, content: string, heading: string, remoteFilePath: string, altText: string, name: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -694,7 +650,7 @@ class ContactListBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
         await (await this.inputName).setValue(name);
         await (await this.inputInfo).scrollIntoView();
@@ -710,11 +666,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createMultiContact(title: string, headline: string, content: string, heading: string, address: string, latitude: string, longitude: string, link: string, email: string, subTitle: string, text: string, phone: string, url: string, cta: string, remoteFilePath: string, altText: string, name: string, info: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -798,7 +750,7 @@ class ContactListBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.inputNameM).setValue(name);
         await (await this.inputInfo4).scrollIntoView();
         await (await this.inputInfo4).setValue(info);
@@ -817,11 +769,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async createAllContactTypes(title: string, headline: string, content: string, heading: string, address: string, latitude: string, longitude: string, link: string, email: string, subTitle: string, text: string, phone: string, url: string, cta: string, remoteFilePath: string, altText: string, name: string, info: string, btnText: string){
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHeadline).scrollIntoView();
         await (await this.inputHeadline).setValue(headline);
@@ -900,7 +848,7 @@ class ContactListBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.inputNameM).setValue(name);
         await (await this.inputInfo4).scrollIntoView();
         await (await this.inputInfo4).setValue(info);
@@ -940,11 +888,7 @@ class ContactListBlockPage extends Page {
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await browser.pause(3000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();

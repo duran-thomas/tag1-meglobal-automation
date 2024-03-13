@@ -106,11 +106,7 @@ class ClinicalTrialBlockPage extends Page {
      */
 
     public async createCardClinicalTrial(mainTitle: string, title: string, tag1: string, tag2: string, tag3: string, link: string, strDate: string, condition1: string, condition2: string) {
-        await browser.pause(8000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputMainTitle).setValue(mainTitle);
         await browser.pause(1800); //explicit wait seems necessary here
         await (await this.inputTitle).scrollIntoView();
@@ -158,11 +154,7 @@ class ClinicalTrialBlockPage extends Page {
     }
 
     public async createCardClinicalTrialInternalUrl(mainTitle: string, title: string, tag1: string, tag2: string, tag3: string, strDate: string, condition1: string, condition2: string) {
-        await browser.pause(8000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputMainTitle).setValue(mainTitle);
         await browser.pause(1800); //explicit wait seems necessary here
         await (await this.inputTitle).scrollIntoView();
