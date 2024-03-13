@@ -282,12 +282,12 @@ class CarouselBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-border-value"]');
     }
 
-    public get carouselLocationAddressLink(){
-        return $$('div > div.space-y-4 > a')[0];
+    public carouselLocationAddressLink(id:string){
+        return $$(`#${id} div > div.space-y-4 > a`)[0];
     }
 
-    public get carouselLocationAddressIcon(){
-        return $('button[data-analytics-click-text="map-trifold"]');
+    public carouselLocationAddressIcon(id:string){
+        return $(`#${id} button[data-analytics-click-text="map-trifold"]`);
     }
 
     // Location Content Area End
@@ -402,8 +402,8 @@ class CarouselBlockPage extends Page {
         return $('.mf-carousel');
     }
 
-    public get carouselImage() {
-        return $('img[alt="Carousel Alt Text"]');
+    public carouselImage(id:string) {
+        return $(`#${id} img[alt="Carousel Alt Text"]`);
     }
 
     public get paginationElement() {
@@ -415,7 +415,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get swiperElement() {
-        return $('span[aria-label="Go to slide 2"]');
+        return $(`span[aria-label="Go to slide 2"]`);
     }
 
     public get frames() {
