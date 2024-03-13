@@ -1,16 +1,16 @@
 export const environment = {
-    bypassURL: 'https://meda2022:meda2022@dev.montefioreeinstein.org/',
-    baseUrl: 'https://dev.montefioreeinstein.org/',
+    bypassURL: 'https://meda2022:meda2022@meglobaldev.prod.acquia-sites.com/',
+    baseUrl: 'https://meglobaldev.prod.acquia-sites.com/',
     cookies: {
-        name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: 'kvhcccS1OTutK85EIBKspHiEOCo2sR3NML0Nqx%2CZKB3VzNiQ',
-        domain: '.dev.montefioreeinstein.org',
+        name: 'SSESS933b071c7c2e2830c46695ffbb11e015',
+        value: 'TYwuNq7HR8LXsIFmkGKT1hdSGkI-8kFIkCOwnYfZyWc8tj9n',
+        domain: '.meglobaldev.prod.acquia-sites.com',
         path: '/',
     },
     admin: {
-        name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: 'Rl%2CUHAA03WIPpwGtG2PgII9prS2jPa7C1QK-HF4WvzrRPHwX',
-        domain: '.dev.montefioreeinstein.org',
+        name: 'SSESS933b071c7c2e2830c46695ffbb11e015',
+        value: 'OtjEe37C4ra1ifcYj-r6dPNicqv5xEVDlvo4S50PNCogBmjW',
+        domain: '.meglobaldev.prod.acquia-sites.com',
         path: '/',
     }
 };
