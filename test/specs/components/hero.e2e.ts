@@ -69,8 +69,9 @@ describe('Hero Component Tests', () => {
 
      
     it('[S3C821] Verify that a site Content Administrator can create a Hero Component with an Image Media Type', async () => {
+        const id=`Hero-S3C821-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnHero).scrollIntoView();
         await (await QALayoutPage.btnHero).click();
@@ -84,15 +85,16 @@ describe('Hero Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         
-        await (await HeroBlockPage.headlineElement).scrollIntoView();
-        const elem = await HeroBlockPage.headlineElement;
+        await (await HeroBlockPage.headlineElement(id)).scrollIntoView();
+        const elem = await HeroBlockPage.headlineElement(id);
         await expect(elem).toHaveTextContaining(heroBlockData.headline);
 
     });
 
     it('[S3C822] Verify that a site Content Administrator can create a Hero Component with a Video Media Type', async () => {
+        const id=`Hero-S3C822-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnHero).scrollIntoView();
         (await QALayoutPage.btnHero).click();
@@ -104,15 +106,16 @@ describe('Hero Component Tests', () => {
         await expect(HeroBlockPage.successMsg).toBeDisplayed();
         await QALayoutPage.goToPageView();
 
-        await (await HeroBlockPage.headlineElement).scrollIntoView();
-        const elem = await HeroBlockPage.headlineElement;
+        await (await HeroBlockPage.headlineElement(id)).scrollIntoView();
+        const elem = await HeroBlockPage.headlineElement(id);
         await expect(elem).toHaveTextContaining(heroBlockData.headline);
        
     });
 
     it('[S3C823] Verify that the Hero Headline is rendered as a `h1` HTML element.', async () => {
+        const id=`Hero-S3C823-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnHero).scrollIntoView();
         await (await QALayoutPage.btnHero).click();
@@ -124,15 +127,16 @@ describe('Hero Component Tests', () => {
         await expect(HeroBlockPage.successMsg).toBeDisplayed();
         await QALayoutPage.goToPageView();
 
-        await (await HeroBlockPage.headlineElement).scrollIntoView();
+        await (await HeroBlockPage.headlineElement(id)).scrollIntoView();
 
-        const tagName = await HeroBlockPage.headlineElement.getTagName();
+        const tagName = await HeroBlockPage.headlineElement(id).getTagName();
         expect(tagName).toBe('h1');
     });
 
     it('[S3C1105] Verify that Analytics for the Hero Component is configured', async () => {
+        const id=`Hero-S3C1105-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnHero).scrollIntoView();
         await (await QALayoutPage.btnHero).click();
@@ -146,8 +150,8 @@ describe('Hero Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         
-        await (await HeroBlockPage.headlineElement).scrollIntoView();
-        const elem = await HeroBlockPage.headlineElement;
+        await (await HeroBlockPage.headlineElement(id)).scrollIntoView();
+        const elem = await HeroBlockPage.headlineElement(id);
         await expect(elem).toHaveTextContaining(heroBlockData.headline);
 
         /**
@@ -168,7 +172,7 @@ describe('Hero Component Tests', () => {
         const currentUrl = await browser.getUrl();
 
         // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`a[data-analytics-click-text="${heroBlockData.btnText}"]`)).click();
+        await (await $(`#${id} a[data-analytics-click-text="${heroBlockData.btnText}"]`)).click();
 
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)
