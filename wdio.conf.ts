@@ -5,7 +5,6 @@ import QualityWatcherService from "@qualitywatcher/wdio-service";
 import * as dotenvLoader from 'dotenv';
 import * as fs from "fs";
 
-import { commands } from './commands';
 dotenvLoader.config();
 
 export const config: Options.Testrunner = {
@@ -195,18 +194,18 @@ export const config: Options.Testrunner = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['selenium-standalone',
-        [QualityWatcherService, {
-            email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
-            apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-            testRunName: "[Release 0.34.11] Automated Regression",
-            description: 'This test run was created by the automation suite.',
-            projectId: 1,
-            includeAllCases: false,
-            ignoreSkipped: true,
-            generateShareableLink: true,
-            screenshotFolder: "./screenshots",
-            uploadScreenshot: true,
-        }]
+        // [QualityWatcherService, {
+        //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
+        //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
+        //     testRunName: "[Release 0.35.6] Automated Regression",
+        //     description: 'This test run was created by the automation suite.',
+        //     projectId: 1,
+        //     includeAllCases: false,
+        //     ignoreSkipped: true,
+        //     generateShareableLink: true,
+        //     screenshotFolder: "./screenshots",
+        //     uploadScreenshot: true,
+        // }]
     ],
 
     // Framework you want to run your specs with.
@@ -221,7 +220,7 @@ export const config: Options.Testrunner = {
     //specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
-    //specFileRetriesDelay: 30,
+    // specFileRetriesDelay: 30,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
@@ -300,12 +299,8 @@ export const config: Options.Testrunner = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */,
-    before: function (capabilities, specs, browser) {
-        // Add commands to WebdriverIO
-      Object.keys(commands).forEach(key => {
-        browser.addCommand(key, commands[key]);
-      })
-    },
+    // before: fuuntion (capabilities, specs) => {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

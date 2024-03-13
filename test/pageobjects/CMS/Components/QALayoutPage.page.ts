@@ -296,8 +296,10 @@ class LandingQAPage extends Page {
         await (await this.linkAddBlock).waitForExist();
         await (await this.linkAddBlock).scrollIntoView();
         await (await this.linkAddBlock).click();
-        await (await this.btnCreateCustomBlock).waitForDisplayed();
-        await (await this.btnCreateCustomBlock).click();
+        /* Release 35.6 removed the need to click the custom block button before seeing the list of components
+        // await (await this.btnCreateCustomBlock).waitForDisplayed();
+        // await (await this.btnCreateCustomBlock).click();
+        */
         // await (await this.btnCloseChatPopUp).click();
         const frame = await this.dialogFrame;
         if (await frame.isExisting() == true) {
