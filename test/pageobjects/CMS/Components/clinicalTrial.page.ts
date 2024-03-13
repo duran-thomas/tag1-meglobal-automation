@@ -92,8 +92,8 @@ class ClinicalTrialBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get clinicalCardElement() {
-        return $('.mf-card-clinical-trial');
+    public clinicalCardElement(id:string) {
+        return $(`#${id} .mf-card-clinical-trial`);
     }
 
     public get internalUrl() {

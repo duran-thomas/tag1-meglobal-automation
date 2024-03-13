@@ -68,8 +68,9 @@ describe('Card Services Component Tests', () => {
 
   
     it('[S3C903] Verify that a site Content Administrator can create a Card Services Component with an external link', async () => {
+        const id=`CardServices-S3C903-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardServices).scrollIntoView();
         await (await QALayoutPage.btnCardServices).click();
@@ -81,15 +82,16 @@ describe('Card Services Component Tests', () => {
         await expect(CardServicesBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardServicesBlockPage.cardContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardServicesBlockPage.cardContent(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(CardServicesBlockPage.cardServicesElement).toExist; 
-        await expect(await CardServicesBlockPage.cardContent).toHaveText(cardServicesBlockData.content);   
+        await expect(CardServicesBlockPage.cardServicesElement(id)).toExist; 
+        await expect(await CardServicesBlockPage.cardContent(id)).toHaveText(cardServicesBlockData.content);   
     });
 
     it('[S3C904] Verify that a site Content Administrator can create a Card Services Component with an internal link', async () => {
+        const id=`CardServices-S3C904-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardServices).scrollIntoView();
         (await QALayoutPage.btnCardServices).click();
@@ -101,13 +103,14 @@ describe('Card Services Component Tests', () => {
         await expect(CardServicesBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardServicesBlockPage.listElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardServicesBlockPage.listElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(CardServicesBlockPage.internalLink).toExist;  
-        await expect(await $('.mt-16')).toHaveText(cardServicesBlockData.resiText) 
+        await expect(CardServicesBlockPage.internalLink(id)).toExist;  
+        await expect(await $(`#${id} .mt-16`)).toHaveText(cardServicesBlockData.resiText) 
     });
 
     it('[S3C1084] Verify that the Headline size defaults to h3 when creating a Card General Component', async () => {
+        //const id=`CardServices-S3C1084-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
@@ -121,8 +124,9 @@ describe('Card Services Component Tests', () => {
     });
 
     it('[S3C1103] Verify that Analytics for the Card Services Component is configured', async () => {
+        const id=`CardServices-S3C1103-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardServices).scrollIntoView();
         await (await QALayoutPage.btnCardServices).click();
@@ -134,11 +138,10 @@ describe('Card Services Component Tests', () => {
         await expect(CardServicesBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await CardServicesBlockPage.cardContent).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await CardServicesBlockPage.cardContent(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(CardServicesBlockPage.cardServicesElement).toExist; 
-        await expect(await CardServicesBlockPage.cardContent).toHaveText(cardServicesBlockData.content); 
-
+        await expect(CardServicesBlockPage.cardServicesElement(id)).toExist; 
+        await expect(await CardServicesBlockPage.cardContent(id)).toHaveText(cardServicesBlockData.content); 
         /**
          * Create the expected analytics 
          * object based on the spec below: 
@@ -155,13 +158,10 @@ describe('Card Services Component Tests', () => {
 
         // Get the current url of the page
         const currentUrl = await browser.getUrl();
-
         // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`a.mf-button`)).click();
-
+        await (await $(`#${id} a.mf-button`)).click();
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)
-
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
@@ -188,7 +188,6 @@ describe('Card Services Component Tests', () => {
         const screenshotPath = `./screenshots/CardServices/Verify that Analytics for the Card Services Component is configured..png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
-
     });
 
 

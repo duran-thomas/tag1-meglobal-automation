@@ -67,8 +67,9 @@ describe('Clinical Trial Component Tests', () => {
 
 
     it('[S3C819] Verify that a site Content Administrator can create a Card Clinical Trial Component.', async () => {
+        const id=`ClinicalTrial-S3C819-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardClinicalTrial).scrollIntoView();
         (await QALayoutPage.btnCardClinicalTrial).click();
@@ -79,15 +80,16 @@ describe('Clinical Trial Component Tests', () => {
         await expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ClinicalTrialBlockPage.clinicalCardElement).scrollIntoView();
+        await (await ClinicalTrialBlockPage.clinicalCardElement(id)).scrollIntoView();
 
-        await expect(ClinicalTrialBlockPage.clinicalCardElement).toExist;
-        await expect(await $('h2.mb-16')).toHaveTextContaining(clinicalTrialBlockData.title);
+        await expect(ClinicalTrialBlockPage.clinicalCardElement(id)).toExist;
+        await expect(await $(`#${id} h2.mb-16`)).toHaveTextContaining(clinicalTrialBlockData.title);
     });
 
     it('[S3C820] Verify that a site Content Administrator can create a Card Clinical Trial Component, using an internal url', async () => {
+        const id=`ClinicalTrial-S3C820-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnCardClinicalTrial).scrollIntoView();
         (await QALayoutPage.btnCardClinicalTrial).click();
@@ -98,16 +100,17 @@ describe('Clinical Trial Component Tests', () => {
         await expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ClinicalTrialBlockPage.clinicalCardElement).scrollIntoView();
+        await (await ClinicalTrialBlockPage.clinicalCardElement(id)).scrollIntoView();
 
-        await expect(ClinicalTrialBlockPage.clinicalCardElement).toExist;
-        await expect(await $('h2.mb-16')).toHaveTextContaining(clinicalTrialBlockData.title);
+        await expect(ClinicalTrialBlockPage.clinicalCardElement(id)).toExist;
+        await expect(await $(`#${id} h2.mb-16`)).toHaveTextContaining(clinicalTrialBlockData.title);
     });
 
 
     it('[S3C1351] Verify that Analytics for the Card Clinical Trial Component is configured ', async () => {
+        const id=`ClinicalTrial-S3C1351-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardClinicalTrial).scrollIntoView();
         await (await QALayoutPage.btnCardClinicalTrial).click();
@@ -118,10 +121,10 @@ describe('Clinical Trial Component Tests', () => {
         await expect(ClinicalTrialBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await ClinicalTrialBlockPage.clinicalCardElement).scrollIntoView();
+        await (await ClinicalTrialBlockPage.clinicalCardElement(id)).scrollIntoView();
 
-        await expect(ClinicalTrialBlockPage.clinicalCardElement).toExist;
-        await expect(await $('h2.mb-16')).toHaveTextContaining(clinicalTrialBlockData.title);
+        await expect(ClinicalTrialBlockPage.clinicalCardElement(id)).toExist;
+        await expect(await $(`#${id} h2.mb-16`)).toHaveTextContaining(clinicalTrialBlockData.title);
 
 
         /**
@@ -158,7 +161,7 @@ describe('Clinical Trial Component Tests', () => {
         })
 
         // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await ($(`a[data-analytics-click-text="${ctaText}"]`)).click();
+        await ($(`#${id} a[data-analytics-click-text="${ctaText}"]`)).click();
 
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)
