@@ -163,11 +163,7 @@ describe('Sidebar Component Tests', () => {
         await (await QALayoutPage.linkAddSection).click();
         await (await QALayoutPage.sidebarSection).click();
         await (await QALayoutPage.sectionModal).waitForDisplayed();
-        await browser.pause(3000);
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
 
         await expect(SidebarBlockPage.inputFirstColumnClasses).toHaveValue('col-span-full lg:col-span-6');
         await expect(SidebarBlockPage.inputSecondColumnClasses).toHaveValue('col-span-full lg:col-start-8 lg:col-span-17');

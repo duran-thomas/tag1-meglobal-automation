@@ -54,11 +54,7 @@ class AccordionBlockPage extends Page {
      */
 
     public async createAccordion(mainTitle: string, title: string, content: string) {
-        //await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputMainTitle).setValue(mainTitle);
         await (await this.inputTitle).scrollIntoView();
         await (await this.inputTitle).setValue(title);
@@ -75,11 +71,7 @@ class AccordionBlockPage extends Page {
 
     //This method is to facillitate a test from another component
     public async createAccordionWithID(mainTitle: string, title: string, content: string, jumpID: string) {
-        //await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputMainTitle).setValue(mainTitle);
         await (await this.inputTitle).scrollIntoView();
         await (await this.inputTitle).setValue(title);

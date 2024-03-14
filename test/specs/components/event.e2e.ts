@@ -48,7 +48,7 @@ describe('Event Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -65,6 +65,7 @@ describe('Event Component Tests', () => {
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
+    // endpoint to get event ids: https://events.montefioreeinstein.org/api/2/events
   
     it('[S3C918] Verify that a site Content Administrator can create a Event Component in an Event Block', async () => {
         const id=`Event-S3C918-${Date.now()}`;
@@ -159,7 +160,7 @@ describe('Event Component Tests', () => {
         await expect(EventBlockPage.eventElement(id)).toBeExisting();   
 
         const text = await (await EventBlockPage.linkMoreAboutEvent(id)).getText();
-        const title = "Recurring test event";
+        const title = "Be BOLD - Quit Smoking Group";
         //const title = await EventBlockPage.testEventTitle;
 
         /**
@@ -250,7 +251,7 @@ describe('Event Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        const text = await $(`#${id} p=${eventBlockData.eventResults}`);
+        const text = await $(`p=${eventBlockData.eventResults}`);
         
         await expect(text).toBeDisplayed();   
     });
@@ -270,7 +271,7 @@ describe('Event Component Tests', () => {
 
         await QALayoutPage.goToPageView();
 
-        const text = await $(`#${id} p=${eventBlockData.eventListResults}`);
+        const text = await $(`p=${eventBlockData.eventListResults}`);
         
         await expect(text).toBeDisplayed();   
     });

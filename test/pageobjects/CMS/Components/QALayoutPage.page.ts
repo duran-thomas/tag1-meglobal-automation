@@ -228,7 +228,9 @@ class LandingQAPage extends Page {
     }
 
     public get btnCloseChatPopUp() {
-        return $('button[aria-label="closeButton"]');
+        //class changed in sprint 35
+        //return $('button[aria-label="closeButton"]');
+        return $('.css-19ftm6o');
     }
 
     public get linkQuickActions() {
@@ -245,11 +247,7 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeOneColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
         if(id){
             await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -270,11 +268,7 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeTwoColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -291,11 +285,7 @@ class LandingQAPage extends Page {
 
         await (await this.sidebarSection).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -306,13 +296,15 @@ class LandingQAPage extends Page {
         await (await this.linkAddBlock).waitForExist();
         await (await this.linkAddBlock).scrollIntoView();
         await (await this.linkAddBlock).click();
-        await (await this.btnCreateCustomBlock).waitForDisplayed();
-        await (await this.btnCreateCustomBlock).click();
+        /* Release 35.6 removed the need to click the custom block button before seeing the list of components
+        // await (await this.btnCreateCustomBlock).waitForDisplayed();
+        // await (await this.btnCreateCustomBlock).click();
+        */
         // await (await this.btnCloseChatPopUp).click();
         const frame = await this.dialogFrame;
         if (await frame.isExisting() == true) {
             await browser.switchToFrame(frame);
-            await browser.pause(2000);
+            await browser.pause(1000);
             if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
                 await this.btnCloseChatPopUp.click();
                 await browser.switchToParentFrame();
@@ -335,10 +327,7 @@ class LandingQAPage extends Page {
         await (await this.btnRemoveSection).scrollIntoView();
         await this.btnRemoveSection.isDisplayedInViewport();
         await (await this.btnRemoveSection).click();
-        await browser.pause(2000); // find a better wait criteria
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await browser.pause(1800);
         await (await this.btnRemove).click();
         await browser.pause(2000);

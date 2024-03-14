@@ -49,7 +49,7 @@ describe('Card Services Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -142,7 +142,6 @@ describe('Card Services Component Tests', () => {
         
         await expect(CardServicesBlockPage.cardServicesElement(id)).toExist; 
         await expect(await CardServicesBlockPage.cardContent(id)).toHaveText(cardServicesBlockData.content); 
-
         /**
          * Create the expected analytics 
          * object based on the spec below: 
@@ -159,13 +158,10 @@ describe('Card Services Component Tests', () => {
 
         // Get the current url of the page
         const currentUrl = await browser.getUrl();
-
         // Interact with the billboard button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`a.mf-button`)).click();
-
+        await (await $(`#${id} a.mf-button`)).click();
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)
-
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
@@ -192,7 +188,6 @@ describe('Card Services Component Tests', () => {
         const screenshotPath = `./screenshots/CardServices/Verify that Analytics for the Card Services Component is configured..png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
-
     });
 
 

@@ -131,8 +131,8 @@ class FreeformBlockPage extends Page {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-extra-classes-0-value-"]');
     }
 
-    public get dividerElement() {
-        return $('hr[class="mf-divider bg-soft-gray bg-tint-sky"]');
+    public dividerElement(id: string) {
+        return $(`#${id} hr[class="mf-divider bg-soft-gray bg-tint-sky"]`);
     }
 
     //Dropdown Block
@@ -214,12 +214,15 @@ class FreeformBlockPage extends Page {
         return $('.mf-icon-list__icon > span');
     }
 
-    public get listItem() {
-        return $('.mf-icon-list__item');
+    public listItem(id: string) {
+        return $(`#${id} .mf-icon-list__item`);
     }
 
+    // public lastItem(id: string) {
+    //     return $(`#${id} div .layout-content li:nth-child(6)`);
+    // }
     public get lastItem() {
-        return $('div[class="layout-content "] li:nth-child(6)');
+        return $(`div .layout-content li:nth-child(6)`);
     }
 
     // public get () {
@@ -246,6 +249,10 @@ class FreeformBlockPage extends Page {
 
     public get entityIframe() {
         return $('#entity_browser_iframe_image_browser');
+    }
+
+    public get inputLink() {
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-link-0-uri-"]');
     }
 
     //Inline Navigation Block
@@ -393,11 +400,7 @@ class FreeformBlockPage extends Page {
      */
 
     public async createFreeformAccordion(adminTitle: string, headline: string, title:string, content: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -416,11 +419,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformButton(adminTitle: string, headline: string, text:string, url: string, text1:string, url1: string, text2:string, url2: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -451,11 +450,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformDivider(adminTitle: string, headline: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -474,11 +469,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformDropdown(adminTitle: string, headline: string, triggerText: string, url: string, linkText: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -499,11 +490,7 @@ class FreeformBlockPage extends Page {
 
 
     public async createFreeformIconList(adminTitle: string, headline: string, text: string, text1: string, text2: string, text3: string, text4: string, text5: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -554,11 +541,7 @@ class FreeformBlockPage extends Page {
 
 
     public async createFreeformImage(adminTitle: string, headline: string, remoteFilePath: string, altText: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -577,7 +560,9 @@ class FreeformBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(5000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
+        await (await this.inputLink).scrollIntoView();
+        await (await this.inputLink).setValue('https://google.com');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -588,11 +573,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformInlineNav(adminTitle: string, headline: string, label: string, navHeadline: string, linkText: string, url: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -613,11 +594,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformLinks(adminTitle: string, headline: string, linkText: string, url: string, linkText1: string, url1: string, linkText2: string, url2: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -646,11 +623,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformRichText(adminTitle: string, headline: string, content: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -668,11 +641,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformSpacer(adminTitle: string, headline: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -690,11 +659,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformTypeahead(adminTitle: string, headline: string, label: string, placeholder: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -718,11 +683,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformVideo(adminTitle: string, headline: string, remoteFilePath: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -740,7 +701,7 @@ class FreeformBlockPage extends Page {
         await (await this.btnSaveMedia).click();
         await browser.pause(5000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -751,11 +712,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformVisualList(adminTitle: string, headline: string, title: string, link: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownToggle).scrollIntoView();
@@ -778,11 +735,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async createFreeformSizing(adminTitle: string, headline: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
         await (await this.dropdownHeadlineOptions).click();
@@ -803,11 +756,7 @@ class FreeformBlockPage extends Page {
     }
 
     public async checkHeadingSize(){
-        await browser.pause(4000); 
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.headlineOptions).scrollIntoView();
         await (await this.headlineOptions).click();
         await browser.pause(2500);

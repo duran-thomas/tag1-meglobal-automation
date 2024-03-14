@@ -282,12 +282,12 @@ class CarouselBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-border-value"]');
     }
 
-    public get carouselLocationAddressLink(){
-        return $$('div > div.space-y-4 > a')[0];
+    public carouselLocationAddressLink(id:string){
+        return $$(`#${id} div > div.space-y-4 > a`)[0];
     }
 
-    public get carouselLocationAddressIcon(){
-        return $('button[data-analytics-click-text="map-trifold"]');
+    public carouselLocationAddressIcon(id:string){
+        return $(`#${id} button[data-analytics-click-text="map-trifold"]`);
     }
 
     // Location Content Area End
@@ -402,8 +402,8 @@ class CarouselBlockPage extends Page {
         return $('.mf-carousel');
     }
 
-    public get carouselImage() {
-        return $('img[alt="Carousel Alt Text"]');
+    public carouselImage(id:string) {
+        return $(`#${id} img[alt="Carousel Alt Text"]`);
     }
 
     public get paginationElement() {
@@ -415,7 +415,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get swiperElement() {
-        return $('span[aria-label="Go to slide 2"]');
+        return $(`span[aria-label="Go to slide 2"]`);
     }
 
     public get frames() {
@@ -433,11 +433,7 @@ class CarouselBlockPage extends Page {
      */
 
     public async createCarousel(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(8000);
@@ -463,7 +459,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(6000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(4000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -475,11 +471,7 @@ class CarouselBlockPage extends Page {
 
 
     public async createCarouselNoPagination(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, remoteFilePath1: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(8000);
@@ -504,8 +496,8 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -532,7 +524,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
         await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.dropdownStyling).click();
@@ -549,11 +541,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselNoControls(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(8000);
@@ -578,8 +566,8 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.dropdownStyling).click();
         await browser.pause(5000);
@@ -595,11 +583,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselMultiSlide(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, remoteFilePath1: string, remoteFilePath2: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -625,7 +609,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //second carousel
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -652,7 +636,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //third carousel
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -679,7 +663,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
 
         await (await this.btnAddBlock).scrollIntoView();
@@ -692,11 +676,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselDoubleSlide(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, remoteFilePath1: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -722,7 +702,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //second carousel
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -749,7 +729,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
@@ -761,11 +741,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselWithFeatureCardAndLocation(title: string, headline: string, eyebrow: string, list: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, listTitle: string, listUrl: string) {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAddCardFeature).click();
         await browser.pause(4000);
@@ -795,7 +771,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //Create Card for Location Card
         await (await this.btnAdditionalCardOptions).click();
         await (await this.btnAddCardLocation).click();
@@ -816,9 +792,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselWithBillboardAndMyChart(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string, link: string){
-        await browser.pause(4000)
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAdditionalCardOptions).click();
         await (await this.btnAddBillboard).click();
@@ -848,7 +822,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(4000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         //Create Card MyChart Carousel Element
         await (await this.btnAdditionalCardOptions).click();
         await (await this.btnAddCardMyChart).click();
@@ -879,9 +853,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async createCarouselQuote(title: string, quote: string, quoteAuthor: string, quoteAutorTitle: string, remoteFilePath){
-        await browser.pause(4000)
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.btnAdditionalCardOptions).click();
         await (await this.btnAddQuote).click();
@@ -902,7 +874,7 @@ class CarouselBlockPage extends Page {
         await (await this.btnSaveAudio).click();
         await browser.pause(3000)
 
-        await browser.switchToFrame(iframe);
+        await browser.switchToParentFrame();
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -914,11 +886,7 @@ class CarouselBlockPage extends Page {
     }
 
     public async openParaTypes() {
-        await browser.pause(4000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownToggle).scrollIntoView();
         await (await this.dropdownToggle).click();
         await browser.pause(2500);
@@ -944,12 +912,8 @@ class CarouselBlockPage extends Page {
     
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.pause(1000);
         await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.dropdownStyling).click();
         await (await this.dropdownLayout).scrollIntoView({ behavior: 'auto', block: 'center' });

@@ -191,12 +191,7 @@ class QuickActionsBlockPage extends Page {
 
     public async createQuickAction(title: string, healdine: string) {
         await browser.pause(3000);
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({
-            timeout: 2000
-        });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.compTitle).setValue(title);
         await (await this.inputHeadline).setValue(healdine);
         await (await this.dropdownSource).selectByVisibleText('Aesthetics: Quick Actions test menu');

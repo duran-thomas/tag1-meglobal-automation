@@ -201,11 +201,12 @@ export const config: Options.Testrunner = {
             description: 'This test run was created by the CI pipeline during the daily regression run..',
             projectId: 1,
             includeAllCases: false,
-            excludeSkip: true,
-            consoleLogResults: true
+            ignoreSkipped: true,
+            generateShareableLink: true,
+            screenshotFolder: "./screenshots",
+            uploadScreenshot: true,
         }]
     ],
-
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks

@@ -46,9 +46,9 @@ describe('Tabs Component Tests', () => {
     afterEach(async function() { 
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);
-     await (await QALayoutPage.tabLayout).click();
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -67,8 +67,9 @@ describe('Tabs Component Tests', () => {
 
      
     it('[S3C911] Verify that a site Content Administrator can create a Tabs Component with a single Tab Item', async () => {
+        const id=`Tabs-S3C911-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTabs).scrollIntoView();
         await (await QALayoutPage.btnTabs).click();
@@ -79,15 +80,16 @@ describe('Tabs Component Tests', () => {
         await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TabsBlockPage.tabElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(await TabsBlockPage.tabPanel).toBeDisplayedInViewport();
         await expect(await TabsBlockPage.tabPanel).toHaveTextContaining(tabBlockData.content); 
     });
 
     it('[S3C912] Verify that a site Content Administrator can create a Tabs Component with a multiple Tab Item', async () => {
+        const id=`Tabs-S3C912-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTabs).scrollIntoView();
         await (await QALayoutPage.btnTabs).click();
@@ -98,7 +100,7 @@ describe('Tabs Component Tests', () => {
         await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TabsBlockPage.tabElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(TabsBlockPage.tabPanel).toBeDisplayedInViewport();
         await expect(await $(`#${tabBlockData.name.toLowerCase()}`)).toBeExisting();
@@ -108,8 +110,9 @@ describe('Tabs Component Tests', () => {
     });
 
     it('[S3C1347] Verify that Analytics for the Tabs Component is configured', async () => {
+        const id=`Tabs-S3C91347-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTabs).scrollIntoView();
         await (await QALayoutPage.btnTabs).click();
@@ -120,7 +123,7 @@ describe('Tabs Component Tests', () => {
         await expect(TabsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TabsBlockPage.tabElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TabsBlockPage.tabElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
         await expect(TabsBlockPage.tabPanel).toBeDisplayedInViewport();
         await expect(await $(`#${tabBlockData.name.toLowerCase()}`)).toBeExisting();

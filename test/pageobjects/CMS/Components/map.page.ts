@@ -60,8 +60,8 @@ class MapBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get mapElement() {
-        return $('.mf-map');
+    public mapElement(id:string) {
+        return $(`#${id} .mf-map`);
     }
 
     public get dropdownImage() {
@@ -126,11 +126,7 @@ class MapBlockPage extends Page {
      */
 
     public async createMap(title: string, highlightTitle: string, latitude: string, longitude, remoteFilePath: string, altText: string, remoteFilePath1: string, altText1: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputHighlightTitle).scrollIntoView();
         await (await this.inputHighlightTitle).setValue(highlightTitle);
@@ -166,7 +162,7 @@ class MapBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000);
+        await browser.pause(1000);
         // await (await this.inputMapConfig).scrollIntoView();
         // await (await this.inputMapConfig).setValue(mapConfig);
         // await browser.pause(2000);
@@ -180,11 +176,7 @@ class MapBlockPage extends Page {
     }
 
     public async createMapWithLocation(title: string, location: string, highlightTitle: string, latitude: string, longitude, remoteFilePath: string, altText: string, remoteFilePath1: string, altText1: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputLocation).scrollIntoView();
         await (await this.inputLocation).setValue(location);
@@ -222,7 +214,7 @@ class MapBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(3000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000);
+        await browser.pause(1000);
         // await (await this.inputMapConfig).scrollIntoView();
         // await (await this.inputMapConfig).setValue(mapConfig);
         // await browser.pause(2000);
@@ -237,12 +229,7 @@ class MapBlockPage extends Page {
 
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await browser.pause(2000);

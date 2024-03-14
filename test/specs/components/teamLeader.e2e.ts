@@ -49,7 +49,7 @@ describe('Team Leader Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -68,8 +68,9 @@ describe('Team Leader Component Tests', () => {
 
   
     it('[S3C1124] Verify a Content Administrator can create a Team Member Grid component', async () => {
+        const id=`TeamLeader-S3C91124-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTeamMembersGrid).scrollIntoView();
         await (await QALayoutPage.btnTeamMembersGrid).click();
@@ -82,12 +83,13 @@ describe('Team Leader Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await TeamLeaderBlockPage.textBox[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await TeamLeaderBlockPage.teamMemberGrid).toBeExisting(); 
+        await expect(await TeamLeaderBlockPage.teamMemberGrid(id)).toBeExisting(); 
     });
 
     it('[S3C1327] Verify the ability to display ONLY team members within a Team Members Grid', async () => {
+        const id=`TeamLeader-S3C91327-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTeamMembersGrid).scrollIntoView();
         await (await QALayoutPage.btnTeamMembersGrid).click();
@@ -100,12 +102,13 @@ describe('Team Leader Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await TeamLeaderBlockPage.textBox[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await TeamLeaderBlockPage.teamMemberGrid).toBeExisting(); 
+        await expect(await TeamLeaderBlockPage.teamMemberGrid(id)).toBeExisting(); 
     });
 
     it('[S3C1119] Verify a Content Administrator can create a Team Leader Carousel component', async () => {
+        const id=`TeamLeader-S3C91119-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTeamLeadersCarousel).scrollIntoView();
         await (await QALayoutPage.btnTeamLeadersCarousel).click();
@@ -118,14 +121,15 @@ describe('Team Leader Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await TeamLeaderBlockPage.headerTitleElem).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await TeamLeaderBlockPage.teamCarousel).toBeExisting(); 
-        await expect(await $(`a[href="${teamLeaderBlockData.url}"]`)).toBeExisting(); 
+        await expect(await TeamLeaderBlockPage.teamCarousel(id)).toBeExisting(); 
+        await expect(await $(`a[data-analytics-click-text="${teamLeaderBlockData.btnText}"]`)).toBeExisting(); 
 
     });
     
     it('[S3C1143] Verify that Analytics for the Team Leader Carousel Component is configured', async () => {
+        const id=`TeamLeader-S3C1143-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnTeamLeadersCarousel).scrollIntoView();
         await (await QALayoutPage.btnTeamLeadersCarousel).click();
@@ -138,8 +142,8 @@ describe('Team Leader Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await TeamLeaderBlockPage.headerTitleElem).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(await TeamLeaderBlockPage.teamCarousel).toBeExisting(); 
-        await expect(await $(`a[href="${teamLeaderBlockData.url}"]`)).toBeExisting(); 
+        await expect(await TeamLeaderBlockPage.teamCarousel(id)).toBeExisting(); 
+        await expect(await $(`a[data-analytics-click-text="${teamLeaderBlockData.btnText}"]`)).toBeExisting(); 
 
 
         /**

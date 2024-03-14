@@ -139,11 +139,7 @@ class MediaBlockPage extends Page {
      */
 
     public async createImageType(title: string, remoteFilePath: string, altText: string, link: string, caption: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
         await (await this.dropdownImage).click();
@@ -159,7 +155,7 @@ class MediaBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(8000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.inputLink).scrollIntoView();
         await (await this.inputLink).setValue(link);
         await (await this.inputCaption).setValue(caption);
@@ -174,21 +170,12 @@ class MediaBlockPage extends Page {
     }
 
     public async navToStyleVisibility() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.checkboxCover).scrollIntoView();
     }
 
     public async createVideoType(title: string, remoteFilePath: string, duration: string, remoteFilePath1: string, altText: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
         await (await this.dropdownVideo).click();
@@ -205,7 +192,7 @@ class MediaBlockPage extends Page {
         await (await this.btnSaveMedia).click();
         await browser.pause(3500); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.dropdownPoster).scrollIntoView();
         await (await this.dropdownPoster).click();
         await browser.switchToFrame(await this.imageIframe);
@@ -219,7 +206,7 @@ class MediaBlockPage extends Page {
         await (await this.btnSaveImage).click();
         await browser.pause(10000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(2000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -231,12 +218,7 @@ class MediaBlockPage extends Page {
 
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await browser.pause(3000);

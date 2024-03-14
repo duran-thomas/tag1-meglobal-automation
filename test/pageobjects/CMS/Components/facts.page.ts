@@ -114,20 +114,20 @@ class FactsBlockPage extends Page {
         return $('.ui-draggable-handle');
     }
 
-    public get horizontalElement() {
-        return $('.mf-facts--horizontal');
+    public horizontalElement(id: string) {
+        return $(`#${id} .mf-facts--horizontal`);
     }
 
-    public get factsElement() {
-        return $('.mf-facts');
+    public factsElement(id: string) {
+        return $(`#${id} .mf-facts`);
     }
 
-    public get btnCarousel() {
-        return $('.mf-carousel__nav-button');
+    public btnCarousel(id: string) {
+        return $(`#${id} .mf-carousel__nav-button`);
     }
 
-    public get titleElement() {
-        return $('p.mb-8');
+    public titleElement(id: string) {
+        return $(`#${id} p.mb-8`);
     }
 
     public get successMsg() {
@@ -139,11 +139,7 @@ class FactsBlockPage extends Page {
      */
 
     public async createFactsWithHorizontalLayout(mainTitle: string, title1: string, description1: string, title2: string, description2: string, title3: string, description3: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitleLabel).setValue(mainTitle);
         await (await this.inputFactTitle1).setValue(title1);
         await (await this.inputFactDescription1).scrollIntoView();
@@ -178,11 +174,7 @@ class FactsBlockPage extends Page {
     }
 
     public async createFactsWithVerticalLayout(mainTitle: string, title1: string, description1: string, title2: string, description2: string, title3: string, description3: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitleLabel).setValue(mainTitle);
         await (await this.inputFactTitle1).setValue(title1);
         await (await this.inputFactDescription1).scrollIntoView();
@@ -217,11 +209,7 @@ class FactsBlockPage extends Page {
     }
 
     public async createFactsWithGridLayout(mainTitle: string, title1: string, description1: string, title2: string, description2: string, title3: string, description3: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitleLabel).setValue(mainTitle);
         await (await this.inputFactTitle1).setValue(title1);
         await (await this.inputFactDescription1).scrollIntoView();
@@ -256,11 +244,7 @@ class FactsBlockPage extends Page {
     }
 
     public async createFactsWithSliderLayout(mainTitle: string, title1: string, description1: string, title2: string, description2: string, title3: string, description3: string, title4: string, description4: string, title5: string, description5: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitleLabel).setValue(mainTitle);
         await (await this.inputFactTitle1).setValue(title1);
         await (await this.inputFactDescription1).scrollIntoView();
@@ -314,11 +298,7 @@ class FactsBlockPage extends Page {
     }
 
     public async createAFact(mainTitle: string, title1: string, description1: string) {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitleLabel).setValue(mainTitle);
         await (await this.inputFactTitle1).setValue(title1);
         await (await this.inputFactDescription1).scrollIntoView();
@@ -335,12 +315,7 @@ class FactsBlockPage extends Page {
     }
 
     public async navToStyling() {
-        await browser.pause(6000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed();
-        await browser.switchToFrame(iframe);
-        await browser.pause(3000);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await (await this.dropdownLayout).scrollIntoView();

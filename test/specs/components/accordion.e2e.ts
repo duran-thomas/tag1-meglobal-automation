@@ -30,6 +30,7 @@ describe('Accordion Component Tests', () => {
         global.suiteDescription = this.currentTest?.parent?.title;
         //navigate to admin content page
         await AdminContentPage.open();
+        //await AdminContentPage.closeCookieBanner();
         // Navigate to QA Landing page to execute tests
         await AdminContentPage.getTestPage(global.suiteDescription);  
         await expect(QALayoutPage.tabLayout).toBeDisplayed();

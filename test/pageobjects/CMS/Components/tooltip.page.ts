@@ -74,11 +74,7 @@ class TooltipBlockPage extends Page {
      */
 
     public async createHighlightTooltip(title: string, tooltip: string, content: string, placement: string, theme: string) {
-        await browser.pause(4500); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 3000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
         //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
@@ -106,11 +102,7 @@ class TooltipBlockPage extends Page {
     }
 
     public async createTextTooltip(title: string, tooltip: string, content: string, placement: string, theme: string) {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 3000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await (await this.inputContent).scrollIntoView();
         //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
@@ -137,11 +129,7 @@ class TooltipBlockPage extends Page {
     }
 
     public async navToTooltip() {
-        await browser.pause(3000); //TODO: find a better wait criteria here. At the moment an explicit wait is the only thing that seems to work
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({ timeout: 3000 });
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         //await (await this.dropdownTextFormat).scrollIntoView({ behavior: 'auto', block: 'center' });
         //await (await this.dropdownTextFormat).selectByVisibleText('Basic HTML');
         await (await this.btnTooltipTrigger).scrollIntoView({ behavior: 'auto', block: 'center' });

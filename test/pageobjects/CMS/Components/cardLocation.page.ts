@@ -626,11 +626,7 @@ class CardLocationBlockPage extends Page {
     }
 
     public async createLocationComponentBlock1(title:string, location:string) {
-        await browser.pause(3000); 
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputBlockTitle).setValue(title);
         await (await this.inputLocation).scrollIntoView();
         await (await this.inputLocation).setValue(location);
@@ -642,11 +638,7 @@ class CardLocationBlockPage extends Page {
     }
 
     public async createLocationComponentBlock2(title:string, location:string) {
-        await browser.pause(3000); 
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputBlockTitle).setValue(title);
         await (await this.inputLocation).scrollIntoView();
         await (await this.inputLocation).setValue(location);
@@ -665,11 +657,7 @@ class CardLocationBlockPage extends Page {
     }
 
     public async createCarouselCardLocation() {
-        await browser.pause(3000); 
-        // switch to the iframe
-        const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-        await iframe.waitForDisplayed({timeout:3000});
-        await browser.switchToFrame(iframe);
+        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputBlockTitle).setValue('TR3 Carousel block Title 1');
 
         await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });

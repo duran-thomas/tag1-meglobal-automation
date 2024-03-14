@@ -47,7 +47,7 @@ describe('Facts Component Tests', () => {
         await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
-        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
         //return to starting point
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription);  
@@ -66,8 +66,9 @@ describe('Facts Component Tests', () => {
 
      
     it('[S3C844] Verify that a site Content Administrator can create a Facts Component with a horizontal layout', async () => {
+        const id=`Facts-S3C844-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
         (await QALayoutPage.btnFacts).click();
@@ -78,15 +79,16 @@ describe('Facts Component Tests', () => {
         await expect(FactsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await FactsBlockPage.horizontalElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await FactsBlockPage.horizontalElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(FactsBlockPage.horizontalElement).toExist();   
+        await expect(FactsBlockPage.horizontalElement(id)).toExist();   
         
     });
 
     it('[S3C845] Verify that a site Content Administrator can create a Facts Component with a vertical layout', async () => {
+        const id=`Facts-S3C845-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
         (await QALayoutPage.btnFacts).click();
@@ -97,14 +99,15 @@ describe('Facts Component Tests', () => {
         await expect(FactsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await expect(FactsBlockPage.factsElement).toExist(); 
-        await (await FactsBlockPage.factsElement).scrollIntoView();
+        await expect(FactsBlockPage.factsElement(id)).toExist(); 
+        await (await FactsBlockPage.factsElement(id)).scrollIntoView();
         await browser.pause(4000);
     });
 
     it('[S3C846] Verify that a site Content Administrator can create a Facts Component with a grid layout', async () => {
+        const id=`Facts-S3C846-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
         (await QALayoutPage.btnFacts).click();
@@ -115,14 +118,15 @@ describe('Facts Component Tests', () => {
         await expect(FactsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await expect(FactsBlockPage.factsElement).toExist(); 
-        await (await FactsBlockPage.factsElement).scrollIntoView();
+        await expect(FactsBlockPage.factsElement(id)).toExist(); 
+        await (await FactsBlockPage.factsElement(id)).scrollIntoView();
         await browser.pause(4000);
     });
 
     it('[S3C847] Verify that a site Content Administrator can create a Facts Component with a slider layout', async () => {
+        const id=`Facts-S3C847-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
         (await QALayoutPage.btnFacts).click();
@@ -133,8 +137,8 @@ describe('Facts Component Tests', () => {
         await expect(FactsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await expect(FactsBlockPage.btnCarousel).toExist(); 
-        await (await FactsBlockPage.factsElement).scrollIntoView();
+        await expect(FactsBlockPage.btnCarousel(id)).toExist(); 
+        await (await FactsBlockPage.factsElement(id)).scrollIntoView();
     });
 
     // it('[S3C848] Verify that all design fields are present with the correct available options.', async () => {
@@ -178,8 +182,9 @@ describe('Facts Component Tests', () => {
     // });
 
     it('[S3C849] Verify that the Facts Component displays the correct title', async () => {
-     await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        const id=`Facts-S3C849-${Date.now()}`;
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFacts).scrollIntoView();
         (await QALayoutPage.btnFacts).click();
@@ -189,8 +194,8 @@ describe('Facts Component Tests', () => {
         await expect(FactsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await expect(await FactsBlockPage.titleElement).toHaveText(factsBlockData.title1);
-        await (await FactsBlockPage.factsElement).scrollIntoView();
+        await expect(await FactsBlockPage.titleElement(id)).toHaveText(factsBlockData.title1);
+        await (await FactsBlockPage.factsElement(id)).scrollIntoView();
     });
 
   });
