@@ -1,6 +1,7 @@
 import type { Options } from '@wdio/types'
 import QualityWatcherReporter from "@qualitywatcher/wdio-reporter";
 import QualityWatcherService from "@qualitywatcher/wdio-service";
+import { commands } from "./commands";
 
 import * as dotenvLoader from 'dotenv';
 import * as fs from "fs";
@@ -299,8 +300,12 @@ export const config: Options.Testrunner = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */,
-    // before: fuuntion (capabilities, specs) => {
-    // },
+        before: function (capabilities,specs,browser) {
+            // Add commands to WebdriverIO
+            Object.keys(commands).forEach((key) => {
+            browser.addCommand(key, commands[key as keyof typeof commands]);
+            });
+        },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
