@@ -108,11 +108,9 @@ class HeroBlockPage extends Page {
         return $('#edit-settings-block-form-field-content-0-subform-field-buttons-0-link-options-target');
     }
 
-
-
     /**
      * Helper methods to create Hero Component
-     */
+    */
 
     public async createComponentWithImage(title: string, headline: string, eyebrow: string, intro: string, content: string, btnText: string, url: string, remoteFilePath: string, altText: string) {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
