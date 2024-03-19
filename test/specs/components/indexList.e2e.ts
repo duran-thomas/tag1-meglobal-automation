@@ -37,14 +37,17 @@ describe('Index List Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/IconList/${testName}.png`;
+        const screenshotPath = `./screenshots/IndexList/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
     //delete previously created sections
     afterEach(async function() { 
         await AdminContentPage.open();
-        await AdminContentPage.getTestPage(global.suiteDescription);
+        const testPage = await $(`=${indexListBlockData.pageTitle}`);
+        await testPage.scrollIntoView({ behavior: 'auto', block: 'center' });
+        await testPage.click();
+        // await AdminContentPage.getTestPage(global.suiteDescription);
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.cleanUpJob();
         await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
@@ -60,7 +63,7 @@ describe('Index List Component Tests', () => {
         //await browser.url(environment.baseUrl+'user/logout');
         await browser.setCookies(environment.admin);
         await AdminContentPage.open();
-        await AdminContentPage.deleteTestPage(global.suiteDescription);
+        await AdminContentPage.deleteTestPage(indexListBlockData.pageTitle);
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
     /**
@@ -138,40 +141,35 @@ describe('Index List Component Tests', () => {
             if (err) {
                 console.error(err);
             }
-            // file written successfully
         });
 
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
   });
 
-//   it('[S3C1128] Verify that a Content Administrator can create a Index List - Clinical Categories Component', async () => {
-//     const id=`IndexList-S3C1128-${Date.now()}`;
-//     const environment = getEnvironmentConfig(process.env.ENV);
+  it('[S3C1128] Verify that a Content Administrator can create a Index List - Clinical Categories Component', async () => {
+    const id=`IndexList-S3C1128-${Date.now()}`;
+    const environment = getEnvironmentConfig(process.env.ENV);
+    const baseURL = environment.baseUrl;
+    await browser.url(await `${baseURL}/group/41/nodes`);
+    await browser.pause(1000);
+    await (await indexListPage.btnAddNewContent).click();
+    await (await indexListPage.linkGroupNodeLayoutPage).click();
+    await (await indexListPage.inputPageTitle).setValue(indexListBlockData.pageTitle);
+    await (await indexListPage.btnSaveLayout).scrollIntoView();
+    await (await indexListPage.btnSaveLayout).click();
+    await (await QALayoutPage.tabLayout).click();
+    await QALayoutPage.createNewSection(id);
+    await QALayoutPage.navigateToBlockList();
+    (await QALayoutPage.btnIndexListClinicalCategories).scrollIntoView();
+    (await QALayoutPage.btnIndexListClinicalCategories).click();
+    (await indexListPage.configBlock).waitForDisplayed();
+    await indexListPage.createIndexListClinicalCategories(indexListBlockData.title)
 
-//     // Use the environment data
-//     const baseURL = environment.baseUrl;
+    await QALayoutPage.goToPageView();
 
-//     //Bypass login
-//     await browser.url(await `${baseURL}/group/41/nodes`);
-//     await browser.pause(1000);
-//     await (await indexListPage.btnAddNewContent).click();
-//     await (await indexListPage.linkGroupNodeLayoutPage).click();
-//     await (await indexListPage.inputPageTitle).setValue(indexListBlockData.pageTitle);
-//     await (await indexListPage.btnSaveLayout).scrollIntoView();
-//     await (await indexListPage.btnSaveLayout).click();
-//     await (await QALayoutPage.tabLayout).click();
-//     await QALayoutPage.createNewSection(id);
-//     await QALayoutPage.navigateToBlockList();
-//     (await QALayoutPage.btnIndexListClinicalCategories).scrollIntoView();
-//     (await QALayoutPage.btnIndexListClinicalCategories).click();
-//     (await indexListPage.configBlock).waitForDisplayed();
-//     await indexListPage.createIndexListClinicalCategories(indexListBlockData.title)
-
-//     await QALayoutPage.goToPageView();
-
-//     const indexListComponent = await $(`#${id} .mf-index-list__list`);
-//     await (indexListComponent).scrollIntoView({ behavior: 'auto', block: 'center' });
+    const indexListComponent = await $(`#${id} .mf-index-list__list`);
+    await (indexListComponent).scrollIntoView({ behavior: 'auto', block: 'center' });
     
-//     await expect(indexListComponent).toBeDisplayedInViewport();
-// })
+    await expect(indexListComponent).toBeDisplayedInViewport();
+})
 })

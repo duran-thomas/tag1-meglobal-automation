@@ -55,16 +55,9 @@ class IconListBlockPage extends Page {
   }
 
   public async createIndexListClinicalCategories(title: string){
-    await browser.pause(5000);
-    const iframe = await $('iframe[name="lbim-dialog-iframe"]');
-    await iframe.waitForDisplayed();
-    await browser.switchToFrame(iframe);
+    await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
     await (await this.inputTitle).setValue(title)
     await (await this.dropdownView).selectByVisibleText('Clinical Categories Index List');
-    // await browser.pause(1000)
-    // await (await this.dropdownDisplay).waitForDisplayed();
-    // await (await this.dropdownDisplay).selectByVisibleText('Category and A-Z grouping');
-    // await (await this.dropdownAdvancedOption).click()
     await browser.pause(1000)
     await (await this.selectClinicalCategories).scrollIntoView();
     await (await this.selectClinicalCategories).selectByIndex(0);
