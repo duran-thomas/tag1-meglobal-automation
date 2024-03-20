@@ -141,8 +141,8 @@ class VisualListBlockPage extends Page {
         return $('#edit-actions-submit');
     }
 
-    public get visualListElement() {
-        return $('.mf-visual-list');
+    public visualListElement(id:string) {
+        return $(`#${id} .mf-visual-list`);
     }
 
     public get visualListElementTitle() {
