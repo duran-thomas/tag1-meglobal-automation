@@ -58,8 +58,8 @@ class TooltipBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get tooltipElement() {
-        return $('.mf-tooltip');
+    public tooltipElement(id:string) {
+        return $(`#${id} .mf-tooltip`);
     }
 
     public get dropdownTextFormat() {
