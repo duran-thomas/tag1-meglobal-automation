@@ -67,8 +67,9 @@ describe('Visual List Component Tests', () => {
 
     for (const record of visualListBlockData) {
         it(`${record.testCaseTitle}`, async () => {
+            const id=`VisualList-${record.testCaseTitle.substring(1, 6)}-${Date.now()}`;
             await (await QALayoutPage.tabLayout).click();
-            await QALayoutPage.createNewSection();
+            await QALayoutPage.createNewSection(id);
             await QALayoutPage.navigateToBlockList();
             await (await QALayoutPage.btnVisualList).scrollIntoView();
             
@@ -79,44 +80,44 @@ describe('Visual List Component Tests', () => {
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Simple Visual List Item Title');
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Simple Visual List Item Title Internal URL') {
                 await VisualListBlockPage.createVisualListComponentSimple(record.mainTitle, record.itemTitle, record.link, record.description);
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Simple Visual List Item Title Internal URL');
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Illustration Visual List Item Title') {
 
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Illustration Visual List Item Title Internal URL') {
                 await VisualListBlockPage.createVisualListComponentIllustration(record.mainTitle, record.itemTitle, record.link, record.description, imageFilePath, record.altText);
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Icon Visual List Item Title') {
                 await VisualListBlockPage.createVisualListComponentIcon(record.mainTitle, record.itemTitle, record.link, record.description)
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Icon Visual List Item Title Internal URL') {
                 await VisualListBlockPage.createVisualListComponentIcon(record.mainTitle, record.itemTitle, record.link, record.description)
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Illustration Card Visual List Item Title') {
                 await VisualListBlockPage.createVisualListComponentIllustrationCard(record.mainTitle,
@@ -124,8 +125,8 @@ describe('Visual List Component Tests', () => {
 
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Card Visual List Item Heading');
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Illustration Card Visual List Item Title Internal URL') {
                 await VisualListBlockPage.createVisualListComponentIllustrationCard(record.mainTitle,
@@ -133,8 +134,8 @@ describe('Visual List Component Tests', () => {
 
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Card Visual List Item Heading Internal UR');
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
             if (record.itemTitle === 'QA Image Card Visual List Item Title') {
                 await VisualListBlockPage.createVisualListComponentImageCard(record.mainTitle,
@@ -142,15 +143,16 @@ describe('Visual List Component Tests', () => {
 
                 await QALayoutPage.goToPageView();
                 await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(record.itemTitle);
-                await expect(VisualListBlockPage.visualListElement).toExist();
-                await (await VisualListBlockPage.visualListElement).scrollIntoView();
+                await expect(VisualListBlockPage.visualListElement(id)).toExist();
+                await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
             }
         })
     }
 
     it('[S3C836] Verify that a site Content Administrator can create a Visual List Component with both an Illustration visual list item paragraph and a Simple visual list item', async () => {
+        const id=`VisualList-S3C836-${Date.now()}`;
         await (QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -161,13 +163,14 @@ describe('Visual List Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining('QA Illustration Visual List Item Title');
-        await expect(VisualListBlockPage.visualListElement).toExist();
-        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await expect(VisualListBlockPage.visualListElement(id)).toExist();
+        await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
     });
 
     it('[S3C832] Verify that a site Content Administrator can create a Visual List Component with a Simple visual list item paragraph', async () => {
+        const id=`VisualList-S3C832-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -175,16 +178,17 @@ describe('Visual List Component Tests', () => {
         await VisualListBlockPage.createVisualListComponentSimple(visualListBlockData[4].mainTitle, visualListBlockData[4].itemTitle, visualListBlockData[4].link, visualListBlockData[4].description);
 
         await QALayoutPage.goToPageView();
-        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
         await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[4].itemTitle);
-        await expect(VisualListBlockPage.visualListElement).toExist();
+        await expect(VisualListBlockPage.visualListElement(id)).toExist();
 
     });
 
     //#region TODO: Look at this again later. For now, manually execute these tests.
     it('[S3C842] Verify that the Visual List Paragraph type has been added to the list of paragraph types that appear in the Freeform block', async () => {
+        const id=`VisualList-S3C842-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnFreeform).scrollIntoView();
         await (await QALayoutPage.btnFreeform).click();
@@ -195,8 +199,9 @@ describe('Visual List Component Tests', () => {
     });
 
     it('[S3C843] Verify that all design fields are present with the correct available options.', async () => {
+        const id=`VisualList-S3C843-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -228,8 +233,9 @@ describe('Visual List Component Tests', () => {
     });
 
     it('[S3C1070] Verify that Analytics for the Visual List Component with a Simple Visual List item is configured', async () => {
+        const id=`VisualList-S3C1070-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -237,9 +243,9 @@ describe('Visual List Component Tests', () => {
         await VisualListBlockPage.createSimpleVisualListAnalytics(visualListBlockData[4].mainTitle, visualListBlockData[4].itemTitle, visualListBlockData[4].link, visualListBlockData[4].description);
 
         await QALayoutPage.goToPageView();
-        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
         await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(visualListBlockData[4].itemTitle);
-        await expect(VisualListBlockPage.visualListElement).toExist();
+        await expect(VisualListBlockPage.visualListElement(id)).toExist();
 
         /**
          * Create the expected analytics 
@@ -289,8 +295,9 @@ describe('Visual List Component Tests', () => {
     });
 
     it('[S3C1320] Verify that Analytics for the Visual List Component with a Illustration Card List item is configured', async () => {
+        const id=`VisualList-S3C1320-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -299,9 +306,9 @@ describe('Visual List Component Tests', () => {
         await VisualListBlockPage.createVisualListIllustrationCardAnalytics(illustrationCard[1].mainTitle,illustrationCard[1].eyebrow, illustrationCard[1].heading, illustrationCard[1].url, illustrationCard[1].linkText, illustrationCard[1].description, imageFilePath, illustrationCard[1].altText)
 
         await QALayoutPage.goToPageView();
-        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
         await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(illustrationCard[1].heading);
-        await expect(VisualListBlockPage.visualListElement).toExist();
+        await expect(VisualListBlockPage.visualListElement(id)).toExist();
 
         /**
          * Create the expected analytics 
@@ -351,8 +358,9 @@ describe('Visual List Component Tests', () => {
     });
 
     it('[S3C1321] Verify that Analytics for the Visual List Component with an Image Card List item is configured', async () => {
+        const id=`VisualList-S3C1321-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVisualList).scrollIntoView();
         await (await QALayoutPage.btnVisualList).click();
@@ -361,9 +369,9 @@ describe('Visual List Component Tests', () => {
         await VisualListBlockPage.createVisualListImageCardAnalytics(imageCardData.mainTitle, imageCardData.eyebrow, imageCardData.heading, imageCardData.url, imageCardData.linkText, imageCardData.description, imageFilePath, imageCardData.altText)
 
         await QALayoutPage.goToPageView();
-        await (await VisualListBlockPage.visualListElement).scrollIntoView();
+        await (await VisualListBlockPage.visualListElement(id)).scrollIntoView();
         await expect(await VisualListBlockPage.visualListElementTitle).toHaveTextContaining(imageCardData.heading);
-        await expect(VisualListBlockPage.visualListElement).toExist();
+        await expect(VisualListBlockPage.visualListElement(id)).toExist();
 
         /**
          * Create the expected analytics 
