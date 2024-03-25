@@ -33,7 +33,7 @@ describe.skip('Popular Searches Tests', () => {
   afterEach(async function() { 
     // Take a screenshot after each test/assertion
     const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-    const screenshotPath = `./screenshots/PopularSearches/${testName}.png`;
+    const screenshotPath = `./screenshots/Popularsearches/${testName}.png`;
     await browser.saveScreenshot(screenshotPath);
   });
 

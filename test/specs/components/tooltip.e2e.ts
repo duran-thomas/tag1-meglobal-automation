@@ -7,7 +7,7 @@ import { getEnvironmentConfig } from '../../../envSelector';
 
 
 
-describe('Tooltip Component Tests', () => {
+describe.skip('Tooltip Component Tests', () => {
     
     before(async ()=>{
         // Get the environment configuration

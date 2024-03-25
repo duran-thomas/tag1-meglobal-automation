@@ -145,16 +145,16 @@ after(async function () {
         await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
-    //create quick action component
-    await (await QALayoutPage.tabLayout).click();
-    await QALayoutPage.createNewSection();
-    await browser.refresh();
-    await (await QALayoutPage.linkAddBlock).waitForExist();
-    await (await QALayoutPage.linkAddBlock).scrollIntoView();
-    await (await QALayoutPage.linkAddBlock).click();
-    await (await QALayoutPage.linkQuickActions).click();
-    await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-    await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+        //create quick action component
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
+        await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
+        await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -196,51 +196,51 @@ after(async function () {
         await QuickActionsBlockPage.createNode(quickActionsBlockData.nodeTitle);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayedInViewport();
 
-    //create quick action component
-    await (await QALayoutPage.tabLayout).click();
-    await QALayoutPage.createNewSection();
-    await browser.refresh();
-    await (await QALayoutPage.linkAddBlock).waitForExist();
-    await (await QALayoutPage.linkAddBlock).scrollIntoView();
-    await (await QALayoutPage.linkAddBlock).click();
-    await (await QALayoutPage.linkQuickActions).click();
-    await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
-    await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
+        //create quick action component
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection();
+        await browser.refresh();
+        await (await QALayoutPage.linkAddBlock).waitForExist();
+        await (await QALayoutPage.linkAddBlock).scrollIntoView();
+        await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).click();
+        await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
+        await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
-        await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+            await QALayoutPage.goToPageView();
+            await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-    const expectedAnalyticsData = {
-        clickText: quickActionsBlockData.extMenuLinkTitle,
-        event: 'e_navigationClick',
-        linkType: 'button',
-        navigationType: 'quick actions'
-    }
-
-    const currentUrl = await browser.getUrl();
-
-    await $('a[data-analytics-click-text="Test External Link"]').click();
-    await browser.switchWindow(currentUrl);
-
-    const dataLayer = await browser.executeScript('return window.dataLayer', []);
-    const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
-    let parsedAnalyticsData = []
-
-    for (let x in actualAnalyticsData) {
-        parsedAnalyticsData.push({
-            clickText: actualAnalyticsData[x].clickText,
-            event: actualAnalyticsData[x].event,
-            linkType: actualAnalyticsData[x].linkType,
-            navigationType: actualAnalyticsData[x].navigationType
-        })
-    }
-
-    fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
-        if (err) {
-            console.error(err);
+        const expectedAnalyticsData = {
+            clickText: quickActionsBlockData.extMenuLinkTitle,
+            event: 'e_navigationClick',
+            linkType: 'button',
+            navigationType: 'quick actions'
         }
-        // file written successfully
-    });
+
+        const currentUrl = await browser.getUrl();
+
+        await $('a[data-analytics-click-text="Test External Link"]').click();
+        await browser.switchWindow(currentUrl);
+
+        const dataLayer = await browser.executeScript('return window.dataLayer', []);
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick");
+        let parsedAnalyticsData = []
+
+        for (let x in actualAnalyticsData) {
+            parsedAnalyticsData.push({
+                clickText: actualAnalyticsData[x].clickText,
+                event: actualAnalyticsData[x].event,
+                linkType: actualAnalyticsData[x].linkType,
+                navigationType: actualAnalyticsData[x].navigationType
+            })
+        }
+
+        fs.writeFile('analyticsTestEvidence/quickActions.json', JSON.stringify(dataLayer), err => {
+            if (err) {
+                console.error(err);
+            }
+            // file written successfully
+        });
 
         const screenshotPath = `./screenshots/QuickActions/Verify that Analytics for the Quick Actions Component is configured.png`;
         await browser.saveScreenshot(screenshotPath);
@@ -274,5 +274,4 @@ after(async function () {
 
         return envToMethodMap[env];
     }
-
 });

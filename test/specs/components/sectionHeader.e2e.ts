@@ -39,7 +39,7 @@ describe('Section Header Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/SectionHeader/${testName}.png`;
+        const screenshotPath = `./screenshots/Sectionheader/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
     
