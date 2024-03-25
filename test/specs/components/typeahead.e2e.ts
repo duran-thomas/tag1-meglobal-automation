@@ -58,8 +58,9 @@ describe('Typeahead Component Tests', () => {
     });
 
     it.only('[S3C1112] Verify Content Administrator can create a Typeahead with default settings', async () => {
+        const id=`Typeahead-S3C1112-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnFreeform).scrollIntoView();
         (await QALayoutPage.btnFreeform).click();

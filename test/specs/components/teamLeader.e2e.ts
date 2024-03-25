@@ -164,7 +164,7 @@ describe('Team Leader Component Tests', () => {
         const currentUrl = await browser.getUrl();
 
         // Interact with the carousel button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`a[href="${teamLeaderBlockData.url}"]`)).click();
+        await (await $(`a[data-analytics-click-text="${teamLeaderBlockData.btnText}"]`)).click();
 
 
         // Switch back to the tab where the analytics is being generated

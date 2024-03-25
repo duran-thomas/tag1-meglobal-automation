@@ -66,8 +66,9 @@ describe('Tooltip Component Tests', () => {
 
      
     it('[S3C890] Verify that a site Content Administrator can create a Tooltip Component by highlighting text on the website', async () => {
+        const id=`Tooltip-S3C890-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
         (await QALayoutPage.btnRichText).click();
@@ -78,17 +79,18 @@ describe('Tooltip Component Tests', () => {
         await expect(TooltipBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TooltipBlockPage.tooltipElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TooltipBlockPage.tooltipElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(TooltipBlockPage.tooltipElement).toHaveText(tooltipBlockData.text); 
+        await expect(TooltipBlockPage.tooltipElement(id)).toHaveText(tooltipBlockData.text); 
         
-        await (await TooltipBlockPage.tooltipElement).moveTo();
+        await (await TooltipBlockPage.tooltipElement(id)).moveTo();
         await expect($('span[aria-describedby="tippy-1"]')).toBeExisting(); 
     });
 
     it('[S3C891] Verify that a site Content Administrator can create a Tooltip Component by adding new text on the website', async () => {
+        const id=`Tooltip-S3C891-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
         (await QALayoutPage.btnRichText).click();
@@ -99,17 +101,18 @@ describe('Tooltip Component Tests', () => {
         await expect(TooltipBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TooltipBlockPage.tooltipElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TooltipBlockPage.tooltipElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(TooltipBlockPage.tooltipElement).toHaveText(tooltipBlockData.text); 
+        await expect(TooltipBlockPage.tooltipElement(id)).toHaveText(tooltipBlockData.text); 
         
-        await (await TooltipBlockPage.tooltipElement).moveTo();
+        await (await TooltipBlockPage.tooltipElement(id)).moveTo();
         await expect($('span[aria-describedby="tippy-1"]')).toBeExisting();
     });
 
     it('[S3C892] Verify that when a user hovers over a Tooltip the text is displayed correctly', async () => {
+        const id=`Tooltip-S3C892-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
         (await QALayoutPage.btnRichText).click();
@@ -120,17 +123,18 @@ describe('Tooltip Component Tests', () => {
         await expect(TooltipBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await TooltipBlockPage.tooltipElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await TooltipBlockPage.tooltipElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect(TooltipBlockPage.tooltipElement).toHaveText(tooltipBlockData.text); 
+        await expect(TooltipBlockPage.tooltipElement(id)).toHaveText(tooltipBlockData.text); 
         
-        await (await TooltipBlockPage.tooltipElement).moveTo();
+        await (await TooltipBlockPage.tooltipElement(id)).moveTo();
         await expect($('span[aria-describedby="tippy-1"]')).toBeExisting(); 
     });
 
     it('[S3C893] Verify no maximum length set on tooltip text', async () => {
+        const id=`Tooltip-S3C893-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
         (await QALayoutPage.btnRichText).click();
@@ -142,17 +146,18 @@ describe('Tooltip Component Tests', () => {
 
         await QALayoutPage.goToPageView();
         
-        await expect(TooltipBlockPage.tooltipElement).toHaveText(tooltipBlockData.text); 
+        await expect(TooltipBlockPage.tooltipElement(id)).toHaveText(tooltipBlockData.text); 
         
-        await (await TooltipBlockPage.tooltipElement).moveTo();
+        await (await TooltipBlockPage.tooltipElement(id)).moveTo();
         await expect($('span[aria-describedby="tippy-1"]')).toBeExisting(); 
-        const tipValue = (await TooltipBlockPage.tooltipElement).getAttribute(`x-tooltip.raw.theme.top.placement.top`);
+        const tipValue = (await TooltipBlockPage.tooltipElement(id)).getAttribute(`x-tooltip.raw.theme.top.placement.top`);
         await expect(await tipValue).toEqual(tooltipBlockData.longTooltip);
     });
 
     it.skip('[S3C894] Verify that tooltip is a required field', async () => {
+        const id=`Tooltip-S3C894-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnRichText).scrollIntoView();
         (await QALayoutPage.btnRichText).click();
