@@ -5,7 +5,7 @@ import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
 import * as fs from "fs";
 
-describe.skip('Alert Bar Component Tests', () => {
+describe('Alert Bar Component Tests', () => {
 
   before(async ()=>{
     // Get the environment configuration
