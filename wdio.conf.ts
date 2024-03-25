@@ -6,7 +6,6 @@ import { commands } from "./commands";
 import * as dotenvLoader from 'dotenv';
 import * as fs from "fs";
 
-import { commands } from './commands';
 dotenvLoader.config();
 
 export const config: Options.Testrunner = {
