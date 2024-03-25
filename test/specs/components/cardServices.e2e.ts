@@ -185,7 +185,7 @@ describe('Card Services Component Tests', () => {
             // file written successfully
         });
 
-        const screenshotPath = `./screenshots/CardServices/Verify that Analytics for the Card Services Component is configured..png`;
+        const screenshotPath = `./screenshots/Cardservices/Verify that Analytics for the Card Services Component is configured..png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
     });

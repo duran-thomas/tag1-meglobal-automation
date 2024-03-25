@@ -167,7 +167,7 @@ describe('Card General Component Tests', () => {
             // file written successfully
         });
 
-        const screenshotPath = `./screenshots/CardGeneral/Verify that Analytics for the Card General Component is configured..png`;
+        const screenshotPath = `./screenshots/Cardgeneral/Verify that Analytics for the Card General Component is configured..png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 
