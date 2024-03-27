@@ -38,7 +38,7 @@ describe('Card General Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/Cardgeneral/${testName}.png`;
+        const screenshotPath = `./screenshots/CardGeneral/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
@@ -167,7 +167,7 @@ describe('Card General Component Tests', () => {
             // file written successfully
         });
 
-        const screenshotPath = `./screenshots/Cardgeneral/Verify that Analytics for the Card General Component is configured..png`;
+        const screenshotPath = `./screenshots/CardGeneral/Verify that Analytics for the Card General Component is configured..png`;
         await browser.saveScreenshot(screenshotPath);
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
 

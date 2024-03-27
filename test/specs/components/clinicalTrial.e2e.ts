@@ -38,7 +38,7 @@ describe('Clinical Trial Component Tests', () => {
     afterEach(async function () {
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/Clinicaltrial/${testName}.png`;
+        const screenshotPath = `./screenshots/ClinicalTrial/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
