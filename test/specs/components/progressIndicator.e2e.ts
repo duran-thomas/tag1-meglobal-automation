@@ -37,7 +37,7 @@ describe('Progress Indicator Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/Progressindicator/${testName}.png`;
+        const screenshotPath = `./screenshots/ProgressIndicator/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 

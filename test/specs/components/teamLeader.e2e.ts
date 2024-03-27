@@ -39,7 +39,7 @@ describe('Team Leader Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/Teamleader/${testName}.png`;
+        const screenshotPath = `./screenshots/TeamLeader/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
