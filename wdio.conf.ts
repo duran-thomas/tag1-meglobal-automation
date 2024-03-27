@@ -132,13 +132,13 @@ export const config: Options.Testrunner = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 1,
+        maxInstances: 5,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                'disable-gpu', 'window-size=1920,1080', 'no-sandbox', 'headless'],
-            //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
+                'disable-gpu'],
+            extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,
         //'--auto-open-devtools-for-tabs' opens console
@@ -195,19 +195,20 @@ export const config: Options.Testrunner = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['selenium-standalone',
-        [QualityWatcherService, {
-            email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
-            apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-            testRunName: `Daily Regression executed on ${new Date().toString()}`,
-            description: 'This test run was created by the CI pipeline during the daily regression run..',
-            projectId: 1,
-            includeAllCases: false,
-            ignoreSkipped: true,
-            generateShareableLink: true,
-            screenshotFolder: "./screenshots",
-            uploadScreenshot: true,
-        }]
+        // [QualityWatcherService, {
+        //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
+        //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
+        //     testRunName: "[Release 0.35.6] Automated Regression",
+        //     description: 'This test run was created by the automation suite.',
+        //     projectId: 1,
+        //     includeAllCases: false,
+        //     ignoreSkipped: true,
+        //     generateShareableLink: true,
+        //     screenshotFolder: "./screenshots",
+        //     uploadScreenshot: true,
+        // }]
     ],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
