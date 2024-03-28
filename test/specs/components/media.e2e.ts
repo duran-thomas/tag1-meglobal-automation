@@ -67,9 +67,10 @@ describe('Media Component Tests', () => {
 
 
     it('[S3C867] Verify that a site Content Administrator can create an Image Paragraph Type', async () => {
+        const id=`Media-S3C867-${Date.now()}`;
         const alt = mediaBlockData.altText;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnImage).scrollIntoView();
         (await QALayoutPage.btnImage).click();
@@ -83,7 +84,7 @@ describe('Media Component Tests', () => {
         await QALayoutPage.goToPageView();
         await (await MediaBlockPage.captionElement).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await $(`img[alt="${alt}"]`)).toExist;
+        await expect(await $(`#${id} img[alt="${alt}"]`)).toExist;
         const text = await MediaBlockPage.captionElement;
         await expect(text).toHaveText(mediaBlockData.caption);
     });
@@ -121,10 +122,12 @@ describe('Media Component Tests', () => {
     });
 
     it('[S3C870] Verify that a site Content Administrator can create a Video Paragraph Type', async () => {
+        const id=`Media-S3C870-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnVideo).scrollIntoView();
+        await QALayoutPage.closeChatPopup()
         await (await QALayoutPage.btnVideo).click();
         await (await MediaBlockPage.configBlock).waitForDisplayed();
 
@@ -135,16 +138,17 @@ describe('Media Component Tests', () => {
         await expect(MediaBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await MediaBlockPage.durationElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await MediaBlockPage.durationElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(MediaBlockPage.mediaElement).toExist;
-        await expect((await MediaBlockPage.durationElement)).toHaveText(mediaBlockData.duration);
+        await expect(MediaBlockPage.mediaElement(id)).toExist;
+        await expect((await MediaBlockPage.durationElement(id))).toHaveText(mediaBlockData.duration);
     });
 
 
     it('[S3C1102] Verify that Analytics for the Image Component is configured', async () => {
+        const id=`Media-S3C1102-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnImage).scrollIntoView();
         await (await QALayoutPage.btnImage).click();
@@ -157,12 +161,12 @@ describe('Media Component Tests', () => {
     
         await QALayoutPage.goToPageView();
     
-       /**
-             * Create the expected analytics 
-             * object based on the spec below: 
-             * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
-             *  */ 
-       const expectedAnalyticsData = {
+    /**
+     * Create the expected analytics 
+     * object based on the spec below: 
+     * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g14a70e2868a_0_5
+     *  */ 
+    const expectedAnalyticsData = {
         event: 'e_componentClick',
         componentType:'media image',
         linkType: 'image',
@@ -183,12 +187,11 @@ describe('Media Component Tests', () => {
         // Interact with the Image link to generate the analytics. (Clicking the image link brings the user to a new page)
         element.click();
         return Array.from(window.dataLayer);
-    }, variable, (await $(`a[href="${mediaBlockData.link}"]`)))
+    }, variable, (await $(`#${id} a[href="${mediaBlockData.link}"]`)))
     
     
     
-     const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
-    
+    const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
     // Build the actual analytics data object
     const parsedActualAnalyticsData = {
         //clickText: actualAnalyticsData.clickText.trim(),
@@ -198,7 +201,6 @@ describe('Media Component Tests', () => {
         linkType: actualAnalyticsData.linkType,
         pageSlot: actualAnalyticsData.pageSlot
     }
-    
     fs.writeFile('analyticsTestEvidence/mediaImage.json', JSON.stringify(dataLayer), err => {
         if (err) {
             console.error(err);

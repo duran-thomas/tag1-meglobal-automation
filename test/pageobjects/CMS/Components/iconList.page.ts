@@ -108,20 +108,20 @@ class IconListBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get iconListElement() {
-        return $('.mf-icon-list');
+    public iconListElement(id: string) {
+        return $(`#${id} .mf-icon-list`);
     }
 
     public get iconStyle() {
         return $('.mf-icon-list__icon > span');
     }
 
-    public get listItem() {
-        return $('.mf-icon-list__item');
+    public listItem(id: string) {
+        return $(`#${id} .mf-icon-list__item`);
     }
 
     public get lastItem() {
-        return $('div[class="layout-content "] li:nth-child(6)');
+        return $(`div .layout-content li:nth-child(6)`);
     }
 
 

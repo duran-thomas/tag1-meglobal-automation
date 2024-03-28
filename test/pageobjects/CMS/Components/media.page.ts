@@ -121,12 +121,12 @@ class MediaBlockPage extends Page {
         return $('.mf-media__content');
     }
 
-    public get mediaElement() {
-        return $('.mf-media__button');
+    public mediaElement(id: string) {
+        return $(`#${id} .mf-media__button`);
     }
 
-    public get durationElement() {
-        return $('.mf-media__play__duration');
+    public durationElement(id: string) {
+        return $(`#${id} .mf-media__play__duration`);
     }
 
     public get btnClose() {
