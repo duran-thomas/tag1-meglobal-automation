@@ -114,20 +114,20 @@ class FactsBlockPage extends Page {
         return $('.ui-draggable-handle');
     }
 
-    public get horizontalElement() {
-        return $('.mf-facts--horizontal');
+    public horizontalElement(id: string) {
+        return $(`#${id} .mf-facts--horizontal`);
     }
 
-    public get factsElement() {
-        return $('.mf-facts');
+    public factsElement(id: string) {
+        return $(`#${id} .mf-facts`);
     }
 
-    public get btnCarousel() {
-        return $('.mf-carousel__nav-button');
+    public btnCarousel(id: string) {
+        return $(`#${id} .mf-carousel__nav-button`);
     }
 
-    public get titleElement() {
-        return $('p.mb-8');
+    public titleElement(id: string) {
+        return $(`#${id} p.mb-8`);
     }
 
     public get successMsg() {

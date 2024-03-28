@@ -154,7 +154,7 @@ class FreeformBlockPage extends Page {
         await (await this.dropdownTypeaheadType).waitForDisplayed({timeout:6000});
         await (await this.dropdownTypeaheadType).selectByVisibleText('Layout page');
         await (await this.inputCharacterThreshold).scrollIntoView();
-        await (await this.inputCharacterThreshold).setValue('256');
+        await (await this.inputCharacterThreshold).setValue('5');
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

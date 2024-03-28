@@ -131,8 +131,8 @@ class FreeformBlockPage extends Page {
         return $('input[id^="edit-settings-block-form-field-content-0-subform-field-extra-classes-0-value-"]');
     }
 
-    public get dividerElement() {
-        return $('hr[class="mf-divider bg-soft-gray bg-tint-sky"]');
+    public dividerElement(id: string) {
+        return $(`#${id} hr[class="mf-divider bg-soft-gray bg-tint-sky"]`);
     }
 
     //Dropdown Block
@@ -214,12 +214,15 @@ class FreeformBlockPage extends Page {
         return $('.mf-icon-list__icon > span');
     }
 
-    public get listItem() {
-        return $('.mf-icon-list__item');
+    public listItem(id: string) {
+        return $(`#${id} .mf-icon-list__item`);
     }
 
+    // public lastItem(id: string) {
+    //     return $(`#${id} div .layout-content li:nth-child(6)`);
+    // }
     public get lastItem() {
-        return $('div[class="layout-content "] li:nth-child(6)');
+        return $(`div .layout-content li:nth-child(6)`);
     }
 
     // public get () {
