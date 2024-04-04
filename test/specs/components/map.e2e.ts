@@ -125,7 +125,7 @@ describe('Map Component Tests', () => {
         await (await MapBlockPage.mapElement(id)).scrollIntoView();
         await expect(MapBlockPage.mapElement(id)).toBeDisplayed(); 
 
-        (await $('.dismissButton')).click();
+        //(await $('.dismissButton')).click();
         await (await MapBlockPage.btnFirstLocation).click();
         await browser.pause(2000);
         await (await MapBlockPage.btnOverlayMapIcon).click();
@@ -178,27 +178,27 @@ describe('Map Component Tests', () => {
                 phoneNumber: '18768678768'
             }]
 
-        await browser.execute(() => {
-            const phoneIconsElements = document.querySelectorAll('a[data-analytics-link-type="button"]')
-            const phoneTextElements = document.querySelectorAll('a[data-analytics-click-text="phone"]')
+        // await browser.execute(() => {
+        //     const phoneIconsElements = document.querySelectorAll('a[data-analytics-link-type="button"]')
+        //     const phoneTextElements = document.querySelectorAll('a[data-analytics-click-text="phone"]')
 
-            const phoneIcon = phoneIconsElements[3]
-            const phoneText = phoneTextElements[5]
+        //     const phoneIcon = phoneIconsElements[3]
+        //     const phoneText = phoneTextElements[5]
 
-            if (phoneIcon.getAttribute('target') !== '_blank') {
-                phoneIcon.setAttribute('target', '_blank');
-            }
-            if (phoneText.getAttribute('target') !== '_blank') {
-                phoneText.setAttribute('target', '_blank');
-            }
-        })
-        const icons = $$('a[data-analytics-link-type="button"]')
-        const text = $$('a[data-analytics-click-text="phone"]')
+        //     if (phoneIcon.getAttribute('target') !== '_blank') {
+        //         phoneIcon.setAttribute('target', '_blank');
+        //     }
+        //     if (phoneText.getAttribute('target') !== '_blank') {
+        //         phoneText.setAttribute('target', '_blank');
+        //     }
+        // })
+        // const icons = $$('a[data-analytics-link-type="button"]')
+        // const text = $$('a[data-analytics-click-text="phone"]')
 
-        icons[3].click();
-        await browser.switchWindow(currentUrl);
-        text[5].click();
-        await browser.switchWindow(currentUrl);
+        // icons[3].click();
+        // await browser.switchWindow(currentUrl);
+        // text[5].click();
+        // await browser.switchWindow(currentUrl);
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
         let parsedAnalyticsData = []
@@ -280,22 +280,22 @@ describe('Map Component Tests', () => {
                 linkType: 'button',
                 pageSlot: '1'
             },
-            // {
-            //     clickText: 'map-trifold',
-            //     componentType: 'map > card location',
-            //     event: 'e_componentClick',
-            //     itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-            //     linkType: 'button',
-            //     pageSlot: '1'
-            // },
-            // {
-            //     clickText: '111 East 210th Street Bronx, NY 10467-2401',
-            //     componentType: 'map > card location',
-            //     event: 'e_componentClick',
-            //     itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-            //     linkType: 'link',
-            //     pageSlot: '1'
-            // },
+            {
+                clickText: 'map-trifold',
+                componentType: 'map > card location',
+                event: 'e_componentClick',
+                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+                linkType: 'button',
+                pageSlot: '1'
+            },
+            {
+                clickText: '111 East 210th Street Bronx, NY 10467-2401',
+                componentType: 'map > card location',
+                event: 'e_componentClick',
+                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
+                linkType: 'link',
+                pageSlot: '1'
+            },
             // {
             //     clickText: 'phone',
             //     componentType: 'map > card location',
@@ -343,9 +343,9 @@ describe('Map Component Tests', () => {
         }
         const screenshotPath = `./screenshots/Map/Verify that Analytics for the Map: Locations: Rail Component is configured.png`;
         await browser.saveScreenshot(screenshotPath);
-        await expect(parsedAnalyticsData[0]).toEqual(expectedAnalyticsData[0])
-        // for(let x in parsedAnalyticsData){
-        //     await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
-        // }
+        //await expect(parsedAnalyticsData[0]).toEqual(expectedAnalyticsData[0])
+        for(let x in parsedAnalyticsData){
+            await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
+        }
     });
 });

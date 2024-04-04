@@ -3,13 +3,13 @@ export const environment = {
     baseUrl: 'https://dev.montefioreeinstein.org/',
     cookies: {
         name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: 'K6Rzw32IDJR47x%2CsEEEhBv-Zy7rcnm0D3aNcCvRhTkXTsB9p',
+        value: 'pOItdp0zjeuDruhY9h5MxZdtMTp4eUtscGZmntjdkAetgtIL',
         domain: '.dev.montefioreeinstein.org',
         path: '/',
     },
     admin: {
         name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: '7JwwDFcGdtrn8NKOt6cwzesIR2%2CZjEKCYqk7FG7owVgMepAI',
+        value: '11vh5DpEWzJ2mO35K389-6U4kbXKTAbNuD7BJlPfGezl1w9g',
         domain: '.dev.montefioreeinstein.org',
         path: '/',
     }
