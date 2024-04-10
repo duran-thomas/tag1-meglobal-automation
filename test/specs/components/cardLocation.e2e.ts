@@ -154,7 +154,7 @@ describe('Card Location Component Tests', () => {
        * object based on the spec below: 
        * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_185
        * */
-        const title = process.env.ENV === 'dev' ? "Children's Hospital at Montefiore" : "Montefiore Einstein Hospital, Moses Campus"
+        const title = "Montefiore Einstein Hospital, Moses Campus"
         const expectedAnalyticsData = {
             event: 'e_componentClick',
             componentType: 'card location',
@@ -165,7 +165,7 @@ describe('Card Location Component Tests', () => {
         }
 
         // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await ($(`button[data-analytics-click-text="map-trifold"]`)).click();
+        await ($(`a[data-analytics-click-text="map-trifold"]`)).click();
 
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer', []);
