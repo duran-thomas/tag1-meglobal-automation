@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+[{"clickText":"Accordion Title","componentType":"accordion","event":"e_componentClick","pageSlot":"1"}]
+=======
 [{"OnetrustActiveGroups":",,","event":"OneTrustLoaded"},{"OptanonActiveGroups":",,","event":"OptanonLoaded"},{"OnetrustActiveGroups":",C0001,","event":"OneTrustLoaded"},{"OptanonActiveGroups":",C0001,","event":"OptanonLoaded"},{"OnetrustActiveGroups":",C0001,","event":"OneTrustGroupsUpdated"},{"clickText":"Accordion Title","componentType":"accordion","event":"e_componentClick","pageSlot":"1"}]
+>>>>>>> 022f552864aa91074f893e668e1b6ff9c41af9e9
