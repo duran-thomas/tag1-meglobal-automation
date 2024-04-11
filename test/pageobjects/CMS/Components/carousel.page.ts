@@ -287,7 +287,7 @@ class CarouselBlockPage extends Page {
     }
 
     public carouselLocationAddressIcon(id:string){
-        return $(`#${id} button[data-analytics-click-text="map-trifold"]`);
+        return $(`#${id} a[data-analytics-click-text="map-trifold"]`);
     }
 
     // Location Content Area End

@@ -336,10 +336,9 @@ describe('Contact List Component Tests', () => {
 
     });
 
-    it('[S3C1104] Verify analytics for Contact components are configured', async () => {
-        const id=`ContactList-S3C1104-${Date.now()}`;
+    it('Verify analytics for Contact components are configured', async () => {
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection(id);
+        await QALayoutPage.createNewSection();
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnContactList).scrollIntoView();
         await (await QALayoutPage.btnContactList).click();
@@ -348,7 +347,7 @@ describe('Contact List Component Tests', () => {
         const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
         await ContactListBlockPage.createAllContactTypes(contactListBlockData.title, contactListBlockData.headline, contactListBlockData.content, contactListBlockData.heading, contactListBlockData.address, contactListBlockData.latitude, contactListBlockData.longitude, contactListBlockData.url, contactListBlockData.email, contactListBlockData.subTitle, contactListBlockData.text, contactListBlockData.phone, contactListBlockData.url, contactListBlockData.linkText,
             imageFilePath, contactListBlockData.altText, contactListBlockData.name, contactListBlockData.info, contactListBlockData.btnText);
-    
+
         await expect(ContactListBlockPage.successMsg).toBeDisplayed();
         // Create expected analytics objects
         let allAnalytics = [
@@ -366,7 +365,7 @@ describe('Contact List Component Tests', () => {
                 event: 'e_componentClick',
                 itemTitle: contactListBlockData.email,
                 linkType: 'button',
-                pageSlot: '1' 
+                pageSlot: '1'
             },
             {
                 clickText: 'mail',
@@ -411,14 +410,6 @@ describe('Contact List Component Tests', () => {
                 pageSlot: '1'
             },
             {
-                clickText: 'button',
-                componentType: 'card contact',
-                event: 'e_componentClick',
-                itemTitle: contactListBlockData.btnText,
-                linkType: 'button',
-                pageSlot: '1'
-            },
-            {
                 clickText: 'text',
                 componentType: 'card contact',
                 event: 'e_componentClick',
@@ -426,80 +417,96 @@ describe('Contact List Component Tests', () => {
                 linkType: 'link',
                 pageSlot: '1'
             },
+            {
+                clickText: 'button',
+                componentType: 'card contact',
+                event: 'e_componentClick',
+                itemTitle: contactListBlockData.btnText,
+                linkType: 'button',
+                pageSlot: '1'
+            }
         ]
         // Setting links to open in new tab
-        
         await browser.execute(() => {
             //Location 
-            const icons = document.querySelectorAll('div div a.mf-button')
-            const text = document.querySelectorAll('div.items-start div div a.mf-link')
-
-            icons.forEach(icon => {
-                if (icon.getAttribute('target') !== '_blank') {
-                    icon.setAttribute('target', '_blank');
-                }
-            });
-            text.forEach(txt => {
-                if (txt.getAttribute('target') !== '_blank') {
-                    txt.setAttribute('target', '_blank');
-                }
-            });
+            const locationIcon = document.querySelector('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(4) > div:nth-child(1) > a')
+            const chatIcon = document.querySelector('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(13) > div:nth-child(1) > a')
+            const chatText = document.querySelector('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(13) > div.self-center.grid.gap-y-2 > div > a')
+            const textLink = document.querySelector('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(19) > div > div > a')
+            const buttonLink = document.querySelector('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(21) > div > div > a')
+            if (locationIcon) {
+                locationIcon.setAttribute('target', '_blank');
+            }
+            if (chatIcon && chatText) {
+                chatIcon.setAttribute('target', '_blank');
+                chatText.setAttribute('target', '_blank');
+            }
+            if (textLink) {
+                textLink.setAttribute('target', '_blank');
+            }
+            if (buttonLink) {
+                buttonLink.setAttribute('target', '_blank')
+            }
         })
 
         const currentUrl = await browser.getUrl();
         // Trigger analytics for location contact
-        const icons = $$('div div a.mf-button')
-        const text = $$('div.items-start div div a.mf-link')
-
-        // Location
-        icons[0].click()
-        await browser.switchWindow(currentUrl);
-        // Mail
-        icons[1].click()
-        await browser.switchWindow(currentUrl);
-        text[0].click()
-        await browser.switchWindow(currentUrl);
-        // Phone
-        icons[2].click()
-        await browser.switchWindow(currentUrl);
-        text[1].click()
-        await browser.switchWindow(currentUrl);
-        // Chat
-        icons[3].click()
-        await browser.switchWindow(currentUrl);
-        text[2].click()
-        await browser.switchWindow(currentUrl);
-        // Button
-        icons[4].click()
-        await browser.switchWindow(currentUrl);
-        //Text
-        text[3].click()
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(4) > div:nth-child(1) > a').click()
         await browser.switchWindow(currentUrl);
 
-        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        
+        // Trigger analytics for email contact
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(7) > div:nth-child(1) > a').click()
+        await browser.switchWindow(currentUrl);
+
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(7) > div.self-center.grid.gap-y-2 > div > a').click()
+        await browser.switchWindow(currentUrl);
+
+        //Trigger analytics for Phone
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(10) > div:nth-child(1) > a').click()
+        await browser.switchWindow(currentUrl);
+
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(10) > div.self-center.grid.gap-y-2 > div > a').click()
+        await browser.switchWindow(currentUrl);
+        //Trigger analytics for chat
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(13) > div:nth-child(1) > a').click()
+        await browser.switchWindow(currentUrl);
+
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(13) > div.self-center.grid.gap-y-2 > div > a').click()
+        await browser.switchWindow(currentUrl);
+
+        //Trigger analytics for text
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(19) > div > div > a').click()
+        await browser.switchWindow(currentUrl);
+
+        //Trigger analytics for button
+        await (await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(21) > div > div > a')).scrollIntoView()
+        await $('div.mf-contact.grid.gap-24.p-24.bg-soft-blue > div:nth-child(21) > div > div > a').click()
+        await browser.switchWindow(currentUrl);
+
+        const dataLayer = await browser.executeScript('return window.dataLayer', []);
+
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
         let parsedAnalyticsData = []
 
-        for(let x in actualAnalyticsData){
+        for (let x in actualAnalyticsData) {
             if ('phoneNumber' in actualAnalyticsData[x]) {
                 parsedAnalyticsData.push({
                     clickText: actualAnalyticsData[x].clickText,
                     componentType: actualAnalyticsData[x].componentType,
                     event: actualAnalyticsData[x].event,
                     // Remove HTML tags, whitespace, and newlines from the Headline
-                    itemTitle: actualAnalyticsData[x].itemTitle,
+                    itemTitle: actualAnalyticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
                     linkType: actualAnalyticsData[x].linkType,
                     phoneNumber: actualAnalyticsData[x].phoneNumber,
-                    pageSlot: actualAnalyticsData[x].pageSlot,  
+                    pageSlot: actualAnalyticsData[x].pageSlot,
                 });
-            }else {
+            } else {
                 parsedAnalyticsData.push({
                     clickText: actualAnalyticsData[x].clickText,
                     componentType: actualAnalyticsData[x].componentType,
                     event: actualAnalyticsData[x].event,
                     // Remove html tags, whitespace and newlines from the Headline
-                    itemTitle: actualAnalyticsData[x].itemTitle,
+                    itemTitle: actualAnalyticsData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
                     linkType: actualAnalyticsData[x].linkType,
                     pageSlot: actualAnalyticsData[x].pageSlot
                 })
@@ -515,10 +522,10 @@ describe('Contact List Component Tests', () => {
 
         const screenshotPath = `./screenshots/ContactList/Verify analytics for Contact components are configured.png`;
         await browser.saveScreenshot(screenshotPath);
-        for(let x in parsedAnalyticsData){
+        for (let x in parsedAnalyticsData) {
             await expect(parsedAnalyticsData[x]).toEqual(allAnalytics[x]);
         }
-    })
+    });
 
 
   });

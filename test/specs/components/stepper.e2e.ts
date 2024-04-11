@@ -185,7 +185,7 @@ describe('Stepper Component Tests', () => {
             event: 'e_componentClick',
             componentType:'stepper',
             linkType: 'button',
-            clickText: stepperBlockData.steps.title1,
+            clickText: 'Step 2: 911',
             pageSlot: '1'
         }
 
@@ -213,13 +213,13 @@ describe('Stepper Component Tests', () => {
             // file written successfully
         });
         
-        await expect(expectedAnalyticsDataForwardBtn).toEqual(parsedActualAnalyticsDataForwardBtn);
+        await expect(parsedActualAnalyticsDataForwardBtn).toEqual(expectedAnalyticsDataForwardBtn);
 
         const expectedAnalyticsDataBackLink = {
             event: 'e_componentClick',
             componentType:'stepper',
             linkType: 'link',
-            clickText: stepperBlockData.steps.title2,
+            clickText: 'Step 1: Assess the situation',
             pageSlot: '1'
         }
 
@@ -247,13 +247,13 @@ describe('Stepper Component Tests', () => {
             // file written successfully
         });
         
-        await expect(expectedAnalyticsDataBackLink).toEqual(parsedActualAnalyticsDataBackLink);
+        await expect(parsedActualAnalyticsDataBackLink).toEqual(expectedAnalyticsDataBackLink);
 
         const expectedAnalyticsDataStep = {
             event: 'e_componentClick',
             componentType:'stepper',
             linkType: 'step',
-            clickText: stepperBlockData.steps.title1,
+            clickText: 'Step 2: 911',
             pageSlot: '1'
         }
 
@@ -281,7 +281,7 @@ describe('Stepper Component Tests', () => {
             // file written successfully
         });
         
-        await expect(expectedAnalyticsDataStep).toEqual(parsedActualAnalyticsDataStep);
+        await expect(parsedActualAnalyticsDataStep).toEqual(expectedAnalyticsDataStep);
 
     });
 
@@ -312,7 +312,7 @@ describe('Stepper Component Tests', () => {
             event: 'e_componentClick',
             componentType:'stepper',
             linkType: 'button',
-            clickText: stepperBlockData.steps.title1,
+            clickText: 'Step 2: 911',
             pageSlot: '1'
         }
 
@@ -340,13 +340,13 @@ describe('Stepper Component Tests', () => {
             // file written successfully
         });
         
-        await expect(expectedAnalyticsDataForwardBtn).toEqual(parsedActualAnalyticsDataForwardBtn);
+        await expect(parsedActualAnalyticsDataForwardBtn).toEqual(expectedAnalyticsDataForwardBtn);
 
         const expectedAnalyticsDataStep = {
             event: 'e_componentClick',
             componentType:'stepper',
             linkType: 'step',
-            clickText: stepperBlockData.steps.title2,
+            clickText: 'Step 1: Assess the situation',
             pageSlot: '1'
         }
 
@@ -374,7 +374,7 @@ describe('Stepper Component Tests', () => {
             // file written successfully
         });
         
-        await expect(expectedAnalyticsDataStep).toEqual(parsedActualAnalyticsDataStep);
+        await expect(parsedActualAnalyticsDataStep).toEqual(expectedAnalyticsDataStep);
     });
 
 

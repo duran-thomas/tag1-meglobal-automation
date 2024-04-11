@@ -149,6 +149,7 @@ describe('Card Location Component Tests', () => {
 
     it('[S3C1353] Verify that Analytics for the Card Location Component is configured', async () => {
 
+
         const id=`CardLocation-S3C1353-${Date.now()}`;
         await AdminContentPage.open();
         await AdminContentPage.getTestPage(global.suiteDescription); 

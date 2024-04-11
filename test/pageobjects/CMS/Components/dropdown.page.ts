@@ -36,8 +36,12 @@ class DropdownBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-title"]');
     }
 
+    public get dropdownLinkAttributes() {
+        return $('details[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-link-attributes"]')
+    }
+
     public get dropdownTarget() {
-        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-target"]');
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-0-subform-field-linked-list-item-0-link-attributes-target"]');
     }
 
 
@@ -53,8 +57,12 @@ class DropdownBlockPage extends Page {
         return $('input[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-title"]');
     }
 
+    public get dropdownLinkAttributes1() {
+        return $('details[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-link-attributes"]')
+    }
+
     public get dropdownTarget1() {
-        return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-target"]');
+        return $('select[data-drupal-selector="edit-settings-block-form-field-content-1-subform-field-linked-list-item-0-link-attributes-target"]');
     }
 
 
@@ -134,7 +142,8 @@ class DropdownBlockPage extends Page {
         await (await this.inputURL).setValue(url);
         await (await this.inputLinkText).scrollIntoView();
         await (await this.inputLinkText).setValue(linkText);
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
+        await (await this.dropdownLinkAttributes).click();
         await (await this.dropdownTarget).selectByIndex(1);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
@@ -156,7 +165,8 @@ class DropdownBlockPage extends Page {
         await (await this.inputURL).setValue(url);
         await (await this.inputLinkText).scrollIntoView();
         await (await this.inputLinkText).setValue(linkText);
-        await browser.pause(3000); //explicit waits seem to be necessary here
+        await browser.pause(1000); //explicit waits seem to be necessary here
+        await (await this.dropdownLinkAttributes).click();
         await (await this.dropdownTarget).selectByIndex(1);
         //add second menu item
         await (await this.dropdownToggle).scrollIntoView();
@@ -167,8 +177,9 @@ class DropdownBlockPage extends Page {
         await (await this.inputURL1).setValue(url1);
         await (await this.inputLinkText1).scrollIntoView();
         await (await this.inputLinkText1).setValue(linkText1);
-        await browser.pause(3000); //explicit waits seem to be necessary here
-        await (await this.dropdownTarget).selectByIndex(2);
+        await browser.pause(1000); //explicit waits seem to be necessary here
+        await (await this.dropdownLinkAttributes1).click();
+        await (await this.dropdownTarget1).selectByIndex(2);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

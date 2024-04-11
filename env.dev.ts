@@ -3,7 +3,7 @@ export const environment = {
     baseUrl: 'https://meglobaldev.prod.acquia-sites.com/',
     cookies: {
         name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: 'jz%2CUT9XUzs8f%2CLBQCpiu0PK%2CuVD3J6SOd8Ht6jug748HxAkO',
+        value: 'pOItdp0zjeuDruhY9h5MxZdtMTp4eUtscGZmntjdkAetgtIL',
         domain: '.dev.montefioreeinstein.org',
         path: '/',
     },
