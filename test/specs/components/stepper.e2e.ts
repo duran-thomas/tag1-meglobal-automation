@@ -65,9 +65,10 @@ describe('Stepper Component Tests', () => {
         await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
-    it.skip('[S3C926] Verify required fields in a stepper component', async () => {
+    it('[S3C926] Verify required fields in a stepper component', async () => {
+        const id=`Stepper-S3C926-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -81,8 +82,9 @@ describe('Stepper Component Tests', () => {
     });
 
     it('[S3C927] Verify that a site Content Administrator can create a horizontal Stepper Component', async () => {
+        const id=`Stepper-S3C927-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -93,15 +95,16 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await $('.mf-stepper__list--horizontal')).toBeExisting();
+        await expect(await $(`#${id} .mf-stepper__list--horizontal`)).toBeExisting();
         await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
     });
 
     it('[S3C928] Verify that a site Content Administrator can create a vertical Stepper Component', async () => {
+        const id=`Stepper-S3C928-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -112,15 +115,16 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await $('.mf-stepper__list--vertical')).toBeExisting();
+        await expect(await $(`#${id} .mf-stepper__list--vertical`)).toBeExisting();
         await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
     });
 
     it('[S3C929] Verify that when the stepper component is on the initial step, the "back" button is not displayed, and the "Next Step" button is displayed.', async () => {
+        const id=`Stepper-S3C929-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -131,15 +135,16 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
-        await expect(await StepperBlockPage.btnBackStep).not.toBeDisplayedInViewport();
-        await expect(await StepperBlockPage.btnNextStep).toBeDisplayedInViewport();
+        await expect(await StepperBlockPage.btnBackStep(id)).not.toBeDisplayedInViewport();
+        await expect(await StepperBlockPage.btnNextStep(id)).toBeDisplayedInViewport();
     });
 
     it('[S3C930] Verify that when the stepper component is on the last step, "continue" button is not displayed and the "back" button is displayed', async () => {
+        const id=`Stepper-S3C930-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -150,17 +155,18 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await (await StepperBlockPage.btnLastStep).click();
-        await expect(await StepperBlockPage.btnBackStep).toBeEnabled();
-        await expect(await StepperBlockPage.btnNextStep).not.toBeDisplayedInViewport();
+        await expect(await StepperBlockPage.btnBackStep(id)).toBeEnabled();
+        await expect(await StepperBlockPage.btnNextStep(id)).not.toBeDisplayedInViewport();
     });
 
 
     it('[S3C1076] Verify that Analytics works as expected for a horizontal Stepper Component', async () => {
+        const id=`Stepper-S3C1076-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnStepper).scrollIntoView();
         await (await QALayoutPage.btnStepper).click();
@@ -171,7 +177,7 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(await $('.mf-stepper__list--horizontal')).toBeExisting();
         await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
@@ -190,7 +196,7 @@ describe('Stepper Component Tests', () => {
         }
 
         // Interact with the Forward button on the stepper to generate the analytics. (Clicking the button brings us to the next step)
-        await (await $(`button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
+        await (await $(`#${id} button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
 
          // Get the data layer for the window and get the data for the click event for the component
         let dataLayer = await browser.executeScript('return window.dataLayer',[]);
@@ -229,7 +235,7 @@ describe('Stepper Component Tests', () => {
          // Get the data layer for the window and get the data for the click event for the component
         dataLayer = await browser.executeScript('return window.dataLayer',[]);
         actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "link")))[0];
-
+        await browser.pause(500)
         // Build the actual analytics data object for using the back link
         const parsedActualAnalyticsDataBackLink = {
             //Remove whitespace from the Headline
@@ -286,8 +292,9 @@ describe('Stepper Component Tests', () => {
     });
 
     it('[S3C1077] Verify that Analytics works as expected for a vertical Stepper Component', async () => {
+        const id=`Stepper-S3C1077-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnStepper).scrollIntoView();
         (await QALayoutPage.btnStepper).click();
@@ -298,7 +305,7 @@ describe('Stepper Component Tests', () => {
         await expect(await StepperBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await StepperBlockPage.stepperElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await StepperBlockPage.stepperElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
 
         await expect(await $('.mf-stepper__list--vertical')).toBeExisting();
         await expect(await StepperBlockPage.stepsElements.length).toEqual(5);
@@ -317,7 +324,7 @@ describe('Stepper Component Tests', () => {
         }
 
         // Interact with the Forward button on the stepper to generate the analytics. (Clicking the button brings us to the next step)
-        await (await $(`button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
+        await (await $(`#${id} button[data-analytics-click-text="${stepperBlockData.steps.title1}"]`)).click();
 
          // Get the data layer for the window and get the data for the click event for the component
         let dataLayer = await browser.executeScript('return window.dataLayer',[]);
@@ -356,7 +363,7 @@ describe('Stepper Component Tests', () => {
         // Get the data layer for the window and get the data for the click event for the component
         dataLayer = await browser.executeScript('return window.dataLayer',[]);
         actualAnalyticsData = dataLayer.filter((item) => ((item.event === "e_componentClick") && (item.linkType === "step")))[0];
-
+        await browser.pause(500);
         // Build the actual analytics data object for using the back link
         const parsedActualAnalyticsDataStep = {
             //Remove whitespace from the Headline
@@ -376,9 +383,4 @@ describe('Stepper Component Tests', () => {
         
         await expect(parsedActualAnalyticsDataStep).toEqual(expectedAnalyticsDataStep);
     });
-
-
-
-
-
 });

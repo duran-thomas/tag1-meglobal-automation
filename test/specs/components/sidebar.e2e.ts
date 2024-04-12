@@ -17,13 +17,14 @@ describe('Sidebar Component Tests', () => {
         // Use the environment data
         const bypassURL = environment.bypassURL;
         const cookies = environment.cookies;
+        const admin = environment.admin;
 
         //Bypass login
         await browser.url(await bypassURL);
         await browser.maximizeWindow();
 
         // Set user cookies
-        await browser.setCookies(await cookies);
+        await browser.setCookies(await admin);
 
     });
 
@@ -42,7 +43,7 @@ describe('Sidebar Component Tests', () => {
         const screenshotPath = `./screenshots/Sidebar/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
-   
+
 
     //delete page
     after(async function () {
@@ -50,9 +51,12 @@ describe('Sidebar Component Tests', () => {
         const environment = getEnvironmentConfig(process.env.ENV);
         //await browser.url(environment.baseUrl+'user/logout');
         await browser.setCookies(environment.admin);
-        await AdminContentPage.open();
-        await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+
+        // await AdminContentPage.open();
+        // await AdminContentPage.deleteTestPage(global.suiteDescription);
+        // await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+
+        
         // //1025 delete created node
         // await SidebarBlockPage.deleteNode();
         // await expect (SidebarBlockPage.successMsg).toBeDisplayed();
@@ -74,7 +78,7 @@ describe('Sidebar Component Tests', () => {
 
     });
 
-  
+
     it('[S3C1025] Verify that a site content-admin can create a sidebar component', async () => {
         await SidebarBlockPage.setupSidebar(sidebarBlockData.title);
         await expect(SidebarBlockPage.successMsg).toBeDisplayed();
@@ -83,10 +87,10 @@ describe('Sidebar Component Tests', () => {
         await QALayoutPage.createSidebarSection();
 
         await browser.refresh();
-        
         await (await QALayoutPage.linkAddBlock).waitForExist({timeout:5000});
         await (await QALayoutPage.leftAddBlock).scrollIntoView();
         await (await QALayoutPage.leftAddBlock).click();
+        await (await QALayoutPage.btnSidebarNav).scrollIntoView({ behavior: 'auto', block: 'center' })
         await (await QALayoutPage.btnSidebarNav).click();
         await (await SidebarBlockPage.configBlock).waitForDisplayed();
 
@@ -180,10 +184,10 @@ describe('Sidebar Component Tests', () => {
         await QALayoutPage.createSidebarSection();
 
         await browser.refresh();
-        
         await (await QALayoutPage.linkAddBlock).waitForExist({timeout:5000});
         await (await QALayoutPage.leftAddBlock).scrollIntoView();
         await (await QALayoutPage.leftAddBlock).click();
+        await (await QALayoutPage.btnSidebarNav).scrollIntoView({ behavior: 'auto', block: 'center' })
         await (await QALayoutPage.btnSidebarNav).click();
         await (await SidebarBlockPage.configBlock).waitForDisplayed();
 
@@ -193,7 +197,8 @@ describe('Sidebar Component Tests', () => {
         await expect(SidebarBlockPage.sidebarElement).toExist; 
         await (await SidebarBlockPage.sidebarElement).scrollIntoView({ behavior: 'auto', block: 'center' });
         await expect(SidebarBlockPage.editedElement).toExist; 
-        
+        // Revert menu back to its original state or the following test will fail
+        await SidebarBlockPage.editMenuLink(sidebarBlockData.originalText);
     });
 
     /**Not automating '[S3C966] Verify that links can be added to and removed from a Group Content Menu', 
@@ -232,4 +237,4 @@ describe('Sidebar Component Tests', () => {
     //Unable to complete '[S3C1378] Verify that the current page link is highlighted' on ode7. Resources not available.
 
 
-  });
+});
