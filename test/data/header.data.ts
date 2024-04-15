@@ -7,3 +7,8 @@ export const globalUtilityData = {
     label: 'QA Test Link',
 };
 
+
+export const hamburgerData = {
+    link: '/patient-care/giving',
+    menuTitle: 'QA Donate'
+};

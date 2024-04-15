@@ -142,7 +142,7 @@ class MediaBlockPage extends Page {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
-        await (await this.dropdownImage).click();
+        //await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.imageIframe);
         await (await this.btnBrowse).scrollIntoView();
@@ -178,7 +178,7 @@ class MediaBlockPage extends Page {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
-        await (await this.dropdownVideo).click();
+        //await (await this.dropdownVideo).click();
         // switch to the iframe
         await browser.switchToFrame(await this.videoIframe);
         await (await this.tabNewVideo).scrollIntoView();
