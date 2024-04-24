@@ -17,7 +17,7 @@ class SidebarBlockPage extends Page {
     }
 
     public get nodesBtn() {
-        return $('a[data-analytics-click-text="Nodes"]');
+        return $('a[data-analytics-click-text="Group content"]');
     }
 
     public get addNewContentBtn() {
@@ -187,7 +187,6 @@ class SidebarBlockPage extends Page {
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();
     }
-    
 
     // public async createCardServicesAnalytics(title: string, eyebrow: string, headline: string, content: string, list: string, btnText: string, btnUrl: string, linkText: string, linkUrl: string, info: string, remoteFilePath: string, altText: string) {
     //     await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
@@ -239,7 +238,6 @@ class SidebarBlockPage extends Page {
     public openDentistryGroup() {
         //return super.open('group/71');
         return super.open('group/71');
-
     }
 
     public openDummyTestGroupMenus() {
