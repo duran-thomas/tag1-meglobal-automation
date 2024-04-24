@@ -131,6 +131,10 @@ class LandingQAPage extends Page {
         return $('=Icon List');
     }
 
+    public get btnIndexListClinicalCategories() {
+        return $('=Index List - Clinical Categories');
+    }
+
     public get btnImage() {
         return $('=Image');
     }
@@ -341,6 +345,14 @@ class LandingQAPage extends Page {
     public async goToQALayout() {
         await (await this.tabLayout).scrollIntoView();
         await (await this.tabLayout).click();
+    }
+
+    public async closeChatPopup(){
+        const iframe = await $('iframe[id="hyro-frame"]');
+        await iframe.waitForDisplayed();
+        await browser.switchToFrame(iframe);
+        await (await $('#hyro-widget-closed div div div svg')).click()
+        await browser.switchToParentFrame()
     }
 
 }

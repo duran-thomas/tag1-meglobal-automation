@@ -635,6 +635,10 @@ class CardLocationBlockPage extends Page {
         await (await this.btnAddBlock).click();
         await browser.pause(1500);
         await browser.refresh();
+        await (await this.btnSaveLayout).waitForDisplayed({timeout:4000});
+        await (await this.btnSaveLayout).scrollIntoView({ block: 'center' });
+        await (await this.btnSaveLayout).click();
+        await browser.pause(3000);
     }
 
     public async createLocationComponentBlock2(title:string, location:string) {

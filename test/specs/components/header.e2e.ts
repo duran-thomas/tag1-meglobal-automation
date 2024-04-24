@@ -23,7 +23,6 @@ describe('Header Component Tests', () => {
 
         // Set user cookies
         await browser.setCookies(await cookies);
-
     });
 
     afterEach(async function() { 
@@ -44,7 +43,7 @@ describe('Header Component Tests', () => {
     //     await AdminContentPage.open();
     //     await AdminContentPage.getTestPage(global.suiteDescription);  
     // });
-  
+
     it('[S3C943] Verify that all sections of the Header are present.', async () => {
         await expect(await HeaderBlockPage.btnFindDoctor).toBeDisplayedInViewport(); 
         await expect(await HeaderBlockPage.btnMenu).toBeDisplayedInViewport();   
@@ -66,6 +65,10 @@ describe('Header Component Tests', () => {
 
     });
 
+    it('[S3C629] Verify "Global-Utility" menu links.', async () => {
+        await expect(await HeaderBlockPage.btnFindDoctor).toExist(); 
+        await expect(await $('span[data-analytics-click-text="doctor"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
+
     it('[S3C632] Verify that "Hamburger" menu expands to the current active panel and indicates the active link', async () => {
         await HeaderBlockPage.navToFellowshipPage();
         await (await HeaderBlockPage.btnHamburgerMenu).waitForDisplayed();
@@ -78,10 +81,10 @@ describe('Header Component Tests', () => {
     });
 
 
-    // it.skip('[S3C629] Verify "Global-Utility" menu links.', async () => {
-    //     await expect(await HeaderBlockPage.btnFindDoctor).toExist(); 
-
-    //     await expect(await $('span[data-analytics-click-text="college-graduation"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
+    it('[S3C629] Verify "Global-Utility" menu links.', async () => {
+        await expect(await HeaderBlockPage.btnFindDoctor).toExist();
+        await expect(await $('span[data-analytics-click-text="doctor"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
+      
 
     //     // const parentElement = await $('a[data-analytics-click-text="Find a Doctor"]');
     //     // const childElement = await parentElement.$('span.mf-button__icon.mf-button__icon--leading');
@@ -89,26 +92,24 @@ describe('Header Component Tests', () => {
     //     // const desiredElementExists = await childElement.$('span[data-analytics-click-text="college-graduation"]').isExisting();
 
     //     // expect(desiredElementExists).toBe(true);
+         await expect(currentUrl).toContain('/profiles');
 
-    //     await (await HeaderBlockPage.btnFindDoctor).click();
+    it('[S3C948] Verify buttons can be added to and removed "Global Utility" menu', async () => {
+        //create
+        const environment = getEnvironmentConfig(process.env.ENV);
+        // Use the environment data
+        const baseUrl = environment.baseUrl;
+        await HeaderBlockPage.openUtilityMenu(baseUrl);
+        await HeaderBlockPage.createUtilityMenu(globalUtilityData.link, globalUtilityData.title, globalUtilityData.description, globalUtilityData.label);
+        await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
+        await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('saved');
+        await HeaderBlockPage.openHome(baseUrl);
+        await expect(await HeaderBlockPage.menuElement).toBeExisting();
 
-    //     const currentUrl = await browser.getUrl();
-    //     await expect(currentUrl).toContain('/doctors');
+        //remove
+        await HeaderBlockPage.openUtilityMenu(baseUrl);
+        await (await HeaderBlockPage.createdLink).scrollIntoView();
 
-    // });
-
-    // it.skip('[S3C948] Verify buttons can be added to and removed "Global Utility" menu', async () => {
-    //     //create
-    //     await HeaderBlockPage.openUtilityMenu();
-    //     await HeaderBlockPage.createUtilityMenu(globalUtilityData.link, globalUtilityData.title, globalUtilityData.description, globalUtilityData.label);
-    //     await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
-    //     await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('saved');
-    //     await HeaderBlockPage.openHome();
-    //     await expect(await HeaderBlockPage.menuElement).toBeExisting();
-
-    //     //remove
-    //     await HeaderBlockPage.openUtilityMenu();
-    //     await (await HeaderBlockPage.createdLink).scrollIntoView();
         
     //     // const wikipediaLink = await $('a[href="https://www.wikipedia.com/"]');
     //     // const row = await wikipediaLink.$('..'); // Navigate to the parent row element
@@ -116,25 +117,24 @@ describe('Header Component Tests', () => {
 
     //     // await dropdownToggle.click();
 
-    //     await (await HeaderBlockPage.dropdownToggle).click();//Improve: clicks by index, not locating target element row
+        await (await HeaderBlockPage.dropdownToggle).click();//Improve: clicks by index, not locating target element row
 
-    //     await (await HeaderBlockPage.linkDelete).click();
-    //     await (await HeaderBlockPage.btnDelete).click();
-    //     await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
-    //     await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('deleted');
-    //     await HeaderBlockPage.openHome();
-    //     await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
+        await (await HeaderBlockPage.linkDelete).click();
+        await (await HeaderBlockPage.btnDelete).click();
+        await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
+        await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('deleted');
+        await HeaderBlockPage.openHome(baseUrl);
+        await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
 
     // });
 
-    // it.skip('[S3C631] Verify "Hamburger" menu links.', async () => {
-    //     await HeaderBlockPage.openHomePage();
-    //     await HeaderBlockPage.goToMainMenu();
-    //     await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
-        
-        
-    // });
+
+    it('[S3C631] Verify "Hamburger" menu links.', async () => {
+        await HeaderBlockPage.openHomePage();
+        await HeaderBlockPage.goToMainMenu();
+        // await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
+    });
 
 
 
-  });
+});

@@ -72,8 +72,7 @@ describe('Card Location Component Tests', () => {
             console.error('Error occurred in the after hook:', error);
             }
         }      
-      });
-      
+    });
 
     it('[S3C936] Verify that a site Content Administrator can create Location nodes for use in the Card-Location Component', async () => {
         //create location 1
@@ -132,7 +131,7 @@ describe('Card Location Component Tests', () => {
         await (await CardLocationBlockPage.configBlock).waitForDisplayed();
         
         await CardLocationBlockPage.createLocationComponentBlock1(cardLocationComponentData.title+' 1', cardLocationComponentData.location1);
-
+        await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnCardLocation).scrollIntoView();
         await (await QALayoutPage.btnCardLocation).click();
@@ -140,7 +139,7 @@ describe('Card Location Component Tests', () => {
 
         await CardLocationBlockPage.createLocationComponentBlock2(cardLocationComponentData.title+' 2', cardLocationComponentData.location2);
 
-        //await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
+        await expect(CardLocationBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
         await (await CardLocationBlockPage.cardLocationElements(id)[1]).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -149,23 +148,31 @@ describe('Card Location Component Tests', () => {
     });
 
     it('[S3C1353] Verify that Analytics for the Card Location Component is configured', async () => {
-         /**
-       * Create the expected analytics 
-       * object based on the spec below: 
-       * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g23acaf9823b_0_185
-       * */
-        const title = "Montefiore Einstein Hospital, Moses Campus"
+
+
+        const id=`CardLocation-S3C1353-${Date.now()}`;
+        await AdminContentPage.open();
+        await AdminContentPage.getTestPage(global.suiteDescription); 
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection(id);
+        await QALayoutPage.navigateToBlockList();
+        await (await QALayoutPage.btnCardLocation).scrollIntoView();
+        await (await QALayoutPage.btnCardLocation).click();
+        await (await CardLocationBlockPage.configBlock).waitForDisplayed();
+        
+        await CardLocationBlockPage.createLocationComponentBlock1(cardLocationComponentData.title+' 1', cardLocationComponentData.location1);
+        // const title = process.env.ENV === 'dev' ? "Children's Hospital at Montefiore" : "Montefiore Einstein Hospital, Moses Campus"
         const expectedAnalyticsData = {
             event: 'e_componentClick',
             componentType: 'card location',
-            itemTitle: title,
+            itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
             linkType: 'button',
             clickText: 'map-trifold',
             pageSlot: '1'
         }
 
         // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await ($(`a[data-analytics-click-text="map-trifold"]`)).click();
+        await ($(`#${id} a[data-analytics-click-text="map-trifold"]`)).click();
 
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer', []);
@@ -208,10 +215,8 @@ describe('Card Location Component Tests', () => {
         await (await CardLocationBlockPage.configBlock).waitForDisplayed();
 
         await CardLocationBlockPage.createCarouselCardLocation();
-
         await QALayoutPage.goToPageView();
         await (await CardLocationBlockPage.carouselElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
-
 
         await expect(await CardLocationBlockPage.carouselElement(id)).toBeExisting();
         await expect($(`#${id} span[aria-label="Go to slide 1"]`)).toBeExisting();
@@ -219,4 +224,4 @@ describe('Card Location Component Tests', () => {
         await expect($(`#${id} span[aria-label="Go to slide 3"]`)).toBeExisting();
     });
 
-  });
+});
