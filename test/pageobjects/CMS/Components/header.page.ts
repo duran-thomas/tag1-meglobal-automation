@@ -61,7 +61,7 @@ class HeaderBlockPage extends Page {
         return $('span[data-analytics-click-text="doctor"]');
     }
 
-    public get btnAddLink() {
+    public get btnAddLinkUR() {
         return $('a[href="/admin/structure/menu/manage/global-utilities/add?destination=/admin/structure/menu/manage/global-utilities"]');
     }
 
@@ -121,15 +121,28 @@ class HeaderBlockPage extends Page {
     public get btnAbout() {
         return $('button[data-analytics-click-text="About"]');
     }
+    //Resumed work
 
-    // public get () {
-    //     return $('');
-    // }
+    public get btnAddLink() {
+        return $('a[href="/admin/structure/menu/manage/utility-left/add?destination=/admin/structure/menu/manage/utility-left"]');
+    }
 
-    // public get () {
-    //     return $('');
-    // }
+    public get TestHamburgerLink() {
+        return $('=QA Donate');
+    }
 
+    //attempt to target created menu through indexing
+    public get btnEdit() {
+        return $$('=Edit')[3];
+    }
+
+    public get btnConfirmDelete() {
+        return $('button[class="button button--primary js-form-submit form-submit ui-button ui-corner-all ui-widget"]');
+    }
+
+    public get linkFellowship() {
+        return $$('a[data-analytics-click-text="Fellowship Programs"]')[2];
+    }
 
     
 
@@ -153,12 +166,42 @@ class HeaderBlockPage extends Page {
        await (await this.btnSave).click();
     }
 
+    public async navToUtilityLeft() {
+        return super.open('/admin/structure/menu/manage/utility-left');
+    }
+
+    public async openHomePage() {
+        return super.open('/');
+    }
+
+    public async navToFellowshipPage() {
+        return super.open('/education/fellowship');
+    }
+
+    public async createUtilLeftLink(menuTitle:string, link:string) {
+        await (await this.btnAddLink).click();
+        await (await this.inputMenuTitle).waitForDisplayed({timeout:3000});
+        await (await this.inputMenuTitle).setValue(menuTitle);
+        await (await this.inputLink).setValue(link);
+        await (await this.btnSave).scrollIntoView();
+        await (await this.btnSave).click();
+    }
+
+    public async deleteUtilLeftLink() {
+        await (await this.btnEdit).waitForDisplayed({timeout:3500});
+        await (await this.btnEdit).click();
+        await (await this.linkDelete).scrollIntoView();
+        await (await this.linkDelete).click();
+        await (await this.btnConfirmDelete).waitForDisplayed();
+        await (await this.btnConfirmDelete).click();
+
     public openHome(baseurl: string) {
         return browser.url(baseurl);
     }
 
     public openUtilityMenu(baseurl: string) {
         return browser.url(`${baseurl}admin/structure/menu/manage/global-utilities`);
+
     }
 
     public async goToMainMenu() {

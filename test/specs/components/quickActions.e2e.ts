@@ -101,12 +101,13 @@ after(async function () {
         await (await QALayoutPage.linkAddBlock).waitForExist();
         await (await QALayoutPage.linkAddBlock).scrollIntoView({block: 'start'});
         await (await QALayoutPage.linkAddBlock).click();
+        await (await QALayoutPage.linkQuickActions).scrollIntoView({block: 'start'});
         await (await QALayoutPage.linkQuickActions).click();
         await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
         await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({block: 'start'});
 
         await expect(QuickActionsBlockPage.quickActionsElement(id)).toBeDisplayedInViewport();
         //await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.extLink);
@@ -152,12 +153,13 @@ after(async function () {
     await (await QALayoutPage.linkAddBlock).waitForExist();
     await (await QALayoutPage.linkAddBlock).scrollIntoView();
     await (await QALayoutPage.linkAddBlock).click();
+    await (await QALayoutPage.linkQuickActions).scrollIntoView({block: 'start'});
     await (await QALayoutPage.linkQuickActions).click();
     await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
     await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({block: 'start'});
 
         await expect(QuickActionsBlockPage.quickActionsElement(id)).toBeDisplayedInViewport();
         //await expect(QuickActionsBlockPage.quickActionsButton).toHaveHref(quickActionsBlockData.intLink);
@@ -203,12 +205,13 @@ after(async function () {
     await (await QALayoutPage.linkAddBlock).waitForExist();
     await (await QALayoutPage.linkAddBlock).scrollIntoView();
     await (await QALayoutPage.linkAddBlock).click();
+    await (await QALayoutPage.linkQuickActions).scrollIntoView({block: 'start'});
     await (await QALayoutPage.linkQuickActions).click();
     await QuickActionsBlockPage.createQuickAction(quickActionsBlockData.actionTitle, quickActionsBlockData.headline);
     await expect(QuickActionsBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await QuickActionsBlockPage.quickActionsElement(id)).scrollIntoView({block: 'start'});
 
     const expectedAnalyticsData = {
         clickText: quickActionsBlockData.extMenuLinkTitle,
