@@ -65,10 +65,6 @@ describe('Header Component Tests', () => {
 
     });
 
-    it('[S3C629] Verify "Global-Utility" menu links.', async () => {
-        await expect(await HeaderBlockPage.btnFindDoctor).toExist(); 
-        await expect(await $('span[data-analytics-click-text="doctor"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
-
     it('[S3C632] Verify that "Hamburger" menu expands to the current active panel and indicates the active link', async () => {
         await HeaderBlockPage.navToFellowshipPage();
         await (await HeaderBlockPage.btnHamburgerMenu).waitForDisplayed();
@@ -86,13 +82,19 @@ describe('Header Component Tests', () => {
         await expect(await $('span[data-analytics-click-text="doctor"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
       
 
-    //     // const parentElement = await $('a[data-analytics-click-text="Find a Doctor"]');
-    //     // const childElement = await parentElement.$('span.mf-button__icon.mf-button__icon--leading');
+        // const parentElement = await $('a[data-analytics-click-text="Find a Doctor"]');
+        // const childElement = await parentElement.$('span.mf-button__icon.mf-button__icon--leading');
 
-    //     // const desiredElementExists = await childElement.$('span[data-analytics-click-text="college-graduation"]').isExisting();
+        // const desiredElementExists = await childElement.$('span[data-analytics-click-text="college-graduation"]').isExisting();
 
-    //     // expect(desiredElementExists).toBe(true);
-         await expect(currentUrl).toContain('/profiles');
+        // expect(desiredElementExists).toBe(true);
+        await (await HeaderBlockPage.btnFindDoctor).click();
+
+        const currentUrl = await browser.getUrl();
+        await expect(currentUrl).toContain('/profiles');
+
+    });
+
 
     it('[S3C948] Verify buttons can be added to and removed "Global Utility" menu', async () => {
         //create
@@ -126,7 +128,7 @@ describe('Header Component Tests', () => {
         await HeaderBlockPage.openHome(baseUrl);
         await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
 
-    // });
+     });
 
 
     it('[S3C631] Verify "Hamburger" menu links.', async () => {
