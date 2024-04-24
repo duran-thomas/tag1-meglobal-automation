@@ -3,13 +3,27 @@ import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
 import HeaderBlockPage from '../../pageobjects/CMS/Components/header.page';
 import { globalUtilityData } from '../../data/header.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
+import { getEnvironmentConfig } from '../../../envSelector';
 
 
-describe.skip('Header Component Tests', () => {
+describe('Header Component Tests', () => {
 
     beforeEach(async function() {
         //navigate to home
-        await HeaderBlockPage.openHome();
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        // const cookies = environment.cookies;
+        const admin = environment.admin;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await admin);
+
     });
 
     afterEach(async function() { 
@@ -30,7 +44,7 @@ describe.skip('Header Component Tests', () => {
     //     await AdminContentPage.open();
     //     await AdminContentPage.getTestPage(global.suiteDescription);  
     // });
-  
+
     it('[S3C943] Verify that all sections of the Header are present.', async () => {
         await expect(await HeaderBlockPage.btnFindDoctor).toBeDisplayedInViewport(); 
         await expect(await HeaderBlockPage.btnMenu).toBeDisplayedInViewport();   
@@ -42,8 +56,7 @@ describe.skip('Header Component Tests', () => {
 
     it('[S3C629] Verify "Global-Utility" menu links.', async () => {
         await expect(await HeaderBlockPage.btnFindDoctor).toExist(); 
-
-        await expect(await $('span[data-analytics-click-text="college-graduation"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
+        await expect(await $('span[data-analytics-click-text="doctor"]')).toExist(); //Improve: doesn't directly check the specific element for the icon
 
         // const parentElement = await $('a[data-analytics-click-text="Find a Doctor"]');
         // const childElement = await parentElement.$('span.mf-button__icon.mf-button__icon--leading');
@@ -55,21 +68,24 @@ describe.skip('Header Component Tests', () => {
         await (await HeaderBlockPage.btnFindDoctor).click();
 
         const currentUrl = await browser.getUrl();
-        await expect(currentUrl).toContain('/doctors');
+        await expect(currentUrl).toContain('/profiles');
 
     });
 
     it('[S3C948] Verify buttons can be added to and removed "Global Utility" menu', async () => {
         //create
-        await HeaderBlockPage.openUtilityMenu();
+        const environment = getEnvironmentConfig(process.env.ENV);
+        // Use the environment data
+        const baseUrl = environment.baseUrl;
+        await HeaderBlockPage.openUtilityMenu(baseUrl);
         await HeaderBlockPage.createUtilityMenu(globalUtilityData.link, globalUtilityData.title, globalUtilityData.description, globalUtilityData.label);
         await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
         await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('saved');
-        await HeaderBlockPage.openHome();
+        await HeaderBlockPage.openHome(baseUrl);
         await expect(await HeaderBlockPage.menuElement).toBeExisting();
 
         //remove
-        await HeaderBlockPage.openUtilityMenu();
+        await HeaderBlockPage.openUtilityMenu(baseUrl);
         await (await HeaderBlockPage.createdLink).scrollIntoView();
         
         // const wikipediaLink = await $('a[href="https://www.wikipedia.com/"]');
@@ -84,18 +100,17 @@ describe.skip('Header Component Tests', () => {
         await (await HeaderBlockPage.btnDelete).click();
         await expect(await HeaderBlockPage.statusMsg).toBeDisplayedInViewport();
         await expect(await HeaderBlockPage.statusMsg).toHaveTextContaining('deleted');
-        await HeaderBlockPage.openHome();
+        await HeaderBlockPage.openHome(baseUrl);
         await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
 
     });
 
-    it('[S3C631] Verify "Hamburger" menu links.', async () => {
+    it.only('[S3C631] Verify "Hamburger" menu links.', async () => {
+        await HeaderBlockPage.openHomePage();
         await HeaderBlockPage.goToMainMenu();
-        await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
-        
-        
+        // await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
     });
 
 
 
-  });
+});

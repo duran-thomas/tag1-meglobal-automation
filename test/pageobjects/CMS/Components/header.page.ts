@@ -110,11 +110,12 @@ class HeaderBlockPage extends Page {
     }
 
     public get btnDelete() {
-        return $('#edit-submit');
+        return $('button.button--primary');
     }
 
     public get btnHamburgerMenu() {
-        return $('button[x-ref="btnHamburgerMenu"]');
+        return $('button[data-analytics-click-text="Menu"]');
+        // return $('button[x-ref="btnHamburgerMenu"]');
     }
 
     public get btnAbout() {
@@ -144,7 +145,7 @@ class HeaderBlockPage extends Page {
        await (await this.inputLink).setValue(link);
        await (await this.inputMenuTitle).scrollIntoView();
        await (await this.inputMenuTitle).setValue(title);
-       await (await this.inputDescription).setValue(description);
+       // await (await this.inputDescription).setValue(description);
        await (await this.dropdownIcon).scrollIntoView();
        await (await this.dropdownIcon).selectByVisibleText('wifi');
        await (await this.inputLabel).setValue(label);
@@ -152,25 +153,47 @@ class HeaderBlockPage extends Page {
        await (await this.btnSave).click();
     }
 
-    public openHome() {
-        return browser.url('https://meglobalode6.prod.acquia-sites.com/home');
+    public openHome(baseurl: string) {
+        return browser.url(baseurl);
     }
 
-    public openUtilityMenu() {
-        return browser.url('https://meglobalode6.prod.acquia-sites.com/admin/structure/menu/manage/global-utilities');
+    public openUtilityMenu(baseurl: string) {
+        return browser.url(`${baseurl}admin/structure/menu/manage/global-utilities`);
     }
 
     public async goToMainMenu() {
         await (await this.btnHamburgerMenu).waitForDisplayed({timeout:4000});
         await (await this.btnHamburgerMenu).click();
-        await browser.pause(3000);
-        await (await $('span[data-analytics-click-text="chevron-left"]')).waitForDisplayed({timeout:6000});
-        await (await $('span[data-analytics-click-text="chevron-left"]')).click();
-        await (await $('button[data-analytics-click-text="Education"]')).waitForDisplayed({timeout:3000});
-        await (await $('button[data-analytics-click-text="Education"]')).click();
-        await (await $('button[data-analytics-click-text="Montefiore Einstein"]')).waitForDisplayed({timeout:3000});
-        await (await $('button[data-analytics-click-text="Montefiore Einstein"]')).click();
+        // Patient Care
+        await (await $('button[data-analytics-click-text="Patient Care"]')).waitForDisplayed();
+        // await (await $('button[data-analytics-click-text="Patient Care"]')).click();
+        expect (await $('button[data-analytics-click-text="Patient Care"]')).toBeDisplayed()
+        // College of Medicine
+        await (await $('button[data-analytics-click-text="College of Medicine"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="College of Medicine"]')).toBeDisplayed();
+        // Research
+        await (await $('a[data-analytics-click-text="Research"]')).waitForDisplayed()
+        expect (await $('a[data-analytics-click-text="Research"]')).toBeDisplayed()
+        // Community
+        await (await $('button[data-analytics-click-text="Community"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="Community"]')).toBeDisplayed();
+        // Education
+        await (await $('button[data-analytics-click-text="Education"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="Education"]')).toBeDisplayed();
+        // News
+        await (await $('button[data-analytics-click-text="News"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="News"]')).toBeDisplayed();
+        // For Donors
+        await (await $('button[data-analytics-click-text="For Donors"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="For Donors"]')).toBeDisplayed();
+        // About
+        await (await $('button[data-analytics-click-text="About"]')).scrollIntoView();
+        expect (await $('button[data-analytics-click-text="About"]')).toBeDisplayed();
 
+    }
+
+    public async openHomePage() {
+        return super.open('/');
     }
 }
 
