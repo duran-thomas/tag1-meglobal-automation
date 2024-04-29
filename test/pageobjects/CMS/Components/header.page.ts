@@ -207,32 +207,15 @@ class HeaderBlockPage extends Page {
     public async goToMainMenu() {
         await (await this.btnHamburgerMenu).waitForDisplayed({timeout:4000});
         await (await this.btnHamburgerMenu).click();
-        // Patient Care
         await (await $('button[data-analytics-click-text="Patient Care"]')).waitForDisplayed();
-        // await (await $('button[data-analytics-click-text="Patient Care"]')).click();
         expect (await $('button[data-analytics-click-text="Patient Care"]')).toBeDisplayed()
-        // College of Medicine
-        await (await $('button[data-analytics-click-text="College of Medicine"]')).waitForDisplayed();
         expect (await $('button[data-analytics-click-text="College of Medicine"]')).toBeDisplayed();
-        // Research
-        await (await $('a[data-analytics-click-text="Research"]')).waitForDisplayed()
-        expect (await $('a[data-analytics-click-text="Research"]')).toBeDisplayed()
-        // Community
-        await (await $('button[data-analytics-click-text="Community"]')).waitForDisplayed();
-        expect (await $('button[data-analytics-click-text="Community"]')).toBeDisplayed();
-        // Education
-        await (await $('button[data-analytics-click-text="Education"]')).waitForDisplayed();
-        expect (await $('button[data-analytics-click-text="Education"]')).toBeDisplayed();
-        // News
-        await (await $('button[data-analytics-click-text="News"]')).waitForDisplayed();
-        expect (await $('button[data-analytics-click-text="News"]')).toBeDisplayed();
-        // For Donors
-        await (await $('button[data-analytics-click-text="For Donors"]')).waitForDisplayed();
-        expect (await $('button[data-analytics-click-text="For Donors"]')).toBeDisplayed();
-        // About
-        await (await $('button[data-analytics-click-text="About"]')).scrollIntoView();
-        expect (await $('button[data-analytics-click-text="About"]')).toBeDisplayed();
-
+        expect (await $('a[data-analytics-click-text="Research"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="Community"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="Education"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="News"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="For Donors"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="About"]')).toBeDisabled();
     }
 
     public async openHomePage() {

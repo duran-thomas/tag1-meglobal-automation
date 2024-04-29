@@ -128,15 +128,11 @@ describe('Header Component Tests', () => {
         await HeaderBlockPage.openHome(baseUrl);
         await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
 
-     });
-
+    });
 
     it('[S3C631] Verify "Hamburger" menu links.', async () => {
         await HeaderBlockPage.openHomePage();
         await HeaderBlockPage.goToMainMenu();
         // await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
     });
-
-
-
 });
