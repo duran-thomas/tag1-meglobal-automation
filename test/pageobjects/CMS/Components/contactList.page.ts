@@ -340,7 +340,7 @@ class ContactListBlockPage extends Page {
     }
 
     public contactContent(id:string) {
-        return $(`#${id}  div[class="mf-text-body-3-sans text-gray-600"] div[class="mf-rich-text"]`);
+        return $(`#${id}  div[class="mf-text-body-3-sans"] div[class="mf-rich-text"]`);
     }
 
     public contactHeading(id:string) {

@@ -137,6 +137,17 @@ describe('Header Component Tests', () => {
         // await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
     });
 
+    it('[S3C946] Verify links can be added to and removed from "Utility Right" menu', async () => {
+        await HeaderBlockPage.navToUtilityRight();
+        await HeaderBlockPage.createUtilRightLink(hamburgerData.menuTitle, hamburgerData.link);
+        await HeaderBlockPage.openHomePage();
+        await expect(await $(`a[data-analytics-click-text="${hamburgerData.menuTitle}"]`)).toBeDisplayed();
+        await HeaderBlockPage.navToUtilityRight();
+        await HeaderBlockPage.deleteUtilRightLink();
+        await HeaderBlockPage.openHomePage();
+        await expect(await $(`a[data-analytics-click-text="${hamburgerData.menuTitle}"]`)).not.toBeDisplayed();
+    });
+
 
 
 });
