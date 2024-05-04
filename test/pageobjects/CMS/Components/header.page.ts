@@ -127,6 +127,10 @@ class HeaderBlockPage extends Page {
         return $('a[href="/admin/structure/menu/manage/utility-left/add?destination=/admin/structure/menu/manage/utility-left"]');
     }
 
+    public get btnAddRightLink() {
+        return $('a[href="/admin/structure/menu/manage/utility-right/add?destination=/admin/structure/menu/manage/utility-right"]');
+    }
+
     public get TestHamburgerLink() {
         return $('=QA Donate');
     }
@@ -194,6 +198,7 @@ class HeaderBlockPage extends Page {
         await (await this.linkDelete).click();
         await (await this.btnConfirmDelete).waitForDisplayed();
         await (await this.btnConfirmDelete).click();
+    }
 
     public openHome(baseurl: string) {
         return browser.url(baseurl);
@@ -218,9 +223,28 @@ class HeaderBlockPage extends Page {
         expect (await $('button[data-analytics-click-text="About"]')).toBeDisabled();
     }
 
-    public async openHomePage() {
-        return super.open('/');
+    public async navToUtilityRight() {
+        return super.open('/admin/structure/menu/manage/utility-right');
     }
+
+    public async createUtilRightLink(menuTitle:string, link:string) {
+        await (await this.btnAddRightLink).click();
+        await (await this.inputMenuTitle).waitForDisplayed({timeout:3000});
+        await (await this.inputMenuTitle).setValue(menuTitle);
+        await (await this.inputLink).setValue(link);
+        await (await this.btnSave).scrollIntoView();
+        await (await this.btnSave).click();
+    }
+
+    public async deleteUtilRightLink() {
+        await (await this.btnEdit).waitForDisplayed({timeout:3500});
+        await (await this.btnEdit).click();
+        await (await this.linkDelete).scrollIntoView();
+        await (await this.linkDelete).click();
+        await (await this.btnConfirmDelete).waitForDisplayed();
+        await (await this.btnConfirmDelete).click();
+    }
+
 }
 
 export default new HeaderBlockPage();
