@@ -50,7 +50,7 @@
   "dependencies": {
     "@types/mocha": "^10.0.1",
     "@wdio/globals": "^8.33.0",
-    "chromedriver": "^122.0.3",
+    "chromedriver": "^124.0.1",
     "dotenv": "^16.3.1",
     "nanoid": "^5.0.4",
     "webdriverio": "^7.25.4"

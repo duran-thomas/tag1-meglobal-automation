@@ -128,15 +128,14 @@ describe('Header Component Tests', () => {
         await HeaderBlockPage.openHome(baseUrl);
         await expect(await HeaderBlockPage.menuElement).not.toBeExisting();
 
-     });
-
+    });
 
     it('[S3C631] Verify "Hamburger" menu links.', async () => {
         await HeaderBlockPage.openHomePage();
         await HeaderBlockPage.goToMainMenu();
         // await expect(await HeaderBlockPage.btnAbout).toBeDisplayed();
     });
-
+  
     it('[S3C946] Verify links can be added to and removed from "Utility Right" menu', async () => {
         await HeaderBlockPage.navToUtilityRight();
         await HeaderBlockPage.createUtilRightLink(hamburgerData.menuTitle, hamburgerData.link);
@@ -147,7 +146,5 @@ describe('Header Component Tests', () => {
         await HeaderBlockPage.openHomePage();
         await expect(await $(`a[data-analytics-click-text="${hamburgerData.menuTitle}"]`)).not.toBeDisplayed();
     });
-
-
 
 });
