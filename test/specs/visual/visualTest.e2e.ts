@@ -37,7 +37,7 @@ describe('Visual Regression Testing', () => {
         // Cleanup tasks after each test if necessary
     });
 
-    it('should scroll and capture significant areas of the cancer page', async () => {
+    it('[S3C1809] should scroll and capture significant areas of the cancer page', async () => {
         await browser.url('https://meda2022:meda2022@meglobalode7.prod.acquia-sites.com/cancer');   
         await VisualTestPage.closeDialogs();     
         const elements = await VisualTestPage.gridElements;
