@@ -15,10 +15,7 @@ const vrtConfig = {
 
 const vrt = new VisualRegressionTracker(vrtConfig);
 
-const screenshotsDir = path.join(__dirname, '..', 'screenshots');
-if (!fs.existsSync(screenshotsDir)) {
-    fs.mkdirSync(screenshotsDir);
-}
+const screenshotDir = './screenshots/VisualTests';
 
 describe('Visual Regression Testing', () => {
     before(async () => {
@@ -46,7 +43,7 @@ describe('Visual Regression Testing', () => {
             await element.scrollIntoView({behavior:'auto'});
             await browser.pause(1000); //trying to give time before screenshot to allow consistency with images taken
 
-            const screenshotPath = path.join(__dirname, `../screenshots/GridElement-${i}.png`);
+            const screenshotPath = path.join(screenshotDir, `GridElement-${i}.png`);
             await browser.saveScreenshot(screenshotPath);
 
             const imageBuffer = fs.readFileSync(screenshotPath);
