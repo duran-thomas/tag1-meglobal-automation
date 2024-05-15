@@ -83,3 +83,10 @@ When sending results to QualityWatcher, you will only need an API Key and an Ema
 These should be placed in your `.env` file.
 
 If you need more information on how to map test cases to existing qualitywatcher cases, please see [documentation](https://www.docs.qualitywatcher.com/docs/guides/integrating-automation-results)
+
+## VRT Service
+The visual regression tracker has been integrated into this project for testing as well.
+Initialize docker using `docker-compose up -d`
+Ensure vrt project details are accurate and api information matches with the current vrt project dashboard information.
+Run respective test using the same command format as others with the value `vrt`
+
