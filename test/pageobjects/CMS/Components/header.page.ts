@@ -148,7 +148,9 @@ class HeaderBlockPage extends Page {
         return $$('a[data-analytics-click-text="Fellowship Programs"]')[2];
     }
 
-    
+    public get btnMainAdd() {
+        return $('a[href="/admin/structure/menu/manage/global-utilities/add?destination=/admin/structure/menu/manage/global-utilities"]');
+    }
 
     /**
      * Helper methods to create Header Component
@@ -156,8 +158,8 @@ class HeaderBlockPage extends Page {
 
 
     public async createUtilityMenu(link: string, title: string, description: string, label: string) {
-       await (await this.btnAddLink).waitForDisplayed({timeout:5000});
-       await (await this.btnAddLink).click();
+       await (await this.btnMainAdd).waitForDisplayed({timeout:5000});
+       await (await this.btnMainAdd).click();
        await (await this.inputLink).waitForDisplayed({timeout:5000});
        await (await this.inputLink).setValue(link);
        await (await this.inputMenuTitle).scrollIntoView();

@@ -306,8 +306,9 @@ describe('Freeform Component Tests', () => {
         (await QALayoutPage.btnFreeform).click();
         (await FreeformBlockPage.configBlock).waitForDisplayed();
 
+        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg3.jpg');
         const videoFilePath = await browser.uploadFile('scriptFiles/sampleVideo.mp4');
-        await FreeformBlockPage.createFreeformVideo(data.freeformBlockData.adminTitle, data.freeformBlockData.headline, videoFilePath);
+        await FreeformBlockPage.createFreeformVideo(data.freeformBlockData.adminTitle, data.freeformBlockData.headline, videoFilePath, imageFilePath, data.imageFreeformData.altText);
 
         await expect(FreeformBlockPage.successMsg).toBeDisplayed();
 
