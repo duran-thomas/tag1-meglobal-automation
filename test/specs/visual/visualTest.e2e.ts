@@ -7,7 +7,7 @@ const path = require('path');
 const vrtConfig = {
     apiUrl: 'http://localhost:4200',  // URL to the VRT server
     project: '4d888730-f047-4157-a423-935a70f1e38a',     // Project ID from VRT
-    apiKey: 'A4Q2JTS2G94325P1AQCXMSD2QWWE',         // API key from VRT
+    apiKey: process.env.VRT_API_KEY,         // API key from VRT
     branchName: 'master',               // Branch name
     ciBuildId: `build-${new Date().toISOString()}`, // Unique build ID
     enableSoftAssert: false
