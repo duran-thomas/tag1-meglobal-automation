@@ -43,5 +43,35 @@
     ],
     "complete": false,
     "shareableReport": true
+  },
+  {
+    "testRunName": "[Release 0.40.4] Cancer Page VRT",
+    "description": "This test run was created by the automation suite.",
+    "include_all_cases": false,
+    "projectId": 1,
+    "suites": [],
+    "results": [],
+    "complete": false,
+    "shareableReport": true
+  },
+  {
+    "testRunName": "[Release 0.40.4] Cancer Page VRT",
+    "description": "This test run was created by the automation suite.",
+    "include_all_cases": false,
+    "projectId": 1,
+    "suites": [],
+    "results": [],
+    "complete": false,
+    "shareableReport": true
+  },
+  {
+    "testRunName": "[Release 0.40.4] Cancer Page VRT",
+    "description": "This test run was created by the automation suite.",
+    "include_all_cases": false,
+    "projectId": 1,
+    "suites": [],
+    "results": [],
+    "complete": false,
+    "shareableReport": true
   }
 ]

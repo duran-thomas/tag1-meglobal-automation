@@ -43,7 +43,8 @@
     "event": "npx wdio run wdio.conf.ts --spec ./test/specs/components/event.e2e.ts",
     "indexList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/indexList.e2e.ts",
     "alertBar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/alertBar.e2e.ts",
-    "sidebar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sidebar.e2e.ts"
+    "sidebar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sidebar.e2e.ts",
+    "vrt": "npx wdio run wdio.conf.ts --spec ./test/specs/visual/visualTest.e2e.ts"
   },
   "author": "QW Team",
   "license": "ISC",
@@ -72,6 +73,8 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
-    "wdio-safaridriver-service": "^2.0.0"
+    "wdio-safaridriver-service": "^2.0.0",
+    "@visual-regression-tracker/sdk-js": "^5.7.0",
+    "wdio-visual-regression-tracker-service": "^1.0.0"
   }
 }
