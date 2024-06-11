@@ -133,6 +133,9 @@ class MediaBlockPage extends Page {
         return $('.close-0-2-17');
     }
 
+    public get checkboxAutoplay() {
+        return $('#edit-inline-entity-form-field-autoplay-video-value');
+    }
 
     /**
      * Helper methods to create media Components
@@ -204,7 +207,10 @@ class MediaBlockPage extends Page {
         await browser.switchToParentFrame();
         await browser.pause(1000); //explicit waits seem to be necessary here
 
-        await (await this.btnSaveMedia).scrollIntoView();
+        await (await this.checkboxAutoplay).scrollIntoView();
+        await (await this.checkboxAutoplay).click();
+
+        //await (await this.btnSaveMedia).scrollIntoView();
         await (await this.btnSaveMedia).click();
         await browser.pause(3500); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
