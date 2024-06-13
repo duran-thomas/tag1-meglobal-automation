@@ -282,34 +282,52 @@ describe('Footer Component Tests', () => {
          * https://docs.google.com/presentation/d/1ZutjAoLuYLu2ZtFSzIIrdZdabk-01rpA8aT5JcmEMPc/edit#slide=id.g127fd856972_0_260
          * */
         const expectedAnalyticsData = {
-            event: 'e_componentClick',
+            event: 'e_navigationClick',
             navigationType: 'footer',
-            clickText: 'Clinical Trials',
+            clickText: 'Find Care > Find a Doctor | 2',
+            linkType: "link"
         }
 
         const footerItem = await $('a[data-analytics-click-text="Find a Doctor | 2"]');
 
-        let variable;
-        // Get the data layer for the window and get the data for the click event for the component
-        const dataLayer = await browser.execute(function(argument:any, element:any){
-            /**
-             * Add the event listener to store the window.dataLayer object into the argument variable before the window unloads
-             */
-            window.addEventListener('beforeunload',function(){
-                argument = window.dataLayer;
-            })
-            // Interact with the Image link to generate the analytics. (Clicking the image link brings the user to a new page)
-            element.click();
-            return argument;
-        },variable, footerItem)
+        // Perform cmd + click
+        await browser.performActions([
+            {
+                type: 'key',
+                id: 'keyboard1',
+                actions: [
+                    { type: 'keyDown', value: '\uE03D' }, // Command key down (Meta key)
+                ]
+            },
+            {
+                type: 'pointer',
+                id: 'mouse1',
+                actions: [
+                    { type: 'pointerMove', origin: footerItem, x: 0, y: 0 },
+                    { type: 'pointerDown', button: 0 }, // Left click down
+                    { type: 'pointerUp', button: 0 } // Left click up
+                ]
+            },
+            {
+                type: 'key',
+                id: 'keyboard2',
+                actions: [
+                    { type: 'keyUp', value: '\uE03D' } // Command key up (Meta key)
+                ]
+            }
+        ]);
 
         // Get the data layer for the window and get the data for the click event for the component
-        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
+        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_navigationClick")[0];
         // Build the actual analytics data object
         const parsedActualAnalyticsData = {
             //Remove whitespace from the Headline
             clickText: actualAnalyticsData.clickText.trim(),
             navigationType: actualAnalyticsData.navigationType,
+            linkType: actualAnalyticsData.linkType,
             event: actualAnalyticsData.event
         }
 
