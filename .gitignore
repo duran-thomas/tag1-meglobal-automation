@@ -140,3 +140,8 @@ allure-report/
 .DS_Store/
 .DS_Store
 
+imageUploads
+db
+
+*.cert
+*.key

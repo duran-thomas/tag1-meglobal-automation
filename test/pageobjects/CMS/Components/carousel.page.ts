@@ -419,7 +419,7 @@ class CarouselBlockPage extends Page {
     }
 
     public get frames() {
-        return $$('#entity_browser_iframe_image_browser');
+        return $('#entity_browser_iframe_image_browser');
     }
 
     public get thirdFrame() {
@@ -512,7 +512,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage1).scrollIntoView();
         await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
-        const frame1 = await this.frames[1];
+        const frame1 = await this.frames;
         await frame1.waitForDisplayed();
         await browser.switchToFrame(frame1); 
         await (await this.btnBrowse).scrollIntoView();
@@ -624,7 +624,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage1).scrollIntoView();
         await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
-        const frame1 = await this.frames[1];
+        const frame1 = await this.frames;
         await frame1.waitForDisplayed();
         await browser.switchToFrame(frame1); 
         await (await this.btnBrowse).scrollIntoView();
@@ -651,7 +651,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage2).scrollIntoView();
         await (await this.dropdownImage2).click(); //image currently not being added, selector inspection necessary
-        const frame2 = await this.frames[2];
+        const frame2 = await this.frames;
         await frame2.waitForExist({timeout:8000});
         await browser.switchToFrame(frame2);
         await (await this.btnBrowse).scrollIntoView();
@@ -717,7 +717,7 @@ class CarouselBlockPage extends Page {
         await browser.pause(2000);
         await (await this.dropdownImage1).scrollIntoView();
         await (await this.dropdownImage1).click(); //image currently not being added, selector inspection necessary
-        const frame1 = await this.frames[1];
+        const frame1 = await this.frames;
         await frame1.waitForDisplayed();
         await browser.switchToFrame(frame1); 
         await (await this.btnBrowse).scrollIntoView();

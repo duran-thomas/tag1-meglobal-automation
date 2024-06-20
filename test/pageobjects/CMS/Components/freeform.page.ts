@@ -81,7 +81,7 @@ class FreeformBlockPage extends Page {
 
     //Accordion block
     public get inputTitle() {
-        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-rich-accordion-item-0-title-"]');
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-accordion-0-subform-field-accordion-item-0-title-"]');
     }
 
     public get inputContent() {
@@ -395,6 +395,15 @@ class FreeformBlockPage extends Page {
     }
 
 
+    //updates
+    public get dropdownPoster() {
+        return $('#edit-field-poster-image')
+    }
+
+    public get imageIframe() {
+        return $('iframe[name="entity_browser_iframe_image_browser"]');
+    }
+
     /**
      * Helper methods to create freeform Components
      */
@@ -682,7 +691,7 @@ class FreeformBlockPage extends Page {
         await browser.pause(3000);
     }
 
-    public async createFreeformVideo(adminTitle: string, headline: string, remoteFilePath: string) {
+    public async createFreeformVideo(adminTitle: string, headline: string, remoteFilePath: string, remoteFilePath1: string, altText: string) {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputAdminTitle).setValue(adminTitle);
         await (await this.inputHeadline).setValue(headline);
@@ -696,12 +705,29 @@ class FreeformBlockPage extends Page {
         await (await this.tabUploadNewVideo).click();
         await (await this.btnVideoBrowse).waitForDisplayed({timeout:3500});
         await (await this.btnVideoBrowse).setValue(remoteFilePath);
-        await browser.pause(15000); //explicit waits seem to be necessary here
+        await browser.pause(10000); //explicit waits seem to be necessary here
+
+        await (await this.dropdownPoster).scrollIntoView();
+        await (await this.dropdownPoster).click();
+        await browser.switchToFrame(await this.imageIframe);
+        await (await this.btnBrowse).scrollIntoView();
+        await (await this.btnBrowse).setValue(remoteFilePath1);
+        await browser.pause(4500); //explicit waits seem to be necessary here
+        await (await this.inputAltText).waitForEnabled();
+        await (await this.inputAltText).scrollIntoView();
+        await (await this.inputAltText).setValue(altText);
+        await (await this.btnSaveImage).scrollIntoView();
+        await (await this.btnSaveImage).click();
+        await browser.pause(8000); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(1000); //explicit waits seem to be necessary here
+
         await (await this.btnSaveMedia).scrollIntoView();
         await (await this.btnSaveMedia).click();
         await browser.pause(5000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
-        await browser.pause(1000); //explicit waits seem to be necessary here
+
+        await browser.pause(1200); //explicit waits seem to be necessary here
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

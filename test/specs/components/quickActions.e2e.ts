@@ -14,7 +14,7 @@ before(async () => {
 
     // Use the environment data
     const bypassURL = environment.bypassURL;
-    const cookies = environment.cookies;
+    const cookies = environment.admin;
 
     //Bypass login
     await browser.url(await bypassURL);
