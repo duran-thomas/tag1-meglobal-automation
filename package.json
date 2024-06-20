@@ -44,6 +44,7 @@
     "indexList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/indexList.e2e.ts",
     "alertBar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/alertBar.e2e.ts",
     "sidebar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sidebar.e2e.ts",
+    "search": "npx wdio run wdio.conf.ts --spec ./test/specs/components/search.e2e.ts",
     "vrt": "npx wdio run wdio.conf.ts --spec ./test/specs/visual/visualTest.e2e.ts",
     "breadcrumbs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/breadcrumbs.e2e.ts",
     "footer": "npx wdio run wdio.conf.ts --spec ./test/specs/components/footer.e2e.ts"
