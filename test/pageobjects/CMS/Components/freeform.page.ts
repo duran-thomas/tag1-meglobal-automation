@@ -81,7 +81,7 @@ class FreeformBlockPage extends Page {
 
     //Accordion block
     public get inputTitle() {
-        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-rich-accordion-item-0-title-"]');
+        return $('input[id^="edit-settings-block-form-field-content-0-subform-field-accordion-0-subform-field-accordion-item-0-title-"]');
     }
 
     public get inputContent() {
