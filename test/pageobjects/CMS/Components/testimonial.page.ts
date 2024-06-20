@@ -247,7 +247,7 @@ class TestimonialBlockPage extends Page {
         await browser.pause(2000);
         await (await this.secondDropdownImage).click();
         // switch to the iframe
-        const frame1 = await this.frames[1];
+        const frame1 = await this.entityIframe;
         await frame1.waitForDisplayed();
         await browser.switchToFrame(frame1);
         await (await this.btnBrowse).scrollIntoView();
@@ -271,7 +271,7 @@ class TestimonialBlockPage extends Page {
         await browser.pause(2000);
         await (await this.thirdDropdownImage).click();
         // switch to the iframe
-        const frame2 = await this.frames[2];
+        const frame2 = await this.entityIframe;
         await frame2.waitForDisplayed();
         await browser.switchToFrame(frame2);
         await (await this.btnBrowse).scrollIntoView();
@@ -295,7 +295,7 @@ class TestimonialBlockPage extends Page {
         await browser.pause(2000);
         await (await this.fourthDropdownImage).click();
         // switch to the iframe
-        const frame3 = await this.frames[3];
+        const frame3 = await this.entityIframe;
         await frame3.waitForDisplayed();
         await browser.switchToFrame(frame3);
         await (await this.btnBrowse).scrollIntoView();
@@ -319,7 +319,7 @@ class TestimonialBlockPage extends Page {
         await browser.pause(2000);
         await (await this.fifthDropdownImage).click();
         // switch to the iframe
-        const frame4 = await this.frames[4];
+        const frame4 = await this.entityIframe;
         await frame4.waitForDisplayed();
         await browser.switchToFrame(frame4);
         await (await this.btnBrowse).scrollIntoView();
