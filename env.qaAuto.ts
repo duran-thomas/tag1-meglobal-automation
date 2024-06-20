@@ -9,7 +9,7 @@ export const environment = {
     },
     admin: {
         name: 'SSESSdf0d9aa5f85649894e921d4b01e00b05',
-        value: 'p7Bb4AWIOjP2t9Pz4cxeWiqA6zUMtru4gG2EMjJR6pPoLjgv',
+        value: 'xciha11ujsL8jk8tvqOHw4zLO6lYx2CvovEc1VjM2C%2COtq8v',
         domain: '.meglobalode7.prod.acquia-sites.com',
         path: '/',
     }
