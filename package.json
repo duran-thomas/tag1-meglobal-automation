@@ -25,6 +25,7 @@
     "accordion": "npx wdio run wdio.conf.ts --spec ./test/specs/components/accordion.e2e.ts",
     "billboard": "npx wdio run wdio.conf.ts --spec ./test/specs/components/billboard.e2e.ts",
     "inlineNavigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/inlineNavigation.e2e.ts",
+    "navigation": "npx wdio run wdio.conf.ts --spec ./test/specs/components/navigation.e2e.ts",
     "iconList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/iconList.e2e.ts",
     "contactList": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contactList.e2e.ts",
     "quickActions": "npx wdio run wdio.conf.ts --spec ./test/specs/components/quickActions.e2e.ts",
@@ -45,6 +46,7 @@
     "alertBar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/alertBar.e2e.ts",
     "sidebar": "npx wdio run wdio.conf.ts --spec ./test/specs/components/sidebar.e2e.ts",
     "share": "npx wdio run wdio.conf.ts --spec ./test/specs/components/share.e2e.ts",
+    "search": "npx wdio run wdio.conf.ts --spec ./test/specs/components/search.e2e.ts",
     "vrt": "npx wdio run wdio.conf.ts --spec ./test/specs/visual/visualTest.e2e.ts",
     "breadcrumbs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/breadcrumbs.e2e.ts",
     "footer": "npx wdio run wdio.conf.ts --spec ./test/specs/components/footer.e2e.ts"
