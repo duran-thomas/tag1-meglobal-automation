@@ -97,7 +97,10 @@ export const config: Options.Testrunner = {
         event: ['/test/specs/components/event.e2e.ts'],
         indexList: ['/test/specs/components/indexList.e2e.ts'],
         sidebar: ['/test/specs/components/sidebar.e2e.ts'],
-        vrt: ['/test/specs/visual/visualTest.e2e.ts']
+        vrt: ['/test/specs/visual/visualTest.e2e.ts'],
+        breadcrumbs: ['/test/specs/components/breadcrumbs.e2e.ts'],
+        footer: ['/test/specs/components/footer.e2e.ts'],
+
     },
     // Patterns to exclude.
     exclude: [
@@ -200,7 +203,7 @@ export const config: Options.Testrunner = {
         // [QualityWatcherService, {
         //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
         //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.40.4] Cancer Page VRT",
+        //     testRunName: "[Release 0.44.4] Automated Regression",
         //     description: 'This test run was created by the automation suite.',
         //     projectId: 1,
         //     includeAllCases: false,
@@ -220,7 +223,7 @@ export const config: Options.Testrunner = {
     framework: 'mocha',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    //specFileRetries: 1,
+    specFileRetries: 1,
     //
     // Delay in seconds between the spec file retry attempts
     // specFileRetriesDelay: 30,

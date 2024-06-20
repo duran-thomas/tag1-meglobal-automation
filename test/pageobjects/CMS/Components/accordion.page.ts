@@ -17,7 +17,7 @@ class AccordionBlockPage extends Page {
     }
 
     public get inputTitle() {
-        return $('#edit-settings-block-form-field-content-0-subform-field-rich-accordion-item-0-title');
+        return $('#edit-settings-block-form-field-content-0-subform-field-accordion-0-subform-field-accordion-item-0-title');
     }
 
     public get inputContent() {
