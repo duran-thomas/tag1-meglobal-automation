@@ -49,7 +49,8 @@
     "search": "npx wdio run wdio.conf.ts --spec ./test/specs/components/search.e2e.ts",
     "vrt": "npx wdio run wdio.conf.ts --spec ./test/specs/visual/visualTest.e2e.ts",
     "breadcrumbs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/breadcrumbs.e2e.ts",
-    "footer": "npx wdio run wdio.conf.ts --spec ./test/specs/components/footer.e2e.ts"
+    "footer": "npx wdio run wdio.conf.ts --spec ./test/specs/components/footer.e2e.ts",
+    "hhs": "npx wdio run wdio.conf.ts --spec ./test/specs/components/hhs.e2e.ts"
   },
   "author": "QW Team",
   "license": "ISC",

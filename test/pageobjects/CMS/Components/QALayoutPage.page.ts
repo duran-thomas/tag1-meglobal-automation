@@ -1,4 +1,4 @@
-import Page from '../Login/page';
+import Page from "../Login/page";
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -10,15 +10,15 @@ class LandingQAPage extends Page {
 
     //base page
     public get tabLayout() {
-        return $('=Layout');
+        return $("=Layout");
     }
 
     public get tabView() {
-        return $('=View')
+        return $("=View");
     }
 
     public get linkAddSection() {
-        return $('.layout-builder__add-section:nth-child(1)');
+        return $(".layout-builder__add-section:nth-child(1)");
     }
 
     //right window section menu
@@ -36,17 +36,17 @@ class LandingQAPage extends Page {
 
     //section modal
     public get inputLabel() {
-        return $('#edit-layout-settings-label');
+        return $("#edit-layout-settings-label");
     }
 
     public get modalBtnAddSection() {
-        return $$('#edit-actions-submit')[0];
+        return $$("#edit-actions-submit")[0];
     }
 
     public get sectionIDInput() {
-        return $('#edit-layout-settings-id');
+        return $("#edit-layout-settings-id");
     }
-    
+
     /** The other fields in the modal will be added as they become necessary */
 
     //base page with section added making add block become available
@@ -64,151 +64,155 @@ class LandingQAPage extends Page {
     }
 
     public get btnAccordion() {
-        return $('=Accordion');
+        return $("=Accordion");
     }
 
     public get btnBillBoard() {
-        return $('=Billboard');
+        return $("=Billboard");
     }
 
     public get btnBlackbaud() {
-        return $('=Blackbaud embedded form');
+        return $("=Blackbaud embedded form");
     }
 
     public get btnCardClinicalTrial() {
-        return $('=Card Clinical Trial');
+        return $("=Card Clinical Trial");
     }
 
     public get btnCardFeature() {
-        return $('=Card Feature');
+        return $("=Card Feature");
     }
 
     public get btnCardGeneral() {
-        return $('=Card General');
+        return $("=Card General");
     }
 
     public get btnCardLocation() {
-        return $('=Card Location');
+        return $("=Card Location");
     }
 
     public get btnCardMyChart() {
-        return $('=Card MyChart');
+        return $("=Card MyChart");
     }
 
     public get btnCardServices() {
-        return $('=Card Services');
+        return $("=Card Services");
     }
 
     public get btnCarousel() {
-        return $('=Carousel');
+        return $("=Carousel");
     }
 
     public get btnContactList() {
-        return $('=Contact List');
+        return $("=Contact List");
     }
 
     public get btnEvent() {
-        return $('=Event');
+        return $("=Event");
     }
 
     public get btnDefault() {
-        return $('=Default');
+        return $("=Default");
     }
 
     public get btnFacts() {
-        return $('=Facts');
+        return $("=Facts");
     }
 
     public get btnFreeform() {
-        return $('=Freeform');
+        return $("=Freeform");
     }
 
     public get btnHero() {
-        return $('=Hero');
+        return $("=Hero");
+    }
+
+    public get btnHHS() {
+        return $("=HHS Embedded Content");
     }
 
     public get btnIconList() {
-        return $('=Icon List');
+        return $("=Icon List");
     }
 
     public get btnIndexListClinicalCategories() {
-        return $('=Index List - Clinical Categories');
+        return $("=Index List - Clinical Categories");
     }
 
     public get btnImage() {
-        return $('=Image');
+        return $("=Image");
     }
 
     public get btnInlineNavigation() {
-        return $('=Inline Navigation');
+        return $("=Inline Navigation");
     }
 
     public get btnLayout() {
-        return $('=Layout');
+        return $("=Layout");
     }
 
     public get btnMap() {
-        return $('=Map');
+        return $("=Map");
     }
 
     public get btnProgressIndicator() {
-        return $('=Progress Indicator');
+        return $("=Progress Indicator");
     }
 
     public get btnQuote() {
-        return $('=Quote');
+        return $("=Quote");
     }
 
     public get btnRichText() {
-        return $('=Rich Text');
+        return $("=Rich Text");
     }
 
     public get btnSidebarNav() {
-        return $('=Sidebar Navigation');
+        return $("=Sidebar Navigation");
     }
 
     public get btnSectionHeader() {
-        return $('=Section Header');
+        return $("=Section Header");
     }
 
     public get btnStepper() {
-        return $('=Stepper');
+        return $("=Stepper");
     }
 
     public get btnTabs() {
-        return $('=Tabs');
+        return $("=Tabs");
     }
 
     public get btnTestimonial() {
-        return $('=Testimonial');
+        return $("=Testimonial");
     }
 
     public get btnTeamLeadersCarousel() {
-        return $('=Team Leaders Carousel');
+        return $("=Team Leaders Carousel");
     }
 
     public get btnTeamMembersGrid() {
-        return $('=Team Members Grid');
+        return $("=Team Members Grid");
     }
 
     public get btnVideo() {
-        return $('=Video');
+        return $("=Video");
     }
 
     public get btnVisualList() {
-        return $('=Visual List');
+        return $("=Visual List");
     }
 
     public get btnBack() {
-        return $('=Back');
+        return $("=Back");
     }
 
     public get sectionModal() {
-        return $('#ui-id-2');
+        return $("#ui-id-2");
     }
 
     public get iframeDiv() {
-        return $('.lbim-dialog');
+        return $(".lbim-dialog");
     }
 
     public get btnRemoveSection() {
@@ -216,11 +220,11 @@ class LandingQAPage extends Page {
     }
 
     public get configBlock() {
-        return $('.ui-draggable-handle');
+        return $(".ui-draggable-handle");
     }
 
     public get btnRemove() {
-        return $('#edit-submit');
+        return $("#edit-submit");
     }
 
     public get btnSaveLayout() {
@@ -228,38 +232,44 @@ class LandingQAPage extends Page {
     }
 
     public get dialogFrame() {
-        return $('#hyro-frame');
+        return $("#hyro-frame");
     }
 
     public get btnCloseChatPopUp() {
         //class changed in sprint 35
         //return $('button[aria-label="closeButton"]');
-        return $('.css-19ftm6o');
+        return $(".css-19ftm6o");
     }
 
     public get linkQuickActions() {
-        return $('=Quick Actions');
+        return $("=Quick Actions");
     }
-
 
     /**
      * Methods to create a new section on a page, navigate to block list types
      */
 
-    public async createNewSection(id:string | undefined = undefined) {
+    public async createNewSection(id: string | undefined = undefined) {
         await (await this.linkAddSection).scrollIntoView();
         await (await this.linkAddSection).click();
         await (await this.sectionTypeOneColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.waitForCustomFrame(
+            'iframe[name="lbim-dialog-iframe"]',
+            5000
+        );
         // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
-        if(id){
-            await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
+        if (id) {
+            await (
+                await this.sectionIDInput
+            ).scrollIntoView({ behavior: "auto", block: "center" });
             await (await this.sectionIDInput).setValue(id);
         }
         // To allow for creating sections without IDs, if the id field is undefined the section won't be creating with an ID
-        if(id){
-            await (await this.sectionIDInput).scrollIntoView({ behavior: 'auto', block: 'center' });
+        if (id) {
+            await (
+                await this.sectionIDInput
+            ).scrollIntoView({ behavior: "auto", block: "center" });
             await (await this.sectionIDInput).setValue(id);
         }
         await (await this.modalBtnAddSection).scrollIntoView();
@@ -272,7 +282,10 @@ class LandingQAPage extends Page {
         await (await this.linkAddSection).click();
         await (await this.sectionTypeTwoColumn).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.waitForCustomFrame(
+            'iframe[name="lbim-dialog-iframe"]',
+            5000
+        );
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -289,7 +302,10 @@ class LandingQAPage extends Page {
 
         await (await this.sidebarSection).click();
         await (await this.sectionModal).waitForDisplayed();
-        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.waitForCustomFrame(
+            'iframe[name="lbim-dialog-iframe"]',
+            5000
+        );
         await (await this.modalBtnAddSection).scrollIntoView();
         await (await this.modalBtnAddSection).click();
         await browser.pause(2000);
@@ -306,24 +322,24 @@ class LandingQAPage extends Page {
         */
         // await (await this.btnCloseChatPopUp).click();
         const frame = await this.dialogFrame;
-        if (await frame.isExisting() == true) {
+        if ((await frame.isExisting()) == true) {
             await browser.switchToFrame(frame);
             await browser.pause(1000);
-            if (await this.btnCloseChatPopUp.isDisplayedInViewport() == true) {
+            if (
+                (await this.btnCloseChatPopUp.isDisplayedInViewport()) == true
+            ) {
                 await this.btnCloseChatPopUp.click();
                 await browser.switchToParentFrame();
             } else {
-                console.log('Button not displayed');
+                console.log("Button not displayed");
             }
             await browser.switchToParentFrame();
         }
-
     }
 
     public async goToPageView() {
         await (await this.tabView).waitForEnabled();
         await (await this.tabView).click();
-
     }
 
     public async cleanUpJob() {
@@ -331,7 +347,10 @@ class LandingQAPage extends Page {
         await (await this.btnRemoveSection).scrollIntoView();
         await this.btnRemoveSection.isDisplayedInViewport();
         await (await this.btnRemoveSection).click();
-        await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
+        await browser.waitForCustomFrame(
+            'iframe[name="lbim-dialog-iframe"]',
+            5000
+        );
         await browser.pause(1800);
         await (await this.btnRemove).click();
         await browser.pause(2000);
@@ -341,20 +360,18 @@ class LandingQAPage extends Page {
         await browser.pause(2000);
     }
 
-
     public async goToQALayout() {
         await (await this.tabLayout).scrollIntoView();
         await (await this.tabLayout).click();
     }
 
-    public async closeChatPopup(){
+    public async closeChatPopup() {
         const iframe = await $('iframe[id="hyro-frame"]');
         await iframe.waitForDisplayed();
         await browser.switchToFrame(iframe);
-        await (await $('#hyro-widget-closed div div div svg')).click()
-        await browser.switchToParentFrame()
+        await (await $("#hyro-widget-closed div div div svg")).click();
+        await browser.switchToParentFrame();
     }
-
 }
 
 export default new LandingQAPage();
