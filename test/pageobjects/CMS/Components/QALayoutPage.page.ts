@@ -127,6 +127,10 @@ class LandingQAPage extends Page {
         return $('=Hero');
     }
 
+    public get btnGeneralPublication() {
+        return $("=General Publications");
+    }
+
     public get btnIconList() {
         return $('=Icon List');
     }
