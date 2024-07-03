@@ -72,8 +72,8 @@ class SectionHeaderBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get sectionHeaderElement() {
-        return $('.mf-section-header');
+    public sectionHeaderElement(id: string) {
+        return $(`#${id} .mf-section-header`);
     }
 
     public get headlineOptions() {

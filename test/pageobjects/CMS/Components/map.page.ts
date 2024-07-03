@@ -105,7 +105,7 @@ class MapBlockPage extends Page {
     }
 
     public get btnOverlayMapIcon() {
-        return $$('button[data-analytics-click-text="map-trifold"]')[2]
+        return $$('button[data-analytics-click-text="map-trifold"]')[3]
     }
 
     public get overlayAddressText(){

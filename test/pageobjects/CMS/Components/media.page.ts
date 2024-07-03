@@ -121,12 +121,12 @@ class MediaBlockPage extends Page {
         return $('.mf-media__content');
     }
 
-    public get mediaElement() {
-        return $('.mf-media__button');
+    public mediaElement(id: string) {
+        return $(`#${id} .mf-media__button`);
     }
 
-    public get durationElement() {
-        return $('.mf-media__play__duration');
+    public durationElement(id: string) {
+        return $(`#${id} .mf-media__play__duration`);
     }
 
     public get btnClose() {
@@ -142,7 +142,7 @@ class MediaBlockPage extends Page {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
-        await (await this.dropdownImage).click();
+        //await (await this.dropdownImage).click();
         // switch to the iframe
         await browser.switchToFrame(await this.imageIframe);
         await (await this.btnBrowse).scrollIntoView();
@@ -178,21 +178,17 @@ class MediaBlockPage extends Page {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.inputTitle).setValue(title);
         await browser.pause(2000);
-        await (await this.dropdownVideo).click();
+        //await (await this.dropdownVideo).click();
         // switch to the iframe
         await browser.switchToFrame(await this.videoIframe);
         await (await this.tabNewVideo).scrollIntoView();
         await (await this.tabNewVideo).click();
         await (await this.btnBrowse).scrollIntoView();
         await (await this.btnBrowse).setValue(remoteFilePath);
-        await browser.pause(12000); //explicit waits seem to be necessary here
+        await browser.pause(9000); //explicit waits seem to be necessary here
         await (await this.inputDuration).setValue(duration);
-        await browser.pause(2000);
-        await (await this.btnSaveMedia).scrollIntoView();
-        await (await this.btnSaveMedia).click();
-        await browser.pause(3500); //explicit waits seem to be necessary here
-        await browser.switchToParentFrame();
-        await browser.pause(1000); //explicit waits seem to be necessary here
+        await browser.pause(1000);
+
         await (await this.dropdownPoster).scrollIntoView();
         await (await this.dropdownPoster).click();
         await browser.switchToFrame(await this.imageIframe);
@@ -204,9 +200,20 @@ class MediaBlockPage extends Page {
         await (await this.inputAltText).setValue(altText);
         await (await this.btnSaveImage).scrollIntoView();
         await (await this.btnSaveImage).click();
-        await browser.pause(10000); //explicit waits seem to be necessary here
+        await browser.pause(8000); //explicit waits seem to be necessary here
         await browser.switchToParentFrame();
         await browser.pause(1000); //explicit waits seem to be necessary here
+
+        await (await this.btnSaveMedia).scrollIntoView();
+        await (await this.btnSaveMedia).click();
+        await browser.pause(3500); //explicit waits seem to be necessary here
+        await browser.switchToParentFrame();
+        await browser.pause(1000); //explicit waits seem to be necessary here
+        
+
+
+
+       
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();

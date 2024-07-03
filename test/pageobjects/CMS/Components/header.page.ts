@@ -61,7 +61,7 @@ class HeaderBlockPage extends Page {
         return $('span[data-analytics-click-text="doctor"]');
     }
 
-    public get btnAddLink() {
+    public get btnAddLinkUR() {
         return $('a[href="/admin/structure/menu/manage/global-utilities/add?destination=/admin/structure/menu/manage/global-utilities"]');
     }
 
@@ -110,27 +110,47 @@ class HeaderBlockPage extends Page {
     }
 
     public get btnDelete() {
-        return $('#edit-submit');
+        return $('button.button--primary');
     }
 
     public get btnHamburgerMenu() {
-        return $('button[x-ref="btnHamburgerMenu"]');
+        return $('button[data-analytics-click-text="Menu"]');
+        // return $('button[x-ref="btnHamburgerMenu"]');
     }
 
     public get btnAbout() {
         return $('button[data-analytics-click-text="About"]');
     }
+    //Resumed work
 
-    // public get () {
-    //     return $('');
-    // }
+    public get btnAddLink() {
+        return $('a[href="/admin/structure/menu/manage/utility-left/add?destination=/admin/structure/menu/manage/utility-left"]');
+    }
 
-    // public get () {
-    //     return $('');
-    // }
+    public get btnAddRightLink() {
+        return $('a[href="/admin/structure/menu/manage/utility-right/add?destination=/admin/structure/menu/manage/utility-right"]');
+    }
 
+    public get TestHamburgerLink() {
+        return $('=QA Donate');
+    }
 
-    
+    //attempt to target created menu through indexing
+    public get btnEdit() {
+        return $$('=Edit')[3];
+    }
+
+    public get btnConfirmDelete() {
+        return $('button[class="button button--primary js-form-submit form-submit ui-button ui-corner-all ui-widget"]');
+    }
+
+    public get linkFellowship() {
+        return $$('a[data-analytics-click-text="Fellowship Programs"]')[2];
+    }
+
+    public get btnMainAdd() {
+        return $('a[href="/admin/structure/menu/manage/global-utilities/add?destination=/admin/structure/menu/manage/global-utilities"]');
+    }
 
     /**
      * Helper methods to create Header Component
@@ -138,13 +158,13 @@ class HeaderBlockPage extends Page {
 
 
     public async createUtilityMenu(link: string, title: string, description: string, label: string) {
-       await (await this.btnAddLink).waitForDisplayed({timeout:5000});
-       await (await this.btnAddLink).click();
+       await (await this.btnMainAdd).waitForDisplayed({timeout:5000});
+       await (await this.btnMainAdd).click();
        await (await this.inputLink).waitForDisplayed({timeout:5000});
        await (await this.inputLink).setValue(link);
        await (await this.inputMenuTitle).scrollIntoView();
        await (await this.inputMenuTitle).setValue(title);
-       await (await this.inputDescription).setValue(description);
+       // await (await this.inputDescription).setValue(description);
        await (await this.dropdownIcon).scrollIntoView();
        await (await this.dropdownIcon).selectByVisibleText('wifi');
        await (await this.inputLabel).setValue(label);
@@ -152,26 +172,81 @@ class HeaderBlockPage extends Page {
        await (await this.btnSave).click();
     }
 
-    public openHome() {
-        return browser.url('https://meglobalode6.prod.acquia-sites.com/home');
+    public async navToUtilityLeft() {
+        return super.open('/admin/structure/menu/manage/utility-left');
     }
 
-    public openUtilityMenu() {
-        return browser.url('https://meglobalode6.prod.acquia-sites.com/admin/structure/menu/manage/global-utilities');
+    public async openHomePage() {
+        return super.open('/');
+    }
+
+    public async navToFellowshipPage() {
+        return super.open('/education/fellowship');
+    }
+
+    public async createUtilLeftLink(menuTitle:string, link:string) {
+        await (await this.btnAddLink).click();
+        await (await this.inputMenuTitle).waitForDisplayed({timeout:3000});
+        await (await this.inputMenuTitle).setValue(menuTitle);
+        await (await this.inputLink).setValue(link);
+        await (await this.btnSave).scrollIntoView();
+        await (await this.btnSave).click();
+    }
+
+    public async deleteUtilLeftLink() {
+        await (await this.btnEdit).waitForDisplayed({timeout:3500});
+        await (await this.btnEdit).click();
+        await (await this.linkDelete).scrollIntoView();
+        await (await this.linkDelete).click();
+        await (await this.btnConfirmDelete).waitForDisplayed();
+        await (await this.btnConfirmDelete).click();
+    }
+
+    public openHome(baseurl: string) {
+        return browser.url(baseurl);
+    }
+
+    public openUtilityMenu(baseurl: string) {
+        return browser.url(`${baseurl}admin/structure/menu/manage/global-utilities`);
+
     }
 
     public async goToMainMenu() {
         await (await this.btnHamburgerMenu).waitForDisplayed({timeout:4000});
         await (await this.btnHamburgerMenu).click();
-        await browser.pause(3000);
-        await (await $('span[data-analytics-click-text="chevron-left"]')).waitForDisplayed({timeout:6000});
-        await (await $('span[data-analytics-click-text="chevron-left"]')).click();
-        await (await $('button[data-analytics-click-text="Education"]')).waitForDisplayed({timeout:3000});
-        await (await $('button[data-analytics-click-text="Education"]')).click();
-        await (await $('button[data-analytics-click-text="Montefiore Einstein"]')).waitForDisplayed({timeout:3000});
-        await (await $('button[data-analytics-click-text="Montefiore Einstein"]')).click();
-
+        await (await $('button[data-analytics-click-text="Patient Care"]')).waitForDisplayed();
+        expect (await $('button[data-analytics-click-text="Patient Care"]')).toBeDisplayed()
+        expect (await $('button[data-analytics-click-text="College of Medicine"]')).toBeDisplayed();
+        expect (await $('a[data-analytics-click-text="Research"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="Community"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="Education"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="News"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="For Donors"]')).toBeDisabled();
+        expect (await $('button[data-analytics-click-text="About"]')).toBeDisabled();
     }
+
+    public async navToUtilityRight() {
+        return super.open('/admin/structure/menu/manage/utility-right');
+    }
+
+    public async createUtilRightLink(menuTitle:string, link:string) {
+        await (await this.btnAddRightLink).click();
+        await (await this.inputMenuTitle).waitForDisplayed({timeout:3000});
+        await (await this.inputMenuTitle).setValue(menuTitle);
+        await (await this.inputLink).setValue(link);
+        await (await this.btnSave).scrollIntoView();
+        await (await this.btnSave).click();
+    }
+
+    public async deleteUtilRightLink() {
+        await (await this.btnEdit).waitForDisplayed({timeout:3500});
+        await (await this.btnEdit).click();
+        await (await this.linkDelete).scrollIntoView();
+        await (await this.linkDelete).click();
+        await (await this.btnConfirmDelete).waitForDisplayed();
+        await (await this.btnConfirmDelete).click();
+    }
+
 }
 
 export default new HeaderBlockPage();

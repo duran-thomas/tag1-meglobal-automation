@@ -1,10 +1,10 @@
 import LoginPage from  '../../pageobjects/CMS/Login/login.page';
 import AdminContentPage from '../../pageobjects/CMS/Login/adminContent.page';
-import AccordionBlockPage from '../../pageobjects/CMS/Components/accordion.page';
-import { accordionBlockData } from '../../data/accordion.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
 import * as fs from "fs";
+import { indexListBlockData } from '../../data/indexList.data';
+import indexListPage from '../../pageobjects/CMS/Components/indexList.page';
 
 
 describe('Index List Component Tests', () => {
@@ -25,16 +25,76 @@ describe('Index List Component Tests', () => {
         await browser.setCookies(await cookies);
 
     });
+    before(async function() {
+        global.suiteDescription = this.currentTest?.parent?.title;
+        //navigate to admin content page
+        await AdminContentPage.open();
+        // Navigate to QA Landing page to execute tests
+        // await AdminContentPage.getTestPage(global.suiteDescription);  
+        // await expect(QALayoutPage.tabLayout).toBeDisplayed();
+    })
+
+    afterEach(async function() { 
+        // Take a screenshot after each test/assertion
+        const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
+        const screenshotPath = `./screenshots/IndexList/${testName}.png`;
+        await browser.saveScreenshot(screenshotPath);
+    });
+
+    //delete previously created sections
+    afterEach(async function() { 
+        await AdminContentPage.open();
+        const testPage = await $(`=${indexListBlockData.pageTitle}`);
+        await testPage.scrollIntoView({ behavior: 'auto', block: 'center' });
+        await testPage.click();
+        // await AdminContentPage.getTestPage(global.suiteDescription);
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.cleanUpJob();
+        await expect(QALayoutPage.btnRemoveSection).not.toBeDisplayedInViewport();
+        //return to starting point
+        await AdminContentPage.open();
+        // await AdminContentPage.getTestPage(global.suiteDescription);  
+    });
+
+    //delete page
+    after(async function () {
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+        //await browser.url(environment.baseUrl+'user/logout');
+        await browser.setCookies(environment.admin);
+        await AdminContentPage.open();
+        await AdminContentPage.deleteTestPage(indexListBlockData.pageTitle);
+        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+    });
     /**
     * TODO: This needs to be updated to create its own Index List Component eventually and execute the test. 
     * At the moment it relies on the index list component that exists at the cancer/types route, which doesn't seem
     * to exist on ode7. 
     */
-    it('[] Verify that Analytics for the Index List Component is configured', async () => {
-        const baseUrl = getEnvironmentConfig(process.env.ENV).baseUrl;
-        browser.url(`${baseUrl}/cancer/types`)
-        //TODO: Update this to read from a pageObject and a test data file when the above updates are being made.
-        const indexListComponent = await $('.mf-index-list__list');
+
+    it('[S3C1342] Verify that Analytics for the Index List Component is configured', async () => {
+        const id=`IndexList-S3C1342-${Date.now()}`;
+        const environment = getEnvironmentConfig(process.env.ENV);
+        const baseURL = environment.baseUrl;
+        await browser.url(await `${baseURL}/group/41/nodes`);
+        await browser.pause(1000);
+
+        await (await indexListPage.btnAddNewContent).click();
+        await (await indexListPage.linkGroupNodeLayoutPage).click();
+        await (await indexListPage.inputPageTitle).setValue(indexListBlockData.pageTitle);
+        await (await indexListPage.btnSaveLayout).scrollIntoView();
+        await (await indexListPage.btnSaveLayout).click();
+        await (await QALayoutPage.tabLayout).click();
+        await QALayoutPage.createNewSection(id);
+        await QALayoutPage.navigateToBlockList();
+        (await QALayoutPage.btnIndexListClinicalCategories).scrollIntoView();
+        (await QALayoutPage.btnIndexListClinicalCategories).click();
+        (await indexListPage.configBlock).waitForDisplayed();
+        await indexListPage.createIndexListClinicalCategories(indexListBlockData.title)
+
+        await QALayoutPage.goToPageView();
+
+        const indexListComponent = await $(`#${id} .mf-index-list__list`);
         const indexListComponentItem = await $('span[data-analytics-click-text="Acute Lymphoblastic Leukemia (ALL)"]');
         const expectedClickText = "Acute Lymphoblastic Leukemia (ALL)";
         await (indexListComponent).scrollIntoView({ behavior: 'auto', block: 'center' });
@@ -49,7 +109,7 @@ describe('Index List Component Tests', () => {
             event: 'e_componentClick',
             componentType:'index-list',
             clickText: expectedClickText,
-            pageSlot: '3'
+            pageSlot: '1'
         }
 
         let variable;
@@ -68,7 +128,6 @@ describe('Index List Component Tests', () => {
 
         // Get the data layer for the window and get the data for the click event for the component
         const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick")[0];
-
         // Build the actual analytics data object
         const parsedActualAnalyticsData = {
             //Remove whitespace from the Headline
@@ -82,11 +141,35 @@ describe('Index List Component Tests', () => {
             if (err) {
                 console.error(err);
             }
-            // file written successfully
         });
 
         await expect(parsedActualAnalyticsData).toEqual(expectedAnalyticsData);
-
-    });
-
   });
+
+  it('[S3C1128] Verify that a Content Administrator can create a Index List - Clinical Categories Component', async () => {
+    const id=`IndexList-S3C1128-${Date.now()}`;
+    const environment = getEnvironmentConfig(process.env.ENV);
+    const baseURL = environment.baseUrl;
+    await browser.url(await `${baseURL}/group/41/nodes`);
+    await browser.pause(1000);
+    await (await indexListPage.btnAddNewContent).click();
+    await (await indexListPage.linkGroupNodeLayoutPage).click();
+    await (await indexListPage.inputPageTitle).setValue(indexListBlockData.pageTitle);
+    await (await indexListPage.btnSaveLayout).scrollIntoView();
+    await (await indexListPage.btnSaveLayout).click();
+    await (await QALayoutPage.tabLayout).click();
+    await QALayoutPage.createNewSection(id);
+    await QALayoutPage.navigateToBlockList();
+    (await QALayoutPage.btnIndexListClinicalCategories).scrollIntoView();
+    (await QALayoutPage.btnIndexListClinicalCategories).click();
+    (await indexListPage.configBlock).waitForDisplayed();
+    await indexListPage.createIndexListClinicalCategories(indexListBlockData.title)
+
+    await QALayoutPage.goToPageView();
+
+    const indexListComponent = await $(`#${id} .mf-index-list__list`);
+    await (indexListComponent).scrollIntoView({ behavior: 'auto', block: 'center' });
+    
+    await expect(indexListComponent).toBeDisplayedInViewport();
+})
+})

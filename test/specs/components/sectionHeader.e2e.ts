@@ -68,8 +68,9 @@ describe('Section Header Component Tests', () => {
 
      
     it('[S3C865] Verify that a site Content Administrator can create a Section Header Component', async () => {
+        const id=`SectionHeader-S3C865-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnSectionHeader).scrollIntoView();
         await (await QALayoutPage.btnSectionHeader).click();
@@ -80,16 +81,17 @@ describe('Section Header Component Tests', () => {
         await expect(SectionHeaderBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await SectionHeaderBlockPage.sectionHeaderElement).scrollIntoView();
+        await (await SectionHeaderBlockPage.sectionHeaderElement(id)).scrollIntoView();
         
-        await expect(SectionHeaderBlockPage.sectionHeaderElement).toExist; 
-        await expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline);   
+        await expect(SectionHeaderBlockPage.sectionHeaderElement(id)).toExist; 
+        await expect(await SectionHeaderBlockPage.sectionHeaderElement(id)).toHaveTextContaining(sectionHeaderBlockData.headline);   
     });
 
 
     it('[S3C866] Verify that all design fields are present with the correct available options.', async () => {
+        const id=`SectionHeader-S3C866-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnSectionHeader).scrollIntoView();
         await (await QALayoutPage.btnSectionHeader).click();
@@ -104,8 +106,9 @@ describe('Section Header Component Tests', () => {
     });
 
     it('[S3C1085] Verify that the Headline size defaults to h2 when creating a Section Header Component', async () => {
+        const id=`SectionHeader-S3C1085-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnSectionHeader).scrollIntoView();
         await (await QALayoutPage.btnSectionHeader).click();
@@ -117,8 +120,9 @@ describe('Section Header Component Tests', () => {
     });
 
     it('[S3C1356] Verify that Analytics for the Section Header Component is configured', async () => {
+        const id=`SectionHeader-S3C1356-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         await (await QALayoutPage.btnSectionHeader).scrollIntoView();
         await (await QALayoutPage.btnSectionHeader).click();
@@ -129,10 +133,10 @@ describe('Section Header Component Tests', () => {
         await expect(SectionHeaderBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await SectionHeaderBlockPage.sectionHeaderElement).scrollIntoView();
+        await (await SectionHeaderBlockPage.sectionHeaderElement(id)).scrollIntoView();
         
-        await expect(SectionHeaderBlockPage.sectionHeaderElement).toExist; 
-        await expect(await SectionHeaderBlockPage.sectionHeaderElement).toHaveTextContaining(sectionHeaderBlockData.headline); 
+        await expect(SectionHeaderBlockPage.sectionHeaderElement(id)).toExist; 
+        await expect(await SectionHeaderBlockPage.sectionHeaderElement(id)).toHaveTextContaining(sectionHeaderBlockData.headline); 
         
          /**
          * Create the expected analytics 
@@ -154,7 +158,7 @@ describe('Section Header Component Tests', () => {
         let currentUrl = await browser.getUrl();
 
         // Interact with the button to generate the analytics. (Clicking the button navigates us to a new tab)
-        await (await $(`a[data-analytics-click-text="${sectionHeaderBlockData.btnText}"]`)).click();
+        await (await $(`#${id} a[data-analytics-click-text="${sectionHeaderBlockData.btnText}"]`)).click();
 
         // Switch back to the tab where the analytics is being generated
         await browser.switchWindow(currentUrl)

@@ -93,8 +93,8 @@ class StepperBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public get stepperElement() {
-        return $('.mf-stepper');
+    public stepperElement(id:string) {
+        return $(`#${id} .mf-stepper`);
     }
 
     public get stepperList() {
@@ -117,12 +117,12 @@ class StepperBlockPage extends Page {
         return $('.add-more-button-rich-text');
     }
 
-    public get btnBackStep() {
-        return $('button[data-analytics-click-text="Step 5: Transition of care"]');
+    public btnBackStep(id:string) {
+        return $(`#${id} button[data-analytics-click-text="Step 5: Transition of care"]`);
     }
 
-    public get btnNextStep() {
-        return $('button[data-analytics-click-text="Step 1: Assess the situation"]');
+    public btnNextStep(id:string) {
+        return $(`#${id} button[data-analytics-click-text="Step 1: Assess the situation"]`);
     }
 
     public get btnLastStep() {
@@ -140,7 +140,7 @@ class StepperBlockPage extends Page {
         await (await this.btnAddBlock).scrollIntoView({ block: 'center' });
         await (await this.btnAddBlock).click();
         await browser.pause(1500);
-        await browser.refresh();
+        // await browser.refresh();
     }
 
     public async createHorizontalStepper(adminTitle: string, title: string, content: string, title1: string, content1: string, title2: string, content2: string, title3: string, content3: string, title4: string, content4: string, backLabel: string, contLabel: string) {
