@@ -65,7 +65,7 @@ describe("Content Proxy Component Tests", () => {
         );
     });
 
-    it.only("[S3C804] Verify that downloadable file links work as expected", async () => {
+    it("[S3C804] Verify that downloadable file links work as expected", async () => {
         const baseUrl = environment.baseUrl;
         await browser.url(`${baseUrl}population-health-dashboards`);
 
