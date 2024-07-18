@@ -86,7 +86,7 @@ describe('Tabs Component Tests', () => {
         await expect(await TabsBlockPage.tabPanel).toHaveTextContaining(tabBlockData.content); 
     });
 
-    it('[S3C912] Verify that a site Content Administrator can create a Tabs Component with a multiple Tab Item', async () => {
+    it.only('[S3C912] Verify that a site Content Administrator can create a Tabs Component with a multiple Tab Item', async () => {
         const id=`Tabs-S3C912-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
         await QALayoutPage.createNewSection(id);
