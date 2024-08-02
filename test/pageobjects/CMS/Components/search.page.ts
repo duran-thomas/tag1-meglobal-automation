@@ -15,7 +15,7 @@ class SearchBlockPage extends Page {
 
     public get selectedSearchResult() {
         return $(
-            'h4[data-analytics-click-text="Improving CAR-T Therapy for Patients with Multiple Myeloma | Montefiore Einstein"]'
+            'h4[data-analytics-click-text="Distal Neuropathies | Montefiore Einstein"]'
         );
     }
     // public get selectedSearchResult() {

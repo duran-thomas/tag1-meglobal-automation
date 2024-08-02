@@ -239,64 +239,24 @@ describe('Carousel Component Tests', () => {
     });
 
     it('[S3C1125] Verify that Analytics for the Card Feature And Image Carousel Component is configured', async () => {
-        const id=`Carousel-S3C1125-${Date.now()}`;
-        const headline = carouselBlockData.headline;
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection(id);
-        await QALayoutPage.navigateToBlockList();
-        await (await QALayoutPage.btnCarousel).scrollIntoView();
-        await (await QALayoutPage.btnCarousel).click();
-        await (await CarouselBlockPage.configBlock).waitForDisplayed();
-
-        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
+        await CarouselBlockPage.navToComponentTesting();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
         
-        await CarouselBlockPage.createCarouselWithFeatureCardAndLocation(carouselBlockData.title, carouselBlockData.headline, carouselBlockData.eyebrow, carouselBlockData.list, carouselBlockData.content, carouselBlockData.btnText, carouselBlockData.url,imageFilePath, carouselBlockData.altText, carouselBlockData.link, carouselBlockData.url);
+        await (await CarouselBlockPage.analyticsButton).click();
 
-        expect(CarouselBlockPage.successMsg).toBeDisplayed();
-
-        await QALayoutPage.goToPageView();
-        await (await CarouselBlockPage.carouselElement).scrollIntoView({ behavior: 'auto', block: 'start' });
-
-        await expect($(`#${id} div[data-analytics-item-title="${headline}"]`)).toBeExisting; 
-        await expect(CarouselBlockPage.controlElement).toExist(); 
-
-        const expectedCardAnalyticsData = {
-            clickText: 'Carousel Button',
-            componentType:'carousel > card feature',
+        const expectedHeadlineAnalyticsData =
+            {
+            clickText: 'Card General button',
+            componentType:'carousel > card',
             event: 'e_componentClick',
-            itemTitle: carouselBlockData.headline,
+            itemTitle: 'Card General headline',
             linkType: 'button',
             pageSlot: '1'
-        };
-        const expectedLocationTextAnalyticsData = {
-            clickText: '3415 Bainbridge Avenue Bronx, NY 10467-2401',
-            componentType:'carousel > card location',
-            event: 'e_componentClick',
-            itemTitle: "Children's Hospital at Montefiore",
-            linkType: 'link',
-            pageSlot: '1'
-        };
-        const expectedLocationIconAnalyticsData = {
-            clickText: 'map-trifold',
-            componentType:'carousel > card location',
-            event: 'e_componentClick',
-            itemTitle: "Children's Hospital at Montefiore",
-            linkType: 'button',
-            pageSlot: '1'
-        };
+        }
 
-        const currentUrl = await browser.getUrl();
+        // const currentUrl = await browser.getUrl();
+        // await browser.switchWindow(currentUrl);
 
-        // Click Carousel button to switch to second card
-        await $(`#${id} a[data-analytics-click-text="Carousel Button"]`).click()
-
-        await browser.switchWindow(currentUrl);
-
-        await (await CarouselBlockPage.controlElement[1]).click();
-        await browser.pause(1000);
-        await ((await CarouselBlockPage.carouselLocationAddressLink(id)).click());
-        await browser.pause(2000);
-        await ((await CarouselBlockPage.carouselLocationAddressIcon(id)).click());
         // Get the data layer for the window and get the data for the click event for the component
         const dataLayer = await browser.executeScript('return window.dataLayer',[]);
         
@@ -315,6 +275,47 @@ describe('Carousel Component Tests', () => {
             })
         }
 
+        await expect(parsedAnalyticsData).toEqual(expectedHeadlineAnalyticsData);
+
+        ////////////
+
+        await CarouselBlockPage.navToComponentTesting();
+        await (await CarouselBlockPage.carouselElement).scrollIntoView();
+        
+        await (await CarouselBlockPage.nextIcon).click();
+        await (await CarouselBlockPage.nextIcon).click();
+        await (await CarouselBlockPage.mapIcon).click();
+
+        const expectedAnalyticsData = {
+            clickText: 'map-trifold',
+            componentType:'carousel > card location',
+            event: 'e_componentClick',
+            itemTitle: "CERC GABI-Brooklyn",
+            linkType: 'button',
+            pageSlot: '4'
+        }
+
+        // const currentUrl = await browser.getUrl();
+        // await browser.switchWindow(currentUrl);
+
+        // Get the data layer for the window and get the data for the click event for the component
+        const dataLayer1 = await browser.executeScript('return window.dataLayer',[]);
+        
+        const actualAnalyticData = dataLayer.filter((item) => item.event === "e_componentClick");
+        let parsedAnalyticData = []
+
+        for(let x in actualAnalyticData){
+            parsedAnalyticData.push({
+                clickText: actualAnalyticData[x].clickText,
+                componentType: actualAnalyticData[x].componentType,
+                event: actualAnalyticData[x].event,
+                // Remove html tags, whitespace and newlines from the Headline
+                itemTitle: actualAnalyticData[x].itemTitle.replace(/(<([^>]+)>)/ig, '').trim(),
+                linkType: actualAnalyticData[x].linkType,
+                pageSlot: actualAnalyticData[x].pageSlot
+            })
+        }
+
         fs.writeFile('analyticsTestEvidence/carouselCardFeatureAndImage.json', JSON.stringify(dataLayer), err => {
             if (err) {
                 console.error(err);
@@ -322,11 +323,8 @@ describe('Carousel Component Tests', () => {
             // file written successfully
         });
 
-        const screenshotPath = `./screenshots/Carousel/Verify that Analytics for the Card Feature And Image Carousel Component is configured.png`;
-        await browser.saveScreenshot(screenshotPath);
-        await expect(parsedAnalyticsData[0]).toEqual(expectedCardAnalyticsData);
-        await expect(parsedAnalyticsData[1]).toEqual(expectedLocationTextAnalyticsData);
-        await expect(parsedAnalyticsData[2]).toEqual(expectedLocationIconAnalyticsData);
+        await expect(parsedAnalyticData).toEqual(expectedAnalyticsData);
+
     })
 
     it('Verify that Analytics for the Billboard and MyChart Carousel Component is configured', async () => {

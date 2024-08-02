@@ -180,6 +180,7 @@ class CompoundGridPage extends Page {
         await (await this.btnSaveLayout).scrollIntoView();
         await (await this.btnSaveLayout).click();
         await browser.pause(3000);
+
     }
 }
 

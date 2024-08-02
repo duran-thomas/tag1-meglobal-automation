@@ -55,6 +55,7 @@ describe('Translation Component Tests', () => {
     });
 
     it('[S3C707] Verify that selecting one of the Language Switcher options translates the page accordingly', async () => {
+        await (await TranslationBlockPage.languageBtn).click();
         await (await TranslationBlockPage.listItems[1]).click();
 
         const expectedLanguage = 'es'; 
@@ -104,7 +105,7 @@ describe('Translation Component Tests', () => {
         await (await TranslationBlockPage.btnLanguage).click();
         await (await TranslationBlockPage.listItems[1]).click();
 
-        await expect(TranslationBlockPage.linkCollege).toHaveHrefContaining('/es');
+        await expect(TranslationBlockPage.patientCare).toHaveHrefContaining('/es');
     });
     
   });
