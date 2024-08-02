@@ -54,6 +54,8 @@
         "findADoctor": "npx wdio run wdio.conf.ts --spec ./test/specs/components/findADoctor.e2e.ts",
         "datePicker": "npx wdio run wdio.conf.ts --spec ./test/specs/components/datePicker.e2e.ts",
         "contentProxy": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contentProxy.e2e.ts",
+        "imageGallery": "npx wdio run wdio.conf.ts --spec ./test/specs/components/imageGallery.e2e.ts"
+
     },
     "author": "QW Team",
     "license": "ISC",

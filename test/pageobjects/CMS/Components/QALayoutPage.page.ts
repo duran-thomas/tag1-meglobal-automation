@@ -150,6 +150,10 @@ class LandingQAPage extends Page {
         return $("=Image");
     }
 
+    public get btnImageGallery() {
+        return $("=Image Gallery");
+    }
+
     public get btnInlineNavigation() {
         return $("=Inline Navigation");
     }
