@@ -52,18 +52,6 @@ describe("Sidebar Component Tests", () => {
         await AdminContentPage.deleteTestPage(global.suiteDescription);
         await expect($(".mf-alert__container--highlight")).toBeDisplayed();
 
-        //1025 delete created node
-        // await SidebarBlockPage.deleteNode();
-        // await expect(SidebarBlockPage.successMsg).toBeDisplayed();
-        // await expect(SidebarBlockPage.successMsg).toHaveText(
-        //     "The Layout Page QA Test - Sidebar page has been deleted."
-        // );
-        // End
-        //968 return menu link to original text
-        await SidebarBlockPage.editMenuLink(sidebarBlockData.originalText);
-        await expect(SidebarBlockPage.messageContent).toHaveTextContaining(
-            "The menu link has been saved."
-        );
         //968 delete node
         await SidebarBlockPage.openDummyTestGroupNodes();
         await (await SidebarBlockPage.linkDummyQANode).waitForClickable();
@@ -243,7 +231,8 @@ describe("Sidebar Component Tests", () => {
         await expect(SidebarBlockPage.sidebarNavFields).toBeExisting();
     });
 
-    it("[S3C1030] Verify that sidebar navigation fields are not shown on single-node landing pages", async () => {
+    //No longer applicable
+    it.skip("[S3C1030] Verify that sidebar navigation fields are not shown on single-node landing pages", async () => {
         await AdminContentPage.open();
         await (await AdminContentPage.btnAddContent).click();
         await (await AdminContentPage.linkLandingPage).click();

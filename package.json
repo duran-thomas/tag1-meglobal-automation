@@ -52,6 +52,12 @@
         "footer": "npx wdio run wdio.conf.ts --spec ./test/specs/components/footer.e2e.ts",
         "compoundGrid": "npx wdio run wdio.conf.ts --spec ./test/specs/components/compoundGrid.e2e.ts",
         "findAnInvestigator": "npx wdio run wdio.conf.ts --spec ./test/specs/components/findAnInvestigator.e2e.ts"
+        "findADoctor": "npx wdio run wdio.conf.ts --spec ./test/specs/components/findADoctor.e2e.ts",
+        "datePicker": "npx wdio run wdio.conf.ts --spec ./test/specs/components/datePicker.e2e.ts",
+        "contentProxy": "npx wdio run wdio.conf.ts --spec ./test/specs/components/contentProxy.e2e.ts",
+        "imageGallery": "npx wdio run wdio.conf.ts --spec ./test/specs/components/imageGallery.e2e.ts"
+
+
     },
     "author": "QW Team",
     "license": "ISC",
@@ -84,4 +90,5 @@
         "@visual-regression-tracker/sdk-js": "^5.7.0",
         "wdio-visual-regression-tracker-service": "^1.0.0"
     }
+
 }

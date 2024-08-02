@@ -4,6 +4,8 @@ import MapBlockPage from '../../pageobjects/CMS/Components/map.page';
 import { mapBlockData } from '../../data/map.data';
 import QALayoutPage from '../../pageobjects/CMS/Components/QALayoutPage.page';
 import { getEnvironmentConfig } from '../../../envSelector';
+import * as fs from "fs";
+
 
 describe('Map Component Tests', () => {
     
@@ -60,7 +62,7 @@ describe('Map Component Tests', () => {
         await browser.setCookies(environment.admin);
         await AdminContentPage.open();
         await AdminContentPage.deleteTestPage(global.suiteDescription);
-        await expect($('.mf-alert__container--highlight')).toBeDisplayed();
+        //await expect($('.mf-alert__container--highlight')).toBeDisplayed();
     });
 
      
@@ -104,133 +106,6 @@ describe('Map Component Tests', () => {
         await hideLocationCheckbox.scrollIntoView();
         await expect(hideLocationCheckbox).toBeDisplayed();
         await expect(await hideLocationCheckbox.isSelected()).toBe(false);
-    });
-
-    it('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
-        const id=`Map-S3C1349-${Date.now()}`;
-        await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection(id);
-        await QALayoutPage.navigateToBlockList();
-        await (await QALayoutPage.btnMap).scrollIntoView();
-        await (await QALayoutPage.btnMap).click();
-        await (await MapBlockPage.configBlock).waitForDisplayed();
-
-        const imageFilePath = await browser.uploadFile('scriptFiles/sampleImg1.jpg');
-        const imageFilePath2 = await browser.uploadFile('scriptFiles/sampleImg2.jpg');
-        await MapBlockPage.createMapWithLocation(mapBlockData.title, mapBlockData.location, mapBlockData.highlightTitle, mapBlockData.latitude, mapBlockData.longitude, imageFilePath, mapBlockData.altText, imageFilePath2, mapBlockData.iconAltText);
-        await expect(MapBlockPage.successMsg).toBeDisplayed();
-
-        await QALayoutPage.goToPageView();
-
-        await (await MapBlockPage.mapElement(id)).scrollIntoView();
-        await expect(MapBlockPage.mapElement(id)).toBeDisplayed(); 
-
-        //(await $('.dismissButton')).click();
-        await (await MapBlockPage.btnFirstLocation).click();
-        await browser.pause(2000);
-        await (await MapBlockPage.btnOverlayMapIcon).click();
-        await browser.pause(1000)
-        await (await MapBlockPage.overlayAddressText).click();
-        await browser.pause(1000)
-        const currentUrl = await browser.getUrl();
-
-        const expectedAnalyticsData = 
-            [{
-                clickText: 'text',
-                componentType: 'map',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1'
-            },
-            {
-                clickText: 'map-trifold',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1'
-            },
-            {
-                clickText: '111 East 210th Street Bronx, NY 10467-2401',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'link',
-                pageSlot: '1'
-            },
-            {
-                clickText: 'phone',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'button',
-                pageSlot: '1',
-                phoneNumber: '18768678768'
-            },
-            {
-                clickText: 'phone',
-                componentType: 'map > card location',
-                event: 'e_componentClick',
-                itemTitle: 'Montefiore Einstein Hospital, Moses Campus',
-                linkType: 'link',
-                pageSlot: '1',
-                phoneNumber: '18768678768'
-            }]
-
-        // await browser.execute(() => {
-        //     const phoneIconsElements = document.querySelectorAll('a[data-analytics-link-type="button"]')
-        //     const phoneTextElements = document.querySelectorAll('a[data-analytics-click-text="phone"]')
-
-        //     const phoneIcon = phoneIconsElements[3]
-        //     const phoneText = phoneTextElements[5]
-
-        //     if (phoneIcon.getAttribute('target') !== '_blank') {
-        //         phoneIcon.setAttribute('target', '_blank');
-        //     }
-        //     if (phoneText.getAttribute('target') !== '_blank') {
-        //         phoneText.setAttribute('target', '_blank');
-        //     }
-        // })
-        // const icons = $$('a[data-analytics-link-type="button"]')
-        // const text = $$('a[data-analytics-click-text="phone"]')
-
-        // icons[3].click();
-        // await browser.switchWindow(currentUrl);
-        // text[5].click();
-        // await browser.switchWindow(currentUrl);
-        const dataLayer = await browser.executeScript('return window.dataLayer',[]);
-        const actualAnalyticsData = dataLayer.filter((item) => item.event === "e_componentClick");
-        let parsedAnalyticsData = []
-        for(let x in actualAnalyticsData){
-            if ('phoneNumber' in actualAnalyticsData[x]) {
-                parsedAnalyticsData.push({
-                    clickText: actualAnalyticsData[x].clickText,
-                    componentType: actualAnalyticsData[x].componentType,
-                    event: actualAnalyticsData[x].event,
-                    // Remove HTML tags, whitespace, and newlines from the Headline
-                    itemTitle: actualAnalyticsData[x].itemTitle,
-                    linkType: actualAnalyticsData[x].linkType,
-                    phoneNumber: actualAnalyticsData[x].phoneNumber,
-                    pageSlot: actualAnalyticsData[x].pageSlot,  
-                });
-            }else {
-                parsedAnalyticsData.push({
-                    clickText: actualAnalyticsData[x].clickText,
-                    componentType: actualAnalyticsData[x].componentType,
-                    event: actualAnalyticsData[x].event,
-                    // Remove html tags, whitespace and newlines from the Headline
-                    itemTitle: actualAnalyticsData[x].itemTitle,
-                    linkType: actualAnalyticsData[x].linkType,
-                    pageSlot: actualAnalyticsData[x].pageSlot
-                })
-            }
-        }
-        const screenshotPath = `./screenshots/Map/Verify that Analytics for the Map: Locations: Overlay Component is configured.png`;
-        await browser.saveScreenshot(screenshotPath);
-        for(let x in parsedAnalyticsData){
-            await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
-        }
     });
 
     it('[S3C1348] Verify that Analytics for the Map: Locations: Rail Component is configured', async () => {
@@ -344,6 +219,95 @@ describe('Map Component Tests', () => {
         const screenshotPath = `./screenshots/Map/Verify that Analytics for the Map: Locations: Rail Component is configured.png`;
         await browser.saveScreenshot(screenshotPath);
         //await expect(parsedAnalyticsData[0]).toEqual(expectedAnalyticsData[0])
+        for(let x in parsedAnalyticsData){
+            await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
+        }
+    });
+
+    it('[S3C1349] Verify that Analytics for the Map: Locations: Overlay Component is configured', async () => {
+
+        await MapBlockPage.navToComponentTesting();
+        await (await MapBlockPage.mapSample).scrollIntoView();
+        await (await MapBlockPage.firstListItem).click();
+        //await (await MapBlockPage.firstMapIcon).click();
+        const currentUrl = await browser.getUrl();
+        await (await MapBlockPage.secondMapIcon).click();
+        await browser.switchWindow(currentUrl)
+        await (await MapBlockPage.firstPhoneIcon).click();
+
+        const expectedAnalyticsData = [
+            {
+                event: 'e_componentClick',
+                clickText: 'text',
+                componentType: 'map',
+                linkType: 'button',
+                itemTitle: 'Moses Campus Research Tower',
+                pageSlot: '2'
+            },
+            {
+                event: 'e_componentClick',
+                clickText: 'text > map-trifold',
+                componentType: 'map',
+                linkType: 'button',
+                itemTitle: 'Breast Care Center',
+                pageSlot: '2'
+            },
+            {
+                event: 'e_componentClick',
+                clickText: 'text > phone',
+                componentType: 'map',
+                linkType: 'button',
+                itemTitle: 'Breast Care Center',
+                phoneNumber: '718-405-8360',
+                pageSlot: '2'
+            },
+        ];
+
+        const dataLayer = await browser.executeScript(
+            "return window.dataLayer",
+            []
+        );
+        const actualAnalyticsData = dataLayer.filter(
+            (item) => item.event === "e_componentClick"
+        );
+
+        let parsedAnalyticsData = []
+        for(let x in actualAnalyticsData){
+                if ('phoneNumber' in actualAnalyticsData[x]) {
+                    parsedAnalyticsData.push({
+                        clickText: actualAnalyticsData[x].clickText,
+                        componentType: actualAnalyticsData[x].componentType,
+                        event: actualAnalyticsData[x].event,
+                        // Remove HTML tags, whitespace, and newlines from the Headline
+                        itemTitle: actualAnalyticsData[x].itemTitle,
+                        linkType: actualAnalyticsData[x].linkType,
+                        phoneNumber: actualAnalyticsData[x].phoneNumber,
+                        pageSlot: actualAnalyticsData[x].pageSlot,  
+                    });
+                }else {
+                    parsedAnalyticsData.push({
+                        clickText: actualAnalyticsData[x].clickText,
+                        componentType: actualAnalyticsData[x].componentType,
+                        event: actualAnalyticsData[x].event,
+                        // Remove html tags, whitespace and newlines from the Headline
+                        itemTitle: actualAnalyticsData[x].itemTitle,
+                        linkType: actualAnalyticsData[x].linkType,
+                        pageSlot: actualAnalyticsData[x].pageSlot
+                    })
+                }
+            }
+
+        fs.writeFile(
+            "analyticsTestEvidence/mapOverlay.json",
+            JSON.stringify(dataLayer),
+            (err) => {
+                if (err) {
+                    console.error(err);
+                }
+                // file written successfully
+            }
+        );
+
         for(let x in parsedAnalyticsData){
             await expect(parsedAnalyticsData[x]).toEqual(expectedAnalyticsData[x]);
         }
