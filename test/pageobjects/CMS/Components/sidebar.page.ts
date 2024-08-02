@@ -236,16 +236,15 @@ class SidebarBlockPage extends Page {
     overwrite specific options to adapt it to page object
     */
     public openDentistryGroup() {
-        //return super.open('group/71');
         return super.open('group/71');
     }
 
     public openDummyTestGroupMenus() {
-        return super.open('group/361/menus');
+        return super.open('group/451/menus');
     }
 
     public openDummyTestGroupNodes() {
-        return super.open('group/361/nodes');
+        return super.open('group/451/nodes');
     }
 }
 

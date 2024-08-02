@@ -60,7 +60,7 @@ describe('Footer Component Tests', () => {
         const youTubeIcons = await FooterBlockPage.youTubeIcon;
 
         await expect(logo).toBeExisting();
-        await expect(phoneIcons.length).toBe(2);
+        await expect(phoneIcons.length).toBe(3);
         await expect(locationIcons.length).toBe(2);
         await expect(xIcons.length).toBe(2);
         await expect(fbIcons.length).toBe(2);
@@ -284,11 +284,11 @@ describe('Footer Component Tests', () => {
         const expectedAnalyticsData = {
             event: 'e_navigationClick',
             navigationType: 'footer',
-            clickText: 'Find Care > Find a Doctor | 2',
+            clickText: 'Find Care > Find a Doctor',
             linkType: "link"
         }
 
-        const footerItem = await $('a[data-analytics-click-text="Find a Doctor | 2"]');
+        const footerItem = await $('.mf-footer__main-links > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)');
 
         // Perform cmd + click
         await browser.performActions([

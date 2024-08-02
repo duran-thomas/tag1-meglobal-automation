@@ -63,7 +63,7 @@ class HeaderBlockPage extends Page {
         return $('span[data-analytics-click-text="doctor"]');
     }
 
-    public get btnAddLinkUR() {
+    public get btnAddLinkURL() {
         return $(
             'a[href="/admin/structure/menu/manage/global-utilities/add?destination=/admin/structure/menu/manage/global-utilities"]'
         );
@@ -158,6 +158,10 @@ class HeaderBlockPage extends Page {
         return $$('a[data-analytics-click-text="Fellowship Programs"]')[2];
     }
 
+    public get flyoutEducation(){
+        return $('button[data-analytics-click-text="Education"]');
+    }
+
     public get btnAddNewMenu() {
         return $(".local-actions__item");
     }
@@ -239,8 +243,8 @@ class HeaderBlockPage extends Page {
         description: string,
         label: string
     ) {
-        await (await this.btnAddLink).waitForDisplayed({ timeout: 5000 });
-        await (await this.btnAddLink).click();
+        await (await this.btnAddLinkURL).waitForDisplayed({ timeout: 5000 });
+        await (await this.btnAddLinkURL).click();
         await (await this.inputLink).waitForDisplayed({ timeout: 5000 });
         await (await this.inputLink).setValue(link);
         await (await this.inputMenuTitle).scrollIntoView();
