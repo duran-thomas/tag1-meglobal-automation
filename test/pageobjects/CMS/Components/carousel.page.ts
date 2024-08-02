@@ -425,7 +425,19 @@ class CarouselBlockPage extends Page {
     public get thirdFrame() {
         return $('iframe[name="entity_browser_iframe_image_browser"]');
     }
+    //maintenance
 
+    public get analyticsButton() {
+        return $('a[data-analytics-click-text="Card General button"]');
+    }
+
+    public get nextIcon() {
+        return $('div[aria-label="Next slide"]');
+    }
+
+    public get mapIcon() {
+        return $('button[data-analytics-click-text="map-trifold"]');
+    }
 
 
     /**
@@ -917,6 +929,10 @@ class CarouselBlockPage extends Page {
         await (await this.dropdownStyling).scrollIntoView({ behavior: 'auto', block: 'center' });
         await (await this.dropdownStyling).click();
         await (await this.dropdownLayout).scrollIntoView({ behavior: 'auto', block: 'center' });
+    }
+
+    public async navToComponentTesting() {
+        return super.open("/internal/component-testing/carousel-card-carousel");
     }
 }
 

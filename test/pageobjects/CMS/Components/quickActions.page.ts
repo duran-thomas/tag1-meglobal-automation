@@ -97,12 +97,12 @@ class QuickActionsBlockPage extends Page {
         return $('.mf-alert__container--success');
     }
 
-    public quickActionsElement(id:string) {
-        return $(`#${id} .mf-quick-actions`);
+    public get quickActionsElement() {
+        return $(`.mf-quick-actions`);
     }
 
-    public quickActionsButton(id:string) {
-        return $(`#${id} a.mf-button`);
+    public get quickActionsButton() {
+        return $(`a.mf-button`);
     }
 
     // public get quickActionsElement() {
@@ -194,7 +194,7 @@ class QuickActionsBlockPage extends Page {
         await browser.waitForCustomFrame('iframe[name="lbim-dialog-iframe"]', 5000);
         await (await this.compTitle).setValue(title);
         await (await this.inputHeadline).setValue(healdine);
-        await (await this.dropdownSource).selectByVisibleText('Aesthetics: Quick Actions test menu');
+        await (await this.dropdownSource).selectByIndex(1);
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();
         await browser.refresh();
@@ -263,19 +263,18 @@ class QuickActionsBlockPage extends Page {
     */
    
     public openMenus() {
-        return super.open('group/1/menus');
+        return super.open('group/456/menus');
     }
     public openNodes() {
-        return super.open('group/1/nodes');
+        return super.open('group/456/nodes');
     }
     //ode7 group was recreated and as such has a different path
     public openMenusQaAuto() {
-        return super.open('group/356/menus');
+        return super.open('group/456/menus');
     }
     public openNodesQaAuto() {
-        return super.open('group/356/nodes');
+        return super.open('group/456/nodes');
     }
-
     //ode7 group was recreated and as such has a different path
 
     public openDevMenus() {

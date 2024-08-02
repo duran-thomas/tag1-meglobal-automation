@@ -77,7 +77,7 @@ describe("Breadcrumbs Component Tests", () => {
         await expect(await url).toContain(breadcrumbsBlockData.patientUrl);
     });
 
-    it.only("[S3C1345] Verify that Analytics for the Breadcrumbs Component is configured", async () => {
+    it("[S3C1345] Verify that Analytics for the Breadcrumbs Component is configured", async () => {
         await BreadcrumbsBlockPage.openPage();
         await (
             await BreadcrumbsBlockPage.linkClinicalServices

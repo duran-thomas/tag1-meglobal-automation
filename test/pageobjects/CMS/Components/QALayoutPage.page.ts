@@ -101,10 +101,21 @@ class LandingQAPage extends Page {
 
     public get btnCarousel() {
         return $("=Carousel");
+
+    }
+
+    public get btnCompoundGrid() {
+        return $("=Compound Grid");
     }
 
     public get btnContactList() {
         return $("=Contact List");
+
+    }
+
+    public get btnDatePicker() {
+        return $("=Date Picker");
+
     }
 
     public get btnEvent() {
@@ -173,6 +184,12 @@ class LandingQAPage extends Page {
 
     public get btnSectionHeader() {
         return $("=Section Header");
+
+    }
+
+    public get btnShare() {
+        return $('=Share');
+
     }
 
     public get btnStepper() {

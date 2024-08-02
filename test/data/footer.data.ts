@@ -21,7 +21,7 @@ export const contactConfigData = {
 export const groupMenuData = {
     title: 'QA Test - Clinical Trials Footer',
     menuLinkTitle: 'Find a Residency',
-    link: 'Residency Programs (126)',
+    link: 'Residency Programs [/education/gme/residency | Layout Page | Shared - Education] (4491)',
     secondMenuLinkTitle: 'Search on Wikipedia',
     secondLink: 'https://www.wikipedia.com/',
     layoutTitle: 'QA Clinical Trials Group Layout page'

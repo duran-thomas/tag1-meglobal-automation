@@ -20,7 +20,14 @@ describe("Search Component Test", () => {
         await browser.setCookies(await cookies);
     });
 
-    it("[S3C1994] Verify analytics for Search Component", async () => {
+    afterEach(async function() { 
+        // Take a screenshot after each test/assertion
+        const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
+        const screenshotPath = `./screenshots/Search/${testName}.png`;
+        await browser.saveScreenshot(screenshotPath);
+    });
+
+    it.only("[S3C1994] Verify analytics for Search Component", async () => {
         const environment = getEnvironmentConfig(process.env.ENV);
         const baseUrl = environment.baseUrl;
         await browser.url((await baseUrl) + "/search");

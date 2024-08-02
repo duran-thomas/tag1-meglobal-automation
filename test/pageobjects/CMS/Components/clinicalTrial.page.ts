@@ -118,6 +118,9 @@ class ClinicalTrialBlockPage extends Page {
         await browser.pause(1800); //explicit wait seems necessary here
         await (await this.btnAddFirstTag).waitForEnabled();
         await (await this.btnAddFirstTag).click();
+        await browser.pause(1200);
+        await (await this.btnAddFirstTag).click();
+
         await (await this.inputTag2).scrollIntoView();
         await (await this.inputTag2).setValue(tag2);
         await browser.pause(1800); //explicit wait seems necessary here
