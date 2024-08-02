@@ -205,17 +205,21 @@ class FooterBlockPage extends Page {
     }
 
     public get linkFindDoctor() {
-        return $('a[data-analytics-click-text="Find a Doctor | 2"]');
+        return $('.mf-footer__main-links > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)');
+    }
+
+    public get dropdownLinkAttr(){
+        return $('#edit-link-0-options-attributes');
     }
 
     //copyright 
 
     public get inputCopyright() {
-        return $('#edit-settings-copyright-2-copyright-text');
+        return $('#edit-settings-copyright-1-copyright-text');
     }
 
     public get testCopyrightElem() {
-        return $('p.mf-text-body-4-sans:nth-child(3)');
+        return $('p.mf-text-body-4-sans:nth-child(2)');
     }
 
     //clinicalTrial group
@@ -354,6 +358,9 @@ class FooterBlockPage extends Page {
         const btn = this.editBtn;
         await btn[1].scrollIntoView();
         await btn[1].click();
+        await (await this.dropdownLinkAttr).waitForDisplayed();
+        await (await this.dropdownLinkAttr).scrollIntoView();
+        await (await this.dropdownLinkAttr).click();
         await (await this.inputClass).scrollIntoView();
         await (await this.inputClass).setValue(val);
         await (await this.btnSave).scrollIntoView();
@@ -390,9 +397,10 @@ class FooterBlockPage extends Page {
     public async addSecondLinkToMenu(title:string, link:string, ) {
         await (await this.btnAddLink).click();
         await this.inputMenuLinkTitle.setValue(title);
-        await (await this.dropdownParentLink).scrollIntoView();
-        await (await this.dropdownParentLink).selectByIndex(1);
         await (await this.inputLink).setValue(link);
+        await (await this.inputLink).setValue(link);
+        // await (await this.dropdownParentLink).scrollIntoView();
+        // await (await this.dropdownParentLink).selectByIndex(1);
         await (await this.btnSave).scrollIntoView();
         await (await this.btnSave).click();
     }

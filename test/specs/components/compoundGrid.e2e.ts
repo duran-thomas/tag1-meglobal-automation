@@ -6,10 +6,25 @@ import { getEnvironmentConfig } from "../../../envSelector";
 import * as fs from "fs";
 
 describe("Compound Grid Component Tests", () => {
+
+    before(async ()=>{
+        // Get the environment configuration
+        const environment = getEnvironmentConfig(process.env.ENV);
+
+        // Use the environment data
+        const bypassURL = environment.bypassURL;
+        const cookies = environment.cookies;
+
+        //Bypass login
+        await browser.url(await bypassURL);
+        await browser.maximizeWindow();
+
+        // Set user cookies
+        await browser.setCookies(await cookies);
+    });
+
     it("[S3C2007] Verify that Analytics for the Compound Grid Component is configured", async () => {
-        await browser.url(
-            "https://meda2022:meda2022@content.montefioreeinstein.org/internal/component-testing/compound-grid-default"
-        );
+        await CompoundGridPage.navToComponentTesting();
         await (await CompoundGridPage.compoundGridLayout).scrollIntoView();
         await (await CompoundGridPage.firstCompoundGridImage).click();
 

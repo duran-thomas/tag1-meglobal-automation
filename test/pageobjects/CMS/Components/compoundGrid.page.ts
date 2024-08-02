@@ -10,6 +10,12 @@ class CompoundGridPage extends Page {
             ".block-inline-blockcompound-grid .mf-compound-grid__main-item"
         )[0];
     }
+
+    //nav function
+
+    public async navToComponentTesting() {
+        return super.open("/internal/component-testing/compound-grid-default");
+    }
 }
 
 export default new CompoundGridPage();
