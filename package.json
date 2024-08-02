@@ -83,4 +83,5 @@
         "@visual-regression-tracker/sdk-js": "^5.7.0",
         "wdio-visual-regression-tracker-service": "^1.0.0"
     }
+
 }
