@@ -120,6 +120,34 @@ class MapBlockPage extends Page {
         return $$('a[data-analytics-click-text="phone"]')[5]
     }
 
+    //maintenance changes
+    public get mapSample() {
+        return $('.mf-map');
+    }
+
+    public get firstListItem() {
+        return $('li.py-24:nth-child(1)');
+    }
+    public get secondListItem() {
+        return $('');
+    }
+
+    public get firstMapIcon() {
+        return $$('button[data-analytics-click-text="map-trifold"]')[2];
+    }
+
+    public get firstAddress() {
+        return $('a[data-analytics-click-text="111 East 210th Street Bronx, NY 10467-2401"]');
+    }
+
+    public get secondMapIcon() {
+        return $('a[data-analytics-click-text="map-trifold"]');
+    }
+
+    public get firstPhoneIcon() {
+        return $('a[data-analytics-click-text="phone"]');
+    }
+
 
     /**
      * Helper methods to create Map Component
@@ -233,6 +261,10 @@ class MapBlockPage extends Page {
         await (await this.dropdownStyling).scrollIntoView();
         await (await this.dropdownStyling).click();
         await browser.pause(2000);
+    }
+
+    public async navToComponentTesting() {
+        return super.open("/internal/component-testing/map-locations-overlay");
     }
 }
 

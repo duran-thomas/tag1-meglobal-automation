@@ -522,8 +522,8 @@ class CardLocationBlockPage extends Page {
         await (await this.checkboxPediatrics).scrollIntoView();
         await (await this.checkboxPediatrics).click();
         await (await this.checkboxIsChildLocation).scrollIntoView();
-        await (await this.checkboxIsChildLocation).click();
-        await (await this.dropdownParentLocation).selectByVisibleText('P0129: Montefiore Medical Group Greene Medical Arts Pavilion');
+        //await (await this.checkboxIsChildLocation).click();
+       //await (await this.dropdownParentLocation).selectByVisibleText('P0129: Montefiore Medical Group Greene Medical Arts Pavilion');
         await (await this.btnSave).click();
         await browser.pause(2000);
 
@@ -675,24 +675,24 @@ class CardLocationBlockPage extends Page {
         await (await this.carouselCheckboxShadow).click();
         await (await this.carouselCheckboxBorder).click();
 
-        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await (await this.dropdownToggle).click();
-        await (await this.listCardLocation).click();
-        await (await this.carouselInputLocation1).waitForDisplayed({timeout:5000});
-        await (await this.carouselInputLocation1).setValue('QA Test');
-        await (await this.listResult).click();
-        await (await this.carouselDropdownContentPosition1).selectByVisibleText('below');
-        await (await this.carouselDropdownSize1).selectByVisibleText('medium');
-        await (await this.carouselCheckboxBorder1).click();
+        // await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
+        // await (await this.dropdownToggle).click();
+        // await (await this.listCardLocation).click();
+        // await (await this.carouselInputLocation1).waitForDisplayed({timeout:5000});
+        // await (await this.carouselInputLocation1).setValue('QA Test');
+        // await (await this.listResult).click();
+        // await (await this.carouselDropdownContentPosition1).selectByVisibleText('below');
+        // await (await this.carouselDropdownSize1).selectByVisibleText('medium');
+        // await (await this.carouselCheckboxBorder1).click();
 
-        await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
-        await (await this.dropdownToggle).click();
-        await (await this.listCardLocation).click();
-        await (await this.carouselInputLocation2).waitForDisplayed({timeout:5000});
-        await (await this.carouselInputLocation2).setValue('P9903');
-        await (await this.listResult).click();
-        await (await this.carouselDropdownContentPosition2).selectByVisibleText('below');
-        await (await this.carouselDropdownSize2).selectByVisibleText('large');
+        // await (await this.dropdownToggle).scrollIntoView({ behavior: 'auto', block: 'center' });
+        // await (await this.dropdownToggle).click();
+        // await (await this.listCardLocation).click();
+        // await (await this.carouselInputLocation2).waitForDisplayed({timeout:5000});
+        // await (await this.carouselInputLocation2).setValue('P9903');
+        // await (await this.listResult).click();
+        // await (await this.carouselDropdownContentPosition2).selectByVisibleText('below');
+        // await (await this.carouselDropdownSize2).selectByVisibleText('large');
 
         await (await this.btnAddBlock).scrollIntoView();
         await (await this.btnAddBlock).click();

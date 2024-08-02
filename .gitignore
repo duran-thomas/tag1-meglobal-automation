@@ -145,3 +145,5 @@ db
 
 *.cert
 *.key
+env.dev.ts
+env.qaAuto.ts

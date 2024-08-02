@@ -171,6 +171,10 @@ class LandingQAPage extends Page {
         return $('=Section Header');
     }
 
+    public get btnShare() {
+        return $('=Share');
+    }
+
     public get btnStepper() {
         return $('=Stepper');
     }
