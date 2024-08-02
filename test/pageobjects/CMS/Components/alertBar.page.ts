@@ -45,6 +45,11 @@ class AlertBarBlockPage extends Page {
   public get btnSaveConfig(){
     return $('#edit-submit')
   }
+
+  public get textArea(){
+    return $('.form-textarea-wrapper');
+}
+
 }
 
 

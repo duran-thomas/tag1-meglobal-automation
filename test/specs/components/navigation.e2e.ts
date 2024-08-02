@@ -49,7 +49,7 @@ describe("Navigation Component Tests", () => {
 
     const expectedHamburgerAnalytics = [
       {
-        clickText: "Montefiore Einstein > Patient Care > Locations",
+        clickText: "Montefiore Einstein Home > Patient Care > Locations",
         event: "e_navigationClick",
         linkType: "link",
         navigationType: "hamburger",

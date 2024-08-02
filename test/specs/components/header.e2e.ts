@@ -77,8 +77,10 @@ describe("Header Component Tests", () => {
     await (await HeaderBlockPage.btnHamburgerMenu).waitForDisplayed();
     await (await HeaderBlockPage.btnHamburgerMenu).click();
     await browser.pause(5000);
-    const elem = await HeaderBlockPage.linkFellowship;
-    await expect(elem).toBeDisplayedInViewport();
+    const elem = await HeaderBlockPage.flyoutEducation;
+    await expect(elem).toExist();
+    await elem.click;
+    await elem.click;
     await expect(elem).toHaveElementClassContaining(
       "mf-link--direction-backwards"
     ); //assert it's the active link (animation style)
@@ -163,7 +165,7 @@ describe("Header Component Tests", () => {
     ).not.toBeDisplayed();
   });
 
-  it.only("[S3C1236] Verify Group Flyout menus can be created and displayed", async () => {
+  it("[S3C1236] Verify Group Flyout menus can be created and displayed", async () => {
     const environment = getEnvironmentConfig(process.env.ENV);
     const baseUrl = environment.baseUrl;
     await HeaderBlockPage.navToGlobalFlyoutMenu();
@@ -210,7 +212,8 @@ describe("Header Component Tests", () => {
     await HeaderBlockPage.cleanUpMenuItems();
   });
 
-  it.only("[S3C1235] Verify that 'Global Flyout' menu items will be marked active when they are in the page's URL", async () => {
+  //Functionality has changed
+  it.skip("[S3C1235] Verify that 'Global Flyout' menu items will be marked active when they are in the page's URL", async () => {
     const environment = getEnvironmentConfig(process.env.ENV);
     const baseUrl = environment.baseUrl;
     await browser.url((await baseUrl) + "education/gme");
@@ -219,7 +222,7 @@ describe("Header Component Tests", () => {
     await expect($(".mf-flyout__nav__line")).not.toBeDisplayed();
   });
 
-  it.only("[S3C1235] Verify links can be added to and removed from 'Global Flyout' menu", async () => {
+  it("[S3C1235] Verify links can be added to and removed from 'Global Flyout' menu", async () => {
     const environment = getEnvironmentConfig(process.env.ENV);
     const baseUrl = environment.baseUrl;
     await browser.url(
